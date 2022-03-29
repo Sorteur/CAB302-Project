@@ -28,6 +28,17 @@ public class Maze {
 
     }
 
-
+    public Cell Search(int xPos,int yPos){
+        for (Cell cells:Grid){
+            if (xPos == cells.getPosX()){
+                if (yPos == cells.getPosy()){
+                    System.out.println("Found a cell with that Co-Ordinate");
+                    return cells;
+                }
+            }
+        }
+        System.out.println("Could not find a cell with that Co-Ordinate");
+        return null;
+    }
 }
 

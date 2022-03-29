@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4b6e86b4-7292-4739-a5c0-2934c990bb8a" name="Changes" comment="test">
+    <list default="true" id="4b6e86b4-7292-4739-a5c0-2934c990bb8a" name="Changes" comment="Just Testing what we could do to generate cells for the mazes, currently just a grid no I/O.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/CAB302-Project/Cell.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CAB302-Project/Cell.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/CAB302-Project/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CAB302-Project/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/CAB302-Project/Maze.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CAB302-Project/Maze.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Cell.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Maze.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Maze.java" afterDir="false" />
     </list>
@@ -87,7 +86,14 @@
       <option name="project" value="LOCAL" />
       <updated>1648516805664</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Just Testing what we could do to generate cells for the mazes, currently just a grid no I/O.">
+      <created>1648556376985</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1648556376986</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -116,6 +122,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Test" />
     <MESSAGE value="Test 2" />
-    <option name="LAST_COMMIT_MESSAGE" value="Test 2" />
+    <MESSAGE value="Just Testing what we could do to generate cells for the mazes, currently just a grid no I/O." />
+    <option name="LAST_COMMIT_MESSAGE" value="Just Testing what we could do to generate cells for the mazes, currently just a grid no I/O." />
   </component>
 </project>
