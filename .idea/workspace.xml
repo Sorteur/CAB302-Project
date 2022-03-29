@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4b6e86b4-7292-4739-a5c0-2934c990bb8a" name="Changes" comment="Test 2">
+    <list default="true" id="4b6e86b4-7292-4739-a5c0-2934c990bb8a" name="Changes" comment="test">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CAB302-Project/Cell.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CAB302-Project/Cell.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CAB302-Project/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CAB302-Project/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CAB302-Project/Maze.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CAB302-Project/Maze.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Cell.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Maze.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Maze.java" afterDir="false" />
     </list>
