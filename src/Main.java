@@ -1,8 +1,11 @@
+import javax.swing.*;
+
 public class Main {
     public static void main (String[] args){
 
         Maze testmaze = new Maze(6,3);
-        GUI.RunGUI(testmaze);
+        SwingUtilities.invokeLater(new GUI2("BorderLayout"));
+        //GUI.RunGUI(testmaze);
 
 
         //testmaze.GridInfo();
