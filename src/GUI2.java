@@ -17,38 +17,43 @@ public class GUI2 extends JFrame implements ActionListener, Runnable {
         setLayout(new BorderLayout());
         setVisible(true);
         pnlOne = createPanel(Color.white);
-        //pnlOne.add(m);
         pnlTwo = createPanel(Color.GRAY);
         pnlThree = createPanel(Color.gray);
+        pnlFour = createPanel(Color.gray);
+        pnlBtn = createPanel(Color.gray);
         getContentPane().add(pnlOne,BorderLayout.CENTER);
         getContentPane().add(pnlTwo,BorderLayout.WEST);
         getContentPane().add(pnlThree,BorderLayout.NORTH);
-        LayoutPanel();
+        getContentPane().add(pnlFour,BorderLayout.EAST);
+        getContentPane().add(pnlBtn,BorderLayout.SOUTH);
+        //LayoutPanel();
     }
 
     private JPanel pnlOne;
     private JPanel pnlTwo;
     private JPanel pnlThree;
+    private JPanel pnlFour;
+    private JPanel pnlBtn;
 
     private JPanel createPanel(Color c) {
         JPanel A = new JPanel();
         A.setBackground(c);
         return A;
     }
-    //DrawGrid m = new DrawGrid(1,CurrentMaze.Length,CurrentMaze.Height);
-    private void LayoutPanel(){
+
+    private void layoutButtonPanel() {
         GridBagLayout layout = new GridBagLayout();
-        //add components to grid
-        GridBagConstraints constraints = new GridBagConstraints();
-//Defaults
-        constraints.fill = GridBagConstraints.NONE;
-        constraints.anchor = GridBagConstraints.CENTER;
-        constraints.weightx = 100;
-        constraints.weighty = 100;
-        //pnlOne.setLayout(layout);
-        //pnlTwo.setLayout(layout);
-        //pnlThree.setLayout(layout);
-        //pnlOne.add(m);
+        pnlBtn.setLayout(layout);
+        //Lots of layout code here
+    }
+
+    private JButton createButton(String str) {
+        JButton A = new JButton(str);
+//Create a JButton object and store it in a local var
+//Set the button text to that passed in str
+//Add the frame as an actionListener
+//Return the JButton object
+        return A;
     }
 
     @Override
