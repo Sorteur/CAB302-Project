@@ -26,7 +26,7 @@ public class DrawGrid extends Canvas {
 
 
 
-        /*
+
         while (i < X){
             int j=0;
             while (j < Y){
@@ -35,7 +35,7 @@ public class DrawGrid extends Canvas {
             }
             i+=1;
         }
-        */
+
 
 
     }
