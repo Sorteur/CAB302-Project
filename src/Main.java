@@ -3,8 +3,8 @@ import javax.swing.*;
 public class Main {
     public static void main (String[] args){
 
-        Maze testmaze = new Maze(6,3);
-        SwingUtilities.invokeLater(new GUI2("BorderLayout"));
+        Maze testmaze = new Maze(100,70);
+        SwingUtilities.invokeLater(new GUI2(testmaze));
         //GUI.RunGUI(testmaze);
 
 
