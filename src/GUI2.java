@@ -1,39 +1,53 @@
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 
-public class GUI2 extends JFrame implements ActionListener, Runnable {
+public class GUI2 implements ActionListener, Runnable, ComponentListener {
     public static final int WIDTH = 500;
     public static final int HEIGHT = 500;
-    public Maze CurrentMaze = new Maze(6,4);
-    public GUI2(String string) throws HeadlessException {
-
+    public GUI2(Maze maze) throws HeadlessException {
+    currentmaze = maze;
     }
+
+    Maze currentmaze;
 
     private void createGUI() {
-        setSize(WIDTH, HEIGHT);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(new BorderLayout());
-        setVisible(true);
-        pnlOne = createPanel(Color.white);
-        pnlTwo = createPanel(Color.GRAY);
-        pnlThree = createPanel(Color.gray);
-        pnlFour = createPanel(Color.gray);
-        pnlBtn = createPanel(Color.gray);
-        getContentPane().add(pnlOne,BorderLayout.CENTER);
-        getContentPane().add(pnlTwo,BorderLayout.WEST);
-        getContentPane().add(pnlThree,BorderLayout.NORTH);
-        getContentPane().add(pnlFour,BorderLayout.EAST);
-        getContentPane().add(pnlBtn,BorderLayout.SOUTH);
-        //LayoutPanel();
+        JFrame frame = new JFrame();
+        frame.setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
+        frame.setSize(WIDTH, HEIGHT);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+        frame.setLayout(new BorderLayout());
+
+        JMenuBar mnuBar = new JMenuBar();
+        frame.add(mnuBar, BorderLayout.NORTH);
+        mnuBar.setPreferredSize(new Dimension(1, 20));
+
+        pnlMaze = createPanel(Color.WHITE);
+        pnlMaze.addComponentListener(this);
+
+        pnlMaze.setLayout(new BorderLayout());
+        frame.add(pnlMaze, BorderLayout.CENTER);
+
+        pnlLeft = createPanel(Color.LIGHT_GRAY);
+        frame.add(pnlLeft, BorderLayout.WEST);
+        pnlLeft.setPreferredSize(new Dimension(100, 1));
+
+        //frame.pack();
+
+        DrawGrid MazeGrid = new DrawGrid(pnlMaze,5,currentmaze.Length,currentmaze.Height);
+        //System.out.println(pnlMaze.getSize());
+        //System.out.println(pnlMaze.getY());
+
     }
 
-    private JPanel pnlOne;
-    private JPanel pnlTwo;
-    private JPanel pnlThree;
-    private JPanel pnlFour;
-    private JPanel pnlBtn;
+    private JPanel pnlMaze;
+    private JPanel pnlLeft;
+
 
     private JPanel createPanel(Color c) {
         JPanel A = new JPanel();
@@ -41,28 +55,43 @@ public class GUI2 extends JFrame implements ActionListener, Runnable {
         return A;
     }
 
-    private void layoutButtonPanel() {
-        GridBagLayout layout = new GridBagLayout();
-        pnlBtn.setLayout(layout);
-        //Lots of layout code here
-    }
 
-    private JButton createButton(String str) {
-        JButton A = new JButton(str);
-//Create a JButton object and store it in a local var
-//Set the button text to that passed in str
-//Add the frame as an actionListener
-//Return the JButton object
-        return A;
-    }
+
+
+
+
+
+
+
 
     @Override
     public void run(){
         createGUI();
+
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
+    }
+
+    @Override
+    public void componentResized(ComponentEvent e) {
+        System.out.println(pnlMaze.getSize());
+    }
+
+    @Override
+    public void componentMoved(ComponentEvent e) {
+
+    }
+
+    @Override
+    public void componentShown(ComponentEvent e) {
+
+    }
+
+    @Override
+    public void componentHidden(ComponentEvent e) {
 
     }
 }
