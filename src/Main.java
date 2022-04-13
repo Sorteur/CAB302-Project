@@ -3,12 +3,10 @@ import javax.swing.*;
 public class Main {
     public static void main (String[] args){
 
-        Maze testmaze = new Maze(100,70);
-        SwingUtilities.invokeLater(new GUI2(testmaze));
-        //GUI.RunGUI(testmaze);
+        Maze currentMaze = new Maze(2,2);
+        SwingUtilities.invokeLater(new GUI2(currentMaze));
 
 
-        //testmaze.GridInfo();
-        //testmaze.Search(1,16);
+        //currentMaze.GridInfo();
     }
 }

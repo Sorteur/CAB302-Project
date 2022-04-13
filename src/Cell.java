@@ -1,7 +1,7 @@
 public class Cell {
     public Cell(int posX, int posy, boolean nwall, boolean swall, boolean wwall, boolean ewall, boolean start, boolean finish) {
-        PosX = posX;
-        Posy = posy;
+        GridX = posX;
+        GridY = posy;
         Nwall = nwall;
         Swall = swall;
         Wwall = wwall;
@@ -10,15 +10,18 @@ public class Cell {
         Finish = finish;
     }
 
-    int PosX;
-    int Posy;
+    int GridX;
+    int GridY;
 
-    public int getPosX() {
-        return PosX;
+    int PosX;
+    int PosY;
+
+    public int getGridX() {
+        return GridX;
     }
 
-    public int getPosy() {
-        return Posy;
+    public int getGridY() {
+        return GridY;
     }
 
     public boolean isNwall() {
@@ -69,11 +72,11 @@ public class Cell {
         Finish = finish;
     }
 
-    boolean Nwall;
-    boolean Swall;
-    boolean Wwall;
-    boolean Ewall;
-    boolean Start;
-    boolean Finish;
+    private boolean Nwall;
+    private boolean Swall;
+    private boolean Wwall;
+    private boolean Ewall;
+    private boolean Start;
+    private boolean Finish;
 
 }
