@@ -5,6 +5,7 @@ public class Maze {
     int Length;
     int Height;
     int Size;
+    boolean Editable = true;
     ArrayList<Cell> Grid = new ArrayList<>();
     public Maze(int length, int height) {
         Length = length;
@@ -21,18 +22,19 @@ public class Maze {
         }
     }
 
+
     public void GridInfo(){
         for (Cell cells:Grid){
-            System.out.println("This Cell's Position is "+cells.getPosX()+","+cells.getPosy());
+            System.out.println("This Cell's Position is "+cells.getGridX()+","+cells.getGridY());
         }
 
     }
 
     public Cell Search(int xPos,int yPos){
         for (Cell cells:Grid){
-            if (xPos == cells.getPosX()){
-                if (yPos == cells.getPosy()){
-                    System.out.println("Found a cell with that Co-Ordinate");
+            if (xPos == cells.getGridX()){
+                if (yPos == cells.getGridY()){
+                    //System.out.println("Found a cell with that Co-Ordinate");
                     return cells;
                 }
             }
