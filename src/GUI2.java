@@ -18,23 +18,23 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
     private void createGUI() {
 
         //Setting up Frame
-        JFrame frame = new JFrame();
-        frame.setExtendedState(Frame.MAXIMIZED_BOTH);
-        frame.setSize(WIDTH, HEIGHT);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
-        frame.setLayout(new BorderLayout());
+        JFrame Main = new JFrame();
+        Main.setExtendedState(Frame.MAXIMIZED_BOTH);
+        Main.setSize(WIDTH, HEIGHT);
+        Main.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Main.setVisible(true);
+        Main.setLayout(new BorderLayout());
 
 
         //Setting up Menu Bar
         JMenuBar mnuBar = new JMenuBar();
-        frame.add(mnuBar, BorderLayout.NORTH);
+        Main.add(mnuBar, BorderLayout.NORTH);
         mnuBar.setPreferredSize(new Dimension(1, 20));
 
 
         //Setting up central Panel for Maze
         pnlMaze = createPanel(Color.WHITE);
-        frame.add(pnlMaze, BorderLayout.CENTER);
+        Main.add(pnlMaze, BorderLayout.CENTER);
         pnlMaze.addComponentListener(this);
         pnlMaze.setLayout(new BorderLayout());
         pnlMaze.setPreferredSize(new Dimension(1, 1));
@@ -43,7 +43,7 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
 
         //Setting up side panels for Buttons
         pnlLeft = createPanel(Color.LIGHT_GRAY);
-        frame.add(pnlLeft, BorderLayout.WEST);
+        Main.add(pnlLeft, BorderLayout.WEST);
         pnlLeft.setPreferredSize(new Dimension(200, 1));
 
         //Toggle Slider for editing
@@ -56,27 +56,6 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
 
 
     }
-
-    /*
-    private JButton createButton(){
-        JButton A = new JButton("TEST");
-        A.setOpaque(false);
-        A.setContentAreaFilled(false);
-        A.setBorderPainted(false);
-        A.addActionListener(this);
-        A.setPreferredSize(new Dimension(16,6));
-        pnlMaze.add(A,BorderLayout.CENTER);
-
-        return A;
-    }
-
-    public void EditGrid(){
-        ArrayList<JButton> buttonGrid = new ArrayList<>();
-        for (Cell cells:currentMaze.Grid) {
-            buttonGrid.add(createButton());
-        }
-    }
-     */
 
     private JButton pnlButton;
     private JPanel pnlMaze;
@@ -104,7 +83,6 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
 
     @Override
     public void componentResized(ComponentEvent e) {
-        //System.out.println(pnlMaze.getSize());
     }
 
     @Override
