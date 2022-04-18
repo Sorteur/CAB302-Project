@@ -27,7 +27,6 @@ public class Maze {
         for (Cell cells:Grid){
             System.out.println("This Cell's Position is "+cells.getGridX()+","+cells.getGridY());
         }
-
     }
 
     public Cell Search(int xPos,int yPos){

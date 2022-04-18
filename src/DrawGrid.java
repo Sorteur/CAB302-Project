@@ -52,8 +52,7 @@ public class DrawGrid extends Canvas implements MouseInputListener {
         Popout.add(North,BorderLayout.NORTH);
         North.setPreferredSize(new Dimension(200,125));
         North.addActionListener(e -> {
-            if (A.isNwall()){A.setNwall(false);}
-            else {A.setNwall(true);}
+            A.setNwall(!A.isNwall());
             repaint();
         });
 
@@ -63,8 +62,7 @@ public class DrawGrid extends Canvas implements MouseInputListener {
         Popout.add(South,BorderLayout.SOUTH);
         South.setPreferredSize(new Dimension(200,125));
         South.addActionListener(e -> {
-            if (A.isSwall()){A.setSwall(false);}
-            else {A.setSwall(true);}
+            A.setSwall(!A.isSwall());
             repaint();
         });
 
@@ -73,8 +71,7 @@ public class DrawGrid extends Canvas implements MouseInputListener {
         Popout.add(East,BorderLayout.EAST);
         East.setPreferredSize(new Dimension(250,200));
         East.addActionListener(e -> {
-            if (A.isEwall()){A.setEwall(false);}
-            else {A.setEwall(true);}
+            A.setEwall(!A.isEwall());
             repaint();
         });
 
@@ -83,8 +80,7 @@ public class DrawGrid extends Canvas implements MouseInputListener {
         Popout.add(West,BorderLayout.WEST);
         West.setPreferredSize(new Dimension(250,200));
         West.addActionListener(e -> {
-            if (A.isWwall()){A.setWwall(false);}
-            else {A.setWwall(true);}
+            A.setWwall(!A.isWwall());
             repaint();
         });
     }
@@ -93,7 +89,7 @@ public class DrawGrid extends Canvas implements MouseInputListener {
     public void DrawSquare(Cell cell,Graphics g, int x, int y, int length){
         cell.PosX = x;
         cell.PosY = y;
-    //System.out.println(cell.isNwall());
+
         //North
         if (cell.isNwall()){
         g.drawLine(x,y,x+length,y);}
@@ -106,27 +102,22 @@ public class DrawGrid extends Canvas implements MouseInputListener {
         //West
         if (cell.isWwall()){
         g.drawLine(x,y+length,x,y);}
-
     }
 
     public void paint(Graphics g) {
+        int PosX = (panel.getWidth()-(size*X))/2;
+        int PosY = (panel.getHeight()-(size*Y))/2;
+        int z=0;
         int i = 0;
         while (i < X){
             int j=0;
             while (j < Y){
-                DrawSquare(currentMaze.Search(i,j),g,((panel.getWidth()-(size*X))/2)+(i*size),((panel.getHeight()-(size*Y))/2)+(j*size),size);
+                DrawSquare(currentMaze.Grid.get(z),g,PosX+(i*size),PosY+(j*size),size);
                 j+=1;
+                z+=1;
             }
             i+=1;
-
         }
-
-
-    }
-
-    public void clearGrid(Graphics g){
-        currentMaze.Editable = false;
-        g.clearRect(((panel.getWidth()-(size*X)-4)/2),((panel.getHeight()-(size*Y)-4)/2),(size*X)+4,(size*Y)+4);
     }
 
     @Override
