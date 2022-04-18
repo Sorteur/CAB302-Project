@@ -39,7 +39,7 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
         pnlMaze.setLayout(new BorderLayout());
         pnlMaze.setPreferredSize(new Dimension(1, 1));
 
-        DrawGrid MazeGrid = new DrawGrid(pnlMaze, 1, currentMaze);
+        DrawGrid MazeGrid = new DrawGrid(pnlMaze, 5, currentMaze);
 
         //Setting up side panels for Buttons
         pnlLeft = createPanel(Color.LIGHT_GRAY);
@@ -52,7 +52,7 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
         //Button for grid disappear
         pnlButton = new JButton("Make Grid Disappear");
         pnlLeft.add(pnlButton);
-        pnlButton.addActionListener(e -> MazeGrid.clearGrid(MazeGrid.getGraphics()));
+       // pnlButton.addActionListener(e -> MazeGrid.clearGrid(MazeGrid.getGraphics()));
 
 
     }
