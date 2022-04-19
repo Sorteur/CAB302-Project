@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4b6e86b4-7292-4739-a5c0-2934c990bb8a" name="Changes" comment="Test 6">
+    <list default="true" id="4b6e86b4-7292-4739-a5c0-2934c990bb8a" name="Changes" comment="Added Button functionallity to enable and disable Walls on cells">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CAB302-Project/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CAB302-Project/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DrawGrid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DrawGrid.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,6 +25,16 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
+    <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -43,11 +50,10 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../LecWk5Exp/lec05-gui/src/week5/THIS.java" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RunManager">
@@ -60,6 +66,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Main" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
@@ -94,14 +103,28 @@
       <option name="project" value="LOCAL" />
       <updated>1648556376986</updated>
     </task>
-    <task id="LOCAL-00004" summary="Test 6">
-      <created>1650326135447</created>
+    <task id="LOCAL-00004" summary="Moved from Test to main, disposed of unused files,">
+      <created>1649805444841</created>
       <option name="number" value="00004" />
       <option name="presentableId" value="LOCAL-00004" />
       <option name="project" value="LOCAL" />
-      <updated>1650326135447</updated>
+      <updated>1649805444841</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="updating">
+      <created>1649805565905</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1649805565905</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Added Pushable 'Buttons'">
+      <created>1649833234274</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1649833234274</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -131,7 +154,9 @@
     <MESSAGE value="Test" />
     <MESSAGE value="Test 2" />
     <MESSAGE value="Just Testing what we could do to generate cells for the mazes, currently just a grid no I/O." />
-    <MESSAGE value="Test 6" />
-    <option name="LAST_COMMIT_MESSAGE" value="Test 6" />
+    <MESSAGE value="Moved from Test to main, disposed of unused files," />
+    <MESSAGE value="updating" />
+    <MESSAGE value="Added Pushable 'Buttons'" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Pushable 'Buttons'" />
   </component>
 </project>
