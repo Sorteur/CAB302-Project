@@ -58,14 +58,14 @@ public class DrawGrid extends Canvas implements MouseInputListener {
         Cell EditedCell = currentMaze.Search(x,y);
         int index = currentMaze.Grid.indexOf(EditedCell);
         System.out.println(index);
-        Cell NCell = null;
-        Cell SCell = null;
-        Cell WCell = null;
-        Cell ECell = null;
-        if (index % Y != 0) {NCell = currentMaze.Grid.get(index - 1);}
-        if (index % Y != Y-1) {SCell = currentMaze.Grid.get(index + 1);}
-        if (index - Y  >= 0){WCell = currentMaze.Grid.get(index - Y);}
-        if (index + Y  < X*Y){ECell = currentMaze.Grid.get(index + Y);}
+        Cell NCell;
+        Cell SCell;
+        Cell WCell;
+        Cell ECell;
+        if (index % Y != 0) {NCell = currentMaze.Grid.get(index - 1);} else {NCell = null;}
+        if (index % Y != Y-1) {SCell = currentMaze.Grid.get(index + 1);} else {SCell = null;}
+        if (index - Y  >= 0){WCell = currentMaze.Grid.get(index - Y);} else {WCell = null;}
+        if (index + Y  < X*Y){ECell = currentMaze.Grid.get(index + Y);} else {ECell = null;}
 
 
 
@@ -83,25 +83,33 @@ public class DrawGrid extends Canvas implements MouseInputListener {
         JToggleButton North = createButton("North",EditedCell,200,125,PopOut);
         North.addActionListener(e -> {
             EditedCell.setNwall(!EditedCell.isNwall());
-
-
-
-            //EditedCell.setNwall(!EditedCell.isNwall());
+            if (NCell != null){
+                NCell.setSwall(false);
+            }
             repaint();
         });
         JToggleButton South = createButton("South",EditedCell,200,125,PopOut);
         South.addActionListener(e -> {
             EditedCell.setSwall(!EditedCell.isSwall());
+            if (SCell != null){
+                SCell.setNwall(false);
+            }
             repaint();
         });
         JToggleButton East = createButton("East",EditedCell,250,200,PopOut);
         East.addActionListener(e -> {
             EditedCell.setEwall(!EditedCell.isEwall());
+            if (ECell != null){
+                ECell.setWwall(false);
+            }
             repaint();
         });
         JToggleButton West = createButton("West",EditedCell,250,200,PopOut);
         West.addActionListener(e -> {
             EditedCell.setWwall(!EditedCell.isWwall());
+            if (WCell != null){
+                WCell.setEwall(false);
+            }
             repaint();
         });
     }
