@@ -2,6 +2,7 @@ import javax.swing.*;
 import javax.swing.event.MouseInputListener;
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.util.Objects;
 
 public class DrawGrid extends Canvas implements MouseInputListener {
     public DrawGrid(JPanel panel, int Scale, Maze m) {
@@ -32,55 +33,75 @@ public class DrawGrid extends Canvas implements MouseInputListener {
         }
     }
 
+    private JToggleButton createButton(String name, Cell A, int width, int height, JFrame frame){
+        JToggleButton Button = new JToggleButton(name);
+        if (Objects.equals(name, "North")){
+            if (!A.isNwall()){Button.setSelected(true);}
+            frame.add(Button,BorderLayout.NORTH);
+        } else if (Objects.equals(name, "South")){
+            if (!A.isSwall()){Button.setSelected(true);}
+            frame.add(Button,BorderLayout.SOUTH);
+        }else if (Objects.equals(name, "East")){
+            if (!A.isEwall()){Button.setSelected(true);}
+            frame.add(Button,BorderLayout.EAST);
+        }else {
+            if (!A.isWwall()){Button.setSelected(true);}
+            frame.add(Button,BorderLayout.WEST);
+        }
+        Button.setPreferredSize(new Dimension(width,height));
+        return Button;
+    }
+
+
+
     public void EditSquare(int x, int y){
-        Cell A = currentMaze.Search(x,y);
+        Cell EditedCell = currentMaze.Search(x,y);
+        int index = currentMaze.Grid.indexOf(EditedCell);
+        System.out.println(index);
+        Cell NCell = null;
+        Cell SCell = null;
+        Cell WCell = null;
+        Cell ECell = null;
+        if (index % Y != 0) {NCell = currentMaze.Grid.get(index - 1);}
+        if (index % Y != Y-1) {SCell = currentMaze.Grid.get(index + 1);}
+        if (index - Y  >= 0){WCell = currentMaze.Grid.get(index - Y);}
+        if (index + Y  < X*Y){ECell = currentMaze.Grid.get(index + Y);}
+
+
 
         Frame[] allFrames = Frame.getFrames();
         for (Frame fr: allFrames){
-            if (fr.getName() != allFrames[0].getName()){
+            if (!Objects.equals(fr.getName(), allFrames[0].getName())){
                 fr.dispose();
             }
         }
-        JFrame Popout = new JFrame();
-        Popout.setSize(500, 500);
-        Popout.setVisible(true);
-        Popout.setLayout(new BorderLayout());
-        //Popout.dispose();
+        JFrame PopOut = new JFrame();
+        PopOut.setSize(500, 500);
+        PopOut.setVisible(true);
+        PopOut.setLayout(new BorderLayout());
 
-        JToggleButton North = new JToggleButton("North");
-        if (!A.isNwall()){North.setSelected(true);}
-        Popout.add(North,BorderLayout.NORTH);
-        North.setPreferredSize(new Dimension(200,125));
+        JToggleButton North = createButton("North",EditedCell,200,125,PopOut);
         North.addActionListener(e -> {
-            A.setNwall(!A.isNwall());
+            EditedCell.setNwall(!EditedCell.isNwall());
+
+
+
+            //EditedCell.setNwall(!EditedCell.isNwall());
             repaint();
         });
-
-
-        JToggleButton South = new JToggleButton("South");
-        if (!A.isSwall()){South.setSelected(true);}
-        Popout.add(South,BorderLayout.SOUTH);
-        South.setPreferredSize(new Dimension(200,125));
+        JToggleButton South = createButton("South",EditedCell,200,125,PopOut);
         South.addActionListener(e -> {
-            A.setSwall(!A.isSwall());
+            EditedCell.setSwall(!EditedCell.isSwall());
             repaint();
         });
-
-        JToggleButton East = new JToggleButton("East");
-        if (!A.isEwall()){East.setSelected(true);}
-        Popout.add(East,BorderLayout.EAST);
-        East.setPreferredSize(new Dimension(250,200));
+        JToggleButton East = createButton("East",EditedCell,250,200,PopOut);
         East.addActionListener(e -> {
-            A.setEwall(!A.isEwall());
+            EditedCell.setEwall(!EditedCell.isEwall());
             repaint();
         });
-
-        JToggleButton West = new JToggleButton("West");
-        if (!A.isWwall()){West.setSelected(true);}
-        Popout.add(West,BorderLayout.WEST);
-        West.setPreferredSize(new Dimension(250,200));
+        JToggleButton West = createButton("West",EditedCell,250,200,PopOut);
         West.addActionListener(e -> {
-            A.setWwall(!A.isWwall());
+            EditedCell.setWwall(!EditedCell.isWwall());
             repaint();
         });
     }
@@ -107,16 +128,16 @@ public class DrawGrid extends Canvas implements MouseInputListener {
     public void paint(Graphics g) {
         int PosX = (panel.getWidth()-(size*X))/2;
         int PosY = (panel.getHeight()-(size*Y))/2;
-        int z=0;
-        int i = 0;
-        while (i < X){
-            int j=0;
-            while (j < Y){
-                DrawSquare(currentMaze.Grid.get(z),g,PosX+(i*size),PosY+(j*size),size);
-                j+=1;
-                z+=1;
+        int CurrentCell=0;
+        int RelativeX = 0;
+        while (RelativeX < X){
+            int RelativeY=0;
+            while (RelativeY < Y){
+                DrawSquare(currentMaze.Grid.get(CurrentCell),g,PosX+(RelativeX*size),PosY+(RelativeY*size),size);
+                RelativeY+=1;
+                CurrentCell+=1;
             }
-            i+=1;
+            RelativeX+=1;
         }
     }
 
