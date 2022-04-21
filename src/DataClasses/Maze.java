@@ -1,12 +1,32 @@
+package DataClasses;
+
+import DataClasses.Cell;
 
 import java.util.*;
 
 public class Maze {
-    int Length;
-    int Height;
+
+    //TODO Grid is currently inverted need to fix.
+    private int Length;
+
+    public int getLength() {
+        return Length;
+    }
+
+    private int Height;
+
+    public int getHeight() {
+        return Height;
+    }
+
     int Size;
     boolean Editable = true;
-    ArrayList<Cell> Grid = new ArrayList<>();
+    private ArrayList<Cell> Grid = new ArrayList<>();
+
+    public ArrayList<Cell> getGrid() {
+        return Grid;
+    }
+
     public Maze(int length, int height) {
         Length = length;
         Height = height;
@@ -25,7 +45,7 @@ public class Maze {
 
     public void GridInfo(){
         for (Cell cells:Grid){
-            System.out.println("This Cell's Position is "+cells.getGridX()+","+cells.getGridY());
+            System.out.println("This DataClasses.Cell's Position is "+cells.getGridX()+","+cells.getGridY());
         }
     }
 
