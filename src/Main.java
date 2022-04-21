@@ -1,4 +1,5 @@
 import DataClasses.Maze;
+import UserInterface.GUI2;
 
 import javax.swing.*;
 

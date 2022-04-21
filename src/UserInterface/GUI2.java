@@ -1,3 +1,5 @@
+package UserInterface;
+
 import DataClasses.Maze;
 
 import javax.swing.*;
