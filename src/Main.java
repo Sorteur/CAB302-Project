@@ -1,3 +1,5 @@
+import DataClasses.Maze;
+
 import javax.swing.*;
 
 public class Main {

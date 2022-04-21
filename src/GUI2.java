@@ -1,9 +1,9 @@
+import DataClasses.Maze;
+
 import javax.swing.*;
-import javax.swing.event.MouseInputListener;
 //import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
 
 public class GUI2 implements ActionListener, Runnable, ComponentListener {
     public static final int WIDTH = 500;
@@ -32,7 +32,7 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
         mnuBar.setPreferredSize(new Dimension(1, 20));
 
 
-        //Setting up central Panel for Maze
+        //Setting up central Panel for DataClasses.Maze
         pnlMaze = createPanel(Color.WHITE);
         Main.add(pnlMaze, BorderLayout.CENTER);
         pnlMaze.addComponentListener(this);

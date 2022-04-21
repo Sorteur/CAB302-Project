@@ -1,22 +1,16 @@
 package DataClasses;
 
 public class Cell {
-    public Cell(int index, int gridx, int gridy, WallType northernwall, WallType southernwall, WallType westernwall, WallType easternwall) {
-        Index = index;
-        GridX = gridx;
-        GridY = gridy;
-
-        Northernwall = northernwall;
-        Southernwall = southernwall;
-        Westernwall = westernwall;
-        Easternwall = easternwall;
-
-        Vistited = false;
+    public Cell(int posX, int posY, boolean nwall, boolean swall, boolean wwall, boolean ewall, boolean start, boolean finish) {
+        GridX = posX;
+        GridY = posY;
+        Nwall = nwall;
+        Swall = swall;
+        Wwall = wwall;
+        Ewall = ewall;
+        Start = start;
+        Finish = finish;
     }
-
-    public int Id;
-    public int MazeId;
-    public int Index;
 
     int GridX;
     int GridY;
@@ -24,94 +18,83 @@ public class Cell {
     private int PosX;
     private int PosY;
 
-    private WallType Northernwall;
-    private WallType Southernwall;
-    private WallType Westernwall;
-    private WallType Easternwall;
-    private boolean Vistited;
-
-    public boolean Searched = false;
-    public boolean PermaSearched = false;
-
-    public boolean IsVistited()
-    {
-        return Vistited;
-    }
-
-    public void IsVisiting()
-    {
-        Vistited = true;
-    }
-
-    public int GetPosX()
-    {
+    public int getPosX() {
         return PosX;
     }
 
-    public int GetPosY() {
+    public int getPosY() {
         return PosY;
     }
 
-    public void SetPosX(int x)
-    {
+    public void setPosX(int x) {
         this.PosX = x;
     }
 
-    public void SetPosY(int y)
-    {
+    public void setPosY(int y) {
         this.PosY = y;
     }
 
-    public int GetGridX()
-    {
+    public int getGridX() {
         return GridX;
     }
 
-    public int GetGridY()
-    {
+    public int getGridY() {
         return GridY;
     }
 
-    public WallType IsNorthernwall()
-    {
-        return Northernwall;
+    public boolean isNwall() {
+        return Nwall;
     }
 
-    public void SetNorthernwall(WallType northernwall)
-    {
-        Northernwall = northernwall;
+    public void setNwall(boolean nwall) {
+        Nwall = nwall;
     }
 
-    public WallType IsSouthernwall()
-    {
-        return Southernwall;
+    public boolean isSwall() {
+        return Swall;
     }
 
-    public void SetSouthernwall(WallType southernwall)
-    {
-        Southernwall = southernwall;
+    public void setSwall(boolean swall) {
+        Swall = swall;
     }
 
-    public WallType IsWesternwall()
-    {
-        return Westernwall;
+    public boolean isWwall() {
+        return Wwall;
     }
 
-    public void SetWesternwall(WallType westernwall)
-    {
-        Westernwall = westernwall;
+    public void setWwall(boolean wwall) {
+        Wwall = wwall;
     }
 
-    public WallType IsEasternwall()
-    {
-        return Easternwall;
+    public boolean isEwall() {
+        return Ewall;
     }
 
-    public void SetEasternwall(WallType easternwall)
-    {
-        Easternwall = easternwall;
+    public void setEwall(boolean ewall) {
+        Ewall = ewall;
     }
 
+    public boolean isStart() {
+        return Start;
+    }
 
+    public void setStart(boolean start) {
+        Start = start;
+    }
+
+    public boolean isFinish() {
+        return Finish;
+    }
+
+    public void setFinish(boolean finish) {
+        Finish = finish;
+    }
+
+    private boolean Nwall;
+    private boolean Swall;
+    private boolean Wwall;
+    private boolean Ewall;
+    private boolean Start;
+    private boolean Finish;
 
 }

@@ -1,3 +1,6 @@
+import DataClasses.Cell;
+import DataClasses.Maze;
+
 import javax.swing.*;
 import javax.swing.event.MouseInputListener;
 import java.awt.*;
@@ -5,18 +8,7 @@ import java.awt.event.MouseEvent;
 import java.util.Objects;
 
 public class DrawGrid extends Canvas implements MouseInputListener {
-    public DrawGrid(JPanel panel, int Scale, Maze m) {
-        this.scale = Scale;
-        this.X = m.Length;
-        this.Y = m.Height;
-        this.currentMaze = m;
-        ScaleCalc();
 
-        this.addMouseListener(this);
-        panel.setLayout(new BorderLayout());
-        panel.add(this, BorderLayout.CENTER);
-        this.panel = panel;
-    }
     Maze currentMaze;
     JPanel panel;
     int scale;
@@ -24,6 +16,18 @@ public class DrawGrid extends Canvas implements MouseInputListener {
     int Y;
     int size;
 
+    public DrawGrid(JPanel panel, int Scale, Maze maze) {
+        this.scale = Scale;
+        this.X = maze.getHeight();
+        this.Y = maze.getLength();
+        this.currentMaze = maze;
+        ScaleCalc();
+
+        this.addMouseListener(this);
+        panel.setLayout(new BorderLayout());
+        panel.add(this, BorderLayout.CENTER);
+        this.panel = panel;
+    }
 
     public void ScaleCalc(){
         if (scale == 1){
@@ -56,16 +60,16 @@ public class DrawGrid extends Canvas implements MouseInputListener {
 
     public void EditSquare(int x, int y){
         Cell EditedCell = currentMaze.Search(x,y);
-        int index = currentMaze.Grid.indexOf(EditedCell);
+        int index = currentMaze.getGrid().indexOf(EditedCell);
         System.out.println(index);
         Cell NCell;
         Cell SCell;
         Cell WCell;
         Cell ECell;
-        if (index % Y != 0) {NCell = currentMaze.Grid.get(index - 1);} else {NCell = null;}
-        if (index % Y != Y-1) {SCell = currentMaze.Grid.get(index + 1);} else {SCell = null;}
-        if (index - Y  >= 0){WCell = currentMaze.Grid.get(index - Y);} else {WCell = null;}
-        if (index + Y  < X*Y){ECell = currentMaze.Grid.get(index + Y);} else {ECell = null;}
+        if (index % Y != 0) {NCell = currentMaze.getGrid().get(index - 1);} else {NCell = null;}
+        if (index % Y != Y-1) {SCell = currentMaze.getGrid().get(index + 1);} else {SCell = null;}
+        if (index - Y  >= 0){WCell = currentMaze.getGrid().get(index - Y);} else {WCell = null;}
+        if (index + Y  < X*Y){ECell = currentMaze.getGrid().get(index + Y);} else {ECell = null;}
 
 
 
@@ -116,8 +120,9 @@ public class DrawGrid extends Canvas implements MouseInputListener {
 
 
     public void DrawSquare(Cell cell,Graphics g, int x, int y, int length){
-        cell.PosX = x;
-        cell.PosY = y;
+
+        cell.setPosX(x);
+        cell.setPosY(y);
 
         //North
         if (cell.isNwall()){
@@ -141,7 +146,7 @@ public class DrawGrid extends Canvas implements MouseInputListener {
         while (RelativeX < X){
             int RelativeY=0;
             while (RelativeY < Y){
-                DrawSquare(currentMaze.Grid.get(CurrentCell),g,PosX+(RelativeX*size),PosY+(RelativeY*size),size);
+                DrawSquare(currentMaze.getGrid().get(CurrentCell),g,PosX+(RelativeX*size),PosY+(RelativeY*size),size);
                 RelativeY+=1;
                 CurrentCell+=1;
             }
@@ -154,8 +159,8 @@ public class DrawGrid extends Canvas implements MouseInputListener {
         int clickX = e.getX();
         int clickY = e.getY();
 
-        for (Cell cell:currentMaze.Grid) {
-            if (((clickX > cell.PosX) && (clickX < cell.PosX+size)) && ((clickY > cell.PosY) && (clickY < cell.PosY+size))){
+        for (Cell cell:currentMaze.getGrid()) {
+            if (((clickX > cell.getPosX()) && (clickX < cell.getPosX()+size)) && ((clickY > cell.getPosY()) && (clickY < cell.getPosY()+size))){
                 EditSquare(cell.getGridX(),cell.getGridY());
             }
         }
