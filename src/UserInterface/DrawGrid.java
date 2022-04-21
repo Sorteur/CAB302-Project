@@ -1,3 +1,5 @@
+package UserInterface;
+
 import DataClasses.Cell;
 import DataClasses.Maze;
 

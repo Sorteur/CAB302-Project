@@ -1,3 +1,5 @@
+package UserInterface;
+
 import DataClasses.Maze;
 
 import javax.swing.*;
@@ -9,7 +11,7 @@ public class GUI {
 
     public static void RunGUI(Maze maze){
 
-       // DrawGrid m = new DrawGrid(1,maze.Length,maze.Height);
+       // UserInterface.DrawGrid m = new UserInterface.DrawGrid(1,maze.Length,maze.Height);
         JFrame Frame = new JFrame();
 
 
