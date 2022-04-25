@@ -14,8 +14,22 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
     public GUI2(Maze maze) throws HeadlessException {
         currentMaze = maze;
     }
-
     Maze currentMaze;
+
+    private JButton pnlClearGridButton;
+    private JButton pnlGenerateGridButton;
+    private JButton pnlSaveGridButton;
+    private JButton pnlLoadGridButton;
+    private JButton pnlPrintGridButton;
+    private JButton pnlResizeGridButton;
+    private JButton pnlPlaceStartCellButton;
+    private JButton pnlPlaceEndCellButton;
+    private JButton pnlSolveMazeButton;
+
+
+
+    private JPanel pnlMaze;
+    private JPanel pnlLeft;
 
     private void createGUI() {
 
@@ -51,18 +65,31 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
         //Toggle Slider for editing
 
 
+
+
         //Button for grid disappear
-        pnlButton = new JButton("Make Grid Disappear");
-        pnlLeft.add(pnlButton);
+        pnlClearGridButton = new JButton("Clear Maze");
+        pnlLeft.add(pnlClearGridButton);
        // pnlButton.addActionListener(e -> MazeGrid.clearGrid(MazeGrid.getGraphics()));
 
+        pnlGenerateGridButton = new JButton("Generate Maze");
+        pnlLeft.add(pnlGenerateGridButton);
+        pnlSaveGridButton = new JButton("Save Maze");
+        pnlLeft.add(pnlSaveGridButton);
+        pnlLoadGridButton = new JButton("Load Maze");
+        pnlLeft.add(pnlLoadGridButton);
+        pnlPrintGridButton = new JButton("Print");
+        pnlLeft.add(pnlPrintGridButton);
+        pnlResizeGridButton = new JButton("Resize Maze");
+        pnlLeft.add(pnlResizeGridButton);
+        pnlPlaceStartCellButton = new JButton("Place Starting Point");
+        pnlLeft.add(pnlPlaceStartCellButton);
+        pnlPlaceEndCellButton = new JButton("Place End Point");
+        pnlLeft.add(pnlPlaceEndCellButton);
+        pnlSolveMazeButton = new JButton("Solve");
+        pnlLeft.add(pnlSolveMazeButton);
 
     }
-
-    private JButton pnlButton;
-    private JPanel pnlMaze;
-    private JPanel pnlLeft;
-
 
     private JPanel createPanel(Color c) {
         JPanel A = new JPanel();
