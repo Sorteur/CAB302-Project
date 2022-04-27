@@ -14,6 +14,7 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
     public GUI2(Maze maze) throws HeadlessException {
         currentMaze = maze;
     }
+
     Maze currentMaze;
 
     private JButton pnlClearGridButton;
@@ -25,8 +26,6 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
     private JButton pnlPlaceStartCellButton;
     private JButton pnlPlaceEndCellButton;
     private JButton pnlSolveMazeButton;
-
-
 
     private JPanel pnlMaze;
     private JPanel pnlLeft;
@@ -64,29 +63,44 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
 
         //Toggle Slider for editing
 
-
+        Dimension lftSize = new Dimension(150,25);
 
 
         //Button for grid disappear
         pnlClearGridButton = new JButton("Clear Maze");
-        pnlLeft.add(pnlClearGridButton);
+      //  pnlLeft.add(pnlClearGridButton);
        // pnlButton.addActionListener(e -> MazeGrid.clearGrid(MazeGrid.getGraphics()));
 
-        pnlGenerateGridButton = new JButton("Generate Maze");
+        pnlGenerateGridButton = new JButton("New Maze");
+        pnlGenerateGridButton.setPreferredSize(lftSize);
         pnlLeft.add(pnlGenerateGridButton);
+
         pnlSaveGridButton = new JButton("Save Maze");
+        pnlSaveGridButton.setPreferredSize(lftSize);
         pnlLeft.add(pnlSaveGridButton);
+
         pnlLoadGridButton = new JButton("Load Maze");
+        pnlLoadGridButton.setPreferredSize(lftSize);
         pnlLeft.add(pnlLoadGridButton);
+
         pnlPrintGridButton = new JButton("Print");
+        pnlPrintGridButton.setPreferredSize(lftSize);
         pnlLeft.add(pnlPrintGridButton);
+
         pnlResizeGridButton = new JButton("Resize Maze");
+        pnlResizeGridButton.setPreferredSize(lftSize);
         pnlLeft.add(pnlResizeGridButton);
+
         pnlPlaceStartCellButton = new JButton("Place Starting Point");
+        pnlPlaceStartCellButton.setPreferredSize(lftSize);
         pnlLeft.add(pnlPlaceStartCellButton);
+
         pnlPlaceEndCellButton = new JButton("Place End Point");
+        pnlPlaceEndCellButton.setPreferredSize(lftSize);
         pnlLeft.add(pnlPlaceEndCellButton);
+
         pnlSolveMazeButton = new JButton("Solve");
+        pnlSolveMazeButton.setPreferredSize(lftSize);
         pnlLeft.add(pnlSolveMazeButton);
 
     }
