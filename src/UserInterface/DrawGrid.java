@@ -20,8 +20,8 @@ public class DrawGrid extends Canvas implements MouseInputListener {
 
     public DrawGrid(JPanel panel, int Scale, Maze maze) {
         this.scale = Scale;
-        this.X = maze.getHeight();
-        this.Y = maze.getLength();
+        this.X = maze.getLength();
+        this.Y = maze.getHeight();
         this.currentMaze = maze;
         ScaleCalc();
 
