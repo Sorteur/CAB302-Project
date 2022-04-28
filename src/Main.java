@@ -1,4 +1,5 @@
 import DataClasses.Maze;
+import Engine.MazeManager;
 import UserInterface.GUI2;
 import javax.swing.*;
 
@@ -7,6 +8,7 @@ public class Main {
 
         Maze currentMaze = new Maze(6 ,4);
         SwingUtilities.invokeLater(new GUI2(currentMaze));
+        MazeManager.Instance().writesomething();
 
     }
 }
