@@ -18,6 +18,7 @@ public class MazeManager {
     }
 
     public void CreateMaze (int Length, int Height) {
+        System.out.println(Length);
         Maze = new Maze(Length, Height);
     }
 
