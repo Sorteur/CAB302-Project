@@ -1,7 +1,5 @@
 package UserInterface;
 
-import DataClasses.Maze;
-import DataModules.MazeModule;
 import Engine.MazeManager;
 
 import javax.swing.*;
@@ -16,7 +14,7 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
     public GUI2() throws HeadlessException {
     }
 
-    private JButton pnlClearGridButton;
+   // private JButton pnlClearGridButton;
     private JButton pnlGenerateGridButton;
     private JButton pnlSaveGridButton;
     private JButton pnlLoadGridButton;
@@ -64,7 +62,7 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
 
 
         //Button for grid disappear
-        pnlClearGridButton = new JButton("Clear Maze");
+        //pnlClearGridButton = new JButton("Clear Maze");
       //  pnlLeft.add(pnlClearGridButton);
        // pnlButton.addActionListener(e -> MazeGrid.clearGrid(MazeGrid.getGraphics()));
 
@@ -134,6 +132,7 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
             int Height = Integer.parseInt(HeightBox.getText());
             MazeManager.Instance().CreateMaze(Width,Height);
             DrawGrid MazeGrid = new DrawGrid(pnlMaze, 1, MazeManager.Instance().LoadMaze());
+            UpdateGrid();
             PopOut.dispose();
         });
 
@@ -150,6 +149,11 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
         A.setBackground(c);
         return A;
     }
+
+    public void UpdateGrid(){
+        pnlMaze.updateUI();
+    }
+
 
     @Override
     public void run() {
