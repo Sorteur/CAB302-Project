@@ -1,6 +1,8 @@
 package UserInterface;
 
 import DataClasses.Maze;
+import DataModules.MazeModule;
+import Engine.MazeManager;
 
 import javax.swing.*;
 //import javax.swing.border.Border;
@@ -11,11 +13,8 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
     public static final int WIDTH = 500;
     public static final int HEIGHT = 500;
 
-    public GUI2(Maze maze) throws HeadlessException {
-        currentMaze = maze;
+    public GUI2() throws HeadlessException {
     }
-
-    Maze currentMaze;
 
     private JButton pnlClearGridButton;
     private JButton pnlGenerateGridButton;
@@ -32,6 +31,7 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
 
     private void createGUI() {
 
+
         //Setting up Frame
         JFrame Main = new JFrame();
         Main.setExtendedState(Frame.MAXIMIZED_BOTH);
@@ -39,7 +39,6 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
         Main.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Main.setVisible(true);
         Main.setLayout(new BorderLayout());
-
 
         //Setting up Menu Bar
         JMenuBar mnuBar = new JMenuBar();
@@ -53,8 +52,6 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
         pnlMaze.addComponentListener(this);
         pnlMaze.setLayout(new BorderLayout());
         pnlMaze.setPreferredSize(new Dimension(1, 1));
-
-        DrawGrid MazeGrid = new DrawGrid(pnlMaze, 1, currentMaze);
 
         //Setting up side panels for Buttons
         pnlLeft = createPanel(Color.LIGHT_GRAY);
@@ -103,6 +100,49 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
         pnlSolveMazeButton.setPreferredSize(lftSize);
         pnlLeft.add(pnlSolveMazeButton);
 
+        newMaze();
+
+        DrawGrid MazeGrid = new DrawGrid(pnlMaze, 1, MazeManager.Instance().LoadMaze());
+    }
+
+    private void newMaze(){
+        Font Large  = new Font("Larger",Font.PLAIN, 24 );
+
+        JFrame PopOut = new JFrame();
+        PopOut.setSize(400, 300);
+        PopOut.setVisible(true);
+        PopOut.setLayout(new BorderLayout());
+
+        JTextField WidthBox = new JTextField();
+        JLabel WidthLabel = new JLabel("Insert width of new Maze:");
+        WidthBox.setFont(Large);
+        WidthLabel.setFont(Large);
+        WidthBox.setBounds(305,30,60,30);
+        WidthLabel.setBounds(20,25, 400,30);
+
+        JTextField HeightBox = new JTextField();
+        JLabel HeightLabel = new JLabel("Insert height of new Maze:");
+        HeightBox.setFont(Large);
+        HeightLabel.setFont(Large);
+        HeightBox.setBounds(305,80,60,30);
+        HeightLabel.setBounds(20,75, 400,30);
+
+        JButton Confirm = new JButton("Confirm");
+        Confirm.setFont(Large);
+        Confirm.setBounds(125,175,150,50);
+        Confirm.addActionListener(e -> {
+            int Width = Integer.parseInt(WidthBox.getText());
+            int Height = Integer.parseInt(HeightBox.getText());
+            MazeManager.Instance().CreateMaze(Width,Height);
+            PopOut.dispose();
+        });
+
+        PopOut.add(WidthBox);
+        PopOut.add(HeightBox);
+        PopOut.add(WidthLabel);
+        PopOut.add(HeightLabel);
+        PopOut.add(Confirm);
+        PopOut.setLayout(null);
     }
 
     private JPanel createPanel(Color c) {
