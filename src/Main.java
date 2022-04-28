@@ -8,7 +8,7 @@ public class Main {
 
         Maze currentMaze = new Maze(6 ,4);
         SwingUtilities.invokeLater(new GUI2(currentMaze));
-        MazeManager.Instance().writesomething();
+        MazeManager.Instance().CreateMaze(4,5);
 
     }
 }
