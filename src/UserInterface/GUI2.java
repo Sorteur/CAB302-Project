@@ -102,7 +102,6 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
 
         newMaze();
 
-        DrawGrid MazeGrid = new DrawGrid(pnlMaze, 1, MazeManager.Instance().LoadMaze());
     }
 
     private void newMaze(){
@@ -134,6 +133,7 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
             int Width = Integer.parseInt(WidthBox.getText());
             int Height = Integer.parseInt(HeightBox.getText());
             MazeManager.Instance().CreateMaze(Width,Height);
+            DrawGrid MazeGrid = new DrawGrid(pnlMaze, 1, MazeManager.Instance().LoadMaze());
             PopOut.dispose();
         });
 
