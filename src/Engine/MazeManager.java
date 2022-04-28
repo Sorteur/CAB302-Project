@@ -1,7 +1,10 @@
 package Engine;
+import DataClasses.Maze;
 
 public class MazeManager {
     private static MazeManager instance = new MazeManager();
+
+    private Maze Maze;
     private MazeManager (){
 
     }
@@ -10,7 +13,14 @@ public class MazeManager {
         return instance;
     }
 
-    public void writesomething () {
-        System.out.println("Something");
+    public Maze LoadMaze () {
+        return Maze;
     }
+
+    public void CreateMaze (int Length, int Height) {
+        Maze = new Maze(Length, Height);
+    }
+
+
+
 }
