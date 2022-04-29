@@ -21,5 +21,13 @@ public class MazeManager {
         Maze = new Maze(Length, Height);
     }
 
+    public void GetMaze (int ID) {
+
+    }
+
+    public void SaveMaze (Maze maze) {
+
+    }
+
 
 }
