@@ -68,6 +68,7 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
 
         pnlGenerateGridButton = new JButton("New Maze");
         pnlGenerateGridButton.setPreferredSize(lftSize);
+        pnlGenerateGridButton.addActionListener( e-> newMaze());
         pnlLeft.add(pnlGenerateGridButton);
 
         pnlSaveGridButton = new JButton("Save Maze");
@@ -131,7 +132,7 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
             int Width = Integer.parseInt(WidthBox.getText());
             int Height = Integer.parseInt(HeightBox.getText());
             MazeManager.Instance().CreateMaze(Width,Height);
-            DrawGrid MazeGrid = new DrawGrid(pnlMaze, 1, MazeManager.Instance().LoadMaze());
+            DrawGrid MazeGrid = new DrawGrid(pnlMaze, MazeManager.Instance().LoadMaze());
             UpdateGrid();
             PopOut.dispose();
         });
