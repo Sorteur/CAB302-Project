@@ -6,7 +6,6 @@ import java.util.*;
 
 public class Maze {
 
-    //TODO Grid is currently inverted need to fix.
     private int Length;
 
     public int getLength() {
@@ -19,8 +18,10 @@ public class Maze {
         return Height;
     }
 
-    int Size;
+    public int Scale;
+
     boolean Editable = true;
+
     private ArrayList<Cell> Grid = new ArrayList<>();
 
     public ArrayList<Cell> getGrid() {
@@ -30,7 +31,9 @@ public class Maze {
     public Maze(int length, int height) {
         Length = length;
         Height = height;
-        Size = length*height;
+        ScaleCalc(Height);
+
+
         int l = length;
         while (l > 0){
             int h=height;
@@ -40,6 +43,8 @@ public class Maze {
             }
             l-=1;
         }
+
+
     }
 
 
@@ -60,6 +65,13 @@ public class Maze {
         }
         System.out.println("Could not find a cell with that Co-Ordinate");
         return null;
+    }
+
+
+
+
+    public void ScaleCalc(int Height){
+        Scale = 1024/Height;
     }
 }
 
