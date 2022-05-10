@@ -18,12 +18,12 @@ public class DrawGrid extends Canvas implements MouseInputListener {
     int Y;
     int size;
 
-    public DrawGrid(JPanel panel, int Scale, Maze maze) {
-        this.scale = Scale;
+    public DrawGrid(JPanel panel, Maze maze) {
         this.X = maze.getLength();
         this.Y = maze.getHeight();
         this.currentMaze = maze;
-        ScaleCalc();
+        this.size = maze.Scale;
+        System.out.println(size);
 
         this.addMouseListener(this);
         panel.setLayout(new BorderLayout());
@@ -31,13 +31,6 @@ public class DrawGrid extends Canvas implements MouseInputListener {
         this.panel = panel;
     }
 
-    public void ScaleCalc(){
-        if (scale == 1){
-            size =  64;
-        } else {
-            size =  16;
-        }
-    }
 
     private JToggleButton createButton(String name, Cell A, int width, int height, JFrame frame){
         JToggleButton Button = new JToggleButton(name);
