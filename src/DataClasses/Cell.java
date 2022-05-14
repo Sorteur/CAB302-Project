@@ -1,7 +1,8 @@
 package DataClasses;
 
 public class Cell {
-    public Cell(int posX, int posY, boolean nwall, boolean swall, boolean wwall, boolean ewall, boolean start, boolean finish) {
+    public Cell(int id, int posX, int posY, boolean nwall, boolean swall, boolean wwall, boolean ewall, boolean start, boolean finish) {
+        Id = id;
         GridX = posX;
         GridY = posY;
         Nwall = nwall;
@@ -10,13 +11,30 @@ public class Cell {
         Ewall = ewall;
         Start = start;
         Finish = finish;
+        Vistited = false;
     }
+
+    public int Id;
 
     int GridX;
     int GridY;
 
     private int PosX;
     private int PosY;
+
+    private boolean Nwall;
+    private boolean Swall;
+    private boolean Wwall;
+    private boolean Ewall;
+
+    private boolean Start;
+    private boolean Finish;
+
+    private boolean Vistited;
+
+    public boolean isVistited() {
+        return Vistited;
+    }
 
     public int getPosX() {
         return PosX;
@@ -90,11 +108,6 @@ public class Cell {
         Finish = finish;
     }
 
-    private boolean Nwall;
-    private boolean Swall;
-    private boolean Wwall;
-    private boolean Ewall;
-    private boolean Start;
-    private boolean Finish;
+
 
 }
