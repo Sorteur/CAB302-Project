@@ -1,33 +1,19 @@
 package UserInterface;
 
-import DataClasses.Cell;
 import Engine.MazeManager;
 
 import javax.swing.*;
-//import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.*;
 
-public class GUI2 implements ActionListener, Runnable, ComponentListener, MouseListener {
+public class GUI2 implements ActionListener, Runnable, ComponentListener {
     public static final int WIDTH = 500;
     public static final int HEIGHT = 500;
 
     public GUI2() throws HeadlessException {
     }
 
-   // private JButton pnlClearGridButton;
-    private JButton pnlGenerateGridButton;
-    private JButton pnlSaveGridButton;
-    private JButton pnlLoadGridButton;
-    private JButton pnlPrintGridButton;
-    private JButton pnlResizeGridButton;
-    private JButton pnlPlaceStartCellButton;
-    private JButton pnlPlaceEndCellButton;
-    private JButton pnlSolveMazeButton;
-
     private JPanel pnlMaze;
-    private JPanel pnlLeft;
-
     private DrawGrid grid;
 
     private void createGUI() {
@@ -52,59 +38,49 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener, MouseL
         pnlMaze.setLayout(new BorderLayout());
         pnlMaze.setPreferredSize(new Dimension(1, 1));
         grid = new DrawGrid(pnlMaze);
-        grid.addMouseListener(this);
         pnlMaze.add(grid, BorderLayout.CENTER);
 
 
         //Setting up side panels for Buttons
-        pnlLeft = createPanel(Color.LIGHT_GRAY);
+        JPanel pnlLeft = createPanel(Color.LIGHT_GRAY);
         Main.add(pnlLeft, BorderLayout.WEST);
         pnlLeft.setPreferredSize(new Dimension(200, 1));
 
-        //Toggle Slider for editing
+        Dimension lftBtnSize = new Dimension(150,25);
 
-        Dimension lftSize = new Dimension(150,25);
-
-
-        //Button for grid disappear
-        //pnlClearGridButton = new JButton("Clear Maze");
-      //  pnlLeft.add(pnlClearGridButton);
-       // pnlButton.addActionListener(e -> MazeGrid.clearGrid(MazeGrid.getGraphics()));
-
-        pnlGenerateGridButton = new JButton("New Maze");
-        pnlGenerateGridButton.setPreferredSize(lftSize);
-        pnlGenerateGridButton.addActionListener( e-> newMaze());
+        JButton pnlGenerateGridButton = new JButton("New Maze");
+        pnlGenerateGridButton.setPreferredSize(lftBtnSize);
+        pnlGenerateGridButton.addActionListener(e-> newMaze());
         pnlLeft.add(pnlGenerateGridButton);
 
-        pnlSaveGridButton = new JButton("Save Maze");
-        pnlSaveGridButton.setPreferredSize(lftSize);
+        JButton pnlSaveGridButton = new JButton("Save Maze");
+        pnlSaveGridButton.setPreferredSize(lftBtnSize);
         pnlLeft.add(pnlSaveGridButton);
 
-        pnlLoadGridButton = new JButton("Load Maze");
-        pnlLoadGridButton.setPreferredSize(lftSize);
+        JButton pnlLoadGridButton = new JButton("Load Maze");
+        pnlLoadGridButton.setPreferredSize(lftBtnSize);
         pnlLeft.add(pnlLoadGridButton);
 
-        pnlPrintGridButton = new JButton("Print");
-        pnlPrintGridButton.setPreferredSize(lftSize);
+        JButton pnlPrintGridButton = new JButton("Print");
+        pnlPrintGridButton.setPreferredSize(lftBtnSize);
         pnlLeft.add(pnlPrintGridButton);
 
-        pnlResizeGridButton = new JButton("Resize Maze");
-        pnlResizeGridButton.setPreferredSize(lftSize);
+        JButton pnlResizeGridButton = new JButton("Resize Maze");
+        pnlResizeGridButton.setPreferredSize(lftBtnSize);
         pnlLeft.add(pnlResizeGridButton);
 
-        pnlPlaceStartCellButton = new JButton("Place Starting Point");
-        pnlPlaceStartCellButton.setPreferredSize(lftSize);
+        JButton pnlPlaceStartCellButton = new JButton("Place Starting Point");
+        pnlPlaceStartCellButton.setPreferredSize(lftBtnSize);
         pnlLeft.add(pnlPlaceStartCellButton);
 
-        pnlPlaceEndCellButton = new JButton("Place End Point");
-        pnlPlaceEndCellButton.setPreferredSize(lftSize);
+        JButton pnlPlaceEndCellButton = new JButton("Place End Point");
+        pnlPlaceEndCellButton.setPreferredSize(lftBtnSize);
         pnlLeft.add(pnlPlaceEndCellButton);
 
-        pnlSolveMazeButton = new JButton("Solve");
-        pnlSolveMazeButton.setPreferredSize(lftSize);
+        JButton pnlSolveMazeButton = new JButton("Solve");
+        pnlSolveMazeButton.setPreferredSize(lftBtnSize);
         pnlLeft.add(pnlSolveMazeButton);
 
-        newMaze();
 
     }
 
@@ -136,7 +112,7 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener, MouseL
                 int Width = Integer.parseInt(WidthBox.getText());
                 int Height = Integer.parseInt(HeightBox.getText());
                 grid.GridSet(MazeManager.Instance().CreateMaze(Width,Height));
-                UpdateGrid();
+                pnlMaze.updateUI();
                 PopOut.dispose();
         });
 
@@ -153,11 +129,6 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener, MouseL
         A.setBackground(c);
         return A;
     }
-
-    public void UpdateGrid(){
-        pnlMaze.updateUI();
-    }
-
 
     @Override
     public void run() {
@@ -187,32 +158,4 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener, MouseL
     @Override
     public void componentHidden(ComponentEvent e) {
     }
-
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        int clickX = e.getX();
-        int clickY = e.getY();
-        System.out.println("Here!");
-
-        for (Cell cell:MazeManager.Instance().LoadMaze().getGrid()) {
-            if (((clickX > cell.getPosX()) && (clickX < cell.getPosX()+MazeManager.Instance().LoadMaze().Scale)) && ((clickY > cell.getPosY()) && (clickY < cell.getPosY()+MazeManager.Instance().LoadMaze().Scale))){
-                grid.EditSquare(cell.getGridX(),cell.getGridY());
-            }
-        }
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {}
-
-    @Override
-    public void mouseReleased(MouseEvent e) {}
-
-    @Override
-    public void mouseEntered(MouseEvent e) {}
-
-    @Override
-    public void mouseExited(MouseEvent e) {}
 }
-
-
-

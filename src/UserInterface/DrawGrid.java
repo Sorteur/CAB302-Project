@@ -8,11 +8,13 @@ import javax.swing.*;
 import javax.swing.event.MouseInputListener;
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.Objects;
 
-public class DrawGrid extends Canvas{
+public class DrawGrid extends Canvas implements MouseListener {
     public DrawGrid(JPanel panel) {
         this.panel = panel;
+        this.addMouseListener(this);
     }
 
     Maze CurrentMaze;
@@ -142,5 +144,38 @@ public class DrawGrid extends Canvas{
             }
             RelativeX+=1;
         }
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        int clickX = e.getX();
+        int clickY = e.getY();
+        //System.out.println("Here!");
+
+        for (Cell cell:CurrentMaze.getGrid()) {
+            if (((clickX > cell.getPosX()) && (clickX < cell.getPosX()+size)) && ((clickY > cell.getPosY()) && (clickY < cell.getPosY()+size))){
+                EditSquare(cell.getGridX(),cell.getGridY());
+            }
+        }
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
     }
 }
