@@ -7,13 +7,20 @@ import org.junit.jupiter.api.*;
 
 public class MazeManagerTest {
 
-    @Test
-    public void CreateMazeTest() throws Exception {
+    @BeforeEach @Test
+     void CreateMazeTest(){
         MazeManager.Instance().CreateMaze(10,10);
-        assertNotNull(MazeManager.Instance().LoadMaze());
     }
 
+    @Test
+     void LoadMazeTest(){
+        assertNotNull(MazeManager.Instance().LoadMaze(),"Couldn't find current maze");
+    }
 
-
+    @Test @Disabled
+    void SaveLoadMazeTest() {
+        MazeManager.Instance().SaveMaze(MazeManager.Instance().LoadMaze());
+        MazeManager.Instance().GetMaze(1);
+    }
 
 }

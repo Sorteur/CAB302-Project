@@ -5,9 +5,6 @@ public class MazeManager {
     private static MazeManager instance = new MazeManager();
 
     private Maze Maze;
-    private MazeManager (){
-
-    }
 
     public static MazeManager Instance(){
         return instance;
@@ -17,8 +14,9 @@ public class MazeManager {
         return Maze;
     }
 
-    public void CreateMaze (int Length, int Height) {
+    public Maze CreateMaze (int Length, int Height) {
         Maze = new Maze(Length, Height);
+        return Maze;
     }
 
     public void GetMaze (int ID) {

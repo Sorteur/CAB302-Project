@@ -1,5 +1,6 @@
 package UserInterface;
 
+import DataClasses.Cell;
 import Engine.MazeManager;
 
 import javax.swing.*;
@@ -7,7 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class GUI2 implements ActionListener, Runnable, ComponentListener {
+public class GUI2 implements ActionListener, Runnable, ComponentListener, MouseListener {
     public static final int WIDTH = 500;
     public static final int HEIGHT = 500;
 
@@ -27,9 +28,9 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
     private JPanel pnlMaze;
     private JPanel pnlLeft;
 
+    private DrawGrid grid;
+
     private void createGUI() {
-
-
         //Setting up Frame
         JFrame Main = new JFrame();
         Main.setExtendedState(Frame.MAXIMIZED_BOTH);
@@ -44,12 +45,16 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
         mnuBar.setPreferredSize(new Dimension(1, 20));
 
 
-        //Setting up central Panel for DataClasses.Maze
+        //Setting up and Displaying Panel to display Grid
         pnlMaze = createPanel(Color.WHITE);
         Main.add(pnlMaze, BorderLayout.CENTER);
         pnlMaze.addComponentListener(this);
         pnlMaze.setLayout(new BorderLayout());
         pnlMaze.setPreferredSize(new Dimension(1, 1));
+        grid = new DrawGrid(pnlMaze);
+        grid.addMouseListener(this);
+        pnlMaze.add(grid, BorderLayout.CENTER);
+
 
         //Setting up side panels for Buttons
         pnlLeft = createPanel(Color.LIGHT_GRAY);
@@ -124,17 +129,15 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
         HeightLabel.setFont(Large);
         HeightBox.setBounds(305,80,60,30);
         HeightLabel.setBounds(20,75, 400,30);
-
         JButton Confirm = new JButton("Confirm");
         Confirm.setFont(Large);
         Confirm.setBounds(125,175,150,50);
         Confirm.addActionListener(e -> {
-            int Width = Integer.parseInt(WidthBox.getText());
-            int Height = Integer.parseInt(HeightBox.getText());
-            MazeManager.Instance().CreateMaze(Width,Height);
-            DrawGrid MazeGrid = new DrawGrid(pnlMaze, MazeManager.Instance().LoadMaze());
-            UpdateGrid();
-            PopOut.dispose();
+                int Width = Integer.parseInt(WidthBox.getText());
+                int Height = Integer.parseInt(HeightBox.getText());
+                grid.GridSet(MazeManager.Instance().CreateMaze(Width,Height));
+                UpdateGrid();
+                PopOut.dispose();
         });
 
         PopOut.add(WidthBox);
@@ -184,6 +187,31 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
     @Override
     public void componentHidden(ComponentEvent e) {
     }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        int clickX = e.getX();
+        int clickY = e.getY();
+        System.out.println("Here!");
+
+        for (Cell cell:MazeManager.Instance().LoadMaze().getGrid()) {
+            if (((clickX > cell.getPosX()) && (clickX < cell.getPosX()+MazeManager.Instance().LoadMaze().Scale)) && ((clickY > cell.getPosY()) && (clickY < cell.getPosY()+MazeManager.Instance().LoadMaze().Scale))){
+                grid.EditSquare(cell.getGridX(),cell.getGridY());
+            }
+        }
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {}
+
+    @Override
+    public void mouseReleased(MouseEvent e) {}
+
+    @Override
+    public void mouseEntered(MouseEvent e) {}
+
+    @Override
+    public void mouseExited(MouseEvent e) {}
 }
 
 
