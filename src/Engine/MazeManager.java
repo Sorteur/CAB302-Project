@@ -4,11 +4,15 @@ import DataClasses.Maze;
 public class MazeManager {
     private static MazeManager instance = new MazeManager();
 
-    private Maze Maze;
-
     public static MazeManager Instance(){
         return instance;
     }
+
+    private MazeManager (){
+
+    }
+
+    private Maze Maze;
 
     public Maze LoadMaze () {
         return Maze;
@@ -26,7 +30,6 @@ public class MazeManager {
     public void SaveMaze (Maze maze) {
 
     }
-
 
 
 }
