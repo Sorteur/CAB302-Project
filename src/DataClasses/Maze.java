@@ -1,19 +1,15 @@
 package DataClasses;
 
-import DataClasses.Cell;
-
-import java.util.*;
+import java.util.ArrayList;
 
 public class Maze {
 
     private int Length;
-
     public int getLength() {
         return Length;
     }
 
     private int Height;
-
     public int getHeight() {
         return Height;
     }
@@ -23,7 +19,6 @@ public class Maze {
     boolean Editable = true;
 
     private ArrayList<Cell> Grid = new ArrayList<>();
-
     public ArrayList<Cell> getGrid() {
         return Grid;
     }
@@ -32,8 +27,6 @@ public class Maze {
         Length = length;
         Height = height;
         ScaleCalc(Height);
-
-
         int l = length;
         while (l > 0){
             int h=height;
@@ -42,15 +35,6 @@ public class Maze {
                 h-=1;
             }
             l-=1;
-        }
-
-
-    }
-
-
-    public void GridInfo(){
-        for (Cell cells:Grid){
-            System.out.println("This DataClasses.Cell's Position is "+cells.getGridX()+","+cells.getGridY());
         }
     }
 
