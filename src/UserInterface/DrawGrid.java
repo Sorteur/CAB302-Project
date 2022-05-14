@@ -2,6 +2,7 @@ package UserInterface;
 
 import DataClasses.Cell;
 import DataClasses.Maze;
+import Engine.MazeManager;
 
 import javax.swing.*;
 import javax.swing.event.MouseInputListener;
@@ -9,28 +10,25 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.Objects;
 
-public class DrawGrid extends Canvas implements MouseInputListener {
+public class DrawGrid extends Canvas{
+    public DrawGrid(JPanel panel) {
+        this.panel = panel;
+    }
 
-    Maze currentMaze;
+    Maze CurrentMaze;
     JPanel panel;
-    int scale;
     int X;
     int Y;
     int size;
 
-    public DrawGrid(JPanel panel, Maze maze) {
-        this.X = maze.getLength();
-        this.Y = maze.getHeight();
-        this.currentMaze = maze;
-        this.size = maze.Scale;
-        System.out.println(size);
-
-        this.addMouseListener(this);
-        panel.setLayout(new BorderLayout());
-        panel.add(this, BorderLayout.CENTER);
-        this.panel = panel;
+    public void GridSet(Maze maze){
+        CurrentMaze = maze;
+        X = maze.getLength();
+        Y = maze.getHeight();
+        size = maze.Scale;
+        panel.updateUI();
+        repaint();
     }
-
 
     private JToggleButton createButton(String name, Cell A, int width, int height, JFrame frame){
         JToggleButton Button = new JToggleButton(name);
@@ -51,20 +49,18 @@ public class DrawGrid extends Canvas implements MouseInputListener {
         return Button;
     }
 
-
-
     public void EditSquare(int x, int y){
-        Cell EditedCell = currentMaze.Search(x,y);
-        int index = currentMaze.getGrid().indexOf(EditedCell);
+        Cell EditedCell = MazeManager.Instance().LoadMaze().Search(x,y);
+        int index = MazeManager.Instance().LoadMaze().getGrid().indexOf(EditedCell);
         System.out.println(index);
         Cell NCell;
         Cell SCell;
         Cell WCell;
         Cell ECell;
-        if (index % Y != 0) {NCell = currentMaze.getGrid().get(index - 1);} else {NCell = null;}
-        if (index % Y != Y-1) {SCell = currentMaze.getGrid().get(index + 1);} else {SCell = null;}
-        if (index - Y  >= 0){WCell = currentMaze.getGrid().get(index - Y);} else {WCell = null;}
-        if (index + Y  < X*Y){ECell = currentMaze.getGrid().get(index + Y);} else {ECell = null;}
+        if (index % Y != 0) {NCell = MazeManager.Instance().LoadMaze().getGrid().get(index - 1);} else {NCell = null;}
+        if (index % Y != Y-1) {SCell = MazeManager.Instance().LoadMaze().getGrid().get(index + 1);} else {SCell = null;}
+        if (index - Y  >= 0){WCell = MazeManager.Instance().LoadMaze().getGrid().get(index - Y);} else {WCell = null;}
+        if (index + Y  < X*Y){ECell = MazeManager.Instance().LoadMaze().getGrid().get(index + Y);} else {ECell = null;}
 
 
 
@@ -113,7 +109,6 @@ public class DrawGrid extends Canvas implements MouseInputListener {
         });
     }
 
-
     public void DrawSquare(Cell cell,Graphics g, int x, int y, int length){
 
         cell.setPosX(x);
@@ -141,41 +136,11 @@ public class DrawGrid extends Canvas implements MouseInputListener {
         while (RelativeX < X){
             int RelativeY=0;
             while (RelativeY < Y){
-                DrawSquare(currentMaze.getGrid().get(CurrentCell),g,PosX+(RelativeX*size),PosY+(RelativeY*size),size);
+                DrawSquare(MazeManager.Instance().LoadMaze().getGrid().get(CurrentCell),g,PosX+(RelativeX*size),PosY+(RelativeY*size),size);
                 RelativeY+=1;
                 CurrentCell+=1;
             }
             RelativeX+=1;
         }
     }
-
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        int clickX = e.getX();
-        int clickY = e.getY();
-
-        for (Cell cell:currentMaze.getGrid()) {
-            if (((clickX > cell.getPosX()) && (clickX < cell.getPosX()+size)) && ((clickY > cell.getPosY()) && (clickY < cell.getPosY()+size))){
-                EditSquare(cell.getGridX(),cell.getGridY());
-            }
-        }
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {}
-
-    @Override
-    public void mouseReleased(MouseEvent e) {}
-
-    @Override
-    public void mouseEntered(MouseEvent e) {}
-
-    @Override
-    public void mouseExited(MouseEvent e) {}
-
-    @Override
-    public void mouseDragged(MouseEvent e) {}
-
-    @Override
-    public void mouseMoved(MouseEvent e) {}
 }
