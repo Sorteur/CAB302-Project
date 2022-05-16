@@ -14,7 +14,6 @@ public class Maze {
         return Height;
     }
 
-    public int Scale;
 
     boolean Editable = true;
 
@@ -89,7 +88,6 @@ public class Maze {
         Length = length;
         Height = height;
         int id = 0;
-        ScaleCalc(Height);
         int l = length;
         while (l > 0){
             int h=height;
@@ -115,11 +113,5 @@ public class Maze {
         return null;
     }
 
-
-
-
-    public void ScaleCalc(int Height){
-        Scale = 1024/Height;
-    }
 }
 

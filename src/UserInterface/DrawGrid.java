@@ -27,7 +27,7 @@ public class DrawGrid extends Canvas implements MouseListener {
         CurrentMaze = maze;
         X = maze.getLength();
         Y = maze.getHeight();
-        size = maze.Scale;
+        size = (panel.getHeight()-48)/Y;
         panel.updateUI();
         repaint();
     }
