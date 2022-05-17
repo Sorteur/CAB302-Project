@@ -5,7 +5,6 @@ import DataClasses.Maze;
 import Engine.MazeManager;
 
 import javax.swing.*;
-import javax.swing.event.MouseInputListener;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -50,19 +49,19 @@ public class DrawGrid extends Canvas implements MouseListener {
         Button.setPreferredSize(new Dimension(width,height));
         return Button;
     }
-
+//TODO MOVE TO MAZE CLASS AND SPLIT INTO DIFFERENT CLASSES
     public void EditSquare(int x, int y){
-        Cell EditedCell = MazeManager.Instance().LoadMaze().Search(x,y);
-        int index = MazeManager.Instance().LoadMaze().getGrid().indexOf(EditedCell);
-        System.out.println(index);
+        Cell EditedCell = MazeManager.Instance().GetMaze().Search(x,y);
+        int index = MazeManager.Instance().GetMaze().getGrid().indexOf(EditedCell);
+        //System.out.println(index);
         Cell NCell;
         Cell SCell;
         Cell WCell;
         Cell ECell;
-        if (index % Y != 0) {NCell = MazeManager.Instance().LoadMaze().getGrid().get(index - 1);} else {NCell = null;}
-        if (index % Y != Y-1) {SCell = MazeManager.Instance().LoadMaze().getGrid().get(index + 1);} else {SCell = null;}
-        if (index - Y  >= 0){WCell = MazeManager.Instance().LoadMaze().getGrid().get(index - Y);} else {WCell = null;}
-        if (index + Y  < X*Y){ECell = MazeManager.Instance().LoadMaze().getGrid().get(index + Y);} else {ECell = null;}
+        if (index % Y != 0) {NCell = MazeManager.Instance().GetMaze().getGrid().get(index - 1);} else {NCell = null;}
+        if (index % Y != Y-1) {SCell = MazeManager.Instance().GetMaze().getGrid().get(index + 1);} else {SCell = null;}
+        if (index - Y  >= 0){WCell = MazeManager.Instance().GetMaze().getGrid().get(index - Y);} else {WCell = null;}
+        if (index + Y < X*Y){ECell = MazeManager.Instance().GetMaze().getGrid().get(index + Y);} else {ECell = null;}
 
 
 
@@ -138,7 +137,7 @@ public class DrawGrid extends Canvas implements MouseListener {
         while (RelativeX < X){
             int RelativeY=0;
             while (RelativeY < Y){
-                DrawSquare(MazeManager.Instance().LoadMaze().getGrid().get(CurrentCell),g,PosX+(RelativeX*size),PosY+(RelativeY*size),size);
+                DrawSquare(MazeManager.Instance().GetMaze().getGrid().get(CurrentCell),g,PosX+(RelativeX*size),PosY+(RelativeY*size),size);
                 RelativeY+=1;
                 CurrentCell+=1;
             }
