@@ -3,18 +3,16 @@ import DataClasses.Maze;
 
 public class MazeManager {
     private static MazeManager instance = new MazeManager();
-
     public static MazeManager Instance(){
         return instance;
     }
-
     private MazeManager (){
-
     }
 
     private Maze Maze;
 
-    public Maze LoadMaze () {
+
+    public Maze GetMaze() {
         return Maze;
     }
 
@@ -23,7 +21,7 @@ public class MazeManager {
         return Maze;
     }
 
-    public void GetMaze (int ID) {
+    public void LoadMaze(int ID) {
 
     }
 

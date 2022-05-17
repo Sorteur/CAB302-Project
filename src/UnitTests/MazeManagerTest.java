@@ -14,13 +14,13 @@ public class MazeManagerTest {
 
     @Test
      void LoadMazeTest(){
-        assertNotNull(MazeManager.Instance().LoadMaze(),"Couldn't find current maze");
+        assertNotNull(MazeManager.Instance().GetMaze(),"Couldn't find current maze");
     }
 
     @Test @Disabled
     void SaveLoadMazeTest() {
-        MazeManager.Instance().SaveMaze(MazeManager.Instance().LoadMaze());
-        MazeManager.Instance().GetMaze(1);
+        MazeManager.Instance().SaveMaze(MazeManager.Instance().GetMaze());
+        MazeManager.Instance().LoadMaze(1);
     }
 
 }
