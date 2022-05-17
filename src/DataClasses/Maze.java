@@ -4,37 +4,28 @@ import java.util.ArrayList;
 
 public class Maze {
 
-    private int Length;
+    private final int Length;
     public int getLength() {
         return Length;
     }
 
-    private int Height;
+    private final int Height;
     public int getHeight() {
         return Height;
     }
 
-
-    boolean Editable = true;
-
-    private ArrayList<Cell> Grid = new ArrayList<>();
+    private final ArrayList<Cell> Grid = new ArrayList<>();
     public ArrayList<Cell> getGrid() {
         return Grid;
     }
 
     public Cell getCell(int index) {
-
-        Cell cell = Grid.get(index);
-
-        return  cell;
-
+        return  Grid.get(index);
     }
 
     public void setCell(int index, Cell cell) {
         Grid.set(index, cell);
     }
-
-
 
     //TODO exception handling for arrays that are out of bounds
     public boolean checkNorthCell(int index)
@@ -104,12 +95,10 @@ public class Maze {
         for (Cell cells:Grid){
             if (xPos == cells.getGridX()){
                 if (yPos == cells.getGridY()){
-                    //System.out.println("Found a cell with that Co-Ordinate");
                     return cells;
                 }
             }
         }
-        System.out.println("Could not find a cell with that Co-Ordinate");
         return null;
     }
 
