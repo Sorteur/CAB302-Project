@@ -40,32 +40,44 @@ public class MazeGenerator {
     public Maze GenerateMaze(Maze themaze) {
         Cell randomstart = randomCell(themaze);
 
-        Cell nextcell = chooseViableNeihgbor(randomstart);
+        DepthFirstSearch(randomstart);
 
         return maze;
     }
 
 
 
-    public Cell randomCell (Maze themaze)
+    private void DepthFirstSearch(Cell currentcell){
+        currentcell.isVisiting();
+        Cell unvisitedneighbor = null;
+
+
+         do{
+            unvisitedneighbor = chooseViableNeihgbor(currentcell);
+            if (!(unvisitedneighbor == null))
+            {
+                DepthFirstSearch(unvisitedneighbor);
+            }
+        }while (unvisitedneighbor != null);
+
+    }
+
+
+    private Cell randomCell (Maze themaze)
     {
         maze = themaze;
 
         int mazemax = maze.getHeight() * maze.getLength();
         int start = (int)(Math.random() * mazemax);
 
-        //TODO Comment Out
-        System.out.println(start);
-
         return maze.getCell(start);
-
     }
 
-    private Cell chooseViableNeihgbor (Cell cell) {
-        boolean viableneihgbor = false;
+    private Cell chooseViableNeihgbor (Cell currentcell) {
+        Cell viableneihgbor = null;
 
         // I used this guide to make this https://www.tutorialspoint.com/how-to-randomize-and-shuffle-array-of-numbers-in-java
-        int[] checkorder = {1,2,3,4};
+        int[] checkorder = {0,1,2,3};
         Random rand = new Random();
         for(int i = 0; i < checkorder.length; ++i) {
             int index = rand.nextInt(checkorder.length - i);
@@ -78,33 +90,63 @@ public class MazeGenerator {
 
         for(int side: checkorder)
         {
-            if(side == 0)
+            if(checkorder[side] == 0)
             {
-                viableneihgbor = maze.checkEastCell(cell.Id);
+                viableneihgbor = maze.checkNorthCell(currentcell.Id);
+                if (viableneihgbor != null){
+                    if(!viableneihgbor.isVistited()) {
+                        currentcell.setNwall(false);
+                        viableneihgbor.setSwall(false);
+
+                        return viableneihgbor;
+                    }
+                }
             }
-            else if(side == 1)
+            else if(checkorder[side] == 1)
             {
+                viableneihgbor = maze.checkEastCell(currentcell.Id);
+                if (viableneihgbor != null){
+                    if(!viableneihgbor.isVistited()) {
+                        currentcell.setEwall(false);
+                        viableneihgbor.setWwall(false);
 
+                        return viableneihgbor;
+                    }
+                }
             }
-            else if(side == 2)
+            else if(checkorder[side] == 2) {
+                viableneihgbor = maze.checkSouthCell(currentcell.Id);
+                if (viableneihgbor != null){
+                    if(!viableneihgbor.isVistited()) {
+                        currentcell.setSwall(false);
+                        viableneihgbor.setNwall(false);
+
+                        return viableneihgbor;
+                    }
+                }
+            }
+             else if(checkorder[side] == 3)
             {
+                viableneihgbor = maze.checkWestCell(currentcell.Id);
+                if (viableneihgbor != null){
+                    if(!viableneihgbor.isVistited()){
+                        currentcell.setWwall(false);
+                        viableneihgbor.setEwall(false);
 
+                        return viableneihgbor;
+                    }
+                }
             }
-             else if(side == 3)
-            {
-
-            }
-
         }
 
-        return cell;
+        return null;
     }
 
     private void addcelltoStack(Cell cell){
         stk.add(cell);
-
-
-
+    }
+    private Cell popcellfromStack(){
+        return (Cell)stk.pop();
     }
 
 

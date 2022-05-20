@@ -36,6 +36,10 @@ public class Cell {
         return Vistited;
     }
 
+    public void isVisiting() {
+        Vistited = true;
+    }
+
     public int getPosX() {
         return PosX;
     }
