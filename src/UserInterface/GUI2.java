@@ -1,5 +1,6 @@
 package UserInterface;
 
+import Engine.MazeGenerator;
 import Engine.MazeManager;
 
 import javax.swing.*;
@@ -111,7 +112,7 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
         Confirm.addActionListener(e -> {
                 int Width = Integer.parseInt(WidthBox.getText());
                 int Height = Integer.parseInt(HeightBox.getText());
-                grid.GridSet(MazeManager.Instance().CreateMaze(Width,Height));
+                grid.GridSet(MazeGenerator.Instance().GenerateMaze(MazeManager.Instance().CreateMaze(Width,Height)));
                 pnlMaze.updateUI();
                 PopOut.dispose();
         });
