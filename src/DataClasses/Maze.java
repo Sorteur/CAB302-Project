@@ -28,47 +28,46 @@ public class Maze {
     }
 
     //TODO exception handling for arrays that are out of bounds
-    public boolean checkNorthCell(int index)
+    public Cell checkNorthCell(int index)
     {
-        int northcellindex = index - Length;
+        if (index % Height == 0) return null;
 
-        if(northcellindex < 0) throw new RuntimeException("Index out of bounds");
+        int northcellindex = index - 1 ;
 
-        Cell cell = Grid.get(northcellindex);
+        return getCell(northcellindex);
 
-        return false;
+        //return !getCell(northcellindex).isVistited();
     }
 
-    public boolean checkEastCell(int index)
+    public Cell checkEastCell(int index)
     {
-        int eastcellindex = index + 1;
+        int eastcellindex = index + Height;
 
-        if(eastcellindex > (Length*Height)) return false;
+        if(eastcellindex >= (Length*Height)) return null;
 
-        if(getCell(eastcellindex).isVistited()) return false;
+        return getCell(eastcellindex);
 
-        return true;
+        //return !getCell(eastcellindex).isVistited();
     }
 
-    public boolean checkSouthCell(int index)
+    public Cell checkSouthCell(int index)
     {
-        int southcellindex = index + Length;
+        if (index % Height == Height - 1) return null;
 
-        if(southcellindex > (Length*Height)) throw new RuntimeException("Index out of bounds");
+        int southcellindex = index + 1 ;
 
-        Cell cell = Grid.get(southcellindex);
+        return getCell(southcellindex);
 
-        return false;
+        //return !getCell(southcellindex).isVistited();
     }
-    public boolean checkWestCell(int index)
+    public Cell checkWestCell(int index)
     {
-        int westcellindex = index - 1;
+        int westcellindex = index - Height;
 
-        if(westcellindex < 0) throw new RuntimeException("Index out of bounds");
+        if(westcellindex < 0) return null;
 
-        Cell cell = Grid.get(westcellindex);
-
-        return false;
+        return getCell(westcellindex);
+        //return !getCell(westcellindex).isVistited();
     }
 
 
