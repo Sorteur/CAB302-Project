@@ -137,7 +137,19 @@ public class DrawGrid extends Canvas implements MouseListener {
         while (RelativeX < X){
             int RelativeY=0;
             while (RelativeY < Y){
-                DrawSquare(MazeManager.Instance().GetMaze().getGrid().get(CurrentCell),g,PosX+(RelativeX*size),PosY+(RelativeY*size),size);
+                Cell cell = MazeManager.Instance().GetMaze().getGrid().get(CurrentCell);
+                if (cell.isStart())
+                {
+                    g.setColor(Color.GREEN);
+                    g.fillRect(PosX+(RelativeX*size),PosY+(RelativeY*size),size,size);
+                }
+                if (cell.isFinish())
+                {
+                    g.setColor(Color.RED);
+                    g.fillRect(PosX+(RelativeX*size),PosY+(RelativeY*size),size,size);
+                }
+                g.setColor(Color.BLACK);
+                DrawSquare(cell,g,PosX+(RelativeX*size),PosY+(RelativeY*size),size);
                 RelativeY+=1;
                 CurrentCell+=1;
             }
