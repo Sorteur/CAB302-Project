@@ -19,22 +19,14 @@ public class MazeGenerator {
     MazeGenerator() {
 
     }
-
     Maze maze;
 
-    Stack stk = new Stack();
-
-    private Cell GenerateCellState () {
-        return null;
+    private void GenerateStartCell() {
+        this.maze.getCell(0).setStart(true);
     }
 
-    private Maze GenerateStartCell(Maze maze) {
-        return this.maze;
-    }
-
-
-    private Maze GenerateEndCell(Maze maze) {
-        return this.maze;
+    private void GenerateEndCell(){
+        this.maze.getCell(this.maze.getGrid().size()-1).setFinish(true);
     }
 
     public Maze GenerateMaze(Maze themaze) {
@@ -42,10 +34,12 @@ public class MazeGenerator {
 
         DepthFirstSearch(randomstart);
 
+        GenerateStartCell();
+
+        GenerateEndCell();
+
         return maze;
     }
-
-
 
     private void DepthFirstSearch(Cell currentcell){
         currentcell.isVisiting();
@@ -141,13 +135,5 @@ public class MazeGenerator {
 
         return null;
     }
-
-    private void addcelltoStack(Cell cell){
-        stk.add(cell);
-    }
-    private Cell popcellfromStack(){
-        return (Cell)stk.pop();
-    }
-
 
 }
