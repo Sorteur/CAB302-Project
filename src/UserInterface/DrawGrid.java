@@ -71,8 +71,6 @@ public class DrawGrid extends Canvas implements MouseListener {
         if (index - Y  >= 0){WCell = MazeManager.Instance().GetMaze().getGrid().get(index - Y);} else {WCell = null;}
         if (index + Y < X*Y){ECell = MazeManager.Instance().GetMaze().getGrid().get(index + Y);} else {ECell = null;}
 
-
-
         Frame[] allFrames = Frame.getFrames();
         for (Frame fr: allFrames){
             if (!Objects.equals(fr.getName(), allFrames[0].getName())){
@@ -167,18 +165,19 @@ public class DrawGrid extends Canvas implements MouseListener {
         JFileChooser F = new JFileChooser();
         F.setSelectedFile(new File("C:\\Users\\Tyler\\Documents\\Maze.png"));
         if (F.showSaveDialog(panel.getParent()) == JFileChooser.APPROVE_OPTION) {
-            if (JOptionPane.showConfirmDialog(this, "The file exists, overwrite?", "Existing file", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION);{
-                File file = (F.getSelectedFile());
-                String path = file.getPath();
-                BufferedImage MazeImg = new BufferedImage(panel.getWidth(),panel.getHeight(),BufferedImage.TYPE_INT_RGB);
-                BufferedImage Cropped = MazeImg.getSubimage(PosX,PosY,size*X+1,size*Y+1);
-                Graphics2D g = MazeImg.createGraphics();
-                panel.paintAll(g);
-                try {
-                    ImageIO.write(Cropped,"png",new File(path));
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
+            if (F.getSelectedFile().exists()){
+                if (JOptionPane.showConfirmDialog(this, "The file exists, overwrite?", "Existing file", JOptionPane.YES_NO_OPTION) == JOptionPane.NO_OPTION){
+                    return;}}
+            File file = (F.getSelectedFile());
+            String path = file.getPath();
+            BufferedImage MazeImg = new BufferedImage(panel.getWidth(),panel.getHeight(),BufferedImage.TYPE_INT_RGB);
+            BufferedImage Cropped = MazeImg.getSubimage(PosX,PosY,size*X+1,size*Y+1);
+            Graphics2D g = MazeImg.createGraphics();
+            panel.paintAll(g);
+            try {
+                ImageIO.write(Cropped,"png",new File(path));
+            } catch (IOException ex) {
+                ex.printStackTrace();
             }
         }
     }
@@ -187,11 +186,15 @@ public class DrawGrid extends Canvas implements MouseListener {
     public void mouseClicked(MouseEvent e) {
         int clickX = e.getX();
         int clickY = e.getY();
-        //System.out.println("Here!");
-
         for (Cell cell:CurrentMaze.getGrid()) {
             if (((clickX > cell.getPosX()) && (clickX < cell.getPosX()+size)) && ((clickY > cell.getPosY()) && (clickY < cell.getPosY()+size))){
-                EditSquare(cell.getGridX(),cell.getGridY());
+                if (CurrentMaze.Editable){
+                    EditSquare(cell.getGridX(),cell.getGridY());
+                } else if (false == true){
+
+                }
+
+
             }
         }
     }

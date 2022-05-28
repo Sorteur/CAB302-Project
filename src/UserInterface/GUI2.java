@@ -1,16 +1,12 @@
 package UserInterface;
 
+import DataClasses.Maze;
 import Engine.MazeGenerator;
 import Engine.MazeManager;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.filechooser.FileSystemView;
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 public class GUI2 implements ActionListener, Runnable, ComponentListener {
     public static final int WIDTH = 500;
@@ -72,8 +68,9 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
         pnlExportGridButton.addActionListener(e -> grid.Export());
         pnlLeft.add(pnlExportGridButton);
 
-        JButton pnlAddLogoButton = new JButton("Place Logo");
+        JButton pnlAddLogoButton = new JButton("Image Editor");
         pnlAddLogoButton.setPreferredSize(lftBtnSize);
+        pnlAddLogoButton.addActionListener(e -> ImageGUI.Instance().ImageEditor());
         pnlLeft.add(pnlAddLogoButton);
 
         JButton pnlPlaceStartCellButton = new JButton("Place Starting Point");
@@ -87,9 +84,6 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
         JButton pnlSolveMazeButton = new JButton("Solve");
         pnlSolveMazeButton.setPreferredSize(lftBtnSize);
         pnlLeft.add(pnlSolveMazeButton);
-
-
-
 
     }
 
@@ -116,13 +110,23 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
         HeightLabel.setFont(Large);
         HeightBox.setBounds(305,80,60,30);
         HeightLabel.setBounds(20,75, 400,30);
+
+        JRadioButton RandomButton = new JRadioButton("Start with random maze");
+        RandomButton.setBounds(20,125,400,30);
+
         JButton Confirm = new JButton("Confirm");
         Confirm.setFont(Large);
-        Confirm.setBounds(125,175,150,50);
+        Confirm.setBounds(125,200,150,50);
         Confirm.addActionListener(e -> {
                 int Width = Integer.parseInt(WidthBox.getText());
                 int Height = Integer.parseInt(HeightBox.getText());
-                grid.GridSet(MazeGenerator.Instance().GenerateMaze(MazeManager.Instance().CreateMaze(Width,Height)));
+                Maze newMaze;
+                if (RandomButton.isSelected()){
+                    newMaze = MazeGenerator.Instance().GenerateMaze(MazeManager.Instance().CreateMaze(Width,Height));
+                } else {
+                    newMaze = MazeManager.Instance().CreateMaze(Width,Height);
+                }
+                grid.GridSet(newMaze);
                 pnlMaze.updateUI();
                 PopOut.dispose();
         });
@@ -131,6 +135,7 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
         PopOut.add(HeightBox);
         PopOut.add(WidthLabel);
         PopOut.add(HeightLabel);
+        PopOut.add(RandomButton);
         PopOut.add(Confirm);
         PopOut.setLayout(null);
     }
