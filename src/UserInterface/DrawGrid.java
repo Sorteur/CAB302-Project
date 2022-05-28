@@ -4,10 +4,14 @@ import DataClasses.Cell;
 import DataClasses.Maze;
 import Engine.MazeManager;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Objects;
 
 public class DrawGrid extends Canvas implements MouseListener {
@@ -21,12 +25,16 @@ public class DrawGrid extends Canvas implements MouseListener {
     int X;
     int Y;
     int size;
+    int PosX;
+    int PosY;
 
     public void GridSet(Maze maze){
         CurrentMaze = maze;
         X = maze.getLength();
         Y = maze.getHeight();
         size = (panel.getHeight()-48)/Y;
+        PosX = (panel.getWidth()-(size*X))/2;
+        PosY = (panel.getHeight()-(size*Y))/2;
         panel.updateUI();
         repaint();
     }
@@ -130,8 +138,6 @@ public class DrawGrid extends Canvas implements MouseListener {
     }
 
     public void paint(Graphics g) {
-        int PosX = (panel.getWidth()-(size*X))/2;
-        int PosY = (panel.getHeight()-(size*Y))/2;
         int CurrentCell=0;
         int RelativeX = 0;
         while (RelativeX < X){
@@ -155,6 +161,26 @@ public class DrawGrid extends Canvas implements MouseListener {
             }
             RelativeX+=1;
         }
+    }
+
+    public void Export(){
+        JFileChooser F = new JFileChooser();
+        F.setSelectedFile(new File("C:\\Users\\Tyler\\Documents\\Maze.png"));
+        if (F.showSaveDialog(panel.getParent()) == JFileChooser.APPROVE_OPTION) {
+            File file = (F.getSelectedFile());
+            String path = file.getPath();
+            BufferedImage MazeImg = new BufferedImage(panel.getWidth(),panel.getHeight(),BufferedImage.TYPE_INT_RGB);
+            BufferedImage Cropped = MazeImg.getSubimage(PosX,PosY,size*X+1,size*Y+1);
+
+            Graphics2D g = MazeImg.createGraphics();
+            panel.paintAll(g);
+            try {
+                ImageIO.write(Cropped,"png",new File(path));
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+
     }
 
     @Override
