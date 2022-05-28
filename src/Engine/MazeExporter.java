@@ -1,10 +1,10 @@
 package Engine;
 
-import DataClasses.ImageGUIMaybe;
+//import UserInterface.ImageGUIMaybe;
 import DataClasses.Maze;
 
 public class MazeExporter {
-    public ImageGUIMaybe ExportPNG (Maze maze) {
-        return null;
-    }
+    //public ImageGUIMaybe ExportPNG (Maze maze) {
+        //return null;
+    //}
 }
