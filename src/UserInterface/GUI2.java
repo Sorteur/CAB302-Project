@@ -3,9 +3,14 @@ package UserInterface;
 import Engine.MazeGenerator;
 import Engine.MazeManager;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.filechooser.FileSystemView;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class GUI2 implements ActionListener, Runnable, ComponentListener {
     public static final int WIDTH = 500;
@@ -62,9 +67,10 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
         pnlLoadGridButton.setPreferredSize(lftBtnSize);
         pnlLeft.add(pnlLoadGridButton);
 
-        JButton pnlPrintGridButton = new JButton("Print");
-        pnlPrintGridButton.setPreferredSize(lftBtnSize);
-        pnlLeft.add(pnlPrintGridButton);
+        JButton pnlExportGridButton = new JButton("Export as Image");
+        pnlExportGridButton.setPreferredSize(lftBtnSize);
+        pnlExportGridButton.addActionListener(e -> grid.Export());
+        pnlLeft.add(pnlExportGridButton);
 
         JButton pnlResizeGridButton = new JButton("Resize Maze");
         pnlResizeGridButton.setPreferredSize(lftBtnSize);
@@ -83,7 +89,11 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
         pnlLeft.add(pnlSolveMazeButton);
 
 
+
+
     }
+
+
 
     private void newMaze(){
         Font Large  = new Font("Larger",Font.PLAIN, 24 );

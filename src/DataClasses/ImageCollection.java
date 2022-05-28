@@ -2,9 +2,9 @@ package DataClasses;
 import java.util.List;
 
 public class ImageCollection {
-    List<Image> Collection;
+    List<ImageGUIMaybe> Collection;
 
-    public void AddImage(Image image){
+    public void AddImage(ImageGUIMaybe image){
         Collection.add(image);
     }
 

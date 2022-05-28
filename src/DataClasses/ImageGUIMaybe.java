@@ -1,6 +1,7 @@
 package DataClasses;
 
-public class Image {
+public class ImageGUIMaybe {
+
     private int id;
     //figure out whatever a image is held in
 }
