@@ -72,9 +72,9 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
         pnlExportGridButton.addActionListener(e -> grid.Export());
         pnlLeft.add(pnlExportGridButton);
 
-        JButton pnlResizeGridButton = new JButton("Resize Maze");
-        pnlResizeGridButton.setPreferredSize(lftBtnSize);
-        pnlLeft.add(pnlResizeGridButton);
+        JButton pnlAddLogoButton = new JButton("Place Logo");
+        pnlAddLogoButton.setPreferredSize(lftBtnSize);
+        pnlLeft.add(pnlAddLogoButton);
 
         JButton pnlPlaceStartCellButton = new JButton("Place Starting Point");
         pnlPlaceStartCellButton.setPreferredSize(lftBtnSize);
