@@ -70,7 +70,7 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
 
         JButton pnlAddLogoButton = new JButton("Image Editor");
         pnlAddLogoButton.setPreferredSize(lftBtnSize);
-        pnlAddLogoButton.addActionListener(e -> ImageGUI.Instance().ImageEditor());
+        pnlAddLogoButton.addActionListener(e -> ImageGUI.Instance().PlaceImage(100,100,Main));
         pnlLeft.add(pnlAddLogoButton);
 
         JButton pnlPlaceStartCellButton = new JButton("Place Starting Point");

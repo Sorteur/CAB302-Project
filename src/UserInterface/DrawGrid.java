@@ -162,13 +162,13 @@ public class DrawGrid extends Canvas implements MouseListener {
     }
 
     public void Export(){
-        JFileChooser F = new JFileChooser();
-        F.setSelectedFile(new File("C:\\Users\\Tyler\\Documents\\Maze.png"));
-        if (F.showSaveDialog(panel.getParent()) == JFileChooser.APPROVE_OPTION) {
-            if (F.getSelectedFile().exists()){
+        JFileChooser chooser = new JFileChooser();
+        chooser.setSelectedFile(new File("C:\\Users\\Tyler\\Documents\\Maze.png"));
+        if (chooser.showSaveDialog(panel.getParent()) == JFileChooser.APPROVE_OPTION) {
+            if (chooser.getSelectedFile().exists()){
                 if (JOptionPane.showConfirmDialog(this, "The file exists, overwrite?", "Existing file", JOptionPane.YES_NO_OPTION) == JOptionPane.NO_OPTION){
                     return;}}
-            File file = (F.getSelectedFile());
+            File file = (chooser.getSelectedFile());
             String path = file.getPath();
             BufferedImage MazeImg = new BufferedImage(panel.getWidth(),panel.getHeight(),BufferedImage.TYPE_INT_RGB);
             BufferedImage Cropped = MazeImg.getSubimage(PosX,PosY,size*X+1,size*Y+1);
