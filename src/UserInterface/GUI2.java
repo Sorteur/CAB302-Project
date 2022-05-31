@@ -4,9 +4,13 @@ import DataClasses.Maze;
 import Engine.MazeGenerator;
 import Engine.MazeManager;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class GUI2 implements ActionListener, Runnable, ComponentListener {
     public static final int WIDTH = 500;
@@ -36,11 +40,13 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
         //Setting up and Displaying Panel to display Grid
         pnlMaze = createPanel(Color.WHITE);
         Main.add(pnlMaze, BorderLayout.CENTER);
+        pnlMaze.setOpaque(false);
         pnlMaze.addComponentListener(this);
         pnlMaze.setLayout(new BorderLayout());
-        pnlMaze.setPreferredSize(new Dimension(1, 1));
+        //pnlMaze.setPreferredSize(new Dimension(1000, 1000));
         grid = new DrawGrid(pnlMaze);
-        pnlMaze.add(grid, BorderLayout.CENTER);
+        //grid.setBounds(1000,1000,1000,1000);
+        pnlMaze.add(grid,BorderLayout.CENTER);
 
 
         //Setting up side panels for Buttons
@@ -70,7 +76,8 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
 
         JButton pnlAddLogoButton = new JButton("Image Editor");
         pnlAddLogoButton.setPreferredSize(lftBtnSize);
-        pnlAddLogoButton.addActionListener(e -> ImageGUI.Instance().PlaceImage(100,100,Main));
+        //pnlAddLogoButton.addActionListener(e -> ImageGUI.Instance().LogoEditor(pnlMaze));
+                // ImageGUI.Instance().PlaceImage(100,100,Main));
         pnlLeft.add(pnlAddLogoButton);
 
         JButton pnlPlaceStartCellButton = new JButton("Place Starting Point");
@@ -126,6 +133,8 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
                 } else {
                     newMaze = MazeManager.Instance().CreateMaze(Width,Height);
                 }
+
+
                 grid.GridSet(newMaze);
                 pnlMaze.updateUI();
                 PopOut.dispose();
