@@ -29,5 +29,8 @@ public class MazeManager {
 
     }
 
+    public void ExportMaze (Maze maze){
+
+    }
 
 }
