@@ -14,7 +14,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 
-public class DrawGrid extends Canvas implements MouseListener {
+public class DrawGrid extends JPanel implements MouseListener {
     public DrawGrid(JPanel panel) {
         this.panel = panel;
         this.addMouseListener(this);
@@ -61,19 +61,12 @@ public class DrawGrid extends Canvas implements MouseListener {
     public void EditSquare(int x, int y){
         Cell EditedCell = MazeManager.Instance().GetMaze().Search(x,y);
         int index = MazeManager.Instance().GetMaze().getGrid().indexOf(EditedCell);
-        //System.out.println(index);
-        Cell NCell;
-        Cell SCell;
-        Cell WCell;
-        Cell ECell;
-        if (index % Y != 0) {NCell = MazeManager.Instance().GetMaze().getGrid().get(index - 1);} else {NCell = null;}
-        if (index % Y != Y-1) {SCell = MazeManager.Instance().GetMaze().getGrid().get(index + 1);} else {SCell = null;}
-        if (index - Y  >= 0){WCell = MazeManager.Instance().GetMaze().getGrid().get(index - Y);} else {WCell = null;}
-        if (index + Y < X*Y){ECell = MazeManager.Instance().GetMaze().getGrid().get(index + Y);} else {ECell = null;}
-
-        Frame[] allFrames = Frame.getFrames();
-        for (Frame fr: allFrames){
-            if (!Objects.equals(fr.getName(), allFrames[0].getName())){
+        final Cell NCell = CurrentMaze.checkNorthCell(index);
+        final Cell SCell = CurrentMaze.checkSouthCell(index);
+        final Cell WCell = CurrentMaze.checkWestCell(index);
+        final Cell ECell = CurrentMaze.checkEastCell(index);
+        for (Frame fr: Frame.getFrames()){
+            if (!Objects.equals(fr.getName(), Frame.getFrames()[0].getName())){
                 fr.dispose();
             }
         }
@@ -85,42 +78,32 @@ public class DrawGrid extends Canvas implements MouseListener {
         JToggleButton North = createButton("North",EditedCell,200,125,PopOut);
         North.addActionListener(e -> {
             EditedCell.setNwall(!EditedCell.isNwall());
-            if (NCell != null){
-                NCell.setSwall(false);
-            }
+            if (NCell != null) NCell.setSwall(false);
             repaint();
         });
         JToggleButton South = createButton("South",EditedCell,200,125,PopOut);
         South.addActionListener(e -> {
             EditedCell.setSwall(!EditedCell.isSwall());
-            if (SCell != null){
-                SCell.setNwall(false);
-            }
+            if (SCell != null) SCell.setNwall(false);
             repaint();
         });
         JToggleButton East = createButton("East",EditedCell,250,200,PopOut);
         East.addActionListener(e -> {
             EditedCell.setEwall(!EditedCell.isEwall());
-            if (ECell != null){
-                ECell.setWwall(false);
-            }
+            if (ECell != null) ECell.setWwall(false);
             repaint();
         });
         JToggleButton West = createButton("West",EditedCell,250,200,PopOut);
         West.addActionListener(e -> {
             EditedCell.setWwall(!EditedCell.isWwall());
-            if (WCell != null){
-                WCell.setEwall(false);
-            }
+            if (WCell != null) WCell.setEwall(false);
             repaint();
         });
     }
 
     public void DrawSquare(Cell cell,Graphics g, int x, int y, int length){
-
         cell.setPosX(x);
         cell.setPosY(y);
-
         //North
         if (cell.isNwall()){
         g.drawLine(x,y,x+length,y);}
@@ -135,7 +118,9 @@ public class DrawGrid extends Canvas implements MouseListener {
         g.drawLine(x,y+length,x,y);}
     }
 
-    public void paint(Graphics g) {
+    public void paintComponent(Graphics g) {
+        int PosX = (panel.getWidth()-(size*X))/2;
+        int PosY = (panel.getHeight()-(size*Y))/2;
         int CurrentCell=0;
         int RelativeX = 0;
         while (RelativeX < X){
@@ -143,13 +128,11 @@ public class DrawGrid extends Canvas implements MouseListener {
             while (RelativeY < Y){
                 Cell cell = MazeManager.Instance().GetMaze().getGrid().get(CurrentCell);
                 if (cell.isStart())
-                {
-                    g.setColor(Color.GREEN);
+                {   g.setColor(Color.GREEN);
                     g.fillRect(PosX+(RelativeX*size),PosY+(RelativeY*size),size,size);
                 }
                 if (cell.isFinish())
-                {
-                    g.setColor(Color.RED);
+                {   g.setColor(Color.RED);
                     g.fillRect(PosX+(RelativeX*size),PosY+(RelativeY*size),size,size);
                 }
                 g.setColor(Color.BLACK);
