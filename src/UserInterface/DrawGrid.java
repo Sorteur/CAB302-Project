@@ -26,10 +26,10 @@ public class DrawGrid extends JPanel implements MouseListener {
     int PosX;
     int PosY;
 
-    public void GridSet(Maze maze){
-        CurrentMaze = maze;
-        X = maze.getLength();
-        Y = maze.getHeight();
+    public void GridSet(){
+        CurrentMaze = MazeManager.Instance().GetMaze();
+        X = MazeManager.Instance().GetMaze().getLength();
+        Y = MazeManager.Instance().GetMaze().getHeight();
         size = (this.getHeight()-48)/Y;
         PosX = (this.getWidth()-(size*X))/2;
         PosY = (this.getHeight()-(size*Y))/2;
@@ -56,8 +56,8 @@ public class DrawGrid extends JPanel implements MouseListener {
     }
 //TODO MOVE TO MAZE CLASS AND SPLIT INTO DIFFERENT CLASSES
     public void EditSquare(int x, int y){
-        Cell EditedCell = MazeManager.Instance().GetMaze().Search(x,y);
-        int index = MazeManager.Instance().GetMaze().getGrid().indexOf(EditedCell);
+        Cell EditedCell = CurrentMaze.Search(x,y);
+        int index = CurrentMaze.getGrid().indexOf(EditedCell);
         final Cell NCell = CurrentMaze.checkNorthCell(index);
         final Cell SCell = CurrentMaze.checkSouthCell(index);
         final Cell WCell = CurrentMaze.checkWestCell(index);
@@ -115,24 +115,32 @@ public class DrawGrid extends JPanel implements MouseListener {
         g.drawLine(x,y+length,x,y);}
     }
 
+    public void DrawTriangle(Graphics g,int x, int y){
+        Polygon Triangle = new Polygon();
+        Triangle.addPoint(x+(size/3),y);
+        Triangle.addPoint(x+(2*(size/3)),y);
+        Triangle.addPoint(x+(size/2),y+size/5);
+        g.fillPolygon(Triangle);
+    }
+
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        int PosX = (this.getWidth()-(size*X))/2;
-        int PosY = (this.getHeight()-(size*Y))/2;
         int CurrentCell=0;
         int RelativeX = 0;
         while (RelativeX < X){
             int RelativeY=0;
             while (RelativeY < Y){
-                Cell cell = MazeManager.Instance().GetMaze().getGrid().get(CurrentCell);
-                if (cell.isStart())
-                {   g.setColor(Color.GREEN);
-                    g.fillRect(PosX+(RelativeX*size),PosY+(RelativeY*size),size,size);
-                }
-                if (cell.isFinish())
-                {   g.setColor(Color.RED);
-                    g.fillRect(PosX+(RelativeX*size),PosY+(RelativeY*size),size,size);
+                Cell cell = CurrentMaze.getGrid().get(CurrentCell);
+                if(true){
+                    if (CurrentCell == 0){
+                        cell.setNwall(false);
+                        DrawTriangle(g,PosX,PosY);
+                    }
+                    if (CurrentCell == (X*Y)-1){
+                        cell.setSwall(false);
+                        DrawTriangle(g,PosX+((X-1)*size),PosY+(Y*size));
+                    }
                 }
                 g.setColor(Color.BLACK);
                 DrawSquare(cell,g,PosX+(RelativeX*size),PosY+(RelativeY*size),size);

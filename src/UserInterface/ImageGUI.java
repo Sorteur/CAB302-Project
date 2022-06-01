@@ -59,9 +59,6 @@ public class ImageGUI {
         HeightBox.setBounds(180,75,40,25);
         HeightLabel.setBounds(20,70, 400,30);
 
-
-
-
         JButton pnlExportGridButton = new JButton("Place Image");
         pnlExportGridButton.setBounds(125,200,150,50);
         pnlExportGridButton.addActionListener(e ->{
