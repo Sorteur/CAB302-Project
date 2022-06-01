@@ -98,16 +98,13 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
         PopOut.setVisible(true);
         PopOut.setLocationRelativeTo(null);
         PopOut.setLayout(new GridBagLayout());
+
         GridBagConstraints c  =  new GridBagConstraints();
-        //c.weightx = 1;
         c.weighty = 0.1;
-        //c.ipady = 10;
         c.insets = new Insets(5,5,0,5);
-        c.anchor = GridBagConstraints.FIRST_LINE_START;
-        //c.fill = GridBagConstraints.HORIZONTAL;
+        c.anchor = GridBagConstraints.LINE_START;
 
-
-        JLabel WidthLabel = new JLabel("Insert width of new Maze:");
+        JLabel WidthLabel = new JLabel("Insert width of new maze:");
         WidthLabel.setFont(Large);
         c.gridx = 0;
         c.gridy = 0;
@@ -123,12 +120,11 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
         c.insets = new Insets(0,5,0,5);
         PopOut.add(WidthBox,c);
 
-        JLabel HeightLabel = new JLabel("Insert height of new Maze:");
+        JLabel HeightLabel = new JLabel("Insert height of new maze:");
         HeightLabel.setFont(Large);
         c.gridx = 0;
         c.gridy = 1;
         c.gridwidth = 2;
-
         PopOut.add(HeightLabel,c);
 
         JTextField HeightBox = new JTextField();
@@ -137,12 +133,14 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
         c.gridx = 2;
         c.gridy = 1;
         c.gridwidth = 1;
+        c.weighty = 0;
         PopOut.add(HeightBox,c);
 
         JRadioButton RandomButton = new JRadioButton("Random maze start");
         c.gridx = 0;
         c.gridy = 2;
         c.gridwidth = 2;
+        c.insets = new Insets(0,0,5,5);
         PopOut.add(RandomButton,c);
 
         JRadioButton ImageStartEnd = new JRadioButton("Image start/end points");
@@ -151,37 +149,36 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
         c.gridwidth = 2;
         PopOut.add(ImageStartEnd,c);
 
+        JRadioButton BuildAroundLogo = new JRadioButton("Auto logo placement");
+        c.gridx = 0;
+        c.gridy = 4;
+        c.gridwidth = 2;
+        PopOut.add(BuildAroundLogo,c);
+
         JButton Confirm = new JButton("Confirm");
         Confirm.setFont(Large);
-        //c.fill = GridBagConstraints.HORIZONTAL;
-        c.ipady = 0;
-        c.weighty = 0.9;
-        c.anchor = GridBagConstraints.PAGE_END;
-        c.insets = new Insets(15,0,0,0);
+        c.anchor = GridBagConstraints.LINE_END;
+        c.fill = GridBagConstraints.VERTICAL;
         c.gridx = 1;
         c.gridwidth = 2;
-        c.gridheight = 2;
-        c.gridy = 3;
+        c.gridheight = 3;
+        c.gridy = 2;
         Confirm.addActionListener(a -> {
             try {
                 int Width = Integer.parseInt(WidthBox.getText());
                 int Height = Integer.parseInt(HeightBox.getText());
-                Maze newMaze;
                 if (RandomButton.isSelected()) {
-                    newMaze = MazeGenerator.Instance().GenerateMaze(MazeManager.Instance().CreateMaze(Width, Height));
+                    MazeGenerator.Instance().GenerateMaze(MazeManager.Instance().CreateMaze(Width, Height));
                 } else {
-                    newMaze = MazeManager.Instance().CreateMaze(Width, Height);
+                    MazeManager.Instance().CreateMaze(Width, Height);
                 }
-                pnlMaze.GridSet(newMaze);
+                pnlMaze.GridSet();
                 PopOut.dispose();
             } catch(NumberFormatException e) {
                 JOptionPane.showMessageDialog(PopOut,"Dimensions of maze must be whole numbers.","Input error",JOptionPane.ERROR_MESSAGE);
             }
-
         });
         PopOut.add(Confirm,c);
-
-        //PopOut.setLayout(null);
     }
 
     private JPanel createPanel(Color c) {
