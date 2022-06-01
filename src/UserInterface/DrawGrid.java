@@ -119,6 +119,7 @@ public class DrawGrid extends JPanel implements MouseListener {
     }
 
     public void paintComponent(Graphics g) {
+        super.paintComponent(g);
         int PosX = (panel.getWidth()-(size*X))/2;
         int PosY = (panel.getHeight()-(size*Y))/2;
         int CurrentCell=0;
