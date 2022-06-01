@@ -19,8 +19,7 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
     public GUI2() throws HeadlessException {
     }
 
-    private JPanel pnlMaze;
-    private DrawGrid grid;
+    private DrawGrid pnlMaze;
 
     private void createGUI() {
         //Setting up Frame
@@ -38,15 +37,9 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
 
 
         //Setting up and Displaying Panel to display Grid
-        pnlMaze = createPanel(Color.WHITE);
-        Main.add(pnlMaze, BorderLayout.CENTER);
-        pnlMaze.setOpaque(false);
-        pnlMaze.addComponentListener(this);
+        pnlMaze =  new DrawGrid();
         pnlMaze.setLayout(new BorderLayout());
-        //pnlMaze.setPreferredSize(new Dimension(1000, 1000));
-        grid = new DrawGrid(pnlMaze);
-        //grid.setBounds(1000,1000,1000,1000);
-        pnlMaze.add(grid,BorderLayout.CENTER);
+        Main.add(pnlMaze);
 
 
         //Setting up side panels for Buttons
@@ -71,13 +64,14 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
 
         JButton pnlExportGridButton = new JButton("Export as Image");
         pnlExportGridButton.setPreferredSize(lftBtnSize);
-        pnlExportGridButton.addActionListener(e -> grid.Export());
+        pnlExportGridButton.addActionListener(e -> pnlMaze.Export());
         pnlLeft.add(pnlExportGridButton);
 
         JButton pnlAddLogoButton = new JButton("Image Editor");
         pnlAddLogoButton.setPreferredSize(lftBtnSize);
-        //pnlAddLogoButton.addActionListener(e -> ImageGUI.Instance().LogoEditor(pnlMaze));
-                // ImageGUI.Instance().PlaceImage(100,100,Main));
+        pnlAddLogoButton.addActionListener(e -> ImageGUI.Instance().LogoEditor(pnlMaze)
+        );
+
         pnlLeft.add(pnlAddLogoButton);
 
         JButton pnlPlaceStartCellButton = new JButton("Place Starting Point");
@@ -100,53 +94,94 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
         Font Large  = new Font("Larger",Font.PLAIN, 24 );
 
         JFrame PopOut = new JFrame();
-        PopOut.setSize(400, 300);
+        PopOut.setSize(400, 200);
         PopOut.setVisible(true);
-        PopOut.setLayout(new BorderLayout());
+        PopOut.setLocationRelativeTo(null);
+        PopOut.setLayout(new GridBagLayout());
+        GridBagConstraints c  =  new GridBagConstraints();
+        //c.weightx = 1;
+        c.weighty = 0.1;
+        //c.ipady = 10;
+        c.insets = new Insets(5,5,0,5);
+        c.anchor = GridBagConstraints.FIRST_LINE_START;
+        //c.fill = GridBagConstraints.HORIZONTAL;
+
+
+        JLabel WidthLabel = new JLabel("Insert width of new Maze:");
+        WidthLabel.setFont(Large);
+        c.gridx = 0;
+        c.gridy = 0;
+        c.gridwidth = 2;
+        PopOut.add(WidthLabel,c);
 
         JTextField WidthBox = new JTextField();
-        JLabel WidthLabel = new JLabel("Insert width of new Maze:");
         WidthBox.setFont(Large);
-        WidthLabel.setFont(Large);
-        WidthBox.setBounds(305,30,60,30);
-        WidthLabel.setBounds(20,25, 400,30);
+        WidthBox.setPreferredSize(new Dimension(60,30));
+        c.gridx = 2;
+        c.gridy = 0;
+        c.gridwidth = 1;
+        c.insets = new Insets(0,5,0,5);
+        PopOut.add(WidthBox,c);
+
+        JLabel HeightLabel = new JLabel("Insert height of new Maze:");
+        HeightLabel.setFont(Large);
+        c.gridx = 0;
+        c.gridy = 1;
+        c.gridwidth = 2;
+
+        PopOut.add(HeightLabel,c);
 
         JTextField HeightBox = new JTextField();
-        JLabel HeightLabel = new JLabel("Insert height of new Maze:");
         HeightBox.setFont(Large);
-        HeightLabel.setFont(Large);
-        HeightBox.setBounds(305,80,60,30);
-        HeightLabel.setBounds(20,75, 400,30);
+        HeightBox.setPreferredSize(new Dimension(60,30));
+        c.gridx = 2;
+        c.gridy = 1;
+        c.gridwidth = 1;
+        PopOut.add(HeightBox,c);
 
-        JRadioButton RandomButton = new JRadioButton("Start with random maze");
-        RandomButton.setBounds(20,125,400,30);
+        JRadioButton RandomButton = new JRadioButton("Random maze start");
+        c.gridx = 0;
+        c.gridy = 2;
+        c.gridwidth = 2;
+        PopOut.add(RandomButton,c);
+
+        JRadioButton ImageStartEnd = new JRadioButton("Image start/end points");
+        c.gridx = 0;
+        c.gridy = 3;
+        c.gridwidth = 2;
+        PopOut.add(ImageStartEnd,c);
 
         JButton Confirm = new JButton("Confirm");
         Confirm.setFont(Large);
-        Confirm.setBounds(125,200,150,50);
-        Confirm.addActionListener(e -> {
+        //c.fill = GridBagConstraints.HORIZONTAL;
+        c.ipady = 0;
+        c.weighty = 0.9;
+        c.anchor = GridBagConstraints.PAGE_END;
+        c.insets = new Insets(15,0,0,0);
+        c.gridx = 1;
+        c.gridwidth = 2;
+        c.gridheight = 2;
+        c.gridy = 3;
+        Confirm.addActionListener(a -> {
+            try {
                 int Width = Integer.parseInt(WidthBox.getText());
                 int Height = Integer.parseInt(HeightBox.getText());
                 Maze newMaze;
-                if (RandomButton.isSelected()){
-                    newMaze = MazeGenerator.Instance().GenerateMaze(MazeManager.Instance().CreateMaze(Width,Height));
+                if (RandomButton.isSelected()) {
+                    newMaze = MazeGenerator.Instance().GenerateMaze(MazeManager.Instance().CreateMaze(Width, Height));
                 } else {
-                    newMaze = MazeManager.Instance().CreateMaze(Width,Height);
+                    newMaze = MazeManager.Instance().CreateMaze(Width, Height);
                 }
-
-
-                grid.GridSet(newMaze);
-                pnlMaze.updateUI();
+                pnlMaze.GridSet(newMaze);
                 PopOut.dispose();
-        });
+            } catch(NumberFormatException e) {
+                JOptionPane.showMessageDialog(PopOut,"Dimensions of maze must be whole numbers.","Input error",JOptionPane.ERROR_MESSAGE);
+            }
 
-        PopOut.add(WidthBox);
-        PopOut.add(HeightBox);
-        PopOut.add(WidthLabel);
-        PopOut.add(HeightLabel);
-        PopOut.add(RandomButton);
-        PopOut.add(Confirm);
-        PopOut.setLayout(null);
+        });
+        PopOut.add(Confirm,c);
+
+        //PopOut.setLayout(null);
     }
 
     private JPanel createPanel(Color c) {

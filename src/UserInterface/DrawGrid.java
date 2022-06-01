@@ -15,13 +15,11 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class DrawGrid extends JPanel implements MouseListener {
-    public DrawGrid(JPanel panel) {
-        this.panel = panel;
+    public DrawGrid() {
         this.addMouseListener(this);
     }
 
     Maze CurrentMaze;
-    JPanel panel;
     int X;
     int Y;
     int size;
@@ -32,10 +30,9 @@ public class DrawGrid extends JPanel implements MouseListener {
         CurrentMaze = maze;
         X = maze.getLength();
         Y = maze.getHeight();
-        size = (panel.getHeight()-48)/Y;
-        PosX = (panel.getWidth()-(size*X))/2;
-        PosY = (panel.getHeight()-(size*Y))/2;
-        panel.updateUI();
+        size = (this.getHeight()-48)/Y;
+        PosX = (this.getWidth()-(size*X))/2;
+        PosY = (this.getHeight()-(size*Y))/2;
         repaint();
     }
 
@@ -118,10 +115,11 @@ public class DrawGrid extends JPanel implements MouseListener {
         g.drawLine(x,y+length,x,y);}
     }
 
+    @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        int PosX = (panel.getWidth()-(size*X))/2;
-        int PosY = (panel.getHeight()-(size*Y))/2;
+        int PosX = (this.getWidth()-(size*X))/2;
+        int PosY = (this.getHeight()-(size*Y))/2;
         int CurrentCell=0;
         int RelativeX = 0;
         while (RelativeX < X){
@@ -148,16 +146,16 @@ public class DrawGrid extends JPanel implements MouseListener {
     public void Export(){
         JFileChooser chooser = new JFileChooser();
         chooser.setSelectedFile(new File("C:\\Users\\Tyler\\Documents\\Maze.png"));
-        if (chooser.showSaveDialog(panel.getParent()) == JFileChooser.APPROVE_OPTION) {
+        if (chooser.showSaveDialog(this.getParent()) == JFileChooser.APPROVE_OPTION) {
             if (chooser.getSelectedFile().exists()){
                 if (JOptionPane.showConfirmDialog(this, "The file exists, overwrite?", "Existing file", JOptionPane.YES_NO_OPTION) == JOptionPane.NO_OPTION){
                     return;}}
             File file = (chooser.getSelectedFile());
             String path = file.getPath();
-            BufferedImage MazeImg = new BufferedImage(panel.getWidth(),panel.getHeight(),BufferedImage.TYPE_INT_RGB);
+            BufferedImage MazeImg = new BufferedImage(this.getWidth(),this.getHeight(),BufferedImage.TYPE_INT_RGB);
             BufferedImage Cropped = MazeImg.getSubimage(PosX,PosY,size*X+1,size*Y+1);
             Graphics2D g = MazeImg.createGraphics();
-            panel.paintAll(g);
+            this.paintAll(g);
             try {
                 ImageIO.write(Cropped,"png",new File(path));
             } catch (IOException ex) {
