@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 public class Maze {
 
+    public String Description;
+
     private final int Length;
     public int getLength() {
         return Length;
