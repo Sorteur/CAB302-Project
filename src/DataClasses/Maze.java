@@ -16,7 +16,7 @@ public class Maze {
         return Height;
     }
 
-    public boolean Editable;
+    //public boolean Editable;
 
     private final ArrayList<Cell> Grid = new ArrayList<>();
     public ArrayList<Cell> getGrid() {

@@ -94,7 +94,7 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
         Font Large  = new Font("Larger",Font.PLAIN, 24 );
 
         JFrame PopOut = new JFrame();
-        PopOut.setSize(400, 200);
+        PopOut.setSize(350, 200);
         PopOut.setVisible(true);
         PopOut.setLocationRelativeTo(null);
         PopOut.setLayout(new GridBagLayout());
@@ -104,7 +104,7 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
         c.insets = new Insets(5,5,0,5);
         c.anchor = GridBagConstraints.LINE_START;
 
-        JLabel WidthLabel = new JLabel("Insert width of new maze:");
+        JLabel WidthLabel = new JLabel("Width of new maze:");
         WidthLabel.setFont(Large);
         c.gridx = 0;
         c.gridy = 0;
@@ -120,7 +120,7 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
         c.insets = new Insets(0,5,0,5);
         PopOut.add(WidthBox,c);
 
-        JLabel HeightLabel = new JLabel("Insert height of new maze:");
+        JLabel HeightLabel = new JLabel("Height of new maze:");
         HeightLabel.setFont(Large);
         c.gridx = 0;
         c.gridy = 1;
