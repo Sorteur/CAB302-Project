@@ -1,16 +1,10 @@
 package UserInterface;
 
-import DataClasses.Maze;
 import Engine.MazeGenerator;
 import Engine.MazeManager;
-
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 public class GUI2 implements ActionListener, Runnable, ComponentListener {
     public static final int WIDTH = 500;
@@ -19,7 +13,7 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
     public GUI2() throws HeadlessException {
     }
 
-    private DrawGrid pnlMaze;
+    private MazePanel pnlMaze;
 
     private void createGUI() {
         //Setting up Frame
@@ -37,13 +31,14 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
 
 
         //Setting up and Displaying Panel to display Grid
-        pnlMaze =  new DrawGrid();
+        pnlMaze =  new MazePanel();
         pnlMaze.setLayout(new BorderLayout());
         Main.add(pnlMaze);
 
 
         //Setting up side panels for Buttons
-        JPanel pnlLeft = createPanel(Color.LIGHT_GRAY);
+        JPanel pnlLeft = new JPanel();
+        pnlLeft.setBackground(Color.LIGHT_GRAY);
         Main.add(pnlLeft, BorderLayout.WEST);
         pnlLeft.setPreferredSize(new Dimension(200, 1));
 
@@ -67,7 +62,7 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
         pnlExportGridButton.addActionListener(e -> pnlMaze.Export());
         pnlLeft.add(pnlExportGridButton);
 
-        JButton pnlAddLogoButton = new JButton("Image Editor");
+        JButton pnlAddLogoButton = new JButton("Logo Placer");
         pnlAddLogoButton.setPreferredSize(lftBtnSize);
         pnlAddLogoButton.addActionListener(e -> ImageGUI.Instance().LogoEditor(pnlMaze)
         );
@@ -179,12 +174,6 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
             }
         });
         PopOut.add(Confirm,c);
-    }
-
-    private JPanel createPanel(Color c) {
-        JPanel A = new JPanel();
-        A.setBackground(c);
-        return A;
     }
 
     @Override

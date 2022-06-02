@@ -14,15 +14,16 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 
-public class DrawGrid extends JPanel implements MouseListener {
-    public DrawGrid() {
+public class MazePanel extends JPanel implements MouseListener {
+    public MazePanel() {
         this.addMouseListener(this);
+        //System.out.println("Hi");
     }
 
     Maze CurrentMaze;
     int X;
     int Y;
-    int size;
+    int sizeScale;
     int PosX;
     int PosY;
 
@@ -30,9 +31,9 @@ public class DrawGrid extends JPanel implements MouseListener {
         CurrentMaze = MazeManager.Instance().GetMaze();
         X = MazeManager.Instance().GetMaze().getLength();
         Y = MazeManager.Instance().GetMaze().getHeight();
-        size = (this.getHeight()-48)/Y;
-        PosX = (this.getWidth()-(size*X))/2;
-        PosY = (this.getHeight()-(size*Y))/2;
+        sizeScale = (this.getHeight()-48)/Y;
+        PosX = (this.getWidth()-(sizeScale *X))/2;
+        PosY = (this.getHeight()-(sizeScale *Y))/2;
         repaint();
     }
 
@@ -62,6 +63,7 @@ public class DrawGrid extends JPanel implements MouseListener {
         final Cell SCell = CurrentMaze.checkSouthCell(index);
         final Cell WCell = CurrentMaze.checkWestCell(index);
         final Cell ECell = CurrentMaze.checkEastCell(index);
+
         for (Frame fr: Frame.getFrames()){
             if (!Objects.equals(fr.getName(), Frame.getFrames()[0].getName())){
                 fr.dispose();
@@ -75,25 +77,25 @@ public class DrawGrid extends JPanel implements MouseListener {
         JToggleButton North = createButton("North",EditedCell,200,125,PopOut);
         North.addActionListener(e -> {
             EditedCell.setNwall(!EditedCell.isNwall());
-            if (NCell != null) NCell.setSwall(false);
+            if (NCell != null) NCell.setSwall(!NCell.isSwall());
             repaint();
         });
         JToggleButton South = createButton("South",EditedCell,200,125,PopOut);
         South.addActionListener(e -> {
             EditedCell.setSwall(!EditedCell.isSwall());
-            if (SCell != null) SCell.setNwall(false);
+            if (SCell != null) SCell.setNwall(!SCell.isNwall());
             repaint();
         });
         JToggleButton East = createButton("East",EditedCell,250,200,PopOut);
         East.addActionListener(e -> {
             EditedCell.setEwall(!EditedCell.isEwall());
-            if (ECell != null) ECell.setWwall(false);
+            if (ECell != null) ECell.setWwall(!ECell.isWwall());
             repaint();
         });
         JToggleButton West = createButton("West",EditedCell,250,200,PopOut);
         West.addActionListener(e -> {
             EditedCell.setWwall(!EditedCell.isWwall());
-            if (WCell != null) WCell.setEwall(false);
+            if (WCell != null) WCell.setEwall(!WCell.isEwall());
             repaint();
         });
     }
@@ -117,9 +119,9 @@ public class DrawGrid extends JPanel implements MouseListener {
 
     public void DrawTriangle(Graphics g,int x, int y){
         Polygon Triangle = new Polygon();
-        Triangle.addPoint(x+(size/3),y);
-        Triangle.addPoint(x+(2*(size/3)),y);
-        Triangle.addPoint(x+(size/2),y+size/5);
+        Triangle.addPoint(x+(sizeScale /3),y);
+        Triangle.addPoint(x+(2*(sizeScale /3)),y);
+        Triangle.addPoint(x+(sizeScale /2),y+ sizeScale /5);
         g.fillPolygon(Triangle);
     }
 
@@ -139,11 +141,11 @@ public class DrawGrid extends JPanel implements MouseListener {
                     }
                     if (CurrentCell == (X*Y)-1){
                         cell.setSwall(false);
-                        DrawTriangle(g,PosX+((X-1)*size),PosY+(Y*size));
+                        DrawTriangle(g,PosX+((X-1)* sizeScale),PosY+(Y* sizeScale));
                     }
                 }
-                g.setColor(Color.BLACK);
-                DrawSquare(cell,g,PosX+(RelativeX*size),PosY+(RelativeY*size),size);
+                //g.setColor(Color.BLACK);
+                DrawSquare(cell,g,PosX+(RelativeX* sizeScale),PosY+(RelativeY* sizeScale), sizeScale);
                 RelativeY+=1;
                 CurrentCell+=1;
             }
@@ -161,7 +163,7 @@ public class DrawGrid extends JPanel implements MouseListener {
             File file = (chooser.getSelectedFile());
             String path = file.getPath();
             BufferedImage MazeImg = new BufferedImage(this.getWidth(),this.getHeight(),BufferedImage.TYPE_INT_RGB);
-            BufferedImage Cropped = MazeImg.getSubimage(PosX,PosY,size*X+1,size*Y+1);
+            BufferedImage Cropped = MazeImg.getSubimage(PosX,PosY, sizeScale *X+1, sizeScale *Y+1);
             Graphics2D g = MazeImg.createGraphics();
             this.paintAll(g);
             try {
@@ -176,9 +178,11 @@ public class DrawGrid extends JPanel implements MouseListener {
     public void mouseClicked(MouseEvent e) {
         int clickX = e.getX();
         int clickY = e.getY();
+        System.out.println("YES");
         for (Cell cell:CurrentMaze.getGrid()) {
-            if (((clickX > cell.getPosX()) && (clickX < cell.getPosX()+size)) && ((clickY > cell.getPosY()) && (clickY < cell.getPosY()+size))){
+            if (((clickX > cell.getPosX()) && (clickX < cell.getPosX()+ sizeScale)) && ((clickY > cell.getPosY()) && (clickY < cell.getPosY()+ sizeScale))){
                 EditSquare(cell.getGridX(),cell.getGridY());
+
             }
         }
     }
