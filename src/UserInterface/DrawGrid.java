@@ -178,13 +178,7 @@ public class DrawGrid extends JPanel implements MouseListener {
         int clickY = e.getY();
         for (Cell cell:CurrentMaze.getGrid()) {
             if (((clickX > cell.getPosX()) && (clickX < cell.getPosX()+size)) && ((clickY > cell.getPosY()) && (clickY < cell.getPosY()+size))){
-                if (CurrentMaze.Editable){
-                    EditSquare(cell.getGridX(),cell.getGridY());
-                } else if (false == true){
-
-                }
-
-
+                EditSquare(cell.getGridX(),cell.getGridY());
             }
         }
     }

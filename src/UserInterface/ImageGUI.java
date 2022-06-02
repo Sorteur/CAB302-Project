@@ -23,59 +23,103 @@ public class ImageGUI {
         if (K.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
              file = K.getSelectedFile();
         }
+        //return file;
+
         Image image = null;
         try {
             image =  ImageIO.read(file).getScaledInstance(200,200,Image.SCALE_SMOOTH);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return image;
     }
 
 
     public void LogoEditor(JPanel frame){
-        Font Large  = new Font("Larger",Font.PLAIN, 16 );
+        Font Large  = new Font("Larger",Font.PLAIN, 24 );
 
         JFrame logoMenu = new JFrame();
         logoMenu.setSize(400, 300);
         logoMenu.setVisible(true);
-        logoMenu.setLayout(new BorderLayout());
+        logoMenu.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+        c.weighty = 0.1;
+        c.insets = new Insets(5,5,0,5);
+        c.anchor = GridBagConstraints.LINE_START;
 
-        JLabel Pos = new JLabel("Positions for Logo (Top-Left)");
-        Pos.setBounds(25,10,300,30);
+
+        JLabel Pos = new JLabel("Cell Position for Logo");
+        c.gridx = 0;
+        c.gridy = 0;
+        logoMenu.add(Pos,c);
+
+        JLabel XPosLabel = new JLabel("X Pos for Logo:");
+        XPosLabel.setFont(Large);
+        c.gridx = 0;
+        c.gridy = 1;
+        logoMenu.add(XPosLabel,c);
+
+        JTextField XPosBox = new JTextField();
+        XPosBox.setFont(Large);
+        c.gridx = 1;
+        c.gridy = 1;
+        logoMenu.add(XPosBox,c);
+        XPosBox.setPreferredSize(new Dimension(60,30));
+
+        JLabel YPosLabel = new JLabel("Y Pos for Logo:");
+        YPosLabel.setFont(Large);
+        c.gridx = 0;
+        c.gridy = 2;
+        logoMenu.add(YPosLabel,c);
+
+        JTextField YPosBox = new JTextField();
+        YPosBox.setFont(Large);
+        c.gridx = 1;
+        c.gridy = 2;
+        logoMenu.add(YPosBox,c);
+        YPosBox.setPreferredSize(new Dimension(60,30));
+
+        JLabel WidthLabel = new JLabel("Width of Image:");
+        WidthLabel.setFont(Large);
+        c.gridx = 2;
+        c.gridy = 1;
+        logoMenu.add(WidthLabel,c);
 
         JTextField WidthBox = new JTextField();
-        JLabel WidthLabel = new JLabel("Insert Y Pos for Logo:");
         WidthBox.setFont(Large);
-        WidthLabel.setFont(Large);
-        WidthBox.setBounds(180,45,40,25);
-        WidthLabel.setBounds(20,40, 400,30);
+        c.gridx = 3;
+        c.gridy = 1;
+        logoMenu.add(WidthBox,c);
+        WidthBox.setPreferredSize(new Dimension(60,30));
+
+        JLabel HeightLabel = new JLabel("Height of Image:");
+        HeightLabel.setFont(Large);
+        c.gridx = 2;
+        c.gridy = 2;
+        logoMenu.add(HeightLabel,c);
 
         JTextField HeightBox = new JTextField();
-        JLabel HeightLabel = new JLabel("Insert X Pos for Logo:");
         HeightBox.setFont(Large);
-        HeightLabel.setFont(Large);
-        HeightBox.setBounds(180,75,40,25);
-        HeightLabel.setBounds(20,70, 400,30);
+        c.gridx = 3;
+        c.gridy = 2;
+        logoMenu.add(HeightBox,c);
+        HeightBox.setPreferredSize(new Dimension(60,30));
+
+
 
         JButton pnlExportGridButton = new JButton("Place Image");
-        pnlExportGridButton.setBounds(125,200,150,50);
+        c.gridx = 2;
+        c.gridwidth = 2;
+        c.gridy = 3;
+        logoMenu.add(pnlExportGridButton,c);
         pnlExportGridButton.addActionListener(e ->{
-                    LogoPlacer logo = new LogoPlacer(Integer.parseInt(HeightBox.getText()),Integer.parseInt(WidthBox.getText()));
+                    ImagePlacer logo = new ImagePlacer(Integer.parseInt(XPosBox.getText()),Integer.parseInt(YPosBox.getText()));
                     frame.add(logo,BorderLayout.CENTER);
                     frame.updateUI();
                     logoMenu.dispose();
                     }
                 );
 
-        logoMenu.add(Pos);
-        logoMenu.add(HeightBox);
-        logoMenu.add(HeightLabel);
-        logoMenu.add(WidthBox);
-        logoMenu.add(WidthLabel);
-        logoMenu.setLayout(null);
-        logoMenu.add(pnlExportGridButton);
 
     }
 }
