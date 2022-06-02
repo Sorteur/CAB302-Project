@@ -14,7 +14,7 @@ public class MazeTest {
     @BeforeEach
     @Test
     public void ConstructMaze(){
-        TestMaze = new Maze(6, 4, "Test");
+        TestMaze = new Maze(6, 4);
     }
 
     //Test 2: Test to see if length is entered properly

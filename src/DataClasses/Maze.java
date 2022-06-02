@@ -1,5 +1,6 @@
 package DataClasses;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public class Maze {
@@ -16,7 +17,46 @@ public class Maze {
         return Height;
     }
 
-    public boolean Editable;
+    //public boolean Editable;
+
+    public Image getLogo() {
+        return Logo;
+    }
+
+    public void setLogo(Image logo) {
+        Logo = logo;
+    }
+
+
+
+    public int getLogoX() {
+        return LogoX;
+    }
+
+    public void setLogoX(int logoX) {
+        LogoX = logoX;
+    }
+
+    public int getLogoY() {
+        return LogoY;
+    }
+
+    public void setLogoY(int logoY) {
+        LogoY = logoY;
+    }
+
+    public boolean isImgSrtEnd() {
+        return ImgSrtEnd;
+    }
+
+    public void setImgSrtEnd(boolean imgSrtEnd) {
+        ImgSrtEnd = imgSrtEnd;
+    }
+
+    private Image Logo;
+    private int LogoX;
+    private int LogoY;
+    private boolean ImgSrtEnd;
 
     private final ArrayList<Cell> Grid = new ArrayList<>();
     public ArrayList<Cell> getGrid() {
@@ -26,26 +66,6 @@ public class Maze {
     public Cell getCell(int index) {
         return  Grid.get(index);
     }
-
-
-    public Maze(int length, int height, String description) {
-        Description = description;
-        Length = length;
-        Height = height;
-        Editable = true;
-        int id = 0;
-        int l = length;
-        while (l > 0){
-            int h=height;
-            while (h > 0){
-                Grid.add(new Cell(id,l-1,h-1,true,true,true,true,false,false));
-                id++;
-                h-=1;
-            }
-            l-=1;
-        }
-    }
-
 
     public void setCell(int index, Cell cell) {
         Grid.set(index, cell);
@@ -94,6 +114,27 @@ public class Maze {
         //return !getCell(westcellindex).isVistited();
     }
 
+
+
+
+
+    public Maze(int length, int height) {
+        Length = length;
+        Height = height;
+        int id = 0;
+        int l = 0;
+        while (l < Length){
+            int h=0;
+
+            while (h < Height){
+                Grid.add(new Cell(id,l,h,true,true,true,true,false,false));
+                id++;
+                h++;
+
+            }
+            l++;
+        }
+    }
 
     public Cell Search(int xPos,int yPos){
         for (Cell cells:Grid){

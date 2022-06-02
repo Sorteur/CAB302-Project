@@ -163,10 +163,10 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
                 int Width = Integer.parseInt(WidthBox.getText());
                 int Height = Integer.parseInt(HeightBox.getText());
                 if (RandomButton.isSelected()) {
-                    MazeGenerator.Instance().GenerateMaze(MazeManager.Instance().CreateMaze(Width, Height, "Test"));
+                    MazeGenerator.Instance().GenerateMaze(MazeManager.Instance().CreateMaze(Width, Height));
                 } else {
                     //Get Maze Name from User
-                    MazeManager.Instance().CreateMaze(Width, Height, "Test");
+                    MazeManager.Instance().CreateMaze(Width, Height);
                 }
                 pnlMaze.GridSet();
                 PopOut.dispose();
