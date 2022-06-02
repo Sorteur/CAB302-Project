@@ -1,19 +1,61 @@
 package DataModules;
 
 import DataClasses.Maze;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
-public class MazeModule {
+public class MazeModule extends DataModule{
+    public MazeModule(DBConnection connection) {
+        super(connection);
+    }
 
     public int GetMazeIDFromDescription(String description) {
         return 0;
     }
 
     public Maze GetMazeFromID (int ID) {
-        return new Maze(10,10); //temp
+        return null; //temp
     }
 
-    public void AddMaze (Maze maze) {
 
+
+    public void SaveMaze (Maze maze) throws SQLException {
+
+        StartTransaction();
+        try{
+
+            DoSaveMaze(maze);
+
+            CommitTransaction();
+        }
+        catch (SQLException sqle){
+            RollbackTransaction();
+        }
+
+    }
+
+    private void DoSaveMaze (Maze maze) throws SQLException
+    {
+
+        int id = GetNextSequence("MazeId");
+        String description = maze.Description;
+        int length = maze.getLength();
+        int height = maze.getHeight();
+
+        String sql = "INSERT INTO Maze(Id, Deleted, Description, XDimension, YDimension) " + "VALUES (?, false, ?, ?, ? )";
+        PreparedStatement statement = PrepareStatement(sql);
+
+        statement.setInt(1, id);
+        statement.setString(2, description);
+        statement.setInt(3, length);
+        statement.setInt(4, height);
+
+
+
+
+        int rowsInserted = statement.executeUpdate();
+
+        System.out.println("Rows inserted: " + rowsInserted);
     }
 
     public void UpdateMaze (Maze maze) {

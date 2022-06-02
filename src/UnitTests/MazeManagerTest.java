@@ -9,7 +9,7 @@ public class MazeManagerTest {
 
     @BeforeEach @Test
      void CreateMazeTest(){
-        MazeManager.Instance().CreateMaze(10,10);
+        MazeManager.Instance().CreateMaze(10,10, "Test");
     }
 
     @Test

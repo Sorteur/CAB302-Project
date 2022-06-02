@@ -1,6 +1,7 @@
+/*
 create user MazeUser@localhost identified by 'M@zeUs3r360';
 create user MazeAdmin@localhost identified by 'M@ze@dm1n720';
-
+*/
 /* Initialize Database */
 create database CAB302Maze;
 use CAB302Maze;

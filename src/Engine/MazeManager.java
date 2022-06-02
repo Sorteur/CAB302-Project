@@ -16,8 +16,8 @@ public class MazeManager {
         return Maze;
     }
 
-    public Maze CreateMaze (int Length, int Height) {
-        Maze = new Maze(Length, Height);
+    public Maze CreateMaze (int Length, int Height, String Description) {
+        Maze = new Maze(Length, Height, Description);
         return Maze;
     }
 
