@@ -3,13 +3,13 @@ package UserInterface;
 import javax.swing.*;
 import java.awt.*;
 
-public class LogoPlacer extends JPanel {
+public class ImagePlacer extends JPanel {
 
     Image logo;
     int X;
     int Y;
 
-    public LogoPlacer(int x, int y) {
+    public ImagePlacer(int x, int y) {
         X = x;
         Y = y;
         logo = ImageGUI.Instance().ImageSelector();
