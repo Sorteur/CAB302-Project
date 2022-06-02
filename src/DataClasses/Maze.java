@@ -121,7 +121,6 @@ public class Maze {
     public Maze(int length, int height) {
         Length = length;
         Height = height;
-        //Editable = true;
         int id = 0;
         int l = 0;
         while (l < Length){
