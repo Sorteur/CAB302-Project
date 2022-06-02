@@ -1,23 +1,16 @@
 package UserInterface;
 
+import Engine.MazeManager;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class ImagePlacer extends JPanel {
-
-    Image logo;
-    int X;
-    int Y;
-
-    public ImagePlacer(int x, int y) {
-        X = x;
-        Y = y;
-        logo = ImageGUI.Instance().ImageSelector();
+    public ImagePlacer() {
         this.setOpaque(false);
     }
-
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        g.drawImage(logo,X,Y,this);
+        g.drawImage(MazeManager.Instance().GetMaze().getLogo(),MazeManager.Instance().GetMaze().getLogoX(),MazeManager.Instance().GetMaze().getLogoY(),this);
     }
 }

@@ -1,14 +1,21 @@
 package UserInterface;
+import DataClasses.Cell;
+import Engine.MazeManager;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
 public class ImageGUI {
 
-    private static ImageGUI instance = new ImageGUI();
+    private static final ImageGUI instance = new ImageGUI();
+    private Image Logo;
+
     public static ImageGUI Instance(){
         return instance;
     }
@@ -27,7 +34,7 @@ public class ImageGUI {
 
         Image image = null;
         try {
-            image =  ImageIO.read(file).getScaledInstance(200,200,Image.SCALE_SMOOTH);
+            image =  ImageIO.read(file);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -35,17 +42,20 @@ public class ImageGUI {
     }
 
 
-    public void LogoEditor(JPanel frame){
+    public void LogoEditor(MazePanel pnlMaze){
+        //Image Logo;
+
         Font Large  = new Font("Larger",Font.PLAIN, 24 );
 
         JFrame logoMenu = new JFrame();
-        logoMenu.setSize(400, 300);
+        logoMenu.setSize(550, 300);
         logoMenu.setVisible(true);
         logoMenu.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         c.weighty = 0.1;
         c.insets = new Insets(5,5,0,5);
         c.anchor = GridBagConstraints.LINE_START;
+        c.weightx = 0.1;
 
 
         JLabel Pos = new JLabel("Cell Position for Logo");
@@ -79,7 +89,12 @@ public class ImageGUI {
         logoMenu.add(YPosBox,c);
         YPosBox.setPreferredSize(new Dimension(60,30));
 
-        JLabel WidthLabel = new JLabel("Width of Image:");
+        JLabel Size = new JLabel("Size of Logo:");
+        c.gridx = 2;
+        c.gridy = 0;
+        logoMenu.add(Size,c);
+
+        JLabel WidthLabel = new JLabel("Width of Logo:");
         WidthLabel.setFont(Large);
         c.gridx = 2;
         c.gridy = 1;
@@ -92,7 +107,7 @@ public class ImageGUI {
         logoMenu.add(WidthBox,c);
         WidthBox.setPreferredSize(new Dimension(60,30));
 
-        JLabel HeightLabel = new JLabel("Height of Image:");
+        JLabel HeightLabel = new JLabel("Height of Logo:");
         HeightLabel.setFont(Large);
         c.gridx = 2;
         c.gridy = 2;
@@ -105,21 +120,67 @@ public class ImageGUI {
         logoMenu.add(HeightBox,c);
         HeightBox.setPreferredSize(new Dimension(60,30));
 
+        JLabel Preview = new JLabel();
+        c.gridx = 0;
+        c.gridwidth = 2;
+        c.gridy = 3;
+        c.anchor = GridBagConstraints.CENTER;
+        logoMenu.add(Preview,c);
 
+        JButton ImagePicker = new JButton("Open an Image");
+        ImagePicker.addActionListener(e -> {
+            Logo = ImageSelector();
+            Preview.setIcon(new ImageIcon(Logo.getScaledInstance(100,100,Image.SCALE_SMOOTH)));
+        });
+        c.gridx = 0;
+        c.gridwidth = 2;
+        c.gridy = 4;
+        logoMenu.add(ImagePicker,c);
 
         JButton pnlExportGridButton = new JButton("Place Image");
+        pnlExportGridButton.setFont(Large);
         c.gridx = 2;
         c.gridwidth = 2;
         c.gridy = 3;
-        logoMenu.add(pnlExportGridButton,c);
-        pnlExportGridButton.addActionListener(e ->{
-                    ImagePlacer logo = new ImagePlacer(Integer.parseInt(XPosBox.getText()),Integer.parseInt(YPosBox.getText()));
-                    frame.add(logo,BorderLayout.CENTER);
-                    frame.updateUI();
-                    logoMenu.dispose();
+        c.gridheight = 2;
+        c.weighty = 1;
+        //c.weightx = 1;
+        //c.fill  = GridBagConstraints.HORIZONTAL;
+
+        pnlExportGridButton.addActionListener(a ->{
+            try{
+                int X = Integer.parseInt(XPosBox.getText())-1;
+                int Y = Integer.parseInt(YPosBox.getText())-1;
+                Cell Origin = MazeManager.Instance().GetMaze().Search(X,Y);
+                MazeManager.Instance().GetMaze().setLogoX(Origin.getPosX() + 1);
+                MazeManager.Instance().GetMaze().setLogoY(Origin.getPosY() + 1);
+                int Width = pnlMaze.sizeScale*Integer.parseInt(WidthBox.getText());
+                int Height = pnlMaze.sizeScale*Integer.parseInt(HeightBox.getText());
+                Image ScaledImage = Logo.getScaledInstance(Width-2,Height-2,Image.SCALE_SMOOTH);
+
+                for (Cell cell:MazeManager.Instance().GetMaze().getGrid()) {
+                    if (cell.getGridX() >= X & cell.getGridX() < X+Integer.parseInt(WidthBox.getText())){
+                        if (cell.getGridY() >= Y & cell.getGridY() < Y+Integer.parseInt(HeightBox.getText())){
+                            cell.setNwall(true);
+                            cell.setSwall(true);
+                            cell.setEwall(true);
+                            cell.setWwall(true);
+                        }
                     }
-                );
+                }
 
+                MazeManager.Instance().GetMaze().setLogo(ScaledImage);
+                pnlMaze.add(new ImagePlacer(),BorderLayout.CENTER);
+                pnlMaze.updateUI();
+                logoMenu.dispose();
 
+            } catch(NumberFormatException e) {
+                JOptionPane.showMessageDialog(logoMenu,"Inputs must be whole numbers.","Input error",JOptionPane.ERROR_MESSAGE);
+            } catch (NullPointerException e) {
+                JOptionPane.showMessageDialog(logoMenu,"Error, Either an image hasn't been selected, A maze hasn't been loaded, or Positions are out of bounds! ","Input error",JOptionPane.ERROR_MESSAGE);
+            }
+
+        });
+        logoMenu.add(pnlExportGridButton,c);
     }
 }

@@ -1,10 +1,10 @@
 package DataClasses;
 
 public class Cell {
-    public Cell(int id, int posX, int posY, boolean nwall, boolean swall, boolean wwall, boolean ewall, boolean start, boolean finish) {
+    public Cell(int id, int gridx, int gridy, boolean nwall, boolean swall, boolean wwall, boolean ewall, boolean start, boolean finish) {
         Id = id;
-        GridX = posX;
-        GridY = posY;
+        GridX = gridx;
+        GridY = gridy;
         Nwall = nwall;
         Swall = swall;
         Wwall = wwall;
