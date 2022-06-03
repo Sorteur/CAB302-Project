@@ -1,5 +1,6 @@
 package UserInterface;
 import DataClasses.Cell;
+import DataClasses.WallType;
 import Engine.MazeManager;
 
 import javax.imageio.ImageIO;
@@ -153,19 +154,19 @@ public class ImageGUI {
                 int X = Integer.parseInt(XPosBox.getText())-1;
                 int Y = Integer.parseInt(YPosBox.getText())-1;
                 Cell Origin = MazeManager.Instance().GetMaze().Search(X,Y);
-                MazeManager.Instance().GetMaze().setLogoX(Origin.getPosX() + 1);
-                MazeManager.Instance().GetMaze().setLogoY(Origin.getPosY() + 1);
+                MazeManager.Instance().GetMaze().setLogoX(Origin.GetPosX() + 1);
+                MazeManager.Instance().GetMaze().setLogoY(Origin.GetPosY() + 1);
                 int Width = pnlMaze.sizeScale*Integer.parseInt(WidthBox.getText());
                 int Height = pnlMaze.sizeScale*Integer.parseInt(HeightBox.getText());
                 Image ScaledImage = Logo.getScaledInstance(Width-2,Height-2,Image.SCALE_SMOOTH);
 
                 for (Cell cell:MazeManager.Instance().GetMaze().getGrid()) {
-                    if (cell.getGridX() >= X & cell.getGridX() < X+Integer.parseInt(WidthBox.getText())){
-                        if (cell.getGridY() >= Y & cell.getGridY() < Y+Integer.parseInt(HeightBox.getText())){
-                            cell.setNwall(true);
-                            cell.setSwall(true);
-                            cell.setEwall(true);
-                            cell.setWwall(true);
+                    if (cell.GetGridX() >= X & cell.GetGridX() < X+Integer.parseInt(WidthBox.getText())){
+                        if (cell.GetGridY() >= Y & cell.GetGridY() < Y+Integer.parseInt(HeightBox.getText())){
+                            cell.SetNorthernwall(WallType.Wall);
+                            cell.SetSouthernwall(WallType.Wall);
+                            cell.SetEasternwall(WallType.Wall);
+                            cell.SetWesternwall(WallType.Wall);
                         }
                     }
                 }

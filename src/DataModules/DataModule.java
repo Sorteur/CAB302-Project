@@ -39,20 +39,13 @@ public class DataModule {
     {
         String sql = "SELECT NEXT VALUE FOR " +sequenceName;
         int id = 0;
-        StartTransaction();
-        try
-        {
-            PreparedStatement statement = PrepareStatement(sql);
 
-            ResultSet resultSet = statement.executeQuery();
+        PreparedStatement statement = PrepareStatement(sql);
 
-            if(resultSet.next())
-                id = resultSet.getInt(1);
+        ResultSet resultSet = statement.executeQuery();
 
-        }
-        finally {
-            CommitTransaction();
-        }
+        if(resultSet.next())
+            id = resultSet.getInt(1);
 
         return id;
     }

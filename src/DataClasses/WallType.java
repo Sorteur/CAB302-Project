@@ -12,21 +12,24 @@ public enum WallType {
 
 public static class Tools
 {
-    public static WallType IdToWallType(int Id)
+
+    static boolean norm = true;
+
+    public static boolean norm ()
     {
-        switch (Id)
-        {
-            case 1: return Empty;
-            case 2:  return Wall;
-            default: return Wall;
-        }
+        return norm;
     }
+     static Hashtable WallTypeID = new Hashtable<WallType, Integer>();
+
+
+
+
      public static int ToId(WallType wallType)
     {
         switch (wallType)
         {
-            case Empty: return 1;
-            case Wall:  return 2;
+            case Empty: return 0;
+            case Wall:  return 1;
             default: return 0;
         }
     }
