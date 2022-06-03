@@ -15,6 +15,8 @@ public class ImageGUI {
 
     private static final ImageGUI instance = new ImageGUI();
     private Image Logo;
+    private Image StartImage;
+    private Image EndImage;
 
     public static ImageGUI Instance(){
         return instance;
@@ -56,7 +58,6 @@ public class ImageGUI {
         c.insets = new Insets(5,5,0,5);
         c.anchor = GridBagConstraints.LINE_START;
         c.weightx = 0.1;
-
 
         JLabel Pos = new JLabel("Cell Position for Logo");
         c.gridx = 0;
@@ -168,7 +169,6 @@ public class ImageGUI {
                         }
                     }
                 }
-
                 MazeManager.Instance().GetMaze().setLogo(ScaledImage);
                 pnlMaze.add(new ImagePlacer(),BorderLayout.CENTER);
                 pnlMaze.updateUI();
@@ -183,4 +183,42 @@ public class ImageGUI {
         });
         logoMenu.add(pnlExportGridButton,c);
     }
+
+    public void ImgSrtEnd (){
+        Font Large  = new Font("Larger",Font.PLAIN, 24 );
+
+        JFrame imgMenu = new JFrame();
+        imgMenu.setSize(550, 300);
+        imgMenu.setVisible(true);
+        imgMenu.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+
+        JLabel PreviewStart = new JLabel();
+        imgMenu.add(PreviewStart,c);
+
+
+
+        JButton ImagePickerStart = new JButton("Open an Image");
+        ImagePickerStart.addActionListener(e -> {
+            StartImage = ImageSelector();
+            PreviewStart.setIcon(new ImageIcon(Logo.getScaledInstance(100,100,Image.SCALE_SMOOTH)));
+        });
+        imgMenu.add(ImagePickerStart,c);
+
+
+
+        JButton SelectionConfirmation = new JButton("Confirm Selection");
+        SelectionConfirmation.setFont(Large);
+        SelectionConfirmation.addActionListener(e -> {
+            MazeManager.Instance().GetMaze().setStart(StartImage);
+        });
+        imgMenu.add(SelectionConfirmation,c);
+
+
+    }
+
+
+
+
+
 }

@@ -144,7 +144,6 @@ public class MazePanel extends JPanel implements MouseListener {
                         DrawTriangle(g,PosX+((X-1)* sizeScale),PosY+(Y* sizeScale));
                     }
                 }
-                //g.setColor(Color.BLACK);
                 DrawSquare(cell,g,PosX+(RelativeX* sizeScale),PosY+(RelativeY* sizeScale), sizeScale);
                 RelativeY+=1;
                 CurrentCell+=1;
