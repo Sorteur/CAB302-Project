@@ -53,10 +53,31 @@ public class Maze {
         ImgSrtEnd = imgSrtEnd;
     }
 
+    public Image getStart() {
+        return Start;
+    }
+
+    public void setStart(Image start) {
+        Start = start;
+    }
+
+    public Image getEnd() {
+        return End;
+    }
+
+    public void setEnd(Image end) {
+        End = end;
+    }
+
     private Image Logo;
     private int LogoX;
     private int LogoY;
     private boolean ImgSrtEnd;
+
+
+
+    private Image Start;
+    private Image End;
 
     private final ArrayList<Cell> Grid = new ArrayList<>();
     public ArrayList<Cell> getGrid() {
@@ -114,10 +135,6 @@ public class Maze {
         //return !getCell(westcellindex).isVistited();
     }
 
-
-
-
-
     public Maze(int length, int height) {
         Length = length;
         Height = height;
@@ -125,12 +142,10 @@ public class Maze {
         int l = 0;
         while (l < Length){
             int h=0;
-
             while (h < Height){
                 Grid.add(new Cell(id,l,h,true,true,true,true,false,false));
                 id++;
                 h++;
-
             }
             l++;
         }
@@ -146,6 +161,5 @@ public class Maze {
         }
         return null;
     }
-
 }
 
