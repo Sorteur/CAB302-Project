@@ -88,9 +88,28 @@ public class Maze {
         return  Grid.get(index);
     }
 
+
     public void setCell(int index, Cell cell) {
         Grid.set(index, cell);
     }
+
+
+    public Maze(int length, int height) {
+        Length = length;
+        Height = height;
+        int index = 0;
+        int l = 0;
+        while (l < Length){
+            int h=0;
+            while (h < Height){
+                Grid.add(new Cell(index,l,h,WallType.Wall,WallType.Wall,WallType.Wall,WallType.Wall,false,false));
+                index++;
+                h++;
+            }
+            l++;
+        }
+    }
+
 
     //TODO exception handling for arrays that are out of bounds
     public Cell checkNorthCell(int index)
@@ -135,26 +154,12 @@ public class Maze {
         //return !getCell(westcellindex).isVistited();
     }
 
-    public Maze(int length, int height) {
-        Length = length;
-        Height = height;
-        int id = 0;
-        int l = 0;
-        while (l < Length){
-            int h=0;
-            while (h < Height){
-                Grid.add(new Cell(id,l,h,true,true,true,true,false,false));
-                id++;
-                h++;
-            }
-            l++;
-        }
-    }
+
 
     public Cell Search(int xPos,int yPos){
         for (Cell cells:Grid){
-            if (xPos == cells.getGridX()){
-                if (yPos == cells.getGridY()){
+            if (xPos == cells.GetGridX()){
+                if (yPos == cells.GetGridY()){
                     return cells;
                 }
             }

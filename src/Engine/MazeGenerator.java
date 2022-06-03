@@ -2,6 +2,7 @@ package Engine;
 
 import DataClasses.Cell;
 import DataClasses.Maze;
+import DataClasses.WallType;
 
 
 import java.util.ArrayList;
@@ -19,14 +20,14 @@ public class MazeGenerator {
     MazeGenerator() {
 
     }
-    Maze maze;
+    Maze Maze;
 
     private void GenerateStartCell() {
-        this.maze.getCell(0).setStart(true);
+        this.Maze.getCell(0).SetStart(true);
     }
 
     private void GenerateEndCell(){
-        this.maze.getCell(this.maze.getGrid().size()-1).setFinish(true);
+        this.Maze.getCell(this.Maze.getGrid().size()-1).SetFinish(true);
     }
 
     public Maze GenerateMaze(Maze themaze) {
@@ -38,11 +39,11 @@ public class MazeGenerator {
 
         GenerateEndCell();
 
-        return maze;
+        return Maze;
     }
 
     private void DepthFirstSearch(Cell currentcell){
-        currentcell.isVisiting();
+        currentcell.IsVisiting();
         Cell unvisitedneighbor = null;
 
 
@@ -59,12 +60,12 @@ public class MazeGenerator {
 
     private Cell randomCell (Maze themaze)
     {
-        maze = themaze;
+        Maze = themaze;
 
-        int mazemax = maze.getHeight() * maze.getLength();
+        int mazemax = Maze.getHeight() * Maze.getLength();
         int start = (int)(Math.random() * mazemax);
 
-        return maze.getCell(start);
+        return Maze.getCell(start);
     }
 
     private Cell chooseViableNeihgbor (Cell currentcell) {
@@ -86,11 +87,11 @@ public class MazeGenerator {
         {
             if(checkorder[side] == 0)
             {
-                viableneihgbor = maze.checkNorthCell(currentcell.Id);
+                viableneihgbor = Maze.checkNorthCell(currentcell.Index);
                 if (viableneihgbor != null){
-                    if(!viableneihgbor.isVistited()) {
-                        currentcell.setNwall(false);
-                        viableneihgbor.setSwall(false);
+                    if(!viableneihgbor.IsVistited()) {
+                        currentcell.SetNorthernwall(WallType.Empty);
+                        viableneihgbor.SetSouthernwall(WallType.Empty);
 
                         return viableneihgbor;
                     }
@@ -98,22 +99,22 @@ public class MazeGenerator {
             }
             else if(checkorder[side] == 1)
             {
-                viableneihgbor = maze.checkEastCell(currentcell.Id);
+                viableneihgbor = Maze.checkEastCell(currentcell.Index);
                 if (viableneihgbor != null){
-                    if(!viableneihgbor.isVistited()) {
-                        currentcell.setEwall(false);
-                        viableneihgbor.setWwall(false);
+                    if(!viableneihgbor.IsVistited()) {
+                        currentcell.SetEasternwall(WallType.Empty);
+                        viableneihgbor.SetWesternwall(WallType.Empty);
 
                         return viableneihgbor;
                     }
                 }
             }
             else if(checkorder[side] == 2) {
-                viableneihgbor = maze.checkSouthCell(currentcell.Id);
+                viableneihgbor = Maze.checkSouthCell(currentcell.Index);
                 if (viableneihgbor != null){
-                    if(!viableneihgbor.isVistited()) {
-                        currentcell.setSwall(false);
-                        viableneihgbor.setNwall(false);
+                    if(!viableneihgbor.IsVistited()) {
+                        currentcell.SetSouthernwall(WallType.Empty);
+                        viableneihgbor.SetNorthernwall(WallType.Empty);
 
                         return viableneihgbor;
                     }
@@ -121,11 +122,11 @@ public class MazeGenerator {
             }
              else if(checkorder[side] == 3)
             {
-                viableneihgbor = maze.checkWestCell(currentcell.Id);
+                viableneihgbor = Maze.checkWestCell(currentcell.Index);
                 if (viableneihgbor != null){
-                    if(!viableneihgbor.isVistited()){
-                        currentcell.setWwall(false);
-                        viableneihgbor.setEwall(false);
+                    if(!viableneihgbor.IsVistited()){
+                        currentcell.SetWesternwall(WallType.Empty);
+                        viableneihgbor.SetEasternwall(WallType.Empty);
 
                         return viableneihgbor;
                     }

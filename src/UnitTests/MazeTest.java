@@ -41,9 +41,9 @@ public class MazeTest {
         //Setting up searched cell
         Cell searched = TestMaze.Search(3,2);
         //Test if x lines up
-        assertEquals(3,searched.getGridX());
+        assertEquals(3,searched.GetGridX());
         //Test if y lines up
-        assertEquals(2,searched.getGridY());
+        assertEquals(2,searched.GetGridY());
     }
 
     //Test 6: Test if search method returns null *and message* if search parameters are out of bounds

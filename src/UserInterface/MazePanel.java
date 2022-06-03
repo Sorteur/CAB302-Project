@@ -2,6 +2,7 @@ package UserInterface;
 
 import DataClasses.Cell;
 import DataClasses.Maze;
+import DataClasses.WallType;
 import Engine.MazeManager;
 
 import javax.imageio.ImageIO;
@@ -40,16 +41,16 @@ public class MazePanel extends JPanel implements MouseListener {
     private JToggleButton createButton(String name, Cell A, int width, int height, JFrame frame){
         JToggleButton Button = new JToggleButton(name);
         if (Objects.equals(name, "North")){
-            if (!A.isNwall()){Button.setSelected(true);}
+            if (!WallType.Tools.ToBool(A.IsNorthernwall())){Button.setSelected(true);}
             frame.add(Button,BorderLayout.NORTH);
         } else if (Objects.equals(name, "South")){
-            if (!A.isSwall()){Button.setSelected(true);}
+            if (!WallType.Tools.ToBool(A.IsSouthernwall())){Button.setSelected(true);}
             frame.add(Button,BorderLayout.SOUTH);
         }else if (Objects.equals(name, "East")){
-            if (!A.isEwall()){Button.setSelected(true);}
+            if (!WallType.Tools.ToBool(A.IsEasternwall())){Button.setSelected(true);}
             frame.add(Button,BorderLayout.EAST);
         }else {
-            if (!A.isWwall()){Button.setSelected(true);}
+            if (!WallType.Tools.ToBool(A.IsWesternwall())){Button.setSelected(true);}
             frame.add(Button,BorderLayout.WEST);
         }
         Button.setPreferredSize(new Dimension(width,height));
@@ -76,44 +77,44 @@ public class MazePanel extends JPanel implements MouseListener {
 
         JToggleButton North = createButton("North",EditedCell,200,125,PopOut);
         North.addActionListener(e -> {
-            EditedCell.setNwall(!EditedCell.isNwall());
-            if (NCell != null) NCell.setSwall(!NCell.isSwall());
+            EditedCell.SetNorthernwall(EditedCell.SwitchWallType(EditedCell.IsNorthernwall()));
+            if (NCell != null) NCell.SetSouthernwall(NCell.SwitchWallType(NCell.IsSouthernwall()));
             repaint();
         });
         JToggleButton South = createButton("South",EditedCell,200,125,PopOut);
         South.addActionListener(e -> {
-            EditedCell.setSwall(!EditedCell.isSwall());
-            if (SCell != null) SCell.setNwall(!SCell.isNwall());
+            EditedCell.SetSouthernwall(EditedCell.SwitchWallType(EditedCell.IsSouthernwall()));
+            if (SCell != null) SCell.SetNorthernwall(SCell.SwitchWallType(SCell.IsNorthernwall()));
             repaint();
         });
         JToggleButton East = createButton("East",EditedCell,250,200,PopOut);
         East.addActionListener(e -> {
-            EditedCell.setEwall(!EditedCell.isEwall());
-            if (ECell != null) ECell.setWwall(!ECell.isWwall());
+            EditedCell.SetEasternwall(EditedCell.SwitchWallType(EditedCell.IsEasternwall()));
+            if (ECell != null) ECell.SetWesternwall(ECell.SwitchWallType(ECell.IsWesternwall()));
             repaint();
         });
         JToggleButton West = createButton("West",EditedCell,250,200,PopOut);
         West.addActionListener(e -> {
-            EditedCell.setWwall(!EditedCell.isWwall());
-            if (WCell != null) WCell.setEwall(!WCell.isEwall());
+            EditedCell.SetWesternwall(EditedCell.SwitchWallType(EditedCell.IsWesternwall()));
+            if (WCell != null) WCell.SetEasternwall(WCell.SwitchWallType(WCell.IsEasternwall()));
             repaint();
         });
     }
 
     public void DrawSquare(Cell cell,Graphics g, int x, int y, int length){
-        cell.setPosX(x);
-        cell.setPosY(y);
+        cell.SetPosX(x);
+        cell.SetPosY(y);
         //North
-        if (cell.isNwall()){
+        if (WallType.Tools.ToBool(cell.IsNorthernwall())){
         g.drawLine(x,y,x+length,y);}
         //South
-        if (cell.isSwall()){
+        if (WallType.Tools.ToBool(cell.IsSouthernwall())){
         g.drawLine(x,y+length,x+length,y+length);}
         //East
-        if (cell.isEwall()){
+        if (WallType.Tools.ToBool(cell.IsEasternwall())){
         g.drawLine(x+length, y+length,x+length,y);}
         //West
-        if (cell.isWwall()){
+        if (WallType.Tools.ToBool(cell.IsWesternwall())){
         g.drawLine(x,y+length,x,y);}
     }
 
@@ -136,11 +137,11 @@ public class MazePanel extends JPanel implements MouseListener {
                 Cell cell = CurrentMaze.getGrid().get(CurrentCell);
                 if(true){
                     if (CurrentCell == 0){
-                        cell.setNwall(false);
+                        cell.SetNorthernwall(WallType.Empty);
                         DrawTriangle(g,PosX,PosY);
                     }
                     if (CurrentCell == (X*Y)-1){
-                        cell.setSwall(false);
+                        cell.SetSouthernwall(WallType.Empty);
                         DrawTriangle(g,PosX+((X-1)* sizeScale),PosY+(Y* sizeScale));
                     }
                 }
@@ -179,8 +180,8 @@ public class MazePanel extends JPanel implements MouseListener {
         int clickY = e.getY();
         System.out.println("YES");
         for (Cell cell:CurrentMaze.getGrid()) {
-            if (((clickX > cell.getPosX()) && (clickX < cell.getPosX()+ sizeScale)) && ((clickY > cell.getPosY()) && (clickY < cell.getPosY()+ sizeScale))){
-                EditSquare(cell.getGridX(),cell.getGridY());
+            if (((clickX > cell.GetPosX()) && (clickX < cell.GetPosX()+ sizeScale)) && ((clickY > cell.GetPosY()) && (clickY < cell.GetPosY()+ sizeScale))){
+                EditSquare(cell.GetGridX(),cell.GetGridY());
 
             }
         }
