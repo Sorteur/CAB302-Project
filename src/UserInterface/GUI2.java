@@ -163,12 +163,16 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
                 int Width = Integer.parseInt(WidthBox.getText());
                 int Height = Integer.parseInt(HeightBox.getText());
                 if (RandomButton.isSelected()) {
-                    MazeGenerator.Instance().GenerateMaze(MazeManager.Instance().CreateMaze(Width, Height));
+                     MazeGenerator.Instance().GenerateMaze(MazeManager.Instance().CreateMaze(Width, Height));
                 } else {
                     //Get Maze Name from User
                     MazeManager.Instance().CreateMaze(Width, Height);
                 }
-                pnlMaze.GridSet();
+                if (ImageStartEnd.isSelected()){
+                    MazeManager.Instance().GetMaze().setImgSrtEnd(true);
+                    ImageGUI.Instance().ImgSrtEnd();
+
+                } else {pnlMaze.GridSet();}
                 PopOut.dispose();
             } catch(NumberFormatException e) {
                 JOptionPane.showMessageDialog(PopOut,"Dimensions of maze must be whole numbers.","Input error",JOptionPane.ERROR_MESSAGE);
