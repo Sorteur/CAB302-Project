@@ -7,6 +7,16 @@ public class Maze {
 
     public String Description;
 
+    private int Id;
+
+    public void SetId(int id) {
+        Id = id;
+        for (Cell cell : getGrid()) {
+            cell.MazeId = id;
+        }
+    }
+
+
     private final int Length;
     public int getLength() {
         return Length;
