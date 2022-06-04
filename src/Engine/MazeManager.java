@@ -1,5 +1,12 @@
 package Engine;
 import DataClasses.Maze;
+import DataModules.DBConnection;
+import DataModules.MazeModule;
+
+import java.sql.SQLException;
+import java.util.Enumeration;
+import java.util.Hashtable;
+import java.util.Set;
 
 public class MazeManager {
     private static MazeManager instance = new MazeManager();
@@ -21,7 +28,51 @@ public class MazeManager {
         return Maze;
     }
 
-    public void LoadMaze(int ID) {
+    public String[][] LoadMazeDescriptions() {
+
+        MazeModule mazeModule = new MazeModule(DBConnection.Instance());
+
+        Hashtable descriptions;
+        try
+        {
+            int index = 0;
+            descriptions = mazeModule.GetMazeDescriptions();
+
+            Set<Integer> id = descriptions.keySet();
+            String[] IdArray = new String[id.size()];
+            for(Integer Id : id)
+            {
+                IdArray[index++] = Id.toString();
+            }
+
+            index = 0;
+            Enumeration<String> description = descriptions.elements();
+            String[] descriptionArray = new String[id.size()];
+            while(description.hasMoreElements()){
+                descriptionArray[index++] = description.nextElement();
+            }
+
+
+            String[][] output = new String[id.size()][2];
+
+            for(int i = 0; i < id.size(); i++)
+            {
+                output[i][0] = IdArray[i].toString();
+            }
+
+            for(int i = 0; i < id.size(); i++)
+            {
+                output[i][1] = descriptionArray[i];
+            }
+
+            return output;
+
+        }
+        catch (SQLException sqlException){
+            System.out.println(sqlException);
+        }
+
+        return null;
 
     }
 

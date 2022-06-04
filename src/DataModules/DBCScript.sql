@@ -28,9 +28,9 @@ alter table WallType
 	add constraint
     primary key (Id);
 
-insert into WallType (Id, Description) values (1, "Wall");
-insert into WallType (Id, Description) values (2, "Empty");
-insert into WallType (Id, Description) values (3, "ImageWall");
+insert into WallType (Id, Description) values (1, "Empty");
+insert into WallType (Id, Description) values (2, "Wall");
+
 
 /*                                                                   */
 /* STATIC TABLES                                                     */
@@ -62,6 +62,7 @@ create sequence MazeId
 create table Cell (
   Id int default 0 not null,
   MazeId int not null,
+  ArrayListPos int not null,
   XPosistion int not null,
   YPosistion int not null,
   NorthWallTypeId int not null,
