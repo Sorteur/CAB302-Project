@@ -135,7 +135,7 @@ public class MazePanel extends JPanel implements MouseListener {
             int RelativeY=0;
             while (RelativeY < Y){
                 Cell cell = CurrentMaze.getGrid().get(CurrentCell);
-                if(true){
+                if(!CurrentMaze.isImgSrtEnd()){
                     if (CurrentCell == 0){
                         cell.SetNorthernwall(WallType.Empty);
                         DrawTriangle(g,PosX,PosY);

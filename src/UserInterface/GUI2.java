@@ -170,9 +170,9 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
                 }
                 if (ImageStartEnd.isSelected()){
                     MazeManager.Instance().GetMaze().setImgSrtEnd(true);
-                    ImageGUI.Instance().ImgSrtEnd();
-
-                } else {pnlMaze.GridSet();}
+                    ImageGUI.Instance().ImgSrtEnd(pnlMaze);
+                }
+                pnlMaze.GridSet();
                 PopOut.dispose();
             } catch(NumberFormatException e) {
                 JOptionPane.showMessageDialog(PopOut,"Dimensions of maze must be whole numbers.","Input error",JOptionPane.ERROR_MESSAGE);

@@ -9,24 +9,15 @@ public class SrtEndPlacer extends JPanel{
         this.setOpaque(false);
     }
     public void paintComponent(Graphics g){
-        if(MazeManager.Instance().GetMaze() != null) {
-            if (MazeManager.Instance().GetMaze().getExitImage() != null) {
+        super.paintComponent(g);
+        g.drawImage(MazeManager.Instance().GetMaze().getStart(),
+                MazeManager.Instance().GetMaze().Search(0,0).GetPosX()+1,
+                MazeManager.Instance().GetMaze().Search(0,0).GetPosY()+1,
+                this);
 
-                int Endx = MazeManager.Instance().GetMaze().Search(MazeManager.Instance().GetMaze().getExitImage().GetPositionX(), MazeManager.Instance().GetMaze().getExitImage().GetPositionY()).GetPosX();
-                int Endy = MazeManager.Instance().GetMaze().Search(MazeManager.Instance().GetMaze().getExitImage().GetPositionX(), MazeManager.Instance().GetMaze().getExitImage().GetPositionY()).GetPosY();
-
-
-                super.paintComponent(g);
-                g.drawImage(MazeManager.Instance().GetMaze().getEntryImage().GetImage(),
-                        MazeManager.Instance().GetMaze().Search(0, 0).GetPosX() + 1,
-                        MazeManager.Instance().GetMaze().Search(0, 0).GetPosY() + 1,
-                        this);
-
-                g.drawImage(MazeManager.Instance().GetMaze().getExitImage().GetImage(),
-                        Endx + 1,
-                        Endy + 1,
-                        this);
-            }
-        }
+        g.drawImage(MazeManager.Instance().GetMaze().getEnd(),
+                MazeManager.Instance().GetMaze().getEndLogoX()+1,
+                MazeManager.Instance().GetMaze().getEndLogoY()+1,
+                this);
     }
 }
