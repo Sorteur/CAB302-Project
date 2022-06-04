@@ -69,10 +69,28 @@ public class Maze {
         End = end;
     }
 
+    public int getEndLogoX() {
+        return EndLogoX;
+    }
+
+    public void setEndLogoX(int endLogoX) {
+        EndLogoX = endLogoX;
+    }
+
+    public int getEndLogoY() {
+        return EndLogoY;
+    }
+
+    public void setEndLogoY(int endLogoY) {
+        EndLogoY = endLogoY;
+    }
+
     private Image Logo;
     private int LogoX;
     private int LogoY;
     private boolean ImgSrtEnd;
+    private int EndLogoX;
+    private int EndLogoY;
 
 
 
@@ -85,6 +103,9 @@ public class Maze {
     }
 
     public Cell getCell(int index) {
+        if (index < 0 ){
+            return Grid.get(Grid.size()+index);
+        }
         return  Grid.get(index);
     }
 
