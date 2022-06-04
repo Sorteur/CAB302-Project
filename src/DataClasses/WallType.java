@@ -12,18 +12,6 @@ public enum WallType {
 
 public static class Tools
 {
-
-    static boolean norm = true;
-
-    public static boolean norm ()
-    {
-        return norm;
-    }
-     static Hashtable WallTypeID = new Hashtable<WallType, Integer>();
-
-
-
-
      public static int ToId(WallType wallType)
     {
         switch (wallType)
