@@ -17,6 +17,9 @@ public class Cell {
 
     private int Id;
 
+    public int MazeId;
+
+
     public int Index;
     int GridX;
     int GridY;

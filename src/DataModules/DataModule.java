@@ -43,10 +43,13 @@ public class DataModule {
         PreparedStatement statement = PrepareStatement(sql);
 
         ResultSet resultSet = statement.executeQuery();
-
-        if(resultSet.next())
-            id = resultSet.getInt(1);
-
+        try {
+            if (resultSet.next())
+                id = resultSet.getInt(1);
+        }
+        finally {
+            resultSet.close();
+        }
         return id;
     }
 
