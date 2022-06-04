@@ -1,5 +1,6 @@
 package UserInterface;
 import DataClasses.Cell;
+import DataClasses.Maze;
 import DataClasses.WallType;
 import Engine.MazeManager;
 
@@ -7,8 +8,6 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
@@ -18,6 +17,10 @@ public class ImageGUI {
     private Image Logo;
     private Image StartImage;
     private Image EndImage;
+
+    //used to determine if to create Logo/StartEnd or update them.
+    private int i;
+    private int j;
 
     public static ImageGUI Instance(){
         return instance;
@@ -139,27 +142,26 @@ public class ImageGUI {
         c.gridy = 4;
         logoMenu.add(ImagePicker,c);
 
-        JButton pnlExportGridButton = new JButton("Place Image");
-        pnlExportGridButton.setFont(Large);
+        JButton placeImage = new JButton("Place Image");
+        placeImage.setFont(Large);
         c.gridx = 2;
         c.gridwidth = 2;
         c.gridy = 3;
         c.gridheight = 2;
         c.weighty = 1;
-        //c.weightx = 1;
-        //c.fill  = GridBagConstraints.HORIZONTAL;
-
-        pnlExportGridButton.addActionListener(a ->{
+        placeImage.addActionListener(a ->{
             try{
                 int X = Integer.parseInt(XPosBox.getText())-1;
                 int Y = Integer.parseInt(YPosBox.getText())-1;
+                int Width = pnlMaze.sizeScale*Integer.parseInt(WidthBox.getText());
+                int Height = pnlMaze.sizeScale*Integer.parseInt(HeightBox.getText());
+
                 Cell Origin = MazeManager.Instance().GetMaze().Search(X,Y);
                 MazeManager.Instance().GetMaze().setLogoX(Origin.GetPosX() + 1);
                 MazeManager.Instance().GetMaze().setLogoY(Origin.GetPosY() + 1);
-                int Width = pnlMaze.sizeScale*Integer.parseInt(WidthBox.getText());
-                int Height = pnlMaze.sizeScale*Integer.parseInt(HeightBox.getText());
                 Image ScaledImage = Logo.getScaledInstance(Width-2,Height-2,Image.SCALE_SMOOTH);
 
+                //Make sure Logo is un-reachable
                 for (Cell cell:MazeManager.Instance().GetMaze().getGrid()) {
                     if (cell.GetGridX() >= X & cell.GetGridX() < X+Integer.parseInt(WidthBox.getText())){
                         if (cell.GetGridY() >= Y & cell.GetGridY() < Y+Integer.parseInt(HeightBox.getText())){
@@ -170,8 +172,15 @@ public class ImageGUI {
                         }
                     }
                 }
+
+                //Used to make sure only one LogoPlacer is made, update instead if it exists
                 MazeManager.Instance().GetMaze().setLogo(ScaledImage);
-                pnlMaze.add(new ImagePlacer(),BorderLayout.CENTER);
+                if (i == 0){
+                    pnlMaze.add(new LogoPlacer(),BorderLayout.CENTER);
+                    i++;
+                } else {
+                    pnlMaze.repaint();
+                }
                 pnlMaze.updateUI();
                 logoMenu.dispose();
 
@@ -182,10 +191,10 @@ public class ImageGUI {
             }
 
         });
-        logoMenu.add(pnlExportGridButton,c);
+        logoMenu.add(placeImage,c);
     }
 
-    public void ImgSrtEnd (){
+    public void ImgSrtEnd (MazePanel pnlMaze){
         Font Large  = new Font("Larger",Font.PLAIN, 24 );
 
         JFrame imgMenu = new JFrame();
@@ -194,32 +203,67 @@ public class ImageGUI {
         imgMenu.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
+
+        JTextField WidthBox = new JTextField();
+        WidthBox.setFont(Large);
+        WidthBox.setPreferredSize(new Dimension(60,30));
+        imgMenu.add(WidthBox,c);
+
+
+        JTextField HeightBox = new JTextField();
+        HeightBox.setFont(Large);
+        HeightBox.setPreferredSize(new Dimension(60,30));
+        imgMenu.add(HeightBox,c);
+
+
+
+
+        //Start Image
         JLabel PreviewStart = new JLabel();
         imgMenu.add(PreviewStart,c);
-
-
 
         JButton ImagePickerStart = new JButton("Open an Image");
         ImagePickerStart.addActionListener(e -> {
             StartImage = ImageSelector();
-            PreviewStart.setIcon(new ImageIcon(Logo.getScaledInstance(100,100,Image.SCALE_SMOOTH)));
+            PreviewStart.setIcon(new ImageIcon(StartImage.getScaledInstance(100,100,Image.SCALE_SMOOTH)));
         });
         imgMenu.add(ImagePickerStart,c);
 
+        //End Image
+        JLabel PreviewEnd = new JLabel();
+        imgMenu.add(PreviewEnd,c);
+
+        JButton ImagePickerEnd = new JButton("Open an Image");
+        ImagePickerEnd.addActionListener(e -> {
+            EndImage = ImageSelector();
+            PreviewEnd.setIcon(new ImageIcon(EndImage.getScaledInstance(100,100,Image.SCALE_SMOOTH)));
+        });
+        imgMenu.add(ImagePickerEnd,c);
 
 
+        //Selection Confirmation Button
         JButton SelectionConfirmation = new JButton("Confirm Selection");
         SelectionConfirmation.setFont(Large);
         SelectionConfirmation.addActionListener(e -> {
-            MazeManager.Instance().GetMaze().setStart(StartImage);
+            Maze maze = MazeManager.Instance().GetMaze();
+            int Width = (pnlMaze.sizeScale*Integer.parseInt(WidthBox.getText()))-2;
+            int Height = (pnlMaze.sizeScale*Integer.parseInt(HeightBox.getText()))-2;
+
+            maze.setEndLogoX(maze.Search(maze.getLength()-Integer.parseInt(WidthBox.getText()),maze.getHeight()-Integer.parseInt(HeightBox.getText())).GetPosX());
+            maze.setEndLogoY(maze.Search(maze.getLength()-Integer.parseInt(WidthBox.getText()),maze.getHeight()-Integer.parseInt(HeightBox.getText())).GetPosY());
+            
+            //Used to make sure only one SrtEndPlacer is made, update instead if it exists
+            MazeManager.Instance().GetMaze().setStart(StartImage.getScaledInstance(Width,Height,Image.SCALE_SMOOTH));
+            MazeManager.Instance().GetMaze().setEnd(EndImage.getScaledInstance(Width,Height,Image.SCALE_SMOOTH));
+            if (j == 0){
+                pnlMaze.add(new SrtEndPlacer());
+                j++;
+            } else {
+                pnlMaze.repaint();
+            }
+            pnlMaze.updateUI();
+            imgMenu.dispose();
         });
         imgMenu.add(SelectionConfirmation,c);
-
-
     }
-
-
-
-
-
 }

@@ -1,12 +1,11 @@
 package UserInterface;
 
 import Engine.MazeManager;
-
 import javax.swing.*;
 import java.awt.*;
 
-public class ImagePlacer extends JPanel {
-    public ImagePlacer() {
+public class LogoPlacer extends JPanel {
+    public LogoPlacer() {
         this.setOpaque(false);
     }
     public void paintComponent(Graphics g){
