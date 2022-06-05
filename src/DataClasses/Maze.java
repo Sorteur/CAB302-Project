@@ -41,6 +41,12 @@ public class Maze {
             cell.MazeId = id;
         }
     }
+
+    public int GetId()
+    {
+        return Id;
+    }
+
     public int getLength() {
         return Length;
     }
