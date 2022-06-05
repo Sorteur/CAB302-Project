@@ -2,6 +2,7 @@ package Engine;
 import DataClasses.Maze;
 import DataModules.DBConnection;
 import DataModules.MazeModule;
+import UserInterface.MazePanel;
 
 import java.sql.SQLException;
 import java.util.Enumeration;
@@ -17,6 +18,8 @@ public class MazeManager {
     }
 
     private Maze Maze;
+    public MazePanel pnlMaze = new MazePanel();
+
 
 
     public Maze GetMaze() {
@@ -26,6 +29,21 @@ public class MazeManager {
     public Maze CreateMaze (int Length, int Height) {
         Maze = new Maze(Length, Height);
         return Maze;
+    }
+
+    public void LoadMazeFromId(int id)
+    {
+        MazeModule mazeModule = new MazeModule(DBConnection.Instance());
+
+        try
+        {
+            Maze = mazeModule.GetMazeFromID(id);
+        }
+        catch (SQLException sqlException)
+        {
+            System.out.println(sqlException);
+        }
+
     }
 
     public String[][] LoadMazeDescriptions() {

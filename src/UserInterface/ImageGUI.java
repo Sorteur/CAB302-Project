@@ -157,9 +157,8 @@ public class ImageGUI {
                 int Height = pnlMaze.sizeScale*Integer.parseInt(HeightBox.getText());
 
                 Cell Origin = MazeManager.Instance().GetMaze().Search(X,Y);
-                MazeManager.Instance().GetMaze().setLogoX(Origin.GetPosX() + 1);
-                MazeManager.Instance().GetMaze().setLogoY(Origin.GetPosY() + 1);
                 Image ScaledImage = Logo.getScaledInstance(Width-2,Height-2,Image.SCALE_SMOOTH);
+                MazeManager.Instance().GetMaze().ConstructLogo(ScaledImage,Origin.GetPosX() + 1,Origin.GetPosY() + 1);
 
                 //Make sure Logo is un-reachable
                 for (Cell cell:MazeManager.Instance().GetMaze().getGrid()) {
@@ -249,12 +248,12 @@ public class ImageGUI {
             int Width = (pnlMaze.sizeScale*Integer.parseInt(WidthBox.getText()))-2;
             int Height = (pnlMaze.sizeScale*Integer.parseInt(HeightBox.getText()))-2;
 
-            maze.setEndLogoX(maze.Search(maze.getLength()-Integer.parseInt(WidthBox.getText()),maze.getHeight()-Integer.parseInt(HeightBox.getText())).GetPosX());
-            maze.setEndLogoY(maze.Search(maze.getLength()-Integer.parseInt(WidthBox.getText()),maze.getHeight()-Integer.parseInt(HeightBox.getText())).GetPosY());
-            
+            maze.ConstructExitImage(EndImage, maze.Search(maze.getLength()-Integer.parseInt(WidthBox.getText()),maze.getHeight()-Integer.parseInt(HeightBox.getText())).GetPosX(), maze.Search(maze.getLength()-Integer.parseInt(WidthBox.getText()),maze.getHeight()-Integer.parseInt(HeightBox.getText())).GetPosY());
+            maze.ConstructEntryImage(StartImage, maze.Search(maze.getLength()-Integer.parseInt(WidthBox.getText()),maze.getHeight()-Integer.parseInt(HeightBox.getText())).GetPosX(), maze.Search(maze.getLength()-Integer.parseInt(WidthBox.getText()),maze.getHeight()-Integer.parseInt(HeightBox.getText())).GetPosY());
+
             //Used to make sure only one SrtEndPlacer is made, update instead if it exists
-            MazeManager.Instance().GetMaze().setStart(StartImage.getScaledInstance(Width,Height,Image.SCALE_SMOOTH));
-            MazeManager.Instance().GetMaze().setEnd(EndImage.getScaledInstance(Width,Height,Image.SCALE_SMOOTH));
+            MazeManager.Instance().GetMaze().getEntryImage().SetImage(StartImage.getScaledInstance(Width,Height,Image.SCALE_SMOOTH));
+            MazeManager.Instance().GetMaze().getExitImage().SetImage(EndImage.getScaledInstance(Width,Height,Image.SCALE_SMOOTH));
             if (j == 0){
                 pnlMaze.add(new SrtEndPlacer());
                 j++;

@@ -23,11 +23,11 @@ public class MazeGenerator {
     Maze Maze;
 
     private void GenerateStartCell() {
-        this.Maze.getCell(0).SetStart(true);
+        //this.Maze.getCell(0).SetStart(true);
     }
 
     private void GenerateEndCell(){
-        this.Maze.getCell(this.Maze.getGrid().size()-1).SetFinish(true);
+        //this.Maze.getCell(this.Maze.getGrid().size()-1).SetFinish(true);
     }
 
     public Maze GenerateMaze(Maze themaze) {
