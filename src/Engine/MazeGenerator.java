@@ -58,7 +58,7 @@ public class MazeGenerator {
     }
 
 
-    private Cell randomCell (Maze themaze)
+    public Cell randomCell (Maze themaze)
     {
         Maze = themaze;
 

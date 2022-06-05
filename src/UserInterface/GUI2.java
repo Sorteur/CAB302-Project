@@ -169,15 +169,11 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
 
                 if (RandomButton.isSelected()) {
                     if (BuildAroundLogo.isSelected()){
-                        //ImageGUI.Instance().AutoLogo();
-
-                        //Maze maze = MazeManager.Instance().CreateMazeAutoLogo(Width, Height);
-
-                        //THINGS THAT FIND CELLS
-                        //MazeGenerator.Instance().GenerateMaze(maze);
+                        ImageGUI.Instance().AutoLogo(pnlMaze,Width,Height);
 
                     } else {
                         MazeGenerator.Instance().GenerateMaze(MazeManager.Instance().CreateMaze(Width, Height));
+                        pnlMaze.GridSet();
                     }
                 }
 
@@ -185,16 +181,18 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
                 else {
                     if (BuildAroundLogo.isSelected()){
                         ImageGUI.Instance().ImageSelector();
+                        pnlMaze.GridSet();
                     }
                     else {
                         MazeGenerator.Instance().GenerateMaze(MazeManager.Instance().CreateMaze(Width, Height));
+                        pnlMaze.GridSet();
                     }
                 }
+
                 if (ImageStartEnd.isSelected()){
                     MazeManager.Instance().GetMaze().setImgSrtEnd(true);
                     ImageGUI.Instance().ImgSrtEnd(pnlMaze);
                 }
-                pnlMaze.GridSet();
                 PopOut.dispose();
             } catch(NumberFormatException e) {
                 JOptionPane.showMessageDialog(PopOut,"Dimensions of maze must be whole numbers.","Input error",JOptionPane.ERROR_MESSAGE);
