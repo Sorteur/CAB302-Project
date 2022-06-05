@@ -66,7 +66,20 @@ public class LoadMazeDialog {
 
         c.gridy = 1;
         Confirm.addActionListener(a -> {
+            int id = 0;
 
+            id = Descriptions.getSelectedColumn();
+
+            try{
+                id = Integer.parseInt(data[0][id]);
+            }
+            catch (NumberFormatException ex){
+                ex.printStackTrace();
+            }
+
+            MazeManager.Instance().LoadMazeFromId(id);
+            MazeManager.Instance().pnlMaze.GridSet();
+            PopOut.dispose();
         });
         PopOut.add(Confirm,c);
     }

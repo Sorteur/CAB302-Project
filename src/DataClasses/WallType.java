@@ -12,6 +12,15 @@ public enum WallType {
 
 public static class Tools
 {
+    public static WallType IdToWallType(int Id)
+    {
+        switch (Id)
+        {
+            case 0: return Empty;
+            case 1:  return Wall;
+            default: return Wall;
+        }
+    }
      public static int ToId(WallType wallType)
     {
         switch (wallType)

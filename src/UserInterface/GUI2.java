@@ -31,7 +31,7 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
 
 
         //Setting up and Displaying Panel to display Grid
-        pnlMaze =  new MazePanel();
+        pnlMaze = MazeManager.Instance().pnlMaze;
         pnlMaze.setLayout(new BorderLayout());
         Main.add(pnlMaze);
 
@@ -166,7 +166,6 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
                 if (RandomButton.isSelected()) {
                      MazeGenerator.Instance().GenerateMaze(MazeManager.Instance().CreateMaze(Width, Height));
                 } else {
-                    //Get Maze Name from User
                     MazeManager.Instance().CreateMaze(Width, Height);
                 }
                 if (ImageStartEnd.isSelected()){
