@@ -197,52 +197,80 @@ public class ImageGUI {
         Font Large  = new Font("Larger",Font.PLAIN, 24 );
 
         JFrame imgMenu = new JFrame();
-        imgMenu.setSize(550, 300);
+        imgMenu.setSize(600, 275);
         imgMenu.setVisible(true);
         imgMenu.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
+        c.weighty = 0.1;
+        c.insets = new Insets(0,5,0,5);
+        c.anchor = GridBagConstraints.CENTER;
 
+        JLabel WidthLabel = new JLabel("Width of Images");
+        WidthLabel.setFont(Large);
+        c.gridx = 0;
+        c.gridy = 0;
+        imgMenu.add(WidthLabel,c);
 
         JTextField WidthBox = new JTextField();
         WidthBox.setFont(Large);
         WidthBox.setPreferredSize(new Dimension(60,30));
+        c.gridx = 1;
+        c.gridy = 0;
         imgMenu.add(WidthBox,c);
 
+        JLabel HeightLabel = new JLabel("Height of Images");
+        HeightLabel.setFont(Large);
+        c.gridx = 0;
+        c.gridy = 1;
+        imgMenu.add(HeightLabel,c);
 
         JTextField HeightBox = new JTextField();
         HeightBox.setFont(Large);
         HeightBox.setPreferredSize(new Dimension(60,30));
+        c.gridx = 1;
+        c.gridy = 1;
         imgMenu.add(HeightBox,c);
-
-
-
 
         //Start Image
         JLabel PreviewStart = new JLabel();
+        c.gridx = 2;
+        c.gridy = 0;
+        c.gridheight = 2;
         imgMenu.add(PreviewStart,c);
 
-        JButton ImagePickerStart = new JButton("Open an Image");
+        JButton ImagePickerStart = new JButton("Select start image");
         ImagePickerStart.addActionListener(e -> {
             StartImage = ImageSelector();
             PreviewStart.setIcon(new ImageIcon(StartImage.getScaledInstance(100,100,Image.SCALE_SMOOTH)));
         });
+        c.gridx = 2;
+        c.gridy = 2;
         imgMenu.add(ImagePickerStart,c);
 
         //End Image
         JLabel PreviewEnd = new JLabel();
+        c.gridx = 3;
+        c.gridy = 0;
+        c.gridheight = 2;
         imgMenu.add(PreviewEnd,c);
 
-        JButton ImagePickerEnd = new JButton("Open an Image");
+        JButton ImagePickerEnd = new JButton("Select end image");
         ImagePickerEnd.addActionListener(e -> {
             EndImage = ImageSelector();
             PreviewEnd.setIcon(new ImageIcon(EndImage.getScaledInstance(100,100,Image.SCALE_SMOOTH)));
         });
+        c.gridx = 3;
+        c.gridy = 2;
         imgMenu.add(ImagePickerEnd,c);
 
 
         //Selection Confirmation Button
         JButton SelectionConfirmation = new JButton("Confirm Selection");
         SelectionConfirmation.setFont(Large);
+        c.gridx = 0;
+        c.gridwidth = 2;
+        c.gridy = 2;
+        c.anchor = GridBagConstraints.CENTER;
         SelectionConfirmation.addActionListener(e -> {
             Maze maze = MazeManager.Instance().GetMaze();
             int Width = (pnlMaze.sizeScale*Integer.parseInt(WidthBox.getText()))-2;
