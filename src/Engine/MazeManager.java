@@ -31,6 +31,13 @@ public class MazeManager {
         return Maze;
     }
 
+    public Maze CreateMazeAutoLogo (int Length, int Height) {
+
+
+        Maze = new Maze(Length, Height);
+        return Maze;
+    }
+
     public void LoadMazeFromId(int id)
     {
         MazeModule mazeModule = new MazeModule(DBConnection.Instance());
@@ -101,5 +108,9 @@ public class MazeManager {
     public void ExportMaze (Maze maze){
 
     }
+
+
+
+
 
 }
