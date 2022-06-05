@@ -9,6 +9,11 @@ public class SrtEndPlacer extends JPanel{
         this.setOpaque(false);
     }
     public void paintComponent(Graphics g){
+
+        int Endx = MazeManager.Instance().GetMaze().Search(MazeManager.Instance().GetMaze().getExitImage().GetPositionX(),MazeManager.Instance().GetMaze().getExitImage().GetPositionY()).GetPosX();
+        int Endy = MazeManager.Instance().GetMaze().Search(MazeManager.Instance().GetMaze().getExitImage().GetPositionX(),MazeManager.Instance().GetMaze().getExitImage().GetPositionY()).GetPosY();
+
+
         super.paintComponent(g);
         g.drawImage(MazeManager.Instance().GetMaze().getEntryImage().GetImage(),
                 MazeManager.Instance().GetMaze().Search(0,0).GetPosX()+1,
@@ -16,8 +21,8 @@ public class SrtEndPlacer extends JPanel{
                 this);
 
         g.drawImage(MazeManager.Instance().GetMaze().getExitImage().GetImage(),
-                MazeManager.Instance().GetMaze().getExitImage().GetPositionX()+1,
-                MazeManager.Instance().GetMaze().getExitImage().GetPositionY()+1,
+                Endx+1,
+                Endy+1,
                 this);
     }
 }

@@ -150,5 +150,16 @@ public class Maze {
         }
         return null;
     }
+
+    public Cell SearchByPos(int xPos,int yPos){
+        for (Cell cells:Grid){
+            if (xPos == cells.GetGridX()){
+                if (yPos == cells.GetGridY()){
+                    return cells;
+                }
+            }
+        }
+        return null;
+    }
 }
 
