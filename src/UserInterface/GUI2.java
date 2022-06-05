@@ -169,7 +169,7 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
 
                 if (RandomButton.isSelected()) {
                     if (BuildAroundLogo.isSelected()){
-                        ImageGUI.Instance().AutoLogo(pnlMaze,Width,Height);
+                        ImageGUI.Instance().AutoLogo(pnlMaze,Width,Height,true);
 
                     } else {
                         MazeGenerator.Instance().GenerateMaze(MazeManager.Instance().CreateMaze(Width, Height));
@@ -180,8 +180,7 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
 
                 else {
                     if (BuildAroundLogo.isSelected()){
-                        ImageGUI.Instance().ImageSelector();
-                        pnlMaze.GridSet();
+                        ImageGUI.Instance().AutoLogo(pnlMaze,Width,Height,false);
                     }
                     else {
                         MazeGenerator.Instance().GenerateMaze(MazeManager.Instance().CreateMaze(Width, Height));

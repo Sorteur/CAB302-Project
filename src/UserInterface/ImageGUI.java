@@ -301,7 +301,7 @@ public class ImageGUI {
         imgMenu.add(SelectionConfirmation,c);
     }
 
-    public void AutoLogo (MazePanel pnlMaze,int MazeHeight,int MazeLength){
+    public void AutoLogo (MazePanel pnlMaze,int MazeHeight,int MazeLength,boolean Random){
         Font Large  = new Font("Larger",Font.PLAIN, 24 );
 
         JFrame AutoMenu = new JFrame();
@@ -384,8 +384,9 @@ public class ImageGUI {
                 }
             }
 
-            MazeGenerator.Instance().GenerateMaze(maze);
-
+            if (Random == true) {
+                MazeGenerator.Instance().GenerateMaze(maze);
+            }
             MazeManager.Instance().GetMaze().ConstructLogo(Logo.getScaledInstance(Width,Height,Image.SCALE_SMOOTH), pnlMaze.PosX+(StartCell.GetGridX()* pnlMaze.sizeScale)+1, pnlMaze.PosY+(StartCell.GetGridY()* pnlMaze.sizeScale)+1);
             pnlMaze.add(new LogoPlacer());
 
