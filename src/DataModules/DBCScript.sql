@@ -15,7 +15,7 @@ flush privileges;
 /* ----------------------------------------------------------------- */
 
 /*                                                                   */
-/* LOOKUP TABLES                                                  */
+/* LOOKUP TABLES                                                     */
 /*                                                                   */
 
 create table WallType (
@@ -116,7 +116,7 @@ alter table Cell
 create table MazeImageResource (
 	Id int default 0 not null,
     MazeId int not null,
-    ImageType int not null,
+    ImageTypeId int not null,
     Image blob
 );
 
@@ -134,8 +134,8 @@ alter table MazeImageResource
   references Maze(Id);
 
 alter table MazeImageResource
-  add constraint FK_ImageType_MIR
-  foreign key (ImageType)
+  add constraint FK_ImageTypeId_MIR
+  foreign key (ImageTypeId)
   references ImageType(Id);
 
 /* ----------------------------------------------------------------- */

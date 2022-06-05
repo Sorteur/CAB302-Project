@@ -21,7 +21,6 @@ public class MazeManager {
     public MazePanel pnlMaze = new MazePanel();
 
 
-
     public Maze GetMaze() {
         return Maze;
     }
@@ -37,6 +36,7 @@ public class MazeManager {
         Maze = new Maze(Length, Height);
         return Maze;
     }
+
 
     public void LoadMazeFromId(int id)
     {

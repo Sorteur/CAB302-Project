@@ -160,7 +160,7 @@ public class ImageGUI {
                 Cell Origin = MazeManager.Instance().GetMaze().Search(X,Y);
                 Image ScaledImage = Logo.getScaledInstance(Width-2,Height-2,Image.SCALE_SMOOTH);
                 MazeManager.Instance().GetMaze().ConstructLogo(ScaledImage,Origin.GetPosX() + 1,Origin.GetPosY() + 1);
-
+                MazeManager.Instance().GetMaze().getLogo().SetGridScale(X,Y);
                 //Make sure Logo is un-reachable
                 for (Cell cell:MazeManager.Instance().GetMaze().getGrid()) {
                     if (cell.GetGridX() >= X & cell.GetGridX() < X+Integer.parseInt(WidthBox.getText())){
@@ -275,13 +275,15 @@ public class ImageGUI {
         SelectionConfirmation.addActionListener(a -> {
             try {
                 Maze maze = MazeManager.Instance().GetMaze();
-                int Width = (pnlMaze.sizeScale*Integer.parseInt(WidthBox.getText()))-2;
-                int Height = (pnlMaze.sizeScale*Integer.parseInt(HeightBox.getText()))-2;
-
+                int X = Integer.parseInt(WidthBox.getText());
+                int Y = Integer.parseInt(HeightBox.getText());
+                int Width = (pnlMaze.sizeScale*X)-2;
+                int Height = (pnlMaze.sizeScale*Y)-2;
 
                 maze.ConstructExitImage(EndImage.getScaledInstance(Width,Height,Image.SCALE_SMOOTH), maze.getLength()-Integer.parseInt(WidthBox.getText()),maze.getHeight()-Integer.parseInt(HeightBox.getText()));
+                maze.getExitImage().SetGridScale(X,Y);
                 maze.ConstructEntryImage(StartImage.getScaledInstance(Width,Height,Image.SCALE_SMOOTH), 0, 0);
-
+                maze.getEntryImage().SetGridScale(X,Y);
             //Used to make sure only one SrtEndPlacer is made, update instead if it exists
                 if (j == 0){
                     pnlMaze.add(new SrtEndPlacer());
