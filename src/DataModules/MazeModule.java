@@ -15,7 +15,86 @@ public class MazeModule extends DataModule{
         super(connection);
     }
 
+    public Maze GetMazeFromID(int id) throws SQLException{
+        StartTransaction();
+        try{
+            return DoGetMazeFromId(id);
+        }
+        finally {
+            CommitTransaction();
+        }
+    }
 
+    private Maze DoGetMazeFromId(int id) throws SQLException {
+        Maze maze = DoGetPartialMazeFromId(id);
+        maze = PopulateMazeCellsFromMazeId(id, maze);
+        return maze;
+    }
+
+    private Maze PopulateMazeCellsFromMazeId(int mazeid, Maze maze) throws SQLException {
+        String sql = "SELECT Id, ArrayListPos, XPosistion, YPosistion, NorthWallTypeId, EastWallTypeId, SouthWallTypeId, WestWallTypeId " + "FROM Cell " + "WHERE MazeId = ?;";
+
+        PreparedStatement statement = PrepareStatement(sql);
+
+        statement.setInt(1, mazeid);
+
+        ResultSet resultSet= statement.executeQuery();
+        try {
+            while (resultSet.next()) {
+
+                int Id = resultSet.getInt(1);
+                int Index = resultSet.getInt(2);
+                int XPosistion = resultSet.getInt(3);
+                int YPosisiton = resultSet.getInt(4);
+                WallType NorthWallTypeId = WallType.Tools.IdToWallType(resultSet.getInt(5));
+                WallType EastWallTypeId = WallType.Tools.IdToWallType(resultSet.getInt(6));
+                WallType SouthWallTypeId = WallType.Tools.IdToWallType(resultSet.getInt(7));
+                WallType WestWallTypeId = WallType.Tools.IdToWallType(resultSet.getInt(8));
+
+                Cell newCell = new Cell(Index, XPosistion, YPosisiton, NorthWallTypeId, SouthWallTypeId, WestWallTypeId, EastWallTypeId);
+
+                newCell.MazeId = mazeid;
+                newCell.Id = Id;
+
+                maze.SetCell(Index,newCell);
+
+            }
+            return maze;
+        }
+        finally {
+            statement.close();
+        }
+    }
+
+    private Maze DoGetPartialMazeFromId (int id) throws SQLException {
+
+        String sql = "SELECT Id, description, XDimension, YDimension " + "FROM Maze " + "WHERE Deleted = false and Id = ?";
+
+        PreparedStatement statement = PrepareStatement(sql);
+
+        statement.setInt(1, id);
+
+        ResultSet resultSet = statement.executeQuery();
+        int Id = id;
+        String description="Error";
+        int xdemension;
+        int ydemension;
+
+
+        try {
+            if (resultSet.next())
+                description = resultSet.getString(2);
+                xdemension = resultSet.getInt(3);
+                ydemension = resultSet.getInt(4);
+                Maze maze = new Maze(xdemension,ydemension);
+                maze.SetDescription(description);
+                maze.SetId(id);
+                return maze;
+        }
+        finally {
+            resultSet.close();
+        }
+    }
 
     public Hashtable GetMazeDescriptions() throws SQLException{
         StartTransaction();
@@ -40,7 +119,7 @@ public class MazeModule extends DataModule{
     {
         Hashtable result = new Hashtable<Integer, String>();
 
-        String sql = "SELECT Id, description " + "FROM Maze";
+        String sql = "SELECT Id, description " + "FROM Maze " + "WHERE Deleted = false;";
 
         PreparedStatement statement = PrepareStatement(sql);
 
@@ -58,18 +137,6 @@ public class MazeModule extends DataModule{
             statement.close();
         }
     }
-
-
-
-    private int DoGetMazeIDFromDescription(String description) {
-        return 0;
-    }
-
-    public Maze DoGetMazeFromID (int ID) {
-        return null; //temp
-    }
-
-
 
     public void SaveMaze (Maze maze) throws SQLException {
 
@@ -123,8 +190,8 @@ public class MazeModule extends DataModule{
         int id = GetNextSequence("CellId");
         int mazeid = cell.MazeId;
         int arraylistpos = cell.Index;
-        int xposistion = cell.GetPosX();
-        int yposistion = cell.GetPosY();
+        int xposistion = cell.GetGridX();
+        int yposistion = cell.GetGridY();
         int NorthernWallTypeId = WallType.Tools.ToId(cell.IsNorthernwall());
         int EasternWallTypeId = WallType.Tools.ToId(cell.IsEasternwall());
         int SouthernWallTypeId = WallType.Tools.ToId(cell.IsSouthernwall());

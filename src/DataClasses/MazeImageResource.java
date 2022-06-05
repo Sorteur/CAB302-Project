@@ -1,19 +1,46 @@
 package DataClasses;
+
 import java.awt.*;
 
 public class MazeImageResource
 {
-    private final Image Image;
-    private final int PositionX;
-    private final int PositionY;
+    private Image Image;
+    private int PositionX;
+    private int PositionY;
 
-    public MazeImageResource(Image image, int positionX, int positionY){
+    MazeImageResource(int positionX, int positionY){
+        PositionX = positionX;
+        PositionY = positionY;
+    }
+
+    MazeImageResource(Image image, int positionX, int positionY){
         Image = image;
         PositionX = positionX;
         PositionY = positionY;
     }
 
-    public Image GetImage(){ return Image; }
-    public int GetPositionX(){ return PositionX; }
-    public int GetPositionY() { return PositionY; }
+
+    public void SetPosition(int positionX, int positionY)
+    {
+        PositionX = positionX;
+        PositionY = positionY;
+    }
+
+    public int GetPositionX(){
+        return PositionX;
+    }
+
+    public int GetPositionY(){
+        return PositionY;
+    }
+
+    public void SetImage(Image image)
+    {
+        Image = image;
+    }
+
+    public Image GetImage(){
+        return Image;
+    }
+
 }

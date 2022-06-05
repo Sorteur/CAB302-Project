@@ -1,7 +1,7 @@
 package DataClasses;
 
 public class Cell {
-    public Cell(int index, int gridx, int gridy, WallType northernwall, WallType southernwall, WallType westernwall, WallType easternwall, boolean start, boolean finish) {
+    public Cell(int index, int gridx, int gridy, WallType northernwall, WallType southernwall, WallType westernwall, WallType easternwall) {
         Index = index;
         GridX = gridx;
         GridY = gridy;
@@ -10,17 +10,14 @@ public class Cell {
         Southernwall = southernwall;
         Westernwall = westernwall;
         Easternwall = easternwall;
-        Start = start;
-        Finish = finish;
+
         Vistited = false;
     }
 
-    private int Id;
-
+    public int Id;
     public int MazeId;
-
-
     public int Index;
+
     int GridX;
     int GridY;
 
@@ -31,10 +28,6 @@ public class Cell {
     private WallType Southernwall;
     private WallType Westernwall;
     private WallType Easternwall;
-
-    private boolean Start;
-    private boolean Finish;
-
     private boolean Vistited;
 
     public boolean IsVistited()
@@ -114,26 +107,6 @@ public class Cell {
     public void SetEasternwall(WallType easternwall)
     {
         Easternwall = easternwall;
-    }
-
-    public boolean IsStart()
-    {
-        return Start;
-    }
-
-    public void SetStart(boolean start)
-    {
-        Start = start;
-    }
-
-    public boolean IsFinish()
-    {
-        return Finish;
-    }
-
-    public void SetFinish(boolean finish)
-    {
-        Finish = finish;
     }
 
     public WallType SwitchWallType(WallType wallType)
