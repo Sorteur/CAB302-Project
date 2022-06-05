@@ -14,8 +14,6 @@ flush privileges;
 /*                              TABLES                               */
 /* ----------------------------------------------------------------- */
 
-
-
 /*                                                                   */
 /* LOOKUP TABLES                                                  */
 /*                                                                   */
@@ -31,6 +29,18 @@ alter table WallType
 insert into WallType (Id, Description) values (1, "Empty");
 insert into WallType (Id, Description) values (2, "Wall");
 
+create table ImageType (
+	Id int default 0 not null,
+    Description varchar(40) default "" not null);
+    
+alter table ImageType
+	add constraint
+    primary key (Id);
+
+insert into ImageType (Id, Description) values (1, "Empty");
+insert into ImageType (Id, Description) values (2, "Logo");
+insert into ImageType (Id, Description) values (3, "EntryImage");
+insert into ImageType (Id, Description) values (4, "ExitImage");
 
 /*                                                                   */
 /* STATIC TABLES                                                     */
@@ -58,7 +68,6 @@ create sequence MazeId
   start with 1
   increment by 1;
 
-
 create table Cell (
   Id int default 0 not null,
   MazeId int not null,
@@ -82,12 +91,52 @@ alter table Cell
   add constraint FK_MazeId_C
   foreign key (MazeId)
   references Maze(Id);
-/* TODO WallTypeId FK
+
 alter table Cell
-  add constraint FK_MazeId_C
+  add constraint FK_NorthWallTypeId_C
+  foreign key (NorthWallTypeId)
+  references WallType(Id);
+
+alter table Cell
+  add constraint FK_EastWallTypeId_C
+  foreign key (EastWallTypeId)
+  references WallType(Id);
+
+alter table Cell
+  add constraint FK_SouthWallTypeId_C
+  foreign key (SouthWallTypeId)
+  references WallType(Id);
+
+alter table Cell
+  add constraint FK_WestWallTypeId_C
+  foreign key (WestWallTypeId)
+  references WallType(Id);
+
+
+create table MazeImageResource (
+	Id int default 0 not null,
+    MazeId int not null,
+    ImageType int not null,
+    Image blob
+);
+
+alter table MazeImageResource
+add constraint
+primary key(Id);
+
+create sequence MazeImageResourceId
+	start with 1
+    increment by 1;
+
+alter table MazeImageResource
+  add constraint FK_MazeId_MIR
   foreign key (MazeId)
   references Maze(Id);
-*/
+
+alter table MazeImageResource
+  add constraint FK_ImageType_MIR
+  foreign key (ImageType)
+  references ImageType(Id);
 
 /* ----------------------------------------------------------------- */
 /*                            TRIGGERS                               */
@@ -122,5 +171,21 @@ end~
 ~
 
 delimiter ;
+
+delimiter ~
+
+create trigger BI_Id_MIR before insert on MazeImageResource for each row
+begin
+
+    if ((new.Id is null) or (new.Id = 0)) then
+	  set new.Id = nextval(MazeImageResourceId);
+	end if;
+
+end~
+
+~
+
+delimiter ;
+
 
 commit work;
