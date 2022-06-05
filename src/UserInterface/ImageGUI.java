@@ -368,15 +368,15 @@ public class ImageGUI {
 
 
 
-            Maze maze = MazeManager.Instance().CreateMaze(MazeLength, MazeHeight);
+            Maze maze = MazeManager.Instance().CreateMaze(MazeHeight, MazeLength);
             pnlMaze.GridSet();
+            int BoxX = Integer.parseInt(WidthBox.getText());
+            int BoxY = Integer.parseInt(HeightBox.getText());
+            int Width = (pnlMaze.sizeScale*BoxX)-2;
+            int Height = (pnlMaze.sizeScale*BoxY)-2;
 
-            int Width = (pnlMaze.sizeScale*Integer.parseInt(WidthBox.getText()))-2;
-            int Height = (pnlMaze.sizeScale*Integer.parseInt(HeightBox.getText()))-2;
 
-
-            Cell StartCell = MazeGenerator.Instance().randomCell(maze);
-
+            Cell StartCell = MazeGenerator.Instance().RandomCellLogo(maze,BoxX,BoxY);
 
             for (Cell cell:MazeManager.Instance().GetMaze().getGrid()) {
                 if (cell.GetGridX() >= StartCell.GetGridX() & cell.GetGridX() < StartCell.GetGridX()+Integer.parseInt(WidthBox.getText())){

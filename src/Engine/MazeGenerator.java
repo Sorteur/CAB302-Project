@@ -57,6 +57,21 @@ public class MazeGenerator {
 
     }
 
+    public Cell RandomCellLogo(Maze themaze, int xrange, int yrange) {
+        //assuming xrange is 1/3 of the width
+        //assuming yrange is 1/2 of the height
+
+        Cell cell = randomCell(themaze);
+
+        boolean viable = themaze.ViableImageLogo(xrange, yrange, cell);
+
+        if(viable)
+            return cell;
+
+        cell = RandomCellLogo(themaze, xrange, yrange);
+        return cell;
+    }
+
 
     public Cell randomCell (Maze themaze)
     {
@@ -81,6 +96,8 @@ public class MazeGenerator {
             checkorder[index] = tmp;
         }
         System.out.println("Shuffled Array" + Arrays.toString(checkorder));
+        int thrid = 1/2;
+        System.out.println(thrid);
 
 
         for(int side: checkorder)
