@@ -16,7 +16,6 @@ public class LoadMazeDialog {
         return instance;
     }
     LoadMazeDialog() {
-
     }
 
     public void GUI(){
