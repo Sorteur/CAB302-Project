@@ -167,5 +167,34 @@ public class Maze {
         }
         return null;
     }
+
+    public boolean ViableImageLogo(int xrange, int yrange, Cell cell) {
+        int InvalidStartingCellCoordinateX = (Length/3)-1; //Less then this whilst being less then the Y range means your in a possible starting cell
+        int InvalidStartingCellCoordinateY = (Height/2)-1;
+
+        int InvalidExitCellCoordinateX = InvalidStartingCellCoordinateX*2;//Greater then this and being greater then the Y range means your in a possible exit cell
+        int InvalidExitCellCoordinateY = InvalidStartingCellCoordinateY;
+
+        int currentcellx = cell.GetGridX();//All-ways in the maze it exits therefor check is it in a valid area
+        int currentcelly = cell.GetGridY();
+
+        if (currentcellx <= InvalidStartingCellCoordinateX & currentcelly <= InvalidStartingCellCoordinateY)
+            return false;
+        if(currentcellx > InvalidExitCellCoordinateX & currentcelly > InvalidExitCellCoordinateY)
+            return false;
+
+
+        int openingcellx = cell.GetGridX()+xrange;//Must check if this cell exists in the maze and is in invalid cell area
+        int openingcelly = cell.GetGridY()+yrange;
+
+        if(openingcellx > Length || openingcelly > Height) // does it exist
+            return false;
+        if (openingcellx <= InvalidStartingCellCoordinateX & currentcelly <= InvalidStartingCellCoordinateY)// does it touch a potental image
+            return false;
+        if(openingcellx > InvalidExitCellCoordinateX & currentcelly > InvalidExitCellCoordinateY)
+            return false;
+        
+        return true;
+    }
 }
 
