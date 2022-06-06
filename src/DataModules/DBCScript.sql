@@ -1,13 +1,11 @@
 /*
 create user MazeUser@localhost identified by 'M@zeUs3r360';
-create user MazeAdmin@localhost identified by 'M@ze@dm1n720';
 */
 /* Initialize Database */
 create database CAB302Maze;
 use CAB302Maze;
 
 grant select,update,insert,delete on CAB302Maze.* to MazeUser@localhost;
-grant all privileges on CAB302Maze to MazeAdmin@localhost;
 flush privileges;
 
 /* ----------------------------------------------------------------- */
@@ -37,10 +35,12 @@ alter table ImageType
 	add constraint
     primary key (Id);
 
-insert into ImageType (Id, Description) values (1, "Empty");
+insert into ImageType (Id, Description) values (1, "LogoEmpty");
 insert into ImageType (Id, Description) values (2, "Logo");
-insert into ImageType (Id, Description) values (3, "EntryImage");
-insert into ImageType (Id, Description) values (4, "ExitImage");
+insert into ImageType (Id, Description) values (3, "EntryImageEmpty");
+insert into ImageType (Id, Description) values (4, "EntryImage");
+insert into ImageType (Id, Description) values (5, "ExitImageEmpty");
+insert into ImageType (Id, Description) values (6, "ExitImage");
 
 /*                                                                   */
 /* STATIC TABLES                                                     */
@@ -113,11 +113,15 @@ alter table Cell
   references WallType(Id);
 
 
-create table MazeImageResource (
-	Id int default 0 not null,
-    MazeId int not null,
-    ImageTypeId int not null,
-    Image blob
+CREATE TABLE MazeImageResource (
+    Id INT DEFAULT 0 NOT NULL,
+    MazeId INT NOT NULL,
+    ImageTypeId INT NOT NULL,
+    Image MEDIUMBLOB,
+    PositionX INT,
+    PositionY INT,
+    GridScaleX INT,
+    GridScaleY INT
 );
 
 alter table MazeImageResource
