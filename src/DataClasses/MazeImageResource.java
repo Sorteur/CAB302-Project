@@ -116,9 +116,9 @@ public class MazeImageResource
         // with help of this as reference https://stackoverflow.com/questions/22923518/how-can-i-convert-a-bufferedimage-to-an-image
         // and this https://stackoverflow.com/questions/50427495/java-blob-to-image-file
 
-        BufferedImage image = null;
+        Image image = null;
         try {
-            InputStream inputStream = blob.getBinaryStream(0, blob.length());
+            InputStream inputStream = blob.getBinaryStream(1, blob.length());
             image = ImageIO.read(inputStream);
 
         }catch (IOException ioException){

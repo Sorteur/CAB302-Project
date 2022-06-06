@@ -16,8 +16,8 @@ public static class Tools
     {
         switch (Id)
         {
-            case 0: return Empty;
-            case 1:  return Wall;
+            case 1: return Empty;
+            case 2:  return Wall;
             default: return Wall;
         }
     }
@@ -25,8 +25,8 @@ public static class Tools
     {
         switch (wallType)
         {
-            case Empty: return 0;
-            case Wall:  return 1;
+            case Empty: return 1;
+            case Wall:  return 2;
             default: return 0;
         }
     }

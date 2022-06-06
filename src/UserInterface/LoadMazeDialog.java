@@ -67,17 +67,21 @@ public class LoadMazeDialog {
         Confirm.addActionListener(a -> {
             int id = 0;
 
-            id = Descriptions.getSelectedColumn();
+            id = Descriptions.getSelectedRow();
 
             try{
-                id = Integer.parseInt(data[0][id]);
+                id = Integer.parseInt(data[id][0]);
             }
             catch (NumberFormatException ex){
                 ex.printStackTrace();
             }
 
             MazeManager.Instance().LoadMazeFromId(id);
+            if(MazeManager.Instance().GetMaze()!=null);
+                MazeManager.Instance().pnlMaze.add(new SrtEndPlacer());
             MazeManager.Instance().pnlMaze.GridSet();
+            MazeManager.Instance().pnlMaze.updateUI();
+            //MazeManager.Instance().pnlMaze.
             PopOut.dispose();
         });
         PopOut.add(Confirm,c);

@@ -14,6 +14,7 @@ public class Maze {
     private MazeImageResource ExitImage;
     private MazeImageResource EntryImage;
     private boolean ImgSrtEnd;
+    private boolean Solved = false;
     private final ArrayList<Cell> Grid = new ArrayList<>();
 
     public Maze(int length, int height) {
@@ -80,6 +81,9 @@ public class Maze {
     public void setImgSrtEnd(boolean imgSrtEnd) {
         ImgSrtEnd = imgSrtEnd;
     }
+
+    public void setSolved(boolean solved) {Solved = solved; }
+    public boolean GetSolved() {return Solved;}
 
     public void ConstructEntryImage(Image image, int positionX, int posistionY)
     {
@@ -152,6 +156,7 @@ public class Maze {
 
         //return !getCell(southcellindex).isVistited();
     }
+
     public Cell checkWestCell(int index)
     {
         int westcellindex = index - Height;
@@ -161,6 +166,61 @@ public class Maze {
         return getCell(westcellindex);
         //return !getCell(westcellindex).isVistited();
     }
+
+
+    public Cell PathFindNorthCell(int index)
+    {
+        if (index % Height == 0) return null;
+
+
+        if(getCell(index).IsNorthernwall().equals(WallType.Wall))
+            return null;
+
+
+        int northcellindex = index - 1 ;
+
+        return getCell(northcellindex);
+
+    }
+    public Cell PathFindEastCell(int index)
+    {
+        int eastcellindex = index + Height;
+
+        if(getCell(index).IsEasternwall().equals(WallType.Wall))
+            return null;
+
+        if(eastcellindex >= (Length*Height)) return null;
+
+        return getCell(eastcellindex);
+
+        //return !getCell(eastcellindex).isVistited();
+    }
+    public Cell PathFindSouthCell(int index)
+    {
+        if (index % Height == Height - 1) return null;
+
+        if(getCell(index).IsSouthernwall().equals(WallType.Wall))
+            return null;
+
+        int southcellindex = index + 1 ;
+
+        return getCell(southcellindex);
+
+    }
+
+    public Cell PathFindWestCell(int index)
+    {
+        int westcellindex = index - Height;
+
+        if(getCell(index).IsWesternwall().equals(WallType.Wall))
+            return null;
+
+        if(westcellindex < 0) return null;
+
+
+        return getCell(westcellindex);
+    }
+
 
     public Cell Search(int xPos,int yPos){
         for (Cell cells:Grid){
@@ -211,6 +271,18 @@ public class Maze {
             return false;
         
         return true;
+    }
+
+    public WallType SwitchWallType(WallType wallType)
+    {
+        if (wallType == wallType.Wall)
+            return wallType.Empty;
+        if(wallType == wallType.Empty)
+            return wallType.Wall;
+
+        Solved = false;
+
+        return null;// shouldn't even get here...
     }
 }
 
