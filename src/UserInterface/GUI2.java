@@ -163,35 +163,34 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
             try {
                 int Width = Integer.parseInt(WidthBox.getText());
                 int Height = Integer.parseInt(HeightBox.getText());
-
-
-
-
                 if (RandomButton.isSelected()) {
                     if (BuildAroundLogo.isSelected()){
-                        ImageGUI.Instance().AutoLogo(pnlMaze,Width,Height,true);
-
+                        ImageGUI.Instance().AutoLogo(pnlMaze,Width,Height,true,ImageStartEnd.isSelected());
                     } else {
                         MazeGenerator.Instance().GenerateMaze(MazeManager.Instance().CreateMaze(Width, Height));
+
+                        if (ImageStartEnd.isSelected()){
+                            MazeManager.Instance().GetMaze().setImgSrtEnd(true);
+                            ImageGUI.Instance().ImgSrtEnd(pnlMaze);
+                        }
                         pnlMaze.GridSet();
                     }
                 }
-
-
                 else {
                     if (BuildAroundLogo.isSelected()){
-                        ImageGUI.Instance().AutoLogo(pnlMaze,Width,Height,false);
-                    }
-                    else {
-                        MazeGenerator.Instance().GenerateMaze(MazeManager.Instance().CreateMaze(Width, Height));
+                        ImageGUI.Instance().AutoLogo(pnlMaze,Width,Height,false, ImageStartEnd.isSelected());
+
+                    }else {
+                        MazeManager.Instance().CreateMaze(Width, Height);
+
+                        if (ImageStartEnd.isSelected()){
+                            MazeManager.Instance().GetMaze().setImgSrtEnd(true);
+                            ImageGUI.Instance().ImgSrtEnd(pnlMaze);
+                        }
                         pnlMaze.GridSet();
                     }
                 }
 
-                if (ImageStartEnd.isSelected()){
-                    MazeManager.Instance().GetMaze().setImgSrtEnd(true);
-                    ImageGUI.Instance().ImgSrtEnd(pnlMaze);
-                }
                 PopOut.dispose();
             } catch(NumberFormatException e) {
                 JOptionPane.showMessageDialog(PopOut,"Dimensions of maze must be whole numbers.","Input error",JOptionPane.ERROR_MESSAGE);
