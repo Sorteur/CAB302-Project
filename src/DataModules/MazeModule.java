@@ -1,15 +1,11 @@
 package DataModules;
 
-import DataClasses.Cell;
-import DataClasses.Maze;
-import DataClasses.WallType;
+import DataClasses.*;
 
 import java.awt.*;
-import java.sql.Blob;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Hashtable;
 
 public class MazeModule extends DataModule{
@@ -30,7 +26,55 @@ public class MazeModule extends DataModule{
     private Maze DoGetMazeFromId(int id) throws SQLException {
         Maze maze = DoGetPartialMazeFromId(id);
         maze = PopulateMazeCellsFromMazeId(id, maze);
+        maze = PopulateMazeImages(id, maze);
         return maze;
+    }
+    private Maze PopulateMazeImages(int mazeid ,Maze maze) throws SQLException {
+        String sql = "SELECT Id, ImageTypeId, Image, PositionX, PositionY, GridScaleX, GridScaleY " + "FROM MazeImageResource " + "WHERE MazeId = ?;";
+
+        PreparedStatement statement = PrepareStatement(sql);
+
+        statement.setInt(1, mazeid);
+
+        ResultSet resultSet= statement.executeQuery();
+        try {
+            while (resultSet.next()) {
+
+                int id = resultSet.getInt(1);
+                int imageTypeId = resultSet.getInt(2);
+                Image image = MazeImageResource.GetBlobAsImage(resultSet.getBlob(3));
+                int posistionX = resultSet.getInt(4);
+                int posistionY= resultSet.getInt(5);
+                int gridScaleX= resultSet.getInt(6);
+                int gridScaleY= resultSet.getInt(7);
+
+                switch (imageTypeId)
+                {   //Must set empty logos an id to let a future update know where to put a logo
+                    //UI needs to check if a MazeImage all ready exists if it does it should set the image and position instead of constructing it
+                    case 2:  {
+                        //Logo
+
+                        maze.SetLogo(new MazeImageResource(id, image, posistionX, posistionY, gridScaleX, gridScaleY));
+                    }
+                    case 4: {
+                        //EntryImage
+
+                        maze.SetEntryImage(new MazeImageResource(id, image, posistionX, posistionY, gridScaleX, gridScaleY));
+                    }
+                    case 6: {
+                        //ExitImage
+
+                        maze.SetExitImage(new MazeImageResource(id, image, posistionX, posistionY, gridScaleX, gridScaleY));
+
+                    }
+                }
+
+            }
+            return maze;
+        }
+        finally {
+            statement.close();
+        }
     }
 
     private Maze PopulateMazeCellsFromMazeId(int mazeid, Maze maze) throws SQLException {
@@ -157,14 +201,26 @@ public class MazeModule extends DataModule{
 
     private void DoSaveMaze(Maze maze) throws SQLException
     {
-        InsertMaze(maze);
+        if(maze.GetId() == 0){
+            InsertMaze(maze);
 
-        for (Cell cell : maze.getGrid())
-        {
-            InsertCell(cell);
+            for (Cell cell : maze.getGrid())
+            {
+                InsertCell(cell);
+            }
+
+            InsertImages(maze);
         }
+        else{
+            UpdateMaze(maze);
 
-        InsertImages(maze);
+            for (Cell cell : maze.getGrid())
+            {
+                UpdateCell(cell);
+            }
+
+            UpdateImages(maze);
+        }
 
     }
 
@@ -233,27 +289,7 @@ public class MazeModule extends DataModule{
 
         PreparedStatement statement;
 
-        if(maze.getLogo()== null)
-        {
-            sql = "INSERT INTO MazeImageResource(Id, MazeId, ImageTypeId) " + "VALUES (?, ?, ?)";
-
-            id = GetNextSequence("MazeImageResourceId");
-            imagetypeid = 1;
-
-            statement = PrepareStatement(sql);
-
-            statement.setInt(1, id);
-            statement.setInt(2, mazeId);
-            statement.setInt(3, imagetypeid);
-
-            try{
-                statement.executeUpdate();
-            }
-            finally {
-                statement.close();
-            }
-
-        }else
+       if(maze.getLogo()!=null)
         {
             sql = "INSERT INTO MazeImageResource(Id, MazeId, ImageTypeId, Image, PositionX, PositionY, GridScaleX, GridScaleY) " + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
@@ -283,28 +319,7 @@ public class MazeModule extends DataModule{
                 statement.close();
             }
         }
-
-        if(maze.getEntryImage()== null)
-        {
-            sql = "INSERT INTO MazeImageResource(Id, MazeId, ImageTypeId) " + "VALUES (?, ?, ?)";
-
-            id = GetNextSequence("MazeImageResourceId");
-            imagetypeid = 3;
-
-            statement = PrepareStatement(sql);
-
-            statement.setInt(1, id);
-            statement.setInt(2, mazeId);
-            statement.setInt(3, imagetypeid);
-
-            try{
-                statement.executeUpdate();
-            }
-            finally {
-                statement.close();
-            }
-
-        }else {
+        if(maze.getEntryImage()!=null) {
             sql = "INSERT INTO MazeImageResource(Id, MazeId, ImageTypeId, Image, PositionX, PositionY, GridScaleX, GridScaleY) " + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
             id = GetNextSequence("MazeImageResourceId");
@@ -332,28 +347,7 @@ public class MazeModule extends DataModule{
                 statement.close();
             }
         }
-
-        if(maze.getExitImage()== null)
-        {
-            sql = "INSERT INTO MazeImageResource(Id, MazeId, ImageTypeId) " + "VALUES (?, ?, ?)";
-
-            id = GetNextSequence("MazeImageResourceId");
-            imagetypeid = 5;
-
-            statement = PrepareStatement(sql);
-
-            statement.setInt(1, id);
-            statement.setInt(2, mazeId);
-            statement.setInt(3, imagetypeid);
-
-            try{
-                statement.executeUpdate();
-            }
-            finally {
-                statement.close();
-            }
-
-        }else
+        if(maze.getExitImage()!=null)
         {
             sql = "INSERT INTO MazeImageResource(Id, MazeId, ImageTypeId, Image, PositionX, PositionY, GridScaleX, GridScaleY) " + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
@@ -386,8 +380,177 @@ public class MazeModule extends DataModule{
     }
 
 
-    public void UpdateMaze (Maze maze) {
+    private void UpdateMaze (Maze maze) throws SQLException {
+        int id = maze.GetId();
+        String description = maze.GetDescription();
 
+        String sql = "UPDATE Maze " + "SET description = ? " + "WHERE Id = ?";
+        PreparedStatement statement = PrepareStatement(sql);
+
+        statement.setString(1, description);
+        statement.setInt(2, id);
+
+        statement.executeUpdate();
+    }
+
+    private void UpdateCell (Cell cell) throws SQLException {
+
+        int id = cell.Id;
+        int mazeid = cell.MazeId;
+        int arraylistpos = cell.Index;
+        int xposistion = cell.GetGridX();
+        int yposistion = cell.GetGridY();
+        int NorthernWallTypeId = WallType.Tools.ToId(cell.IsNorthernwall());
+        int EasternWallTypeId = WallType.Tools.ToId(cell.IsEasternwall());
+        int SouthernWallTypeId = WallType.Tools.ToId(cell.IsSouthernwall());
+        int WesternWallTypeId = WallType.Tools.ToId(cell.IsWesternwall());
+
+        String sql = "UPDATE Cell " + "SET MazeId = ?, ArrayListPos = ?, XPosistion = ?, YPosistion = ?, NorthWallTypeId = ?, EastWallTypeId = ?, SouthWallTypeId = ?, WestWallTypeId = ?" + "WHERE Id = ?";
+        PreparedStatement statement = PrepareStatement(sql);
+
+        statement.setInt(1, mazeid);
+        statement.setInt(2,arraylistpos);
+        statement.setInt(3,xposistion);
+        statement.setInt(4,yposistion);
+        statement.setInt(5,NorthernWallTypeId);
+        statement.setInt(6,EasternWallTypeId);
+        statement.setInt(7,SouthernWallTypeId);
+        statement.setInt(8,WesternWallTypeId);
+        statement.setInt(9, id);
+
+        statement.executeUpdate();
+    }
+
+    private void UpdateImages(Maze maze) throws SQLException {
+        String sql;
+        int id;
+        int mazeId = maze.GetId();
+        int imagetypeid;
+        int positionx;
+        int positiony;
+        int gridscalex;
+        int gridscaley;
+
+        PreparedStatement statement;
+
+        if (maze.getLogo() != null) {
+            sql = "UPDATE MazeImageResource " + "SET ImageTypeId = ?, Image = ?, PositionX = ?, PositionY = ?, GridScaleX = ?, GridScaleY = ? " + "WHERE Id = ?";
+
+            if(maze.getLogo().GetId() == 0)
+            {
+                id = GetNextSequence("MazeImageResourceId");
+            }
+            else{
+                id = maze.getLogo().GetId();
+            }
+            imagetypeid = 2;
+
+            positionx = maze.getLogo().GetPositionX();
+            positiony = maze.getLogo().GetPositionY();
+            gridscalex = maze.getLogo().GetGridScaleX();
+            gridscaley = maze.getLogo().GetGridScaleY();
+
+            statement = PrepareStatement(sql);
+
+
+            statement.setInt(1, imagetypeid);
+            statement.setBlob(2, maze.getLogo().GetImageAsBlob());
+            statement.setInt(3, positionx);
+            statement.setInt(4, positiony);
+            statement.setInt(5, gridscalex);
+            statement.setInt(6, gridscaley);
+
+            statement.setInt(7, id);
+
+            try {
+                statement.executeUpdate();
+            } finally {
+                statement.close();
+            }
+
+        } else {
+
+        }
+
+        if (maze.getEntryImage() != null) {
+            sql = "UPDATE MazeImageResource " + "SET ImageTypeId = ?, Image = ?, PositionX = ?, PositionY = ?, GridScaleX = ?, GridScaleY = ? " + "WHERE Id = ?";
+
+            if(maze.getEntryImage().GetId() == 0)
+            {
+                id = GetNextSequence("MazeImageResourceId");
+            }
+            else{
+                id = maze.getEntryImage().GetId();
+            }
+
+            imagetypeid = 4;
+
+            positionx = maze.getEntryImage().GetPositionX();
+            positiony = maze.getEntryImage().GetPositionY();
+            gridscalex = maze.getEntryImage().GetGridScaleX();
+            gridscaley = maze.getEntryImage().GetGridScaleY();
+
+            statement = PrepareStatement(sql);
+
+
+            statement.setInt(1, imagetypeid);
+            statement.setBlob(2, maze.getEntryImage().GetImageAsBlob());
+            statement.setInt(3, positionx);
+            statement.setInt(4, positiony);
+            statement.setInt(5, gridscalex);
+            statement.setInt(6, gridscaley);
+
+            statement.setInt(7, id);
+
+            try {
+                statement.executeUpdate();
+            } finally {
+                statement.close();
+            }
+
+        } else {
+
+        }
+
+        if (maze.getExitImage() != null) {
+            sql = "UPDATE MazeImageResource " + "SET ImageTypeId = ?, Image = ?, PositionX = ?, PositionY = ?, GridScaleX = ?, GridScaleY = ? " + "WHERE Id = ?";
+
+            if(maze.getExitImage().GetId() == 0)
+            {
+                id = GetNextSequence("MazeImageResourceId");
+            }
+            else{
+                id = maze.getExitImage().GetId();
+            }
+
+            imagetypeid = 6;
+
+            positionx = maze.getExitImage().GetPositionX();
+            positiony = maze.getExitImage().GetPositionY();
+            gridscalex = maze.getExitImage().GetGridScaleX();
+            gridscaley = maze.getExitImage().GetGridScaleY();
+
+            statement = PrepareStatement(sql);
+
+
+            statement.setInt(1, imagetypeid);
+            statement.setBlob(2, maze.getExitImage().GetImageAsBlob());
+            statement.setInt(3, positionx);
+            statement.setInt(4, positiony);
+            statement.setInt(5, gridscalex);
+            statement.setInt(6, gridscaley);
+
+            statement.setInt(7, id);
+
+            try {
+                statement.executeUpdate();
+            } finally {
+                statement.close();
+            }
+
+        } else {
+
+        }
     }
 
     public void DeleteMaze (int ID) {

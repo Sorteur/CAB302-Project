@@ -174,7 +174,7 @@ public class ImageGUI {
                 }
 
                 //Used to make sure only one LogoPlacer is made, update instead if it exists
-                MazeManager.Instance().GetMaze().setLogo(ScaledImage);
+                MazeManager.Instance().GetMaze().setLogoImage(ScaledImage);
                 if (i == 0){
                     pnlMaze.add(new LogoPlacer(),BorderLayout.CENTER);
                     i++;

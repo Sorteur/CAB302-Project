@@ -1,23 +1,34 @@
 package DataClasses;
 
+import javax.imageio.IIOException;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Blob;
+import java.sql.SQLException;
 
 public class MazeImageResource
 {
     private Image Image;
+    private int Id = 0;
+    private int ImageTypeId;
     private int PositionX;
     private int PositionY;
     private int GridScaleX;
     private int GridScaleY;
 
-    MazeImageResource(int positionX, int positionY){
+
+    public MazeImageResource(int id, Image image, int positionX, int positionY, int gridScaleX, int gridScaleY){
+        Id = id;
+        Image = image;
         PositionX = positionX;
         PositionY = positionY;
+        GridScaleX = gridScaleX;
+        GridScaleY = gridScaleY;
     }
 
     MazeImageResource(Image image, int positionX, int positionY){
@@ -34,6 +45,13 @@ public class MazeImageResource
 
     public Image GetImage(){
         return Image;
+    }
+    public void SetId(int id){
+        Id = id;
+    }
+
+    public int GetId() {
+        return Id;
     }
 
     public void SetPosition(int positionX, int positionY)
@@ -92,6 +110,21 @@ public class MazeImageResource
         }
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(byteArrayOutputStream.toByteArray());
         return byteArrayInputStream;
+    }
+
+    public static Image GetBlobAsImage (Blob blob) throws SQLException {
+        // with help of this as reference https://stackoverflow.com/questions/22923518/how-can-i-convert-a-bufferedimage-to-an-image
+        // and this https://stackoverflow.com/questions/50427495/java-blob-to-image-file
+
+        BufferedImage image = null;
+        try {
+            InputStream inputStream = blob.getBinaryStream(0, blob.length());
+            image = ImageIO.read(inputStream);
+
+        }catch (IOException ioException){
+
+        }
+        return image;
     }
 
 }
