@@ -33,6 +33,11 @@ public class MazeManager {
     public Maze CreateMazeAutoLogo (int Length, int Height) {
 
 
+
+
+
+
+
         Maze = new Maze(Length, Height);
         return Maze;
     }

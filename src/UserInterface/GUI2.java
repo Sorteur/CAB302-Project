@@ -2,6 +2,8 @@ package UserInterface;
 
 import Engine.MazeGenerator;
 import Engine.MazeManager;
+import Engine.MazeSolver;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -71,6 +73,21 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
 
         JButton pnlSolveMazeButton = new JButton("Solve");
         pnlSolveMazeButton.setPreferredSize(lftBtnSize);
+        pnlAddLogoButton.addActionListener(e -> {
+            if (MazeManager.Instance().GetMaze() == null) {
+                JOptionPane.showMessageDialog(pnlLeft, "Must Create or Load in a Maze to Solve!", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            try {
+                MazeSolver.Instance().SolveMaze();
+                if(MazeManager.Instance().GetMaze().GetSolved());
+                {
+
+                }
+            }
+            catch (Exception exception){
+                JOptionPane.showMessageDialog(pnlLeft, "Must Create or Load in a Maze to Solve!", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        });
         pnlLeft.add(pnlSolveMazeButton);
 
     }

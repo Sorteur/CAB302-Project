@@ -65,6 +65,7 @@ public class MazeModule extends DataModule{
                         //ExitImage
 
                         maze.SetExitImage(new MazeImageResource(id, image, posistionX, posistionY, gridScaleX, gridScaleY));
+                        maze.setImgSrtEnd(true);
 
                     }
                 }
@@ -228,7 +229,7 @@ public class MazeModule extends DataModule{
     {
 
         int id = GetNextSequence("MazeId");
-        String description = "fake";
+        String description = maze.GetDescription();
         int length = maze.getLength();
         int height = maze.getHeight();
 
@@ -325,10 +326,10 @@ public class MazeModule extends DataModule{
             id = GetNextSequence("MazeImageResourceId");
             imagetypeid = 4;
 
-            positionx = maze.getLogo().GetPositionX();
-            positiony = maze.getLogo().GetPositionY();
-            gridscalex = maze.getLogo().GetGridScaleX();
-            gridscaley = maze.getLogo().GetGridScaleY();
+            positionx = maze.getEntryImage().GetPositionX();
+            positiony = maze.getEntryImage().GetPositionY();
+            gridscalex = maze.getEntryImage().GetGridScaleX();
+            gridscaley = maze.getEntryImage().GetGridScaleY();
 
             statement = PrepareStatement(sql);
 
@@ -354,10 +355,10 @@ public class MazeModule extends DataModule{
             id = GetNextSequence("MazeImageResourceId");
             imagetypeid = 6;
 
-            positionx =  maze.getLogo().GetPositionX();
-            positiony =  maze.getLogo().GetPositionY();
-            gridscalex =  maze.getLogo().GetGridScaleX();
-            gridscaley =  maze.getLogo().GetGridScaleY();
+            positionx =  maze.getExitImage().GetPositionX();
+            positiony =  maze.getExitImage().GetPositionY();
+            gridscalex =  maze.getExitImage().GetGridScaleX();
+            gridscaley =  maze.getExitImage().GetGridScaleY();
 
             statement = PrepareStatement(sql);
 
@@ -405,7 +406,7 @@ public class MazeModule extends DataModule{
         int SouthernWallTypeId = WallType.Tools.ToId(cell.IsSouthernwall());
         int WesternWallTypeId = WallType.Tools.ToId(cell.IsWesternwall());
 
-        String sql = "UPDATE Cell " + "SET MazeId = ?, ArrayListPos = ?, XPosistion = ?, YPosistion = ?, NorthWallTypeId = ?, EastWallTypeId = ?, SouthWallTypeId = ?, WestWallTypeId = ?" + "WHERE Id = ?";
+        String sql = "UPDATE Cell " + "SET MazeId = ?, ArrayListPos = ?, XPosistion = ?, YPosistion = ?, NorthWallTypeId = ?, EastWallTypeId = ?, SouthWallTypeId = ?, WestWallTypeId = ? " + "WHERE Id = ?";
         PreparedStatement statement = PrepareStatement(sql);
 
         statement.setInt(1, mazeid);

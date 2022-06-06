@@ -34,12 +34,6 @@ public class MazeSolver {
         Cell endcell = CurrentMaze.Search(CurrentMaze.getLength()-1, CurrentMaze.getHeight()-1); // Get the end of the Maze... when our current cell is the end cell we have found the end.
 
         DepthFirstSearch(currentcell, endcell);
-        if(!CurrentMaze.GetSolved())
-        {
-            Exception Exception = new Exception("Unsolvable Maze!");
-            CurrentMaze.setSolved(false);
-            throw Exception;
-        }
     }
 
 
@@ -48,7 +42,7 @@ public class MazeSolver {
         if(currentcell == endcell)
             CurrentMaze.setSolved(true);
 
-
+        currentcell.Searched=true;
 
         Cell unvisitedneighbor = null;
 
@@ -57,19 +51,17 @@ public class MazeSolver {
                 unvisitedneighbor = chooseViableNeihgbor(currentcell);
                 if (unvisitedneighbor == endcell) {
                     CurrentMaze.setSolved(true);
-                    endcell.Searched=true;
                     break;
                 }
                 if (!(unvisitedneighbor == null)) {
-                    unvisitedneighbor.Searched =true;
-                    unvisitedneighbor.PermaSearched=true;
                     DepthFirstSearch(unvisitedneighbor, endcell);
                 }
-            } while (unvisitedneighbor != null && !CurrentMaze.GetSolved());
+            } while (unvisitedneighbor != null);
 
-            if(unvisitedneighbor == null )
+            if(unvisitedneighbor == null)
             {
-                currentcell.Searched=false;
+                Exception Exception = new Exception("Unsolvable Maze!");
+                throw Exception;
             }
     }
     private Cell chooseViableNeihgbor (Cell currentcell) {
@@ -91,7 +83,7 @@ public class MazeSolver {
             {
                 viableneihgbor = CurrentMaze.PathFindNorthCell(currentcell.Index);
                 if (viableneihgbor != null){
-                    if(!viableneihgbor.PermaSearched) {
+                    if(!viableneihgbor.Searched) {
 
                         return viableneihgbor;
                     }
@@ -101,7 +93,7 @@ public class MazeSolver {
             {
                 viableneihgbor = CurrentMaze.PathFindEastCell(currentcell.Index);
                 if (viableneihgbor != null){
-                    if(!viableneihgbor.PermaSearched) {
+                    if(!viableneihgbor.Searched) {
 
                         return viableneihgbor;
                     }
@@ -110,7 +102,7 @@ public class MazeSolver {
             else if(checkorder[side] == 2) {
                 viableneihgbor = CurrentMaze.PathFindSouthCell(currentcell.Index);
                 if (viableneihgbor != null){
-                    if(!viableneihgbor.PermaSearched) {
+                    if(!viableneihgbor.Searched) {
 
                         return viableneihgbor;
                     }
@@ -120,7 +112,7 @@ public class MazeSolver {
             {
                 viableneihgbor = CurrentMaze.PathFindWestCell(currentcell.Index);
                 if (viableneihgbor != null){
-                    if(!viableneihgbor.PermaSearched){
+                    if(!viableneihgbor.Searched){
 
                         return viableneihgbor;
                     }
