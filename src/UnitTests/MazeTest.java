@@ -13,7 +13,7 @@ public class MazeTest {
     // Test 1: Construct maze Object
     @BeforeEach
     @Test
-    public void ConstructMaze(){
+    public void ConstructMaze() {
         TestMaze = new Maze(6, 4);
     }
 
@@ -46,11 +46,18 @@ public class MazeTest {
         assertEquals(2,searched.GetGridY());
     }
 
-    //Test 6: Test if search method returns null *and message* if search parameters are out of bounds
+    //Test 6: Test if search method returns null if search parameters are out of bounds
     @Test
     public void SearchFailTest(){
         assertNull(TestMaze.Search(10,10));
     }
+
+    //Test 7:
+    @Test
+    public void ViableLogoTest(){
+        assertEquals(true,TestMaze.ViableImageLogo(1,2,TestMaze.Search(2,3)));
+    }
+
 
 //TODO Add more unit tests of maze constructor, especially about failing to create maze
 
