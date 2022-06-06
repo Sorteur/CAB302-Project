@@ -60,6 +60,8 @@ public class SaveMazeDialog {
         Save.addActionListener(a -> {
             try {
                 String Description = MazeName.getText();
+                MazeManager.Instance().GetMaze().SetDescription(Description);
+                MazeManager.Instance().SaveMaze();
 
                 PopOut.dispose();
             } catch(NumberFormatException e) {
@@ -80,6 +82,7 @@ public class SaveMazeDialog {
         SaveAs.addActionListener(a -> {
             try {
                 String Description = MazeName.getText();
+                MazeManager.Instance().GetMaze().SetDescription(Description);
                 MazeManager.Instance().GetMaze().SetId(0);
                 MazeManager.Instance().SaveMaze();
 

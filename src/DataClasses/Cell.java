@@ -30,6 +30,8 @@ public class Cell {
     private WallType Easternwall;
     private boolean Vistited;
 
+    public boolean Searched = false;
+
     public boolean IsVistited()
     {
         return Vistited;
@@ -109,16 +111,6 @@ public class Cell {
         Easternwall = easternwall;
     }
 
-    public WallType SwitchWallType(WallType wallType)
-    {
-        if (wallType == wallType.Wall)
-            return wallType.Empty;
-        if(wallType == wallType.Empty)
-            return wallType.Wall;
-
-
-        return null;// shouldn't even get here...
-    }
 
 
 }
