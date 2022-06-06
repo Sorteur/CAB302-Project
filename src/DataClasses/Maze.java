@@ -2,11 +2,12 @@ package DataClasses;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class Maze {
     /*Property's*/
-    private String Description;
-    private int Id;
+    private String Description = "";
+    private int Id = 0;
     private final int Length;
     private final int Height;
     private MazeImageResource Logo;
@@ -35,6 +36,9 @@ public class Maze {
     public void SetDescription(String description) {
         Description = description;
     }
+    public String GetDescription(){
+        return Description;
+    }
     public void SetId(int id) {
         Id = id;
         for (Cell cell : getGrid()) {
@@ -59,11 +63,15 @@ public class Maze {
     {
         Logo = new MazeImageResource(image, positionX, posistionY);
     }
+
     public MazeImageResource getLogo() {
         return Logo;
     }
-    public void setLogo(Image logo) {
+    public void setLogoImage(Image logo) {
         Logo.SetImage(logo);
+    }
+    public void SetLogo(MazeImageResource logo) {
+        Logo = logo;
     }
     public boolean isImgSrtEnd() {
         return ImgSrtEnd;
@@ -78,6 +86,10 @@ public class Maze {
         EntryImage = new MazeImageResource(image, positionX, posistionY);
     }
 
+    public void SetEntryImage(MazeImageResource entryImage){
+        EntryImage = entryImage;
+    }
+
     public MazeImageResource getEntryImage() {
         return EntryImage;
     }
@@ -85,6 +97,10 @@ public class Maze {
     public void ConstructExitImage(Image image, int positionX, int posistionY)
     {
         ExitImage = new MazeImageResource(image, positionX, posistionY);
+    }
+
+    public void SetExitImage(MazeImageResource exitImage){
+        ExitImage =exitImage;
     }
 
     public MazeImageResource getExitImage() {

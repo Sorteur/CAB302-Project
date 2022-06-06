@@ -19,7 +19,7 @@ public class MazeManagerTest {
 
     @Test @Disabled
     void SaveLoadMazeTest() {
-        MazeManager.Instance().SaveMaze(MazeManager.Instance().GetMaze());
+        MazeManager.Instance().SaveMaze();
         //MazeManager.Instance().LoadMaze(1);
     }
 
