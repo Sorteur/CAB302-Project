@@ -57,6 +57,11 @@ public class MazePanel extends JPanel implements MouseListener {
         return Button;
     }
 //TODO MOVE TO MAZE CLASS AND SPLIT INTO DIFFERENT CLASSES
+
+    private WallType SwitchWallType(WallType wallType)
+    {
+        return MazeManager.Instance().GetMaze().SwitchWallType(wallType);
+    }
     public void EditSquare(int x, int y){
         Cell EditedCell = CurrentMaze.Search(x,y);
         int index = CurrentMaze.getGrid().indexOf(EditedCell);
@@ -77,26 +82,26 @@ public class MazePanel extends JPanel implements MouseListener {
 
         JToggleButton North = createButton("North",EditedCell,200,125,PopOut);
         North.addActionListener(e -> {
-            EditedCell.SetNorthernwall(EditedCell.SwitchWallType(EditedCell.IsNorthernwall()));
-            if (NCell != null) NCell.SetSouthernwall(NCell.SwitchWallType(NCell.IsSouthernwall()));
+            EditedCell.SetNorthernwall(SwitchWallType(EditedCell.IsNorthernwall()));
+            if (NCell != null) NCell.SetSouthernwall(SwitchWallType(NCell.IsSouthernwall()));
             repaint();
         });
         JToggleButton South = createButton("South",EditedCell,200,125,PopOut);
         South.addActionListener(e -> {
-            EditedCell.SetSouthernwall(EditedCell.SwitchWallType(EditedCell.IsSouthernwall()));
-            if (SCell != null) SCell.SetNorthernwall(SCell.SwitchWallType(SCell.IsNorthernwall()));
+            EditedCell.SetSouthernwall(SwitchWallType(EditedCell.IsSouthernwall()));
+            if (SCell != null) SCell.SetNorthernwall(SwitchWallType(SCell.IsNorthernwall()));
             repaint();
         });
         JToggleButton East = createButton("East",EditedCell,250,200,PopOut);
         East.addActionListener(e -> {
-            EditedCell.SetEasternwall(EditedCell.SwitchWallType(EditedCell.IsEasternwall()));
-            if (ECell != null) ECell.SetWesternwall(ECell.SwitchWallType(ECell.IsWesternwall()));
+            EditedCell.SetEasternwall(SwitchWallType(EditedCell.IsEasternwall()));
+            if (ECell != null) ECell.SetWesternwall(SwitchWallType(ECell.IsWesternwall()));
             repaint();
         });
         JToggleButton West = createButton("West",EditedCell,250,200,PopOut);
         West.addActionListener(e -> {
-            EditedCell.SetWesternwall(EditedCell.SwitchWallType(EditedCell.IsWesternwall()));
-            if (WCell != null) WCell.SetEasternwall(WCell.SwitchWallType(WCell.IsEasternwall()));
+            EditedCell.SetWesternwall(SwitchWallType(EditedCell.IsWesternwall()));
+            if (WCell != null) WCell.SetEasternwall(SwitchWallType(WCell.IsEasternwall()));
             repaint();
         });
     }
