@@ -102,7 +102,6 @@ public class MazePanel extends JPanel implements MouseListener {
     }
 
     public void DrawSquare(Cell cell,Graphics g, int x, int y, int length){
-        System.out.println("USED");
         cell.SetPosX(x);
         cell.SetPosY(y);
         //North

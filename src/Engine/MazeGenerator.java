@@ -150,7 +150,6 @@ public class MazeGenerator {
                 }
             }
         }
-
         return null;
     }
 

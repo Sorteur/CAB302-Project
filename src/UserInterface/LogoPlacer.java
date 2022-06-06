@@ -9,7 +9,9 @@ public class LogoPlacer extends JPanel {
         this.setOpaque(false);
     }
     public void paintComponent(Graphics g){
-        super.paintComponent(g);
-        g.drawImage(MazeManager.Instance().GetMaze().getLogo().GetImage(),MazeManager.Instance().GetMaze().getLogo().GetPositionX(),MazeManager.Instance().GetMaze().getLogo().GetPositionY(),this);
+        if (MazeManager.Instance().GetMaze().getLogo() != null){
+            super.paintComponent(g);
+            g.drawImage(MazeManager.Instance().GetMaze().getLogo().GetImage(),MazeManager.Instance().GetMaze().getLogo().GetPositionX(),MazeManager.Instance().GetMaze().getLogo().GetPositionY(),this);
+        }
     }
 }
