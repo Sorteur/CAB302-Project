@@ -101,8 +101,17 @@ public class MazeManager {
 
     }
 
-    public void SaveMaze (Maze maze) {
+    public void SaveMaze () {
+        MazeModule mazeModule = new MazeModule(DBConnection.Instance());
 
+        try
+        {
+            mazeModule.SaveMaze(Maze);
+        }
+        catch (SQLException sqlException)
+        {
+            System.out.println(sqlException);
+        }
     }
 
     public void ExportMaze (Maze maze){
