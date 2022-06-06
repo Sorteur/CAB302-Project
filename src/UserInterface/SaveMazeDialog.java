@@ -8,6 +8,13 @@ import java.awt.*;
 
 public class SaveMazeDialog {
 
+    private static final SaveMazeDialog instance = new SaveMazeDialog();
+
+    public static SaveMazeDialog Instance(){
+        return instance;
+    }
+    SaveMazeDialog() {
+    }
 
     public void GUI(){
         Font Large  = new Font("Larger",Font.PLAIN, 24 );
@@ -33,7 +40,7 @@ public class SaveMazeDialog {
 
         JTextField MazeName = new JTextField();
         MazeName.setFont(Large);
-        MazeName.setPreferredSize(new Dimension(60,30));
+        MazeName.setPreferredSize(new Dimension(150,30));
         MazeName.setText(MazeManager.Instance().GetMaze().GetDescription());
         c.gridx = 2;
         c.gridy = 1;
@@ -46,7 +53,7 @@ public class SaveMazeDialog {
         Save.setFont(Large);
         c.anchor = GridBagConstraints.LINE_END;
         c.fill = GridBagConstraints.VERTICAL;
-        c.gridx = 1;
+        c.gridx = 0;
         c.gridwidth = 2;
         c.gridheight = 3;
         c.gridy = 2;
