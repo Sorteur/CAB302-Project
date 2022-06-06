@@ -66,18 +66,8 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
 
         JButton pnlAddLogoButton = new JButton("Logo Placer");
         pnlAddLogoButton.setPreferredSize(lftBtnSize);
-        pnlAddLogoButton.addActionListener(e -> ImageGUI.Instance().LogoEditor(pnlMaze)
-        );
-
+        pnlAddLogoButton.addActionListener(e -> ImageGUI.Instance().LogoEditor(pnlMaze));
         pnlLeft.add(pnlAddLogoButton);
-
-        JButton pnlPlaceStartCellButton = new JButton("Place Starting Point");
-        pnlPlaceStartCellButton.setPreferredSize(lftBtnSize);
-        pnlLeft.add(pnlPlaceStartCellButton);
-
-        JButton pnlPlaceEndCellButton = new JButton("Place End Point");
-        pnlPlaceEndCellButton.setPreferredSize(lftBtnSize);
-        pnlLeft.add(pnlPlaceEndCellButton);
 
         JButton pnlSolveMazeButton = new JButton("Solve");
         pnlSolveMazeButton.setPreferredSize(lftBtnSize);
