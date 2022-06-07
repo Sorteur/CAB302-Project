@@ -125,7 +125,10 @@ public class MazePanel extends JPanel implements MouseListener {
         {
             if(cell.Searched)
             {
-                g.fillRect(x+(length/4), y+(length/4), sizeScale/2,sizeScale/2);
+                g.setColor(Color.RED);
+                g.fillRect(x+(length/4), y+(length/4), sizeScale/3,sizeScale/3);
+                g.setColor(Color.BLACK);
+
 
 
             }
