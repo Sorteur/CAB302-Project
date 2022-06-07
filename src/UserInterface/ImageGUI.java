@@ -1,7 +1,6 @@
 package UserInterface;
 import DataClasses.Cell;
 import DataClasses.Maze;
-import DataClasses.WallType;
 import Engine.MazeGenerator;
 import Engine.MazeManager;
 
@@ -50,7 +49,6 @@ public class ImageGUI {
 
 
     public void LogoEditor(MazePanel pnlMaze){
-        //Image Logo;
 
         Font Large  = new Font("Larger",Font.PLAIN, 24 );
 
@@ -154,46 +152,20 @@ public class ImageGUI {
             try{
                 int X = Integer.parseInt(XPosBox.getText())-1;
                 int Y = Integer.parseInt(YPosBox.getText())-1;
-                int Width = pnlMaze.sizeScale*Integer.parseInt(WidthBox.getText());
-                int Height = pnlMaze.sizeScale*Integer.parseInt(HeightBox.getText());
-                //TODO MOVE THIS AND RESTRICT ENTRY REQUIREMENTS
-
-                Cell Origin = MazeManager.Instance().GetMaze().Search(X,Y);
-                Image ScaledImage = Logo.getScaledInstance(Width-2,Height-2,Image.SCALE_SMOOTH);
-                MazeManager.Instance().GetMaze().ConstructLogo(ScaledImage, X,Y);
-                MazeManager.Instance().GetMaze().getLogo().SetGridScale(Width,Height);
-                //Make sure Logo is un-reachable
-                for (Cell cell:MazeManager.Instance().GetMaze().getGrid()) {
-                    if (cell.GetGridX() >= X & cell.GetGridX() < X+Integer.parseInt(WidthBox.getText())){
-                        if (cell.GetGridY() >= Y & cell.GetGridY() < Y+Integer.parseInt(HeightBox.getText())){
-                            cell.SetNorthernwall(WallType.Wall);
-                            cell.SetSouthernwall(WallType.Wall);
-                            cell.SetEasternwall(WallType.Wall);
-                            cell.SetWesternwall(WallType.Wall);
-                        }
-                    }
-                }
-
-                //Used to make sure only one LogoPlacer is made, update instead if it exists
-                MazeManager.Instance().GetMaze().setLogoImage(ScaledImage);
-                if (i == 0){
-                    pnlMaze.add(new LogoPlacer(),BorderLayout.CENTER);
-                    i++;
-                } else {
-                    pnlMaze.repaint();
-                }
-                pnlMaze.updateUI();
+                int WidthBoxInt = Integer.parseInt(WidthBox.getText());
+                int HeightBoxInt = Integer.parseInt(HeightBox.getText());
+                MazeManager.Instance().CreateLogo(Logo,pnlMaze, X, Y, WidthBoxInt, HeightBoxInt,i);
+                i++;
                 logoMenu.dispose();
-
             } catch(NumberFormatException e) {
                 JOptionPane.showMessageDialog(logoMenu,"Inputs must be whole numbers.","Input error",JOptionPane.ERROR_MESSAGE);
             } catch (NullPointerException e) {
                 JOptionPane.showMessageDialog(logoMenu,"Error, Either an image hasn't been selected, A maze hasn't been loaded, or Positions are out of bounds! ","Input error",JOptionPane.ERROR_MESSAGE);
             }
-
         });
         logoMenu.add(placeImage,c);
     }
+
 
     public void ImgSrtEnd (MazePanel pnlMaze){
         Font Large  = new Font("Larger",Font.PLAIN, 24 );
@@ -275,25 +247,13 @@ public class ImageGUI {
         c.anchor = GridBagConstraints.CENTER;
         SelectionConfirmation.addActionListener(a -> {
             try {
-                Maze maze = MazeManager.Instance().GetMaze();
                 int X = Integer.parseInt(WidthBox.getText());
                 int Y = Integer.parseInt(HeightBox.getText());
                 int Width = (pnlMaze.sizeScale*X)-2;
                 int Height = (pnlMaze.sizeScale*Y)-2;
-
-                maze.ConstructExitImage(EndImage.getScaledInstance(Width,Height,Image.SCALE_SMOOTH), maze.getLength()-Integer.parseInt(WidthBox.getText()),maze.getHeight()-Integer.parseInt(HeightBox.getText()));
-                maze.getExitImage().SetGridScale(X,Y);
-                maze.ConstructEntryImage(StartImage.getScaledInstance(Width,Height,Image.SCALE_SMOOTH), 0, 0);
-                maze.getEntryImage().SetGridScale(X,Y);
-            //Used to make sure only one SrtEndPlacer is made, update instead if it exists
-                if (j == 0){
-                    pnlMaze.add(new SrtEndPlacer());
-                    j++;
-                } else {
-                    pnlMaze.repaint();
-                }
-                pnlMaze.updateUI();
+                MazeManager.Instance().StartEndCreator(pnlMaze, X, Y, Width, Height,EndImage,StartImage,j);
                 imgMenu.dispose();
+                j++;
             } catch (NumberFormatException e){
                 JOptionPane.showMessageDialog(imgMenu,"Inputs must be whole numbers.","Input error", JOptionPane.ERROR_MESSAGE);
             } catch (NullPointerException e){
@@ -303,6 +263,7 @@ public class ImageGUI {
         });
         imgMenu.add(SelectionConfirmation,c);
     }
+
 
     public void AutoLogo (MazePanel pnlMaze,int MazeLength,int MazeHeight,boolean Random, boolean ImageStartEnd){
         Font Large  = new Font("Larger",Font.PLAIN, 24 );
@@ -367,36 +328,10 @@ public class ImageGUI {
         c.anchor = GridBagConstraints.CENTER;
         SelectionConfirmation.addActionListener(a -> {
             try {
-
-
-            Maze maze = MazeManager.Instance().CreateMaze(MazeLength, MazeHeight);
-            pnlMaze.GridSet();
-            int BoxX = Integer.parseInt(WidthBox.getText());
-            int BoxY = Integer.parseInt(HeightBox.getText());
-            int Width = (pnlMaze.sizeScale*BoxX)-2;
-            int Height = (pnlMaze.sizeScale*BoxY)-2;
-
-
-            Cell StartCell = MazeGenerator.Instance().RandomCellLogo(maze,BoxX,BoxY);
-            for (Cell cell:MazeManager.Instance().GetMaze().getGrid()) {
-                if (cell.GetGridX() >= StartCell.GetGridX() & cell.GetGridX() < StartCell.GetGridX()+Integer.parseInt(WidthBox.getText())){
-                    if (cell.GetGridY() >= StartCell.GetGridY() & cell.GetGridY() < StartCell.GetGridY()+Integer.parseInt(HeightBox.getText())){
-                        cell.IsVisiting();
-                    }
-                }
-            }
-            if (Random) {MazeGenerator.Instance().GenerateMaze(maze);}
-
-            if (ImageStartEnd){
-                MazeManager.Instance().GetMaze().setImgSrtEnd(true);
-                ImageGUI.Instance().ImgSrtEnd(pnlMaze);
-            }
-
-            MazeManager.Instance().GetMaze().ConstructLogo(Logo.getScaledInstance(Width,Height,Image.SCALE_SMOOTH), StartCell.GetGridX(), StartCell.GetGridY());
-            pnlMaze.add(new LogoPlacer());
-            pnlMaze.GridSet();
-            pnlMaze.updateUI();
-            AutoMenu.dispose();
+                int BoxX = Integer.parseInt(WidthBox.getText());
+                int BoxY = Integer.parseInt(HeightBox.getText());
+                MazeManager.Instance().AutoLogoCreator(pnlMaze, MazeLength, MazeHeight, Random, ImageStartEnd, BoxX, BoxY, Logo);
+                AutoMenu.dispose();
             } catch (NumberFormatException e){
                 JOptionPane.showMessageDialog(AutoMenu,"Inputs must be whole numbers.","Input error", JOptionPane.ERROR_MESSAGE);
             } catch (NullPointerException e){
@@ -406,7 +341,5 @@ public class ImageGUI {
         });
         AutoMenu.add(SelectionConfirmation,c);
     }
-
-
 
 }

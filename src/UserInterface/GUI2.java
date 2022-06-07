@@ -80,13 +80,9 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
         JButton pnlSolveMazeButton = new JButton("Solve");
         pnlSolveMazeButton.setPreferredSize(lftBtnSize);
         pnlSolveMazeButton.addActionListener(e -> {
-            if (MazeManager.Instance().GetMaze() == null) {
-                JOptionPane.showMessageDialog(pnlLeft, "Must Create or Load in a Maze to Solve!", "Error", JOptionPane.ERROR_MESSAGE);
-            }
+            if (MazeManager.Instance().GetMaze() == null) {JOptionPane.showMessageDialog(pnlLeft, "Must Create or Load in a Maze to Solve!", "Error", JOptionPane.ERROR_MESSAGE);}
             else {
-
                 try {
-
                     if (MazeManager.Instance().GetMaze().GetSolved())
                     {
                         MazeManager.Instance().GetMaze().setSolved(false);
@@ -192,7 +188,6 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
                         ImageGUI.Instance().AutoLogo(pnlMaze,Width,Height,true,ImageStartEnd.isSelected());
                     } else {
                         MazeGenerator.Instance().GenerateMaze(MazeManager.Instance().CreateMaze(Width, Height));
-
                         if (ImageStartEnd.isSelected()){
                             MazeManager.Instance().GetMaze().setImgSrtEnd(true);
                             ImageGUI.Instance().ImgSrtEnd(pnlMaze);
@@ -203,7 +198,6 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
                 else {
                     if (BuildAroundLogo.isSelected()){
                         ImageGUI.Instance().AutoLogo(pnlMaze,Width,Height,false, ImageStartEnd.isSelected());
-
                     }else {
                         MazeManager.Instance().CreateMaze(Width, Height);
 
@@ -214,7 +208,6 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
                         pnlMaze.GridSet();
                     }
                 }
-
                 PopOut.dispose();
             } catch(NumberFormatException e) {
                 JOptionPane.showMessageDialog(PopOut,"Dimensions of maze must be whole numbers.","Input error",JOptionPane.ERROR_MESSAGE);
