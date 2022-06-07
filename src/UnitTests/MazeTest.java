@@ -1,6 +1,7 @@
 package UnitTests;
 import DataClasses.Cell;
 import DataClasses.Maze;
+import DataClasses.WallType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -59,14 +60,20 @@ public class MazeTest {
 
     }
 
-    //Test 6: Test to see if cell 3,1 is a viable location for an Auto-logo
+    //Test 8: Test to see if cell 4,3 is not viable location for an Auto-logo
     @Test
-    public void ViableLogoTestTrue(){
-        assertEquals(true,TestMaze.ViableImageLogo(1,1,TestMaze.Search(3,1)));
+    public void ViableLogoTestFalse(){
+        assertEquals(false,TestMaze.ViableImageLogo(1,1,TestMaze.Search(4,3)));
 
     }
 
+    //Test 9: Test to see if WallSwitcher Works
+    @Test
+    public void WallSwitcherTest(){
+       // Cell testCell
+        //assertEquals(WallType.Empty,);
 
+    }
 
 
 

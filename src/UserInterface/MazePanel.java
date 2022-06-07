@@ -24,7 +24,7 @@ public class MazePanel extends JPanel implements MouseListener {
     Maze CurrentMaze;
     int X;
     int Y;
-    int sizeScale;
+    public int sizeScale;
     int PosX;
     int PosY;
 
