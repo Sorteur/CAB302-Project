@@ -195,11 +195,12 @@ public class MazePanel extends JPanel implements MouseListener {
     public void mouseClicked(MouseEvent e) {
         int clickX = e.getX();
         int clickY = e.getY();
-        System.out.println("YES");
-        for (Cell cell:CurrentMaze.getGrid()) {
-            if (((clickX > cell.GetPosX()) && (clickX < cell.GetPosX()+ sizeScale)) && ((clickY > cell.GetPosY()) && (clickY < cell.GetPosY()+ sizeScale))){
-                EditSquare(cell.GetGridX(),cell.GetGridY());
+        if (CurrentMaze != null){
+            for (Cell cell:CurrentMaze.getGrid()) {
+                if (((clickX > cell.GetPosX()) && (clickX < cell.GetPosX()+ sizeScale)) && ((clickY > cell.GetPosY()) && (clickY < cell.GetPosY()+ sizeScale))){
+                    EditSquare(cell.GetGridX(),cell.GetGridY());
 
+                }
             }
         }
     }
