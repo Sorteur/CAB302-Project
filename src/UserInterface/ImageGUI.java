@@ -156,6 +156,7 @@ public class ImageGUI {
                 int Y = Integer.parseInt(YPosBox.getText())-1;
                 int Width = pnlMaze.sizeScale*Integer.parseInt(WidthBox.getText());
                 int Height = pnlMaze.sizeScale*Integer.parseInt(HeightBox.getText());
+                //TODO MOVE THIS AND RESTRICT ENTRY REQUIREMENTS
 
                 Cell Origin = MazeManager.Instance().GetMaze().Search(X,Y);
                 Image ScaledImage = Logo.getScaledInstance(Width-2,Height-2,Image.SCALE_SMOOTH);
@@ -374,6 +375,8 @@ public class ImageGUI {
             int BoxY = Integer.parseInt(HeightBox.getText());
             int Width = (pnlMaze.sizeScale*BoxX)-2;
             int Height = (pnlMaze.sizeScale*BoxY)-2;
+
+
             Cell StartCell = MazeGenerator.Instance().RandomCellLogo(maze,BoxX,BoxY);
             for (Cell cell:MazeManager.Instance().GetMaze().getGrid()) {
                 if (cell.GetGridX() >= StartCell.GetGridX() & cell.GetGridX() < StartCell.GetGridX()+Integer.parseInt(WidthBox.getText())){

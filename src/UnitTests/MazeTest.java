@@ -52,14 +52,19 @@ public class MazeTest {
         assertNull(TestMaze.Search(10,10));
     }
 
-    //Test 7:
+    //Test 7: Test to see if cell 3,1 is a viable location for an Auto-logo
     @Test
-    public void ViableLogoTest(){
-        assertEquals(true,TestMaze.ViableImageLogo(1,2,TestMaze.Search(2,3)));
+    public void ViableLogoTestTrue(){
+        assertEquals(true,TestMaze.ViableImageLogo(1,1,TestMaze.Search(3,1)));
+
     }
 
+    //Test 6: Test to see if cell 3,1 is a viable location for an Auto-logo
+    @Test
+    public void ViableLogoTestTrue(){
+        assertEquals(true,TestMaze.ViableImageLogo(1,1,TestMaze.Search(3,1)));
 
-//TODO Add more unit tests of maze constructor, especially about failing to create maze
+    }
 
 
 
@@ -72,5 +77,6 @@ public class MazeTest {
     //Test :
     @Test
     public void name(){
+
     }
  */
