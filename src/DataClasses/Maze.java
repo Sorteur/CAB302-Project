@@ -82,7 +82,20 @@ public class Maze {
         ImgSrtEnd = imgSrtEnd;
     }
 
-    public void setSolved(boolean solved) {Solved = solved; }
+    public void setSolved(boolean solved) {
+        if(!solved)
+        {
+            Solved = solved;
+            for (Cell cell : getGrid()) {
+                cell.Searched = false;
+                cell.PermaSearched = false;
+            }
+        }
+        else {
+            Solved = solved;
+        }
+    }
+
     public boolean GetSolved() {return Solved;}
 
     public void ConstructEntryImage(Image image, int positionX, int posistionY)
@@ -172,10 +185,8 @@ public class Maze {
     {
         if (index % Height == 0) return null;
 
-
         if(getCell(index).IsNorthernwall().equals(WallType.Wall))
             return null;
-
 
         int northcellindex = index - 1 ;
 
@@ -190,6 +201,7 @@ public class Maze {
             return null;
 
         if(eastcellindex >= (Length*Height)) return null;
+
 
         return getCell(eastcellindex);
 
@@ -216,7 +228,6 @@ public class Maze {
             return null;
 
         if(westcellindex < 0) return null;
-
 
         return getCell(westcellindex);
     }
@@ -275,12 +286,13 @@ public class Maze {
 
     public WallType SwitchWallType(WallType wallType)
     {
+
+        setSolved(false);// Maze may no longer be solvable since a wall change is happening
+
         if (wallType == wallType.Wall)
             return wallType.Empty;
         if(wallType == wallType.Empty)
             return wallType.Wall;
-
-        Solved = false;
 
         return null;// shouldn't even get here...
     }

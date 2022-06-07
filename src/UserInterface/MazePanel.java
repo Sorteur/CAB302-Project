@@ -121,6 +121,15 @@ public class MazePanel extends JPanel implements MouseListener {
         //West
         if (WallType.Tools.ToBool(cell.IsWesternwall())){
         g.drawLine(x,y+length,x,y);}
+        if(CurrentMaze.GetSolved())
+        {
+            if(cell.Searched)
+            {
+                g.fillRect(x+(length/4), y+(length/4), sizeScale/2,sizeScale/2);
+
+
+            }
+        }
     }
 
     public void DrawTriangle(Graphics g,int x, int y){
