@@ -53,7 +53,13 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
 
         JButton pnlSaveGridButton = new JButton("Save Maze");
         pnlSaveGridButton.setPreferredSize(lftBtnSize);
-        pnlSaveGridButton.addActionListener(e-> SaveMazeDialog.Instance().GUI());
+        pnlSaveGridButton.addActionListener(e-> {
+
+            if (MazeManager.Instance().GetMaze() == null) {
+                JOptionPane.showMessageDialog(pnlLeft, "Must Create Or Load in A Maze to Save!", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            else SaveMazeDialog.Instance().GUI();
+        });
         pnlLeft.add(pnlSaveGridButton);
 
         JButton pnlLoadGridButton = new JButton("Load Maze");
