@@ -10,7 +10,7 @@ public class SrtEndPlacer extends JPanel{
     }
     public void paintComponent(Graphics g){
 
-        if(MazeManager.Instance().GetMaze().isImgSrtEnd()){
+        if(MazeManager.Instance().GetMaze().getExitImage() != null){
 
             int Endx = MazeManager.Instance().GetMaze().Search(MazeManager.Instance().GetMaze().getExitImage().GetPositionX(),MazeManager.Instance().GetMaze().getExitImage().GetPositionY()).GetPosX();
             int Endy = MazeManager.Instance().GetMaze().Search(MazeManager.Instance().GetMaze().getExitImage().GetPositionX(),MazeManager.Instance().GetMaze().getExitImage().GetPositionY()).GetPosY();
