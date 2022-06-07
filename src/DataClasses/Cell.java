@@ -31,6 +31,7 @@ public class Cell {
     private boolean Vistited;
 
     public boolean Searched = false;
+    public boolean PermaSearched = false;
 
     public boolean IsVistited()
     {
