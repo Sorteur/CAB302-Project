@@ -159,8 +159,8 @@ public class ImageGUI {
 
                 Cell Origin = MazeManager.Instance().GetMaze().Search(X,Y);
                 Image ScaledImage = Logo.getScaledInstance(Width-2,Height-2,Image.SCALE_SMOOTH);
-                MazeManager.Instance().GetMaze().ConstructLogo(ScaledImage,Origin.GetPosX() + 1,Origin.GetPosY() + 1);
-                MazeManager.Instance().GetMaze().getLogo().SetGridScale(X,Y);
+                MazeManager.Instance().GetMaze().ConstructLogo(ScaledImage, X,Y);
+                MazeManager.Instance().GetMaze().getLogo().SetGridScale(Width,Height);
                 //Make sure Logo is un-reachable
                 for (Cell cell:MazeManager.Instance().GetMaze().getGrid()) {
                     if (cell.GetGridX() >= X & cell.GetGridX() < X+Integer.parseInt(WidthBox.getText())){
@@ -389,7 +389,7 @@ public class ImageGUI {
                 ImageGUI.Instance().ImgSrtEnd(pnlMaze);
             }
 
-            MazeManager.Instance().GetMaze().ConstructLogo(Logo.getScaledInstance(Width,Height,Image.SCALE_SMOOTH), pnlMaze.PosX+(StartCell.GetGridX()* pnlMaze.sizeScale)+1, pnlMaze.PosY+(StartCell.GetGridY()* pnlMaze.sizeScale)+1);
+            MazeManager.Instance().GetMaze().ConstructLogo(Logo.getScaledInstance(Width,Height,Image.SCALE_SMOOTH), StartCell.GetGridX(), StartCell.GetGridY());
             pnlMaze.add(new LogoPlacer());
             pnlMaze.GridSet();
             pnlMaze.updateUI();

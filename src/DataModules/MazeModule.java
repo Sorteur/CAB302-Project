@@ -1,6 +1,9 @@
 package DataModules;
 
 import DataClasses.*;
+import Engine.MazeManager;
+import UserInterface.LogoPlacer;
+import UserInterface.SrtEndPlacer;
 
 import java.awt.*;
 import java.sql.PreparedStatement;
@@ -48,26 +51,30 @@ public class MazeModule extends DataModule{
                 int gridScaleX= resultSet.getInt(6);
                 int gridScaleY= resultSet.getInt(7);
 
-                switch (imageTypeId)
-                {   //Must set empty logos an id to let a future update know where to put a logo
-                    //UI needs to check if a MazeImage all ready exists if it does it should set the image and position instead of constructing it
-                    case 2:  {
-                        //Logo
+                if(imageTypeId == 2)
+                {
+                    maze.SetLogo(new MazeImageResource(id, image, posistionX, posistionY, gridScaleX, gridScaleY));
+                }
 
-                        maze.SetLogo(new MazeImageResource(id, image, posistionX, posistionY, gridScaleX, gridScaleY));
-                    }
-                    case 4: {
-                        //EntryImage
+                if(imageTypeId == 4)
+                {
+                    maze.SetEntryImage(new MazeImageResource(id, image, posistionX, posistionY, gridScaleX, gridScaleY));
+                }
 
-                        maze.SetEntryImage(new MazeImageResource(id, image, posistionX, posistionY, gridScaleX, gridScaleY));
-                    }
-                    case 6: {
-                        //ExitImage
+                if(imageTypeId == 6)
+                {
+                    maze.SetExitImage(new MazeImageResource(id, image, posistionX, posistionY, gridScaleX, gridScaleY));
+                }
 
-                        maze.SetExitImage(new MazeImageResource(id, image, posistionX, posistionY, gridScaleX, gridScaleY));
-                        maze.setImgSrtEnd(true);
+                if(maze.getExitImage()!= null)
+                {
+                    maze.setImgSrtEnd(true);
+                    MazeManager.Instance().pnlMaze.add(new SrtEndPlacer());
+                }
 
-                    }
+                if(imageTypeId == 2)
+                {
+                    MazeManager.Instance().pnlMaze.add(new LogoPlacer(),BorderLayout.CENTER);
                 }
 
             }
@@ -422,6 +429,30 @@ public class MazeModule extends DataModule{
         statement.executeUpdate();
     }
 
+
+    private int GetLogoIdByMazeId(int mazeId) throws SQLException{
+
+        String sql = "SELECT Id " + "FROM MazeImageResource " + "WHERE MazeId = ? AND ImageTypeId = 2;";
+
+        PreparedStatement statement = PrepareStatement(sql);
+
+        statement.setInt(1, mazeId);
+
+        ResultSet resultSet= statement.executeQuery();
+        try {
+            while (resultSet.next()) {
+
+                int id = resultSet.getInt(1);
+                return id;
+            }
+        }
+        finally {
+            statement.close();
+        }
+        return 0;
+    }
+
+
     private void UpdateImages(Maze maze) throws SQLException {
         String sql;
         int id;
@@ -437,121 +468,69 @@ public class MazeModule extends DataModule{
         if (maze.getLogo() != null) {
             sql = "UPDATE MazeImageResource " + "SET ImageTypeId = ?, Image = ?, PositionX = ?, PositionY = ?, GridScaleX = ?, GridScaleY = ? " + "WHERE Id = ?";
 
-            if(maze.getLogo().GetId() == 0)
+            id = GetLogoIdByMazeId(maze.GetId());
+
+            if(id == 0)
             {
+                sql = "INSERT INTO MazeImageResource(Id, MazeId, ImageTypeId, Image, PositionX, PositionY, GridScaleX, GridScaleY) " + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
                 id = GetNextSequence("MazeImageResourceId");
+                imagetypeid = 2;
+
+                positionx =  maze.getLogo().GetPositionX();
+                positiony =  maze.getLogo().GetPositionY();
+                gridscalex =  maze.getLogo().GetGridScaleX();
+                gridscaley =  maze.getLogo().GetGridScaleY();
+
+                statement = PrepareStatement(sql);
+
+                statement.setInt(1, id);
+                statement.setInt(2, mazeId);
+                statement.setInt(3, imagetypeid);
+                statement.setBlob(4, maze.getLogo().GetImageAsBlob());
+                statement.setInt(5, positionx);
+                statement.setInt(6, positiony);
+                statement.setInt(7, gridscalex);
+                statement.setInt(8, gridscaley);
+
+                try {
+                    statement.executeUpdate();
+                } finally {
+                    statement.close();
+                }
             }
-            else{
-                id = maze.getLogo().GetId();
-            }
-            imagetypeid = 2;
+            else
+            {
+                imagetypeid = 2;
 
-            positionx = maze.getLogo().GetPositionX();
-            positiony = maze.getLogo().GetPositionY();
-            gridscalex = maze.getLogo().GetGridScaleX();
-            gridscaley = maze.getLogo().GetGridScaleY();
+                positionx = maze.getLogo().GetPositionX();
+                positiony = maze.getLogo().GetPositionY();
+                gridscalex = maze.getLogo().GetGridScaleX();
+                gridscaley = maze.getLogo().GetGridScaleY();
 
-            statement = PrepareStatement(sql);
+                statement = PrepareStatement(sql);
 
 
-            statement.setInt(1, imagetypeid);
-            statement.setBlob(2, maze.getLogo().GetImageAsBlob());
-            statement.setInt(3, positionx);
-            statement.setInt(4, positiony);
-            statement.setInt(5, gridscalex);
-            statement.setInt(6, gridscaley);
+                statement.setInt(1, imagetypeid);
+                statement.setBlob(2, maze.getLogo().GetImageAsBlob());
+                statement.setInt(3, positionx);
+                statement.setInt(4, positiony);
+                statement.setInt(5, gridscalex);
+                statement.setInt(6, gridscaley);
 
-            statement.setInt(7, id);
+                statement.setInt(7, id);
 
-            try {
-                statement.executeUpdate();
-            } finally {
-                statement.close();
+                try {
+                    statement.executeUpdate();
+                } finally {
+                    statement.close();
+                }
             }
 
         } else {
 
         }
 
-        if (maze.getEntryImage() != null) {
-            sql = "UPDATE MazeImageResource " + "SET ImageTypeId = ?, Image = ?, PositionX = ?, PositionY = ?, GridScaleX = ?, GridScaleY = ? " + "WHERE Id = ?";
-
-            if(maze.getEntryImage().GetId() == 0)
-            {
-                id = GetNextSequence("MazeImageResourceId");
-            }
-            else{
-                id = maze.getEntryImage().GetId();
-            }
-
-            imagetypeid = 4;
-
-            positionx = maze.getEntryImage().GetPositionX();
-            positiony = maze.getEntryImage().GetPositionY();
-            gridscalex = maze.getEntryImage().GetGridScaleX();
-            gridscaley = maze.getEntryImage().GetGridScaleY();
-
-            statement = PrepareStatement(sql);
-
-
-            statement.setInt(1, imagetypeid);
-            statement.setBlob(2, maze.getEntryImage().GetImageAsBlob());
-            statement.setInt(3, positionx);
-            statement.setInt(4, positiony);
-            statement.setInt(5, gridscalex);
-            statement.setInt(6, gridscaley);
-
-            statement.setInt(7, id);
-
-            try {
-                statement.executeUpdate();
-            } finally {
-                statement.close();
-            }
-
-        } else {
-
-        }
-
-        if (maze.getExitImage() != null) {
-            sql = "UPDATE MazeImageResource " + "SET ImageTypeId = ?, Image = ?, PositionX = ?, PositionY = ?, GridScaleX = ?, GridScaleY = ? " + "WHERE Id = ?";
-
-            if(maze.getExitImage().GetId() == 0)
-            {
-                id = GetNextSequence("MazeImageResourceId");
-            }
-            else{
-                id = maze.getExitImage().GetId();
-            }
-
-            imagetypeid = 6;
-
-            positionx = maze.getExitImage().GetPositionX();
-            positiony = maze.getExitImage().GetPositionY();
-            gridscalex = maze.getExitImage().GetGridScaleX();
-            gridscaley = maze.getExitImage().GetGridScaleY();
-
-            statement = PrepareStatement(sql);
-
-
-            statement.setInt(1, imagetypeid);
-            statement.setBlob(2, maze.getExitImage().GetImageAsBlob());
-            statement.setInt(3, positionx);
-            statement.setInt(4, positiony);
-            statement.setInt(5, gridscalex);
-            statement.setInt(6, gridscaley);
-
-            statement.setInt(7, id);
-
-            try {
-                statement.executeUpdate();
-            } finally {
-                statement.close();
-            }
-
-        } else {
-
-        }
     }
 
     public void DeleteMaze (int ID) {
