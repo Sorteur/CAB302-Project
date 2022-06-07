@@ -73,19 +73,29 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
 
         JButton pnlSolveMazeButton = new JButton("Solve");
         pnlSolveMazeButton.setPreferredSize(lftBtnSize);
-        pnlAddLogoButton.addActionListener(e -> {
+        pnlSolveMazeButton.addActionListener(e -> {
             if (MazeManager.Instance().GetMaze() == null) {
                 JOptionPane.showMessageDialog(pnlLeft, "Must Create or Load in a Maze to Solve!", "Error", JOptionPane.ERROR_MESSAGE);
             }
-            try {
-                MazeSolver.Instance().SolveMaze();
-                if(MazeManager.Instance().GetMaze().GetSolved());
-                {
+            else {
 
+                try {
+
+                    if (MazeManager.Instance().GetMaze().GetSolved())
+                    {
+                        MazeManager.Instance().GetMaze().setSolved(false);
+                        pnlMaze.GridSet();
+                    }
+                    else
+                    {
+                        MazeManager.Instance().GetMaze().setSolved(false);
+                        MazeSolver.Instance().SolveMaze();
+                        pnlMaze.GridSet();
+                    }
+
+                } catch (Exception exception) {
+                    JOptionPane.showMessageDialog(pnlLeft, exception.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
-            }
-            catch (Exception exception){
-                JOptionPane.showMessageDialog(pnlLeft, "Must Create or Load in a Maze to Solve!", "Error", JOptionPane.ERROR_MESSAGE);
             }
         });
         pnlLeft.add(pnlSolveMazeButton);
