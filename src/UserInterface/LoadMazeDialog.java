@@ -78,7 +78,12 @@ public class LoadMazeDialog {
 
             MazeManager.Instance().LoadMazeFromId(id);
             if(MazeManager.Instance().GetMaze()!=null);
-                MazeManager.Instance().pnlMaze.add(new SrtEndPlacer());
+            {
+                if(MazeManager.Instance().GetMaze().isImgSrtEnd()) {
+                    MazeManager.Instance().pnlMaze.add(new SrtEndPlacer());
+                }
+            }
+
             MazeManager.Instance().pnlMaze.GridSet();
             MazeManager.Instance().pnlMaze.updateUI();
             //MazeManager.Instance().pnlMaze.
