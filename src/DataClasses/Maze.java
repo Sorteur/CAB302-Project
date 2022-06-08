@@ -1,9 +1,7 @@
 package DataClasses;
 
-import java.awt.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Map;
 
 public class Maze {
     /*Property's*/
@@ -60,6 +58,7 @@ public class Maze {
     public LocalDateTime GetCreation(){return Creation;}
     public void SetLastEdited(LocalDateTime lastEdited) {LastEdited =lastEdited;}
     public LocalDateTime GetLastEdited(){return LastEdited;}
+
     public void SetId(int id) {
         Id = id;
         for (Cell cell : getGrid()) {
@@ -262,7 +261,7 @@ public class Maze {
             return false;
         if(openingcellx > InvalidExitCellCoordinateX & currentcelly > InvalidExitCellCoordinateY)
             return false;
-        
+
         return true;
     }
 

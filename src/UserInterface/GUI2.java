@@ -183,11 +183,15 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
             try {
                 int Width = Integer.parseInt(WidthBox.getText());
                 int Height = Integer.parseInt(HeightBox.getText());
+
+                MazeManager.Instance().CreateMaze(Width, Height);
+                //TODO REFACTOR
+
                 if (RandomButton.isSelected()) {
                     if (BuildAroundLogo.isSelected()){
                         ImageGUI.Instance().AutoLogo(pnlMaze,Width,Height,true,ImageStartEnd.isSelected());
                     } else {
-                        MazeGenerator.Instance().GenerateMaze(MazeManager.Instance().CreateMaze(Width, Height));
+                        MazeGenerator.Instance().GenerateMaze(MazeManager.Instance().GetMaze());
                         if (ImageStartEnd.isSelected()){
                             MazeManager.Instance().GetMaze().setImgSrtEnd(true);
                             ImageGUI.Instance().ImgSrtEnd(pnlMaze);

@@ -40,7 +40,6 @@ public class MazeManager {
     public void LoadMazeFromId(int id)
     {
         MazeModule mazeModule = new MazeModule(DBConnection.Instance());
-
         try
         {
             Maze = mazeModule.GetMazeFromID(id);
@@ -49,7 +48,6 @@ public class MazeManager {
         {
             System.out.println(sqlException);
         }
-
     }
 
     public String[][] LoadMazeDescriptions() {
@@ -143,7 +141,8 @@ public class MazeManager {
         pnlMaze.updateUI();
     }
 
-    public void AutoLogoCreator(MazePanel pnlMaze, int MazeLength, int MazeHeight, boolean Random, boolean ImageStartEnd, int BoxX, int BoxY, Image Logo) {
+    public void AutoLogoCreator(MazePanel pnlMaze,int MazeLength,int MazeHeight, boolean Random, boolean ImageStartEnd, int BoxX, int BoxY, Image Logo) {
+        CreateMaze(MazeLength,MazeHeight);
         pnlMaze.GridSet();
         int Width = (pnlMaze.sizeScale* BoxX)-2;
         int Height = (pnlMaze.sizeScale* BoxY)-2;

@@ -4,8 +4,8 @@ import DataClasses.Maze;
 import DataClasses.WallType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class MazeTest {
     //Declaring maze
@@ -14,31 +14,31 @@ public class MazeTest {
     // Test 1: Construct maze Object
     @BeforeEach
     @Test
-    public void ConstructMaze() {
+    void ConstructMaze() {
         TestMaze = new Maze(6, 4);
     }
 
     //Test 2: Test to see if length is entered properly
     @Test
-    public void MazeLengthTest(){
+    void MazeLengthTest(){
         assertEquals(6,TestMaze.getLength());
     }
 
     //Test 3: Test to see if height is entered properly
     @Test
-    public void MazeHeightTest(){
+    void MazeHeightTest(){
         assertEquals(4,TestMaze.getHeight());
     }
 
     //Test 4: Test to see if the correct number of cells are generated
     @Test
-    public void MazeCellCheckTest(){
+    void MazeCellCheckTest(){
         assertEquals(24,TestMaze.getGrid().size());
     }
 
     //Test 5: Test to see if the Search method is correct
     @Test
-    public void SearchTest(){
+    void SearchTest(){
         //Setting up searched cell
         Cell searched = TestMaze.Search(3,2);
         //Test if x lines up
@@ -49,34 +49,32 @@ public class MazeTest {
 
     //Test 6: Test if search method returns null if search parameters are out of bounds
     @Test
-    public void SearchFailTest(){
+    void SearchFailTest(){
         assertNull(TestMaze.Search(10,10));
     }
 
     //Test 7: Test to see if cell 3,1 is a viable location for an Auto-logo
     @Test
-    public void ViableLogoTestTrue(){
-        assertEquals(true,TestMaze.ViableImageLogo(1,1,TestMaze.Search(3,1)));
-
+    void ViableLogoTestTrue(){
+        assertTrue(TestMaze.ViableImageLogo(1, 1, TestMaze.Search(3, 1)));
     }
 
     //Test 8: Test to see if cell 4,3 is not viable location for an Auto-logo
     @Test
-    public void ViableLogoTestFalse(){
-        assertEquals(false,TestMaze.ViableImageLogo(1,1,TestMaze.Search(4,3)));
-
+    void ViableLogoTestFalse(){
+        assertFalse(TestMaze.ViableImageLogo(1, 1, TestMaze.Search(4, 3)));
     }
 
     //Test 9: Test to see if WallSwitcher Works
     @Test
-    public void WallSwitcherTest(){
+    void WallSwitcherTest(){
         Cell testCell = TestMaze.getCell(4);
         assertEquals(WallType.Empty,TestMaze.SwitchWallType(testCell.IsNorthernwall()));
     }
 
     //Test 10: Test to see if Check(North/South/East/West)Cell works
     @Test
-    public void CheckNeighbourCellsTest(){
+   void CheckNeighbourCellsTest(){
         //Using cell at 0,0 as test, north and west should be null, south and east should be cell at 0,1 and 1,0 respectively
         assertNull(TestMaze.checkNorthCell(0));
         assertNull(TestMaze.checkWestCell(0));
@@ -87,8 +85,7 @@ public class MazeTest {
 
     //Test 11: Test to see if PathFind(North/South/East/West)Cell works
     @Test
-    public void CheckNeighbourPathFindTest(){
-        //
+    void CheckNeighbourPathFindTest(){
         TestMaze.SetCell(0,new Cell(0,0,0,WallType.Wall,WallType.Empty,WallType.Wall,WallType.Wall));
         assertNull(TestMaze.PathFindNorthCell(0));
         assertNull(TestMaze.PathFindWestCell(0));
@@ -101,7 +98,7 @@ public class MazeTest {
 /*
     //Test :
     @Test
-    public void name(){
+    void name(){
 
     }
  */
