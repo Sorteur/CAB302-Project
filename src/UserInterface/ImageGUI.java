@@ -1,7 +1,4 @@
 package UserInterface;
-import DataClasses.Cell;
-import DataClasses.Maze;
-import Engine.MazeGenerator;
 import Engine.MazeManager;
 
 import javax.imageio.ImageIO;
@@ -330,7 +327,8 @@ public class ImageGUI {
             try {
                 int BoxX = Integer.parseInt(WidthBox.getText());
                 int BoxY = Integer.parseInt(HeightBox.getText());
-                MazeManager.Instance().AutoLogoCreator(pnlMaze, MazeLength, MazeHeight, Random, ImageStartEnd, BoxX, BoxY, Logo);
+
+                MazeManager.Instance().AutoLogoCreator(pnlMaze,MazeLength,MazeHeight, Random, ImageStartEnd, BoxX, BoxY, Logo);
                 AutoMenu.dispose();
             } catch (NumberFormatException e){
                 JOptionPane.showMessageDialog(AutoMenu,"Inputs must be whole numbers.","Input error", JOptionPane.ERROR_MESSAGE);
