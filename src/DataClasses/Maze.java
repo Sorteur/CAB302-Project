@@ -21,6 +21,16 @@ public class Maze {
     private boolean Solved = false;
     private final ArrayList<Cell> Grid = new ArrayList<>();
 
+
+    /**
+     * Given two integers representing the length and height of the maze in Cells,
+     * will create a maze with the length and height as given.
+     *
+     * @param length Length of the desired maze.
+     * @param height Height of the desired maze.
+     *
+     * @
+     */
     public Maze(int length, int height) {
         Length = length;
         Height = height;
@@ -70,24 +80,18 @@ public class Maze {
         return Height;
     }
 
-    public void ConstructLogo(Image image, int positionX, int posistionY)
-    {
-        Logo = new MazeImageResource(image, positionX, posistionY);
-    }
 
     public MazeImageResource getLogo() {
         return Logo;
     }
-    public void setLogoImage(Image logo) {
-        Logo.SetImage(logo);
-    }
     public void SetLogo(MazeImageResource logo) {
         Logo = logo;
     }
+
+
     public boolean isImgSrtEnd() {
         return ImgSrtEnd;
     }
-
     public void setImgSrtEnd(boolean imgSrtEnd) {
         ImgSrtEnd = imgSrtEnd;
     }
@@ -108,31 +112,24 @@ public class Maze {
 
     public boolean GetSolved() {return Solved;}
 
-    public void ConstructEntryImage(Image image, int positionX, int posistionY)
-    {
-        EntryImage = new MazeImageResource(image, positionX, posistionY);
-    }
+
 
     public void SetEntryImage(MazeImageResource entryImage){
         EntryImage = entryImage;
     }
-
     public MazeImageResource getEntryImage() {
         return EntryImage;
     }
 
-    public void ConstructExitImage(Image image, int positionX, int posistionY)
-    {
-        ExitImage = new MazeImageResource(image, positionX, posistionY);
-    }
 
     public void SetExitImage(MazeImageResource exitImage){
-        ExitImage =exitImage;
+        ExitImage = exitImage;
     }
-
     public MazeImageResource getExitImage() {
         return ExitImage;
     }
+
+
 
     public ArrayList<Cell> getGrid() {
         return Grid;
@@ -254,16 +251,6 @@ public class Maze {
         return null;
     }
 
-    public Cell SearchByPos(int xPos,int yPos){
-        for (Cell cells:Grid){
-            if (xPos == cells.GetGridX()){
-                if (yPos == cells.GetGridY()){
-                    return cells;
-                }
-            }
-        }
-        return null;
-    }
 
     public boolean ViableImageLogo(int xrange, int yrange, Cell cell) {
         int InvalidStartingCellCoordinateX = (Length/3)-1; //Less then this whilst being less then the Y range means your in a possible starting cell
@@ -296,7 +283,6 @@ public class Maze {
 
     public WallType SwitchWallType(WallType wallType)
     {
-
         setSolved(false);// Maze may no longer be solvable since a wall change is happening
 
         if (wallType == wallType.Wall)

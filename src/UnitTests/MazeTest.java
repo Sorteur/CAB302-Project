@@ -70,8 +70,24 @@ public class MazeTest {
     //Test 9: Test to see if WallSwitcher Works
     @Test
     public void WallSwitcherTest(){
-       // Cell testCell
-        //assertEquals(WallType.Empty,);
+        Cell testCell = TestMaze.getCell(4);
+        assertEquals(WallType.Empty,TestMaze.SwitchWallType(testCell.IsNorthernwall()));
+    }
+
+    //Test 10: Checking Neighbouring cells
+    @Test
+    public void CheckNeighbourCellsTest(){
+        //Using cell at 0,0 as test, north and west should be null, south and east should be cell at 0,1 and 1,0 respectively
+        assertNull(TestMaze.checkNorthCell(0));
+        assertNull(TestMaze.checkWestCell(0));
+        assertEquals(TestMaze.Search(0,1),TestMaze.checkSouthCell(0));
+        assertEquals(TestMaze.Search(1,0),TestMaze.checkEastCell(0));
+
+    }
+
+    //Test 11:
+    @Test
+    public void CheckNeighbourPathFindTest(){
 
     }
 
