@@ -55,6 +55,9 @@ create table Maze(
   Id int default 0 not null,
   Deleted bool default false not null,
   Description varchar(40) default "" not null,
+  Author varchar(40) default "" not null,
+  CreationDate DateTime not null,
+  LastEdited DateTime not null,
   XDimension int not null,
   YDimension int not null
   
@@ -119,9 +122,7 @@ CREATE TABLE MazeImageResource (
     ImageTypeId INT NOT NULL,
     Image MEDIUMBLOB,
     PositionX INT,
-    PositionY INT,
-    GridScaleX INT,
-    GridScaleY INT
+    PositionY INT
 );
 
 alter table MazeImageResource

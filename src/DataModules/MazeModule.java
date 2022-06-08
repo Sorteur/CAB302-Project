@@ -9,6 +9,8 @@ import java.awt.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Hashtable;
 
 public class MazeModule extends DataModule{
@@ -237,6 +239,9 @@ public class MazeModule extends DataModule{
 
         int id = GetNextSequence("MazeId");
         String description = maze.GetDescription();
+        String Author = maze.GetAuthor();
+        LocalDateTime CreationTime = maze.GetCreation();
+        LocalDateTime LastEdited = maze.GetLastEdited();
         int length = maze.getLength();
         int height = maze.getHeight();
 
@@ -245,8 +250,12 @@ public class MazeModule extends DataModule{
 
         statement.setInt(1, id);
         statement.setString(2, description);
-        statement.setInt(3, length);
-        statement.setInt(4, height);
+        statement.setString(3, Author);
+
+
+
+        statement.setInt(6, length);
+        statement.setInt(7, height);
 
         statement.executeUpdate();
 
@@ -299,15 +308,14 @@ public class MazeModule extends DataModule{
 
        if(maze.getLogo()!=null)
         {
-            sql = "INSERT INTO MazeImageResource(Id, MazeId, ImageTypeId, Image, PositionX, PositionY, GridScaleX, GridScaleY) " + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            sql = "INSERT INTO MazeImageResource(Id, MazeId, ImageTypeId, Image, PositionX, PositionY) " + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
             id = GetNextSequence("MazeImageResourceId");
             imagetypeid = 2;
 
             positionx =  maze.getLogo().GetPositionX();
             positiony =  maze.getLogo().GetPositionY();
-            gridscalex =  maze.getLogo().GetGridScaleX();
-            gridscaley =  maze.getLogo().GetGridScaleY();
+
 
             statement = PrepareStatement(sql);
 
@@ -317,8 +325,6 @@ public class MazeModule extends DataModule{
             statement.setBlob(4, maze.getLogo().GetImageAsBlob());
             statement.setInt(5, positionx);
             statement.setInt(6, positiony);
-            statement.setInt(7, gridscalex);
-            statement.setInt(8, gridscaley);
 
             try{
                 statement.executeUpdate();
@@ -328,15 +334,13 @@ public class MazeModule extends DataModule{
             }
         }
         if(maze.getEntryImage()!=null) {
-            sql = "INSERT INTO MazeImageResource(Id, MazeId, ImageTypeId, Image, PositionX, PositionY, GridScaleX, GridScaleY) " + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            sql = "INSERT INTO MazeImageResource(Id, MazeId, ImageTypeId, Image, PositionX, PositionY) " + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
             id = GetNextSequence("MazeImageResourceId");
             imagetypeid = 4;
 
             positionx = maze.getEntryImage().GetPositionX();
             positiony = maze.getEntryImage().GetPositionY();
-            gridscalex = maze.getEntryImage().GetGridScaleX();
-            gridscaley = maze.getEntryImage().GetGridScaleY();
 
             statement = PrepareStatement(sql);
 
@@ -346,8 +350,7 @@ public class MazeModule extends DataModule{
             statement.setBlob(4, maze.getEntryImage().GetImageAsBlob());
             statement.setInt(5, positionx);
             statement.setInt(6, positiony);
-            statement.setInt(7, gridscalex);
-            statement.setInt(8, gridscaley);
+
 
             try {
                 statement.executeUpdate();
@@ -357,15 +360,13 @@ public class MazeModule extends DataModule{
         }
         if(maze.getExitImage()!=null)
         {
-            sql = "INSERT INTO MazeImageResource(Id, MazeId, ImageTypeId, Image, PositionX, PositionY, GridScaleX, GridScaleY) " + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            sql = "INSERT INTO MazeImageResource(Id, MazeId, ImageTypeId, Image, PositionX, PositionY) " + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
             id = GetNextSequence("MazeImageResourceId");
             imagetypeid = 6;
 
             positionx =  maze.getExitImage().GetPositionX();
             positiony =  maze.getExitImage().GetPositionY();
-            gridscalex =  maze.getExitImage().GetGridScaleX();
-            gridscaley =  maze.getExitImage().GetGridScaleY();
 
             statement = PrepareStatement(sql);
 
@@ -375,8 +376,7 @@ public class MazeModule extends DataModule{
             statement.setBlob(4, maze.getExitImage().GetImageAsBlob());
             statement.setInt(5, positionx);
             statement.setInt(6, positiony);
-            statement.setInt(7, gridscalex);
-            statement.setInt(8, gridscaley);
+
 
             try{
                 statement.executeUpdate();
@@ -472,15 +472,14 @@ public class MazeModule extends DataModule{
 
             if(id == 0)
             {
-                sql = "INSERT INTO MazeImageResource(Id, MazeId, ImageTypeId, Image, PositionX, PositionY, GridScaleX, GridScaleY) " + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                sql = "INSERT INTO MazeImageResource(Id, MazeId, ImageTypeId, Image, PositionX, PositionY,) " + "VALUES (?, ?, ?, ?, ?, ?)";
 
                 id = GetNextSequence("MazeImageResourceId");
                 imagetypeid = 2;
 
                 positionx =  maze.getLogo().GetPositionX();
                 positiony =  maze.getLogo().GetPositionY();
-                gridscalex =  maze.getLogo().GetGridScaleX();
-                gridscaley =  maze.getLogo().GetGridScaleY();
+
 
                 statement = PrepareStatement(sql);
 
@@ -490,8 +489,7 @@ public class MazeModule extends DataModule{
                 statement.setBlob(4, maze.getLogo().GetImageAsBlob());
                 statement.setInt(5, positionx);
                 statement.setInt(6, positiony);
-                statement.setInt(7, gridscalex);
-                statement.setInt(8, gridscaley);
+
 
                 try {
                     statement.executeUpdate();
@@ -505,18 +503,13 @@ public class MazeModule extends DataModule{
 
                 positionx = maze.getLogo().GetPositionX();
                 positiony = maze.getLogo().GetPositionY();
-                gridscalex = maze.getLogo().GetGridScaleX();
-                gridscaley = maze.getLogo().GetGridScaleY();
 
                 statement = PrepareStatement(sql);
-
 
                 statement.setInt(1, imagetypeid);
                 statement.setBlob(2, maze.getLogo().GetImageAsBlob());
                 statement.setInt(3, positionx);
                 statement.setInt(4, positiony);
-                statement.setInt(5, gridscalex);
-                statement.setInt(6, gridscaley);
 
                 statement.setInt(7, id);
 
@@ -526,11 +519,7 @@ public class MazeModule extends DataModule{
                     statement.close();
                 }
             }
-
-        } else {
-
         }
-
     }
 
     public void DeleteMaze (int ID) {

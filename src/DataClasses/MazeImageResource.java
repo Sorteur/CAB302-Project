@@ -18,8 +18,6 @@ public class MazeImageResource
     private int ImageTypeId;
     private int PositionX;
     private int PositionY;
-    private int GridScaleX;
-    private int GridScaleY;
 
 
     public MazeImageResource(int id, Image image, int positionX, int positionY, int gridScaleX, int gridScaleY){
@@ -27,11 +25,9 @@ public class MazeImageResource
         Image = image;
         PositionX = positionX;
         PositionY = positionY;
-        GridScaleX = gridScaleX;
-        GridScaleY = gridScaleY;
     }
 
-    MazeImageResource(Image image, int positionX, int positionY){
+   public MazeImageResource(Image image, int positionX, int positionY){
         Image = image;
         PositionX = positionX;
         PositionY = positionY;
@@ -71,21 +67,6 @@ public class MazeImageResource
         return PositionY;
     }
 
-    public void SetGridScale(int gridScaleX, int gridScaleY)
-    {
-        GridScaleX = gridScaleX;
-        GridScaleY = gridScaleY;
-    }
-
-    public int GetGridScaleX()
-    {
-        return GridScaleX;
-    }
-
-    public int GetGridScaleY()
-    {
-        return GridScaleY;
-    }
 
     public ByteArrayInputStream GetImageAsBlob()
     {// with help of this as reference https://stackoverflow.com/questions/20961065/converting-image-in-memory-to-a-blob
