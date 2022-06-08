@@ -5,7 +5,14 @@ import Engine.MazeManager;
 import UserInterface.LogoPlacer;
 import UserInterface.SrtEndPlacer;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Blob;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -47,7 +54,7 @@ public class MazeModule extends DataModule{
 
                 int id = resultSet.getInt(1);
                 int imageTypeId = resultSet.getInt(2);
-                Image image = MazeImageResource.GetBlobAsImage(resultSet.getBlob(3));
+                Image image = GetBlobAsImage(resultSet.getBlob(3));
                 int posistionX = resultSet.getInt(4);
                 int posistionY= resultSet.getInt(5);
                 int gridScaleX= resultSet.getInt(6);
@@ -253,7 +260,6 @@ public class MazeModule extends DataModule{
         statement.setString(3, Author);
 
 
-
         statement.setInt(6, length);
         statement.setInt(7, height);
 
@@ -322,7 +328,7 @@ public class MazeModule extends DataModule{
             statement.setInt(1, id);
             statement.setInt(2, mazeId);
             statement.setInt(3, imagetypeid);
-            statement.setBlob(4, maze.getLogo().GetImageAsBlob());
+            statement.setBlob(4,GetImageAsBlob(maze.getLogo().GetImage()));;
             statement.setInt(5, positionx);
             statement.setInt(6, positiony);
 
@@ -347,7 +353,7 @@ public class MazeModule extends DataModule{
             statement.setInt(1, id);
             statement.setInt(2, mazeId);
             statement.setInt(3, imagetypeid);
-            statement.setBlob(4, maze.getEntryImage().GetImageAsBlob());
+            statement.setBlob(4, GetImageAsBlob(maze.getEntryImage().GetImage()));
             statement.setInt(5, positionx);
             statement.setInt(6, positiony);
 
@@ -373,7 +379,7 @@ public class MazeModule extends DataModule{
             statement.setInt(1, id);
             statement.setInt(2, mazeId);
             statement.setInt(3, imagetypeid);
-            statement.setBlob(4, maze.getExitImage().GetImageAsBlob());
+            statement.setBlob(4, GetImageAsBlob(maze.getExitImage().GetImage()));
             statement.setInt(5, positionx);
             statement.setInt(6, positiony);
 
@@ -486,7 +492,7 @@ public class MazeModule extends DataModule{
                 statement.setInt(1, id);
                 statement.setInt(2, mazeId);
                 statement.setInt(3, imagetypeid);
-                statement.setBlob(4, maze.getLogo().GetImageAsBlob());
+                statement.setBlob(4, GetImageAsBlob(maze.getLogo().GetImage()));
                 statement.setInt(5, positionx);
                 statement.setInt(6, positiony);
 
@@ -507,7 +513,7 @@ public class MazeModule extends DataModule{
                 statement = PrepareStatement(sql);
 
                 statement.setInt(1, imagetypeid);
-                statement.setBlob(2, maze.getLogo().GetImageAsBlob());
+                statement.setBlob(2, GetImageAsBlob(maze.getLogo().GetImage()));
                 statement.setInt(3, positionx);
                 statement.setInt(4, positiony);
 
@@ -525,5 +531,51 @@ public class MazeModule extends DataModule{
     public void DeleteMaze (int ID) {
 
     }
+
+
+    //Tools//
+    private ByteArrayInputStream GetImageAsBlob(Image Image)
+    {// with help of this as reference https://stackoverflow.com/questions/20961065/converting-image-in-memory-to-a-blob
+        BufferedImage bufferedImage = new BufferedImage(Image.getWidth(null), Image.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+        Graphics2D graphics2D = bufferedImage.createGraphics();
+        graphics2D.drawImage(Image, 0, 0, null);
+        graphics2D.dispose();
+
+        ByteArrayOutputStream byteArrayOutputStream = null;
+        try {
+            byteArrayOutputStream = new ByteArrayOutputStream();
+            ImageIO.write(bufferedImage, "png", byteArrayOutputStream);
+        } catch (Exception exception){
+
+        }
+        finally {
+            try{
+                byteArrayOutputStream.close();
+            } catch (Exception exception) {
+
+            }
+        }
+        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(byteArrayOutputStream.toByteArray());
+        return byteArrayInputStream;
+    }
+
+    private static Image GetBlobAsImage (Blob blob) throws SQLException {
+        // with help of this as reference https://stackoverflow.com/questions/22923518/how-can-i-convert-a-bufferedimage-to-an-image
+        // and this https://stackoverflow.com/questions/50427495/java-blob-to-image-file
+
+        Image image = null;
+        try {
+            InputStream inputStream = blob.getBinaryStream(1, blob.length());
+            image = ImageIO.read(inputStream);
+
+        }catch (IOException ioException){
+
+        }
+        return image;
+    }
+
+
+
+
 
 }
