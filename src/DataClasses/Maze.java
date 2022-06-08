@@ -1,12 +1,16 @@
 package DataClasses;
 
 import java.awt.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Map;
 
 public class Maze {
     /*Property's*/
     private String Description = "";
+    private String Author = "";
+    private LocalDateTime Creation;
+    private LocalDateTime LastEdited;
     private int Id = 0;
     private final int Length;
     private final int Height;
@@ -40,6 +44,12 @@ public class Maze {
     public String GetDescription(){
         return Description;
     }
+
+    public void SetAuthor(String author) { Author = author;}
+    public String GetAuthor() {return Author;}
+    public LocalDateTime GetCreation(){return Creation;}
+    public void SetLastEdited(LocalDateTime lastEdited) {LastEdited =lastEdited;}
+    public LocalDateTime GetLastEdited(){return LastEdited;}
     public void SetId(int id) {
         Id = id;
         for (Cell cell : getGrid()) {

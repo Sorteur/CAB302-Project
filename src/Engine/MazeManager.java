@@ -118,7 +118,6 @@ public class MazeManager {
 
         Image ScaledImage = Logo.getScaledInstance(Width-2,Height-2,Image.SCALE_SMOOTH);
         Maze.ConstructLogo(ScaledImage, X, Y);
-        Maze.getLogo().SetGridScale(Width,Height);
         //Make sure Logo is un-reachable
         for (Cell cell:Maze.getGrid()) {
             if (cell.GetGridX() >= X & cell.GetGridX() < X + WidthBoxInt){
@@ -143,9 +142,8 @@ public class MazeManager {
 
     public void StartEndCreator(MazePanel pnlMaze, int X, int Y, int Width, int Height, Image EndImage, Image StartImage,int j) {
         Maze.ConstructExitImage(EndImage.getScaledInstance(Width, Height,Image.SCALE_SMOOTH), Maze.getLength()- X, Maze.getHeight()- Y);
-        Maze.getExitImage().SetGridScale(X, Y);
         Maze.ConstructEntryImage(StartImage.getScaledInstance(Width, Height,Image.SCALE_SMOOTH), 0, 0);
-        Maze.getEntryImage().SetGridScale(X, Y);
+
         //Used to make sure only one SrtEndPlacer is made, update instead if it exists
         if (j == 0){
             pnlMaze.add(new SrtEndPlacer());
