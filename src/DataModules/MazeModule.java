@@ -55,17 +55,17 @@ public class MazeModule extends DataModule{
 
                 if(imageTypeId == 2)
                 {
-                    maze.SetLogo(new MazeImageResource(id, image, posistionX, posistionY, gridScaleX, gridScaleY));
+                    maze.SetLogo(new MazeImageResource(image, posistionX, posistionY));
                 }
 
                 if(imageTypeId == 4)
                 {
-                    maze.SetEntryImage(new MazeImageResource(id, image, posistionX, posistionY, gridScaleX, gridScaleY));
+                    maze.SetEntryImage(new MazeImageResource(image, posistionX, posistionY));
                 }
 
                 if(imageTypeId == 6)
                 {
-                    maze.SetExitImage(new MazeImageResource(id, image, posistionX, posistionY, gridScaleX, gridScaleY));
+                    maze.SetExitImage(new MazeImageResource(image, posistionX, posistionY));
                 }
 
                 if(maze.getExitImage()!= null)

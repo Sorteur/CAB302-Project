@@ -20,13 +20,6 @@ public class MazeImageResource
     private int PositionY;
 
 
-    public MazeImageResource(int id, Image image, int positionX, int positionY, int gridScaleX, int gridScaleY){
-        Id = id;
-        Image = image;
-        PositionX = positionX;
-        PositionY = positionY;
-    }
-
     public MazeImageResource(Image image, int positionX, int positionY){
         Image = image;
         PositionX = positionX;
@@ -37,19 +30,7 @@ public class MazeImageResource
     public Image GetImage(){
         return Image;
     }
-    public void SetId(int id){
-        Id = id;
-    }
 
-    public int GetId() {
-        return Id;
-    }
-
-    public void SetPosition(int positionX, int positionY)
-    {
-        PositionX = positionX;
-        PositionY = positionY;
-    }
 
     public int GetPositionX()
     {
