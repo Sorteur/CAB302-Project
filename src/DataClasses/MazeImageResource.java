@@ -13,10 +13,9 @@ import java.sql.SQLException;
 
 public class MazeImageResource
 {
-    private Image Image;
-    private int PositionX;
-    private int PositionY;
-
+    private final Image Image;
+    private final int PositionX;
+    private final int PositionY;
 
     public MazeImageResource(Image image, int positionX, int positionY){
         Image = image;
@@ -24,24 +23,7 @@ public class MazeImageResource
         PositionY = positionY;
     }
 
-
-    public Image GetImage(){
-        return Image;
-    }
-
-
-    public int GetPositionX()
-    {
-        return PositionX;
-
-    }
-
-    public int GetPositionY()
-    {
-        return PositionY;
-    }
-
-
-
-
+    public Image GetImage(){ return Image; }
+    public int GetPositionX(){ return PositionX; }
+    public int GetPositionY() { return PositionY; }
 }

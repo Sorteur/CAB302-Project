@@ -149,12 +149,8 @@ public class Maze {
     public Cell checkNorthCell(int index)
     {
         if (index % Height == 0) return null;
-
         int northcellindex = index - 1 ;
-
         return getCell(northcellindex);
-
-        //return !getCell(northcellindex).isVistited();
     }
     public Cell checkEastCell(int index)
     {
@@ -163,8 +159,6 @@ public class Maze {
         if(eastcellindex >= (Length*Height)) return null;
 
         return getCell(eastcellindex);
-
-        //return !getCell(eastcellindex).isVistited();
     }
     public Cell checkSouthCell(int index)
     {
@@ -174,42 +168,33 @@ public class Maze {
 
         return getCell(southcellindex);
 
-        //return !getCell(southcellindex).isVistited();
-    }
 
+    }
     public Cell checkWestCell(int index)
     {
         int westcellindex = index - Height;
-
         if(westcellindex < 0) return null;
-
         return getCell(westcellindex);
-        //return !getCell(westcellindex).isVistited();
+
     }
 
 
     public Cell PathFindNorthCell(int index)
     {
         if (index % Height == 0) return null;
-
         if(getCell(index).IsNorthernwall().equals(WallType.Wall))
             return null;
-
         int northcellindex = index - 1 ;
-
         return getCell(northcellindex);
-
     }
+
     public Cell PathFindEastCell(int index)
     {
         int eastcellindex = index + Height;
-
         if(getCell(index).IsEasternwall().equals(WallType.Wall))
             return null;
 
         if(eastcellindex >= (Length*Height)) return null;
-
-
         return getCell(eastcellindex);
 
         //return !getCell(eastcellindex).isVistited();

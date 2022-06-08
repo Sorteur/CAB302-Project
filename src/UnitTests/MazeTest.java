@@ -74,7 +74,7 @@ public class MazeTest {
         assertEquals(WallType.Empty,TestMaze.SwitchWallType(testCell.IsNorthernwall()));
     }
 
-    //Test 10: Checking Neighbouring cells
+    //Test 10: Test to see if Check(North/South/East/West)Cell works
     @Test
     public void CheckNeighbourCellsTest(){
         //Using cell at 0,0 as test, north and west should be null, south and east should be cell at 0,1 and 1,0 respectively
@@ -85,14 +85,16 @@ public class MazeTest {
 
     }
 
-    //Test 11:
+    //Test 11: Test to see if PathFind(North/South/East/West)Cell works
     @Test
     public void CheckNeighbourPathFindTest(){
-
+        //
+        TestMaze.SetCell(0,new Cell(0,0,0,WallType.Wall,WallType.Empty,WallType.Wall,WallType.Wall));
+        assertNull(TestMaze.PathFindNorthCell(0));
+        assertNull(TestMaze.PathFindWestCell(0));
+        assertNull(TestMaze.PathFindEastCell(0));
+        assertEquals(TestMaze.Search(0,1),TestMaze.PathFindSouthCell(0));
     }
-
-
-
 }
 
 
