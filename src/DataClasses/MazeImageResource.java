@@ -27,17 +27,12 @@ public class MazeImageResource
         PositionY = positionY;
     }
 
-   public MazeImageResource(Image image, int positionX, int positionY){
+    public MazeImageResource(Image image, int positionX, int positionY){
         Image = image;
         PositionX = positionX;
         PositionY = positionY;
     }
 
-
-    public void SetImage(Image image)
-    {
-        Image = image;
-    }
 
     public Image GetImage(){
         return Image;
