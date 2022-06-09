@@ -29,6 +29,8 @@ public class Maze {
      *
      * @
      */
+
+
     public Maze(int length, int height) {
         Length = length;
         Height = height;
@@ -196,7 +198,6 @@ public class Maze {
         if(eastcellindex >= (Length*Height)) return null;
         return getCell(eastcellindex);
 
-        //return !getCell(eastcellindex).isVistited();
     }
     public Cell PathFindSouthCell(int index)
     {
@@ -243,6 +244,8 @@ public class Maze {
         int InvalidExitCellCoordinateX = InvalidStartingCellCoordinateX*2;//Greater then this and being greater then the Y range means your in a possible exit cell
         int InvalidExitCellCoordinateY = InvalidStartingCellCoordinateY;
 
+
+
         int currentcellx = cell.GetGridX();//All-ways in the maze it exits therefor check is it in a valid area
         int currentcelly = cell.GetGridY();
 
@@ -250,6 +253,7 @@ public class Maze {
             return false;
         if(currentcellx > InvalidExitCellCoordinateX & currentcelly > InvalidExitCellCoordinateY)
             return false;
+
 
 
         int openingcellx = cell.GetGridX()+xrange;//Must check if this cell exists in the maze and is in invalid cell area
@@ -261,6 +265,9 @@ public class Maze {
             return false;
         if(openingcellx > InvalidExitCellCoordinateX & currentcelly > InvalidExitCellCoordinateY)
             return false;
+
+
+
 
         return true;
     }

@@ -1,10 +1,6 @@
 package DataModules;
 
 import DataClasses.*;
-import Engine.MazeManager;
-import UserInterface.LogoPlacer;
-import UserInterface.SrtEndPlacer;
-
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -12,13 +8,8 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.Blob;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Hashtable;
+import java.sql.*;
+
 
 public class MazeModule extends DataModule{
     public MazeModule(DBConnection connection) {
@@ -42,7 +33,7 @@ public class MazeModule extends DataModule{
         return maze;
     }
     private Maze PopulateMazeImages(int mazeid ,Maze maze) throws SQLException {
-        String sql = "SELECT Id, ImageTypeId, Image, PositionX, PositionY, GridScaleX, GridScaleY " + "FROM MazeImageResource " + "WHERE MazeId = ?;";
+        String sql = "SELECT Id, ImageTypeId, Image, PositionX, PositionY " + "FROM MazeImageResource " + "WHERE MazeId = ?;";
 
         PreparedStatement statement = PrepareStatement(sql);
 
@@ -52,13 +43,10 @@ public class MazeModule extends DataModule{
         try {
             while (resultSet.next()) {
 
-                int id = resultSet.getInt(1);
                 int imageTypeId = resultSet.getInt(2);
                 Image image = GetBlobAsImage(resultSet.getBlob(3));
                 int posistionX = resultSet.getInt(4);
                 int posistionY= resultSet.getInt(5);
-                int gridScaleX= resultSet.getInt(6);
-                int gridScaleY= resultSet.getInt(7);
 
                 if(imageTypeId == 2)
                 {
@@ -73,17 +61,6 @@ public class MazeModule extends DataModule{
                 if(imageTypeId == 6)
                 {
                     maze.SetExitImage(new MazeImageResource(image, posistionX, posistionY));
-                }
-
-                if(maze.getExitImage()!= null)
-                {
-                    maze.setImgSrtEnd(true);
-                    MazeManager.Instance().pnlMaze.add(new SrtEndPlacer());
-                }
-
-                if(imageTypeId == 2)
-                {
-                    MazeManager.Instance().pnlMaze.add(new LogoPlacer(),BorderLayout.CENTER);
                 }
 
             }
@@ -131,7 +108,7 @@ public class MazeModule extends DataModule{
 
     private Maze DoGetPartialMazeFromId (int id) throws SQLException {
 
-        String sql = "SELECT Id, description, XDimension, YDimension " + "FROM Maze " + "WHERE Deleted = false and Id = ?";
+        String sql = "SELECT Id, description, Author, CreationDate, LastEdited, XDimension, YDimension " + "FROM Maze " + "WHERE Deleted = false and Id = ?";
 
         PreparedStatement statement = PrepareStatement(sql);
 
@@ -140,15 +117,21 @@ public class MazeModule extends DataModule{
         ResultSet resultSet = statement.executeQuery();
         int Id = id;
         String description="Error";
+        String author="";
         int xdemension;
         int ydemension;
+        Timestamp creationDate;
+        Timestamp lastEditedDate;
 
 
         try {
             if (resultSet.next())
                 description = resultSet.getString(2);
-                xdemension = resultSet.getInt(3);
-                ydemension = resultSet.getInt(4);
+                author = resultSet.getString(3);
+                creationDate = resultSet.getTimestamp(4);
+                lastEditedDate = resultSet.getTimestamp(5);
+                xdemension = resultSet.getInt(6);
+                ydemension = resultSet.getInt(7);
                 Maze maze = new Maze(xdemension,ydemension);
                 maze.SetDescription(description);
                 maze.SetId(id);
@@ -159,7 +142,7 @@ public class MazeModule extends DataModule{
         }
     }
 
-    public Hashtable GetMazeDescriptions() throws SQLException{
+    public MazeDescriptions GetMazeDescriptions() throws SQLException{
         StartTransaction();
         try{
 
@@ -171,29 +154,33 @@ public class MazeModule extends DataModule{
         }
     }
 
-    private Hashtable DoGetMazeDescriptions() throws SQLException
+    private MazeDescriptions DoGetMazeDescriptions() throws SQLException
     {
-        Hashtable descriptions = ReadMazeDescriptions();
+        MazeDescriptions descriptions = ReadMazeDescriptions();
 
         return descriptions;
     }
 
-    private Hashtable ReadMazeDescriptions() throws SQLException
+    private MazeDescriptions ReadMazeDescriptions() throws SQLException
     {
-        Hashtable result = new Hashtable<Integer, String>();
-
-        String sql = "SELECT Id, description " + "FROM Maze " + "WHERE Deleted = false;";
+        String sql = "SELECT Id, Description, Author, CreationDate, LastEdited " + "FROM Maze " + "WHERE Deleted = false;";
 
         PreparedStatement statement = PrepareStatement(sql);
 
         ResultSet resultSet = statement.executeQuery();
 
+        int rows = 0;
+        if(resultSet.last()){
+            rows = resultSet.getRow();
+            resultSet.beforeFirst();
+        }
+
+        MazeDescriptions result = new MazeDescriptions(rows);
         try{
             while(resultSet.next())
             {
-                result.put(resultSet.getInt(1),resultSet.getString(2));
+                result.InsertDescription(resultSet.getRow()-1, resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getTimestamp(4).toLocalDateTime(), resultSet.getTimestamp(5).toLocalDateTime());
             }
-
             return result;
         }
         finally {
@@ -247,21 +234,18 @@ public class MazeModule extends DataModule{
         int id = GetNextSequence("MazeId");
         String description = maze.GetDescription();
         String Author = maze.GetAuthor();
-        LocalDateTime CreationTime = maze.GetCreation();
-        LocalDateTime LastEdited = maze.GetLastEdited();
         int length = maze.getLength();
         int height = maze.getHeight();
 
-        String sql = "INSERT INTO Maze(Id, Deleted, Description, XDimension, YDimension) " + "VALUES (?, false, ?, ?, ? )";
+        String sql = "INSERT INTO Maze(Id, Deleted, Description, Author, XDimension, YDimension ) " + "VALUES (?, false, ?, ?, ?, ? )";
         PreparedStatement statement = PrepareStatement(sql);
 
         statement.setInt(1, id);
         statement.setString(2, description);
         statement.setString(3, Author);
 
-
-        statement.setInt(6, length);
-        statement.setInt(7, height);
+        statement.setInt(4, length);
+        statement.setInt(5, height);
 
         statement.executeUpdate();
 
@@ -314,7 +298,7 @@ public class MazeModule extends DataModule{
 
        if(maze.getLogo()!=null)
         {
-            sql = "INSERT INTO MazeImageResource(Id, MazeId, ImageTypeId, Image, PositionX, PositionY) " + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            sql = "INSERT INTO MazeImageResource(Id, MazeId, ImageTypeId, Image, PositionX, PositionY) " + "VALUES (?, ?, ?, ?, ?, ?)";
 
             id = GetNextSequence("MazeImageResourceId");
             imagetypeid = 2;
@@ -340,7 +324,7 @@ public class MazeModule extends DataModule{
             }
         }
         if(maze.getEntryImage()!=null) {
-            sql = "INSERT INTO MazeImageResource(Id, MazeId, ImageTypeId, Image, PositionX, PositionY) " + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            sql = "INSERT INTO MazeImageResource(Id, MazeId, ImageTypeId, Image, PositionX, PositionY) " + "VALUES (?, ?, ?, ?, ?, ?)";
 
             id = GetNextSequence("MazeImageResourceId");
             imagetypeid = 4;
@@ -366,7 +350,7 @@ public class MazeModule extends DataModule{
         }
         if(maze.getExitImage()!=null)
         {
-            sql = "INSERT INTO MazeImageResource(Id, MazeId, ImageTypeId, Image, PositionX, PositionY) " + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            sql = "INSERT INTO MazeImageResource(Id, MazeId, ImageTypeId, Image, PositionX, PositionY) " + "VALUES (?, ?, ?, ?, ?, ?)";
 
             id = GetNextSequence("MazeImageResourceId");
             imagetypeid = 6;
@@ -397,12 +381,15 @@ public class MazeModule extends DataModule{
     private void UpdateMaze (Maze maze) throws SQLException {
         int id = maze.GetId();
         String description = maze.GetDescription();
+        String author = maze.GetAuthor();
 
-        String sql = "UPDATE Maze " + "SET description = ? " + "WHERE Id = ?";
+
+        String sql = "UPDATE Maze " + "SET description = ?, Author = ?, LastEdited = default " + "WHERE Id = ?";
         PreparedStatement statement = PrepareStatement(sql);
 
         statement.setString(1, description);
-        statement.setInt(2, id);
+        statement.setString(2, author);
+        statement.setInt(3, id);
 
         statement.executeUpdate();
     }
