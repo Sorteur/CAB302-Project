@@ -102,7 +102,17 @@ public class MazeManager {
         //Used to make sure only one LogoPlacer is made, update instead if it exists
         //MazeManager.Instance().GetMaze().setLogoImage(ScaledImage);
 
+        LogoDraw(pnlMaze);
+    }
 
+
+    public void StartEndDraw(MazePanel pnlMaze){
+        pnlMaze.add(new SrtEndPlacer());
+        pnlMaze.repaint();
+        pnlMaze.updateUI();
+    }
+    public void LogoDraw(MazePanel pnlMaze){
+        pnlMaze.add(new LogoPlacer());
         pnlMaze.repaint();
         pnlMaze.updateUI();
     }
@@ -110,10 +120,9 @@ public class MazeManager {
     public void StartEndCreator(MazePanel pnlMaze, int X, int Y, int Width, int Height, Image EndImage, Image StartImage,int j) {
         Maze.SetExitImage(new MazeImageResource(EndImage.getScaledInstance(Width, Height,Image.SCALE_SMOOTH), Maze.getLength()- X, Maze.getHeight()- Y));
         Maze.SetEntryImage(new MazeImageResource(StartImage.getScaledInstance(Width, Height,Image.SCALE_SMOOTH), 0, 0));
-        //Used to make sure only one SrtEndPlacer is made, update instead if it exists
+        StartEndDraw(pnlMaze);
 
-        pnlMaze.repaint();
-        pnlMaze.updateUI();
+        //Used to make sure only one SrtEndPlacer is made, update instead if it exists
     }
 
     public void AutoLogoCreator(MazePanel pnlMaze,int MazeLength,int MazeHeight, boolean Random, boolean ImageStartEnd, int BoxX, int BoxY, Image Logo) {
@@ -132,10 +141,12 @@ public class MazeManager {
         if (Random) {MazeGenerator.Instance().GenerateMaze(Maze);}
         if (ImageStartEnd){
             Maze.setImgSrtEnd(true);
+            StartEndDraw(pnlMaze);
 
             ImageGUI.Instance().ImgSrtEnd(pnlMaze);
         }
         Maze.SetLogo(new MazeImageResource(Logo.getScaledInstance(Width,Height,Image.SCALE_SMOOTH), StartCell.GetGridX(), StartCell.GetGridY()));
+        LogoDraw(pnlMaze);
         pnlMaze.GridSet();
         pnlMaze.updateUI();
     }
