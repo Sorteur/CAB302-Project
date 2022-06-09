@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4b6e86b4-7292-4739-a5c0-2934c990bb8a" name="Changes" comment="Added Search Functionallity">
-      <change beforePath="$PROJECT_DIR$/src/DrawGrid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DrawGrid.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+    <list default="true" id="4b6e86b4-7292-4739-a5c0-2934c990bb8a" name="Changes" comment="Started Auto-logo and fixed bugs">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataClasses/Maze.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataClasses/Maze.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Engine/MazeGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Engine/MazeGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UserInterface/GUI2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/GUI2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UserInterface/ImageGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/ImageGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UserInterface/MazePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/MazePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UserInterface/SrtEndPlacer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/SrtEndPlacer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,6 +18,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="JUnit5 Test Class" />
         <option value="Class" />
       </list>
     </option>
@@ -47,15 +52,34 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../LecWk5Exp/lec05-gui/src/week5/THIS.java" />
-    <property name="project.structure.last.edited" value="Libraries" />
-    <property name="project.structure.proportion" value="0.15" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
+    <property name="create.test.in.the.same.root" value="true" />
+    <property name="project.structure.last.edited" value="Global Libraries" />
+    <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
-  <component name="RunManager">
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="ExtractSuperBase.RECENT_KEYS">
+      <recent name="UserInterface" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="DataClasses" />
+      <recent name="Engine" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="CAB302-Project" />
@@ -63,9 +87,59 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="MazeManagerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="CAB302-Project" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="UnitTests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="UnitTests" />
+      <option name="MAIN_CLASS_NAME" value="UnitTests.MazeManagerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MazeManagerTest.CreateMazeTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="CAB302-Project" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="UnitTests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="UnitTests" />
+      <option name="MAIN_CLASS_NAME" value="UnitTests.MazeManagerTest" />
+      <option name="METHOD_NAME" value="CreateMazeTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MazeManagerTest.LoadMazeTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="CAB302-Project" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="UnitTests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="UnitTests" />
+      <option name="MAIN_CLASS_NAME" value="UnitTests.MazeManagerTest" />
+      <option name="METHOD_NAME" value="LoadMazeTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.MazeManagerTest" />
+        <item itemvalue="JUnit.MazeManagerTest.LoadMazeTest" />
+        <item itemvalue="JUnit.MazeManagerTest.CreateMazeTest" />
       </list>
     </recent_temporary>
   </component>
@@ -99,7 +173,154 @@
       <option name="project" value="LOCAL" />
       <updated>1648556376986</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Moved from Test to main, disposed of unused files,">
+      <created>1649805444841</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1649805444841</updated>
+    </task>
+    <task id="LOCAL-00005" summary="updating">
+      <created>1649805565905</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1649805565905</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Added Pushable 'Buttons'">
+      <created>1649833234274</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1649833234274</updated>
+    </task>
+    <task id="LOCAL-00007" summary="FIXED THE DOUBLE LINE ISSUE LETS GOOOOOOO">
+      <created>1650364872398</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1650364872398</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Slightly changed buttons to look better">
+      <created>1651029047447</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1651029047447</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Added Start-GUI">
+      <created>1651115355398</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1651115355398</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Added Start-GUI">
+      <created>1651115432377</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1651115432377</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Added Start-GUI">
+      <created>1651115589941</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1651115589941</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Added Start-GUI">
+      <created>1651116239412</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1651116239412</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Tweaked some stuff and started on Unit-Tests">
+      <created>1652494808336</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1652494808336</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Changed the way DrawGrid Works and moved some methods to GUI2">
+      <created>1652502503436</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1652502503436</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Fixed Maze bug">
+      <created>1654042182769</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1654042182769</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Reworked grid GUI, Maze create UI">
+      <created>1654068964897</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1654068964897</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Changed coloured start/finish to arrows">
+      <created>1654073984610</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1654073984610</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Started LogoGUI">
+      <created>1654137548263</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1654137548264</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Completed LogoPlacer">
+      <created>1654165263193</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1654165263194</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Completed LogoPlacer">
+      <created>1654165970581</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1654165970581</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Completed LogoPlacer">
+      <created>1654226936680</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1654226936680</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Functionality of Start/End images implemented, still need to make it look pretty">
+      <created>1654300851191</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1654300851191</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Finished implementation of GUI">
+      <created>1654397929182</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1654397929182</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Started Auto-logo and fixed bugs">
+      <created>1654407628597</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1654407628597</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -129,6 +350,22 @@
     <MESSAGE value="Test" />
     <MESSAGE value="Test 2" />
     <MESSAGE value="Just Testing what we could do to generate cells for the mazes, currently just a grid no I/O." />
-    <option name="LAST_COMMIT_MESSAGE" value="Just Testing what we could do to generate cells for the mazes, currently just a grid no I/O." />
+    <MESSAGE value="Moved from Test to main, disposed of unused files," />
+    <MESSAGE value="updating" />
+    <MESSAGE value="Added Pushable 'Buttons'" />
+    <MESSAGE value="FIXED THE DOUBLE LINE ISSUE LETS GOOOOOOO" />
+    <MESSAGE value="Slightly changed buttons to look better" />
+    <MESSAGE value="Added Start-GUI" />
+    <MESSAGE value="Tweaked some stuff and started on Unit-Tests" />
+    <MESSAGE value="Changed the way DrawGrid Works and moved some methods to GUI2" />
+    <MESSAGE value="Fixed Maze bug" />
+    <MESSAGE value="Reworked grid GUI, Maze create UI" />
+    <MESSAGE value="Changed coloured start/finish to arrows" />
+    <MESSAGE value="Started LogoGUI" />
+    <MESSAGE value="Completed LogoPlacer" />
+    <MESSAGE value="Functionality of Start/End images implemented, still need to make it look pretty" />
+    <MESSAGE value="Finished implementation of GUI" />
+    <MESSAGE value="Started Auto-logo and fixed bugs" />
+    <option name="LAST_COMMIT_MESSAGE" value="Started Auto-logo and fixed bugs" />
   </component>
 </project>
