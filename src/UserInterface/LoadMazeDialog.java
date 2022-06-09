@@ -77,12 +77,9 @@ public class LoadMazeDialog {
             }
 
             MazeManager.Instance().LoadMazeFromId(id);
-            pnlMaze.add(new LogoPlacer());
-            pnlMaze.add(new SrtEndPlacer());
+
             pnlMaze.GridSet();
             pnlMaze.updateUI();
-
-
             //MazeManager.Instance().pnlMaze.
             PopOut.dispose();
         });
