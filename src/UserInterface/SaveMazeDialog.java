@@ -20,7 +20,7 @@ public class SaveMazeDialog {
         Font Large  = new Font("Larger",Font.PLAIN, 24 );
 
         JFrame PopOut = new JFrame();
-        PopOut.setSize(350, 200);
+        PopOut.setSize(550, 300);
         PopOut.setVisible(true);
         PopOut.setLocationRelativeTo(null);
         PopOut.setLayout(new GridBagLayout());
@@ -31,36 +31,52 @@ public class SaveMazeDialog {
         c.anchor = GridBagConstraints.LINE_START;
 
 
-        JLabel HeightLabel = new JLabel("Name Of Maze");
-        HeightLabel.setFont(Large);
+        JLabel MazeNameLabel = new JLabel("Name Of Maze");
+        MazeNameLabel.setFont(Large);
         c.gridx = 0;
         c.gridy = 1;
-        c.gridwidth = 2;
-        PopOut.add(HeightLabel,c);
+        //c.gridwidth = 2;
+        PopOut.add(MazeNameLabel,c);
 
         JTextField MazeName = new JTextField();
         MazeName.setFont(Large);
         MazeName.setPreferredSize(new Dimension(150,30));
         MazeName.setText(MazeManager.Instance().GetMaze().GetDescription());
-        c.gridx = 2;
-        c.gridy = 1;
-        c.gridwidth = 1;
+        c.gridx = 0;
+        c.gridy = 2;
         c.weighty = 0;
         PopOut.add(MazeName,c);
+
+        JLabel AuthorLabel = new JLabel("Name Of Author");
+        AuthorLabel.setFont(Large);
+        c.gridx = 1;
+        c.gridy = 1;
+        PopOut.add(AuthorLabel,c);
+
+        JTextField AuthorName = new JTextField();
+        AuthorName.setFont(Large);
+        AuthorName.setPreferredSize(new Dimension(150,30));
+        AuthorName.setText(MazeManager.Instance().GetMaze().GetAuthor());
+        c.gridx = 1;
+        c.gridy = 2;
+        c.weighty = 0;
+        PopOut.add(AuthorName,c);
 
 
         JButton Save = new JButton("Save");
         Save.setFont(Large);
-        c.anchor = GridBagConstraints.LINE_END;
+        //c.anchor = GridBagConstraints.LINE_END;
         c.fill = GridBagConstraints.VERTICAL;
         c.gridx = 0;
-        c.gridwidth = 2;
-        c.gridheight = 3;
-        c.gridy = 2;
+        //c.gridwidth = 2;
+        //c.gridheight = 3;
+        c.gridy = 3;
         Save.addActionListener(a -> {
             try {
                 String Description = MazeName.getText();
+                String Author = AuthorName.getText();
                 MazeManager.Instance().GetMaze().SetDescription(Description);
+                MazeManager.Instance().GetMaze().SetAuthor(Author);
                 MazeManager.Instance().SaveMaze();
 
                 PopOut.dispose();
@@ -73,16 +89,18 @@ public class SaveMazeDialog {
 
         JButton SaveAs = new JButton("SaveAs");
         SaveAs.setFont(Large);
-        c.anchor = GridBagConstraints.LINE_END;
+        //c.anchor = GridBagConstraints.LINE_END;
         c.fill = GridBagConstraints.VERTICAL;
         c.gridx = 1;
-        c.gridwidth = 2;
-        c.gridheight = 3;
-        c.gridy = 2;
+        //c.gridwidth = 2;
+        //c.gridheight = 3;
+        c.gridy = 3;
         SaveAs.addActionListener(a -> {
             try {
                 String Description = MazeName.getText();
+                String Author = AuthorName.getText();
                 MazeManager.Instance().GetMaze().SetDescription(Description);
+                MazeManager.Instance().GetMaze().SetAuthor(Author);
                 MazeManager.Instance().GetMaze().SetId(0);
                 MazeManager.Instance().SaveMaze();
 

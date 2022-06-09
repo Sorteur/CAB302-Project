@@ -22,40 +22,40 @@ public class LoadMazeDialog {
         Font Large  = new Font("Larger",Font.PLAIN, 24 );
 
         JFrame PopOut = new JFrame();
-        PopOut.setSize(400, 200);
+        PopOut.setSize(600, 200);
         PopOut.setVisible(true);
         PopOut.setLocationRelativeTo(null);
         PopOut.setLayout(new GridBagLayout());
 
         GridBagConstraints c  =  new GridBagConstraints();
         c.weighty = 0.1;
-        c.insets = new Insets(5,5,0,5);
+        c.insets = new Insets(10,0,10,5);
         c.anchor = GridBagConstraints.LINE_START;
 
-        JLabel WidthLabel = new JLabel("Select a Maze!");
-        WidthLabel.setFont(Large);
+
+        JLabel Label = new JLabel("Select a Maze!");
+        Label.setFont(Large);
         c.gridx = 0;
         c.gridy = 0;
 
-        PopOut.add(WidthLabel,c);
+        PopOut.add(Label,c);
 
-        String[] columnNames = {"Id", "Name"};
+
+        String[] columnNames = {"Id", "Name", "Author", "Creation Date", "Last Edited"};
         String[][] data = MazeManager.Instance().LoadMazeDescriptions();
-        //String[][] data = { {"1","MazeTest1"}, {"2", "MazeTest2"}, {"3", "MazeTest3"}, {"4", "MazeTest4"}, {"5", "MazeTest5"}, {"6", "MazeTest6"}};
         JTable Descriptions = new JTable(data, columnNames);
-        Descriptions.setBounds(30, 40, 200, 300);
+        //Descriptions.getTableHeader().setReorderingAllowed(false);
+        Descriptions.setPreferredScrollableViewportSize(new Dimension(600, 100));
+        Descriptions.setFillsViewportHeight(true);
 
         JScrollPane scrollPane = new JScrollPane(Descriptions);
+        scrollPane.setPreferredSize(new Dimension(884, 194));
 
         c.anchor = GridBagConstraints.LINE_START;
         c.fill = GridBagConstraints.BOTH;
         c.gridx = 0;
-
         c.gridy = 1;
-
         PopOut.add(scrollPane, c);
-
-
 
         JButton Confirm = new JButton("Confirm");
         Confirm.setFont(Large);
@@ -77,15 +77,9 @@ public class LoadMazeDialog {
             }
 
             MazeManager.Instance().LoadMazeFromId(id);
-            if(MazeManager.Instance().GetMaze()!=null);
-            {
-                if(MazeManager.Instance().GetMaze().isImgSrtEnd()) {
-                    MazeManager.Instance().pnlMaze.add(new SrtEndPlacer());
-                }
-            }
-
             MazeManager.Instance().pnlMaze.GridSet();
             MazeManager.Instance().pnlMaze.updateUI();
+
             //MazeManager.Instance().pnlMaze.
             PopOut.dispose();
         });
