@@ -18,7 +18,7 @@ public class LoadMazeDialog {
     LoadMazeDialog() {
     }
 
-    public void GUI(){
+    public void GUI(MazePanel pnlMaze){
         Font Large  = new Font("Larger",Font.PLAIN, 24 );
 
         JFrame PopOut = new JFrame();
@@ -77,8 +77,11 @@ public class LoadMazeDialog {
             }
 
             MazeManager.Instance().LoadMazeFromId(id);
-            MazeManager.Instance().pnlMaze.GridSet();
-            MazeManager.Instance().pnlMaze.updateUI();
+            pnlMaze.add(new LogoPlacer());
+            pnlMaze.add(new SrtEndPlacer());
+            pnlMaze.GridSet();
+            pnlMaze.updateUI();
+
 
             //MazeManager.Instance().pnlMaze.
             PopOut.dispose();

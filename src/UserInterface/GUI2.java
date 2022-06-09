@@ -33,7 +33,7 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
 
 
         //Setting up and Displaying Panel to display Grid
-        pnlMaze = MazeManager.Instance().pnlMaze;
+        pnlMaze = new MazePanel();
         pnlMaze.setLayout(new BorderLayout());
         Main.add(pnlMaze);
 
@@ -64,7 +64,7 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
 
         JButton pnlLoadGridButton = new JButton("Load Maze");
         pnlLoadGridButton.setPreferredSize(lftBtnSize);
-        pnlLoadGridButton.addActionListener(e-> LoadMazeDialog.Instance().GUI());
+        pnlLoadGridButton.addActionListener(e-> LoadMazeDialog.Instance().GUI(pnlMaze));
         pnlLeft.add(pnlLoadGridButton);
 
         JButton pnlExportGridButton = new JButton("Export as Image");
