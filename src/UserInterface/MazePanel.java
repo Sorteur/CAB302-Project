@@ -37,6 +37,9 @@ public class MazePanel extends JPanel implements MouseListener {
         PosX = (this.getWidth()-(sizeScale *X))/2;
         PosY = (this.getHeight()-(sizeScale *Y))/2;
         repaint();
+        getComponents();
+        System.out.println(getComponents());
+        //System.out.println("HERE");
     }
 
     private JToggleButton createButton(String name, Cell A, int width, int height, JFrame frame){
