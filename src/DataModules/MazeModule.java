@@ -61,6 +61,7 @@ public class MazeModule extends DataModule{
                 if(imageTypeId == 6)
                 {
                     maze.SetExitImage(new MazeImageResource(image, posistionX, posistionY));
+                    maze.setImgSrtEnd(true);
                 }
 
             }
