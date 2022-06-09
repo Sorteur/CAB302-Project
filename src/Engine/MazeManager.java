@@ -9,10 +9,7 @@ import UserInterface.SrtEndPlacer;
 
 import java.awt.*;
 import java.sql.SQLException;
-import java.util.Arrays;
-import java.util.Enumeration;
-import java.util.Hashtable;
-import java.util.Set;
+
 
 public class MazeManager {
     private static MazeManager instance = new MazeManager();
@@ -28,6 +25,10 @@ public class MazeManager {
     private Maze Maze;
 
 
+    /**
+     * Gets current maze
+     * @return Maze - Current maze
+     */
     public Maze GetMaze() {
         return Maze;
     }

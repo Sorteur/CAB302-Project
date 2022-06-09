@@ -29,8 +29,9 @@ public class LoadMazeDialog {
 
         GridBagConstraints c  =  new GridBagConstraints();
         c.weighty = 0.1;
-        c.insets = new Insets(10,0,10,5);
+        c.insets = new Insets(10,10,10,5);
         c.anchor = GridBagConstraints.LINE_START;
+        c.weightx = 0.1;
 
 
         JLabel Label = new JLabel("Select a Maze!");
@@ -50,8 +51,6 @@ public class LoadMazeDialog {
 
         JScrollPane scrollPane = new JScrollPane(Descriptions);
         scrollPane.setPreferredSize(new Dimension(884, 194));
-
-        c.anchor = GridBagConstraints.LINE_START;
         c.fill = GridBagConstraints.BOTH;
         c.gridx = 0;
         c.gridy = 1;
@@ -59,10 +58,9 @@ public class LoadMazeDialog {
 
         JButton Confirm = new JButton("Confirm");
         Confirm.setFont(Large);
-        c.anchor = GridBagConstraints.LINE_END;
-        c.fill = GridBagConstraints.VERTICAL;
+        c.fill = GridBagConstraints.NONE;
         c.gridx = 1;
-
+        c.weightx = 0;
         c.gridy = 1;
         Confirm.addActionListener(a -> {
             int id = 0;
