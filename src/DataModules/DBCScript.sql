@@ -56,11 +56,10 @@ create table Maze(
   Deleted bool default false not null,
   Description varchar(40) default "" not null,
   Author varchar(40) default "" not null,
-  CreationDate DateTime not null,
-  LastEdited DateTime not null,
+  CreationDate DateTime default current_timestamp not null,
+  LastEdited DateTime default current_timestamp not null,
   XDimension int not null,
   YDimension int not null
-  
 );
 
 alter table Maze
