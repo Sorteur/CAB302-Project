@@ -1,8 +1,5 @@
 package Engine;
-import DataClasses.Cell;
-import DataClasses.Maze;
-import DataClasses.MazeImageResource;
-import DataClasses.WallType;
+import DataClasses.*;
 import DataModules.DBConnection;
 import DataModules.MazeModule;
 import UserInterface.ImageGUI;
@@ -19,6 +16,8 @@ import java.util.Set;
 
 public class MazeManager {
     private static MazeManager instance = new MazeManager();
+    private boolean once = false;
+
     public static MazeManager Instance(){
         return instance;
     }
@@ -34,6 +33,10 @@ public class MazeManager {
 
     public Maze CreateMaze (int Length, int Height) {
         Maze = new Maze(Length, Height);
+        if(!once)
+        {
+            once = true;
+        }
         return Maze;
     }
 
@@ -54,34 +57,13 @@ public class MazeManager {
 
         MazeModule mazeModule = new MazeModule(DBConnection.Instance());
 
-        Hashtable descriptions;
+        MazeDescriptions descriptions;
         try
         {
             int index = 0;
             descriptions = mazeModule.GetMazeDescriptions();
+            String[][] output = descriptions.ToStringArray();
 
-            Set<Integer> id = descriptions.keySet();
-            String[] IdArray = new String[id.size()];
-            for(Integer Id : id)
-            {
-                IdArray[index++] = Id.toString();
-            }
-
-            index = 0;
-            Enumeration<String> description = descriptions.elements();
-            String[] descriptionArray = new String[id.size()];
-            while(description.hasMoreElements()){
-                descriptionArray[index++] = description.nextElement();
-            }
-            String[][] output = new String[id.size()][2];
-            for(int i = 0; i < id.size(); i++)
-            {
-                output[i][0] = IdArray[i].toString();
-            }
-            for(int i = 0; i < id.size(); i++)
-            {
-                output[i][1] = descriptionArray[i];
-            }
             return output;
         }
         catch (SQLException sqlException){
@@ -120,12 +102,8 @@ public class MazeManager {
         }
         //Used to make sure only one LogoPlacer is made, update instead if it exists
         //MazeManager.Instance().GetMaze().setLogoImage(ScaledImage);
-        if (i == 0){
-            LogoPlacer A = new LogoPlacer();
-            pnlMaze.add(A,BorderLayout.CENTER);
-        } else {
-            pnlMaze.repaint();
-        }
+
+        pnlMaze.repaint();
         pnlMaze.updateUI();
     }
 
@@ -133,11 +111,8 @@ public class MazeManager {
         Maze.SetExitImage(new MazeImageResource(EndImage.getScaledInstance(Width, Height,Image.SCALE_SMOOTH), Maze.getLength()- X, Maze.getHeight()- Y));
         Maze.SetEntryImage(new MazeImageResource(StartImage.getScaledInstance(Width, Height,Image.SCALE_SMOOTH), 0, 0));
         //Used to make sure only one SrtEndPlacer is made, update instead if it exists
-        if (j == 0){
-            pnlMaze.add(new SrtEndPlacer());
-        } else {
-            pnlMaze.repaint();
-        }
+
+        pnlMaze.repaint();
         pnlMaze.updateUI();
     }
 
@@ -160,7 +135,6 @@ public class MazeManager {
             ImageGUI.Instance().ImgSrtEnd(pnlMaze);
         }
         Maze.SetLogo(new MazeImageResource(Logo.getScaledInstance(Width,Height,Image.SCALE_SMOOTH), StartCell.GetGridX(), StartCell.GetGridY()));
-        pnlMaze.add(new LogoPlacer());
         pnlMaze.GridSet();
         pnlMaze.updateUI();
     }
