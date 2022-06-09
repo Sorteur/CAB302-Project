@@ -22,10 +22,11 @@ public class MazeManager {
         return instance;
     }
     private MazeManager (){
+
     }
 
     private Maze Maze;
-    public MazePanel pnlMaze = new MazePanel();
+
 
     public Maze GetMaze() {
         return Maze;
@@ -33,10 +34,7 @@ public class MazeManager {
 
     public Maze CreateMaze (int Length, int Height) {
         Maze = new Maze(Length, Height);
-        if(!once)
-        {
-            once = true;
-        }
+
         return Maze;
     }
 
@@ -51,6 +49,7 @@ public class MazeManager {
         {
             System.out.println(sqlException);
         }
+
     }
 
     public String[][] LoadMazeDescriptions() {
@@ -103,6 +102,7 @@ public class MazeManager {
         //Used to make sure only one LogoPlacer is made, update instead if it exists
         //MazeManager.Instance().GetMaze().setLogoImage(ScaledImage);
 
+
         pnlMaze.repaint();
         pnlMaze.updateUI();
     }
@@ -132,6 +132,7 @@ public class MazeManager {
         if (Random) {MazeGenerator.Instance().GenerateMaze(Maze);}
         if (ImageStartEnd){
             Maze.setImgSrtEnd(true);
+
             ImageGUI.Instance().ImgSrtEnd(pnlMaze);
         }
         Maze.SetLogo(new MazeImageResource(Logo.getScaledInstance(Width,Height,Image.SCALE_SMOOTH), StartCell.GetGridX(), StartCell.GetGridY()));

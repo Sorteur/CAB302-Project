@@ -28,6 +28,7 @@ public class MazePanel extends JPanel implements MouseListener {
     int PosX;
     int PosY;
 
+
     public void GridSet(){
         CurrentMaze = MazeManager.Instance().GetMaze();
         X = MazeManager.Instance().GetMaze().getLength();
@@ -35,8 +36,6 @@ public class MazePanel extends JPanel implements MouseListener {
         sizeScale = (this.getHeight()-48)/Y;
         PosX = (this.getWidth()-(sizeScale *X))/2;
         PosY = (this.getHeight()-(sizeScale *Y))/2;
-        add(new SrtEndPlacer());
-        add(new LogoPlacer());
         repaint();
     }
 
