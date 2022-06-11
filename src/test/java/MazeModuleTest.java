@@ -1,5 +1,3 @@
-package UnitTests;
-
 public class MazeModuleTest {
     /*
     MazeModule test = new MazeModule(DBConnection.Instance());
