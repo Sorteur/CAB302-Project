@@ -21,8 +21,6 @@ public class MazeDescriptions {
         Count = TotolDescriptions;
     }
 
-    public int GetCount() {return Count;}
-
     public void InsertDescription(int index, int mazeId, String description, String author, LocalDateTime creation, LocalDateTime lastEdited){
         if (!(index < 0 || index > Count))
         {
