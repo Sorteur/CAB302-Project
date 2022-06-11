@@ -23,6 +23,11 @@ public class MazeSolver {
     }
     Maze CurrentMaze;
 
+    /**
+     * Starts the solution process
+     * @param maze Maze to be solved
+     * @throws Exception
+     */
     public void SolveMaze(Maze maze) throws Exception {
         CurrentMaze = maze;
         DepthFirstSearch();

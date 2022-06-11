@@ -17,6 +17,10 @@ public class DBConnection {
         Open();
     }
 
+    /**
+     * Opens a new connection to database
+     * @throws SQLException
+     */
     private void Open() throws SQLException {
         // Week 6 Content...
         Properties props = new Properties();
@@ -48,6 +52,9 @@ public class DBConnection {
         }
     }
 
+    /**
+     * Closes Databaseconnection
+     */
     protected void finalize() {
         try {
             Connection.close();
@@ -57,16 +64,28 @@ public class DBConnection {
         }
     }
 
+    /**
+     * Starts SQL transaction
+     * @throws SQLException
+     */
     public void StartTransaction() throws SQLException
     {
         Connection.setAutoCommit(false);
     }
 
+    /**
+     * Commits SQL Transaction
+     * @throws SQLException
+     */
     public void CommitTransaction() throws SQLException
     {
         Connection.commit();
     }
 
+    /**
+     * Rolls back SQL Transaction
+     * @throws SQLException
+     */
     public void RollbackTransaction() throws SQLException
     {
         Connection.rollback();
