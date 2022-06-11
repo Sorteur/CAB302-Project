@@ -22,39 +22,13 @@ public class MazeGenerator {
     }
     Maze Maze;
 
-    private void GenerateStartCell() {
-        //this.Maze.getCell(0).SetStart(true);
-    }
-
-    private void GenerateEndCell(){
-        //this.Maze.getCell(this.Maze.getGrid().size()-1).SetFinish(true);
-    }
 
     public Maze GenerateMaze(Maze themaze) {
         Cell randomstart = randomCell(themaze);
 
         DepthFirstSearch(randomstart);
 
-        GenerateStartCell();
-
-        GenerateEndCell();
-
         return Maze;
-    }
-
-    private void DepthFirstSearch(Cell currentcell){
-        currentcell.IsVisiting();
-        Cell unvisitedneighbor = null;
-
-
-         do{
-            unvisitedneighbor = chooseViableNeihgbor(currentcell);
-            if (!(unvisitedneighbor == null))
-            {
-                DepthFirstSearch(unvisitedneighbor);
-            }
-        }while (unvisitedneighbor != null);
-
     }
 
     public Cell RandomCellLogo(Maze themaze, int xrange, int yrange) {
@@ -72,8 +46,21 @@ public class MazeGenerator {
         return cell;
     }
 
+    private void DepthFirstSearch(Cell currentcell){
+        currentcell.IsVisiting();
+        Cell unvisitedneighbor = null;
 
-    public Cell randomCell (Maze themaze)
+         do{
+            unvisitedneighbor = chooseViableNeihgbor(currentcell);
+            if (!(unvisitedneighbor == null))
+            {
+                DepthFirstSearch(unvisitedneighbor);
+            }
+        }while (unvisitedneighbor != null);
+
+    }
+
+    private Cell randomCell (Maze themaze)
     {
         Maze = themaze;
 
