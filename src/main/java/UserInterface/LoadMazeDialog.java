@@ -43,44 +43,58 @@ public class LoadMazeDialog {
 
 
         String[] columnNames = {"Id", "Name", "Author", "Creation Date", "Last Edited"};
-        String[][] data = MazeManager.Instance().LoadMazeDescriptions();
-        JTable Descriptions = new JTable(data, columnNames);
-        //Descriptions.getTableHeader().setReorderingAllowed(false);
-        Descriptions.setPreferredScrollableViewportSize(new Dimension(800, 100));
-        Descriptions.setFillsViewportHeight(true);
 
-        JScrollPane scrollPane = new JScrollPane(Descriptions);
-        scrollPane.setPreferredSize(new Dimension(884, 194));
-        c.fill = GridBagConstraints.BOTH;
-        c.gridx = 0;
-        c.gridy = 1;
-        PopOut.add(scrollPane, c);
+        try {
+            String[][] data = MazeManager.Instance().LoadMazeDescriptions();
+            JTable Descriptions = new JTable(data, columnNames);
+            //Descriptions.getTableHeader().setReorderingAllowed(false);
+            Descriptions.setPreferredScrollableViewportSize(new Dimension(800, 100));
+            Descriptions.setFillsViewportHeight(true);
 
-        JButton Confirm = new JButton("Confirm");
-        Confirm.setFont(Large);
-        c.fill = GridBagConstraints.NONE;
-        c.gridx = 1;
-        c.weightx = 0;
-        c.gridy = 1;
-        Confirm.addActionListener(a -> {
-            int id = 0;
+            JScrollPane scrollPane = new JScrollPane(Descriptions);
+            scrollPane.setPreferredSize(new Dimension(884, 194));
+            c.fill = GridBagConstraints.BOTH;
+            c.gridx = 0;
+            c.gridy = 1;
+            PopOut.add(scrollPane, c);
 
-            id = Descriptions.getSelectedRow();
+            JButton Confirm = new JButton("Confirm");
+            Confirm.setFont(Large);
+            c.fill = GridBagConstraints.NONE;
+            c.gridx = 1;
+            c.weightx = 0;
+            c.gridy = 1;
+            Confirm.addActionListener(a -> {
+                int id = 0;
 
-            try{
-                id = Integer.parseInt(data[id][0]);
-            }
-            catch (NumberFormatException ex){
-                ex.printStackTrace();
-            }
+                id = Descriptions.getSelectedRow();
 
-            MazeManager.Instance().LoadMazeFromId(id);
+                try{
+                    id = Integer.parseInt(data[id][0]);
+                }
+                catch (NumberFormatException ex){
+                    ex.printStackTrace();
+                }
 
-            pnlMaze.GridSet();
-            pnlMaze.updateUI();
-            //MazeManager.Instance().pnlMaze.
-            PopOut.dispose();
-        });
+                try {
+                    MazeManager.Instance().LoadMazeFromId(id);
+                }
+                catch (SQLException sqlException) {
+                    JOptionPane.showMessageDialog(PopOut, sqlException.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    PopOut.dispose();
+                }
+                pnlMaze.GridSet();
+                pnlMaze.updateUI();
+                //MazeManager.Instance().pnlMaze.
+                PopOut.dispose();
+
+            });
         PopOut.add(Confirm,c);
+        }
+        catch (SQLException sqlException) {
+            JOptionPane.showMessageDialog(PopOut, sqlException.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            PopOut.dispose();
+        }
+
     }
 }

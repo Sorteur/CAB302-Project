@@ -13,17 +13,11 @@ import java.util.Properties;
 public class DBConnection {
 
     public Connection Connection = null;
-
-    private static DBConnection instance = new DBConnection();
-    public static DBConnection Instance(){
-        return instance;
-    }
-
-    DBConnection () {
+    public DBConnection() throws SQLException {
         Open();
     }
 
-    private void Open() {
+    private void Open() throws SQLException {
         // Week 6 Content...
         Properties props = new Properties();
         FileInputStream in = null;
@@ -46,17 +40,15 @@ public class DBConnection {
 
                 }
 
-        } catch (SQLException sqle) {
-            System.err.println(sqle.toString());
-        } catch (FileNotFoundException fnfe) {
+        }
+        catch (FileNotFoundException fnfe) {
             System.err.println(fnfe);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
 
-    private void Close() {
-        System.out.println("Closing Connection");
+    protected void finalize() {
         try {
             Connection.close();
         }

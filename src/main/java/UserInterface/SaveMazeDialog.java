@@ -5,6 +5,7 @@ import Engine.MazeManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.sql.SQLException;
 
 public class SaveMazeDialog {
 
@@ -81,8 +82,11 @@ public class SaveMazeDialog {
 
                 PopOut.dispose();
             } catch(NumberFormatException e) {
-                JOptionPane.showMessageDialog(PopOut,"Dimensions of maze must be whole numbers.","Input error",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(PopOut, "Dimensions of maze must be whole numbers.", "Input error", JOptionPane.ERROR_MESSAGE);
+            } catch (SQLException sqlException){
+                JOptionPane.showMessageDialog(PopOut, sqlException.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
+
         });
 
         PopOut.add(Save,c);
@@ -108,6 +112,9 @@ public class SaveMazeDialog {
                 PopOut.dispose();
             } catch(NumberFormatException e) {
                 JOptionPane.showMessageDialog(PopOut,"Dimensions of maze must be whole numbers.","Input error",JOptionPane.ERROR_MESSAGE);
+            }
+            catch (SQLException sqlException){
+                JOptionPane.showMessageDialog(PopOut, sqlException.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
         });
 

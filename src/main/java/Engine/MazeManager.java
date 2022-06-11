@@ -39,9 +39,9 @@ public class MazeManager {
         return Maze;
     }
 
-    public void LoadMazeFromId(int id)
+    public void LoadMazeFromId(int id) throws SQLException
     {
-        MazeModule mazeModule = new MazeModule(DBConnection.Instance());
+        MazeModule mazeModule = new MazeModule(new DBConnection());
         try
         {
             Maze = mazeModule.GetMazeFromID(id);
@@ -53,26 +53,24 @@ public class MazeManager {
 
     }
 
-    public String[][] LoadMazeDescriptions() {
+    public String[][] LoadMazeDescriptions() throws SQLException {
 
-        MazeModule mazeModule = new MazeModule(DBConnection.Instance());
+        MazeModule mazeModule = new MazeModule(new DBConnection());
 
         MazeDescriptions descriptions;
-        try
-        {
-            descriptions = mazeModule.GetMazeDescriptions();
-            String[][] output = descriptions.ToStringArray();
 
-            return output;
-        }
-        catch (SQLException sqlException){
-            System.out.println(sqlException);
-        }
-        return null;
+
+        descriptions = mazeModule.GetMazeDescriptions();
+        String[][] output = descriptions.ToStringArray();
+
+        return output;
+
+
+
     }
 
-    public void SaveMaze () {
-        MazeModule mazeModule = new MazeModule(DBConnection.Instance());
+    public void SaveMaze () throws SQLException {
+        MazeModule mazeModule = new MazeModule(new DBConnection());
         try
         {
             mazeModule.SaveMaze(Maze);
@@ -80,6 +78,9 @@ public class MazeManager {
         catch (SQLException sqlException)
         {
             System.out.println(sqlException);
+        }
+        finally {
+
         }
     }
 

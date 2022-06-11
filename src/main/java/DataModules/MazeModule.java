@@ -26,6 +26,33 @@ public class MazeModule extends DataModule{
         }
     }
 
+    public MazeDescriptions GetMazeDescriptions() throws SQLException{
+        StartTransaction();
+        try{
+
+            return DoGetMazeDescriptions();
+
+        }
+        finally {
+            CommitTransaction();
+        }
+    }
+
+    public void SaveMaze (Maze maze) throws SQLException {
+
+        StartTransaction();
+        try{
+
+            DoSaveMaze(maze);
+
+            CommitTransaction();
+        }
+        catch (SQLException sqle){
+            RollbackTransaction();
+        }
+
+    }
+
     private Maze DoGetMazeFromId(int id) throws SQLException {
         Maze maze = DoGetPartialMazeFromId(id);
         maze = PopulateMazeCellsFromMazeId(id, maze);
@@ -143,17 +170,6 @@ public class MazeModule extends DataModule{
         }
     }
 
-    public MazeDescriptions GetMazeDescriptions() throws SQLException{
-        StartTransaction();
-        try{
-
-             return DoGetMazeDescriptions();
-
-        }
-        finally {
-            CommitTransaction();
-        }
-    }
 
     private MazeDescriptions DoGetMazeDescriptions() throws SQLException
     {
@@ -189,20 +205,6 @@ public class MazeModule extends DataModule{
         }
     }
 
-    public void SaveMaze (Maze maze) throws SQLException {
-
-        StartTransaction();
-        try{
-
-            DoSaveMaze(maze);
-
-            CommitTransaction();
-        }
-        catch (SQLException sqle){
-            RollbackTransaction();
-        }
-
-    }
 
     private void DoSaveMaze(Maze maze) throws SQLException
     {
