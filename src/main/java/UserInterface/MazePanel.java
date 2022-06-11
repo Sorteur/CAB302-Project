@@ -37,9 +37,6 @@ public class MazePanel extends JPanel implements MouseListener {
         PosX = (this.getWidth()-(sizeScale *X))/2;
         PosY = (this.getHeight()-(sizeScale *Y))/2;
         repaint();
-        getComponents();
-        System.out.println(getComponents());
-        //System.out.println("HERE");
     }
 
     private JToggleButton createButton(String name, Cell A, int width, int height, JFrame frame){
@@ -60,7 +57,6 @@ public class MazePanel extends JPanel implements MouseListener {
         Button.setPreferredSize(new Dimension(width,height));
         return Button;
     }
-//TODO MOVE TO MAZE CLASS AND SPLIT INTO DIFFERENT CLASSES
 
     private WallType SwitchWallType(WallType wallType)
     {

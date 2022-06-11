@@ -90,8 +90,6 @@ public class Maze {
      */
     public String GetDescription(){return Description;}
 
-    //TODO THESE
-
     /**
      * Sets author of maze
      * @param author String to set author of maze to

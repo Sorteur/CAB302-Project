@@ -22,7 +22,11 @@ public class MazeGenerator {
     }
     Maze Maze;
 
-
+    /**
+     * Method that starts the random-generation
+     * @param themaze Maze to be randomized
+     * @return Randomized maze
+     */
     public Maze GenerateMaze(Maze themaze) {
         Cell randomstart = randomCell(themaze);
 
@@ -31,6 +35,13 @@ public class MazeGenerator {
         return Maze;
     }
 
+    /**
+     *Chooses a random cell in the specified range for logo placement
+     * @param themaze Maze to get a random cell from
+     * @param xrange X-range for random selection
+     * @param yrange Y-range for random selection
+     * @return Randomly selected cell for logo placement
+     */
     public Cell RandomCellLogo(Maze themaze, int xrange, int yrange) {
         //assuming xrange is 1/3 of the width
         //assuming yrange is 1/2 of the height
@@ -46,6 +57,10 @@ public class MazeGenerator {
         return cell;
     }
 
+    /**
+     * Algorithm for randomly creating a solvable maze
+     * @param currentcell
+     */
     private void DepthFirstSearch(Cell currentcell){
         currentcell.IsVisiting();
         Cell unvisitedneighbor = null;
@@ -60,6 +75,11 @@ public class MazeGenerator {
 
     }
 
+    /**
+     * Chooses a random cell
+     * @param themaze Maze to select random cell from
+     * @return Randomly chosen cell
+     */
     private Cell randomCell (Maze themaze)
     {
         Maze = themaze;
@@ -70,6 +90,11 @@ public class MazeGenerator {
         return Maze.getCell(start);
     }
 
+    /**
+     * Randomly chooses a way to go based on which paths are open
+     * @param currentcell Cell that is being checked for paths
+     * @return Cell that is a viable neighbour to move to
+     */
     private Cell chooseViableNeihgbor (Cell currentcell) {
         Cell viableneihgbor = null;
 

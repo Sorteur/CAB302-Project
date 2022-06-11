@@ -28,7 +28,10 @@ public class MazeSolver {
         DepthFirstSearch();
     }
 
-
+    /**
+     * Algorithm for finding solution of maze
+     * @throws Exception
+     */
     private void DepthFirstSearch ()throws Exception{
         Cell currentcell = CurrentMaze.Search(0,0); // Start with the First Cell E.G. The start of the Maze
         Cell endcell = CurrentMaze.Search(CurrentMaze.getLength()-1, CurrentMaze.getHeight()-1); // Get the end of the Maze... when our current cell is the end cell we have found the end.
@@ -42,7 +45,10 @@ public class MazeSolver {
         }
     }
 
-
+    /**
+     * Algorithm for finding solution of maze
+     * @throws Exception
+     */
     private void DepthFirstSearch(Cell currentcell, Cell endcell) throws Exception {
 
         if(currentcell == endcell)
@@ -72,6 +78,12 @@ public class MazeSolver {
                 currentcell.Searched=false;
             }
     }
+
+    /**
+     * Randomly chooses a way to go based on which paths are open
+     * @param currentcell Cell that is being checked for paths
+     * @return Cell that is a viable neighbour to move to
+     */
     private Cell chooseViableNeihgbor (Cell currentcell) {
         Cell viableneihgbor = null;
 
