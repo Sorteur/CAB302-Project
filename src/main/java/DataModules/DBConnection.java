@@ -39,10 +39,15 @@ public class DBConnection {
             String schema = props.getProperty("jdbc.schema");
 
             // get a connection
-            Connection = DriverManager.getConnection(url + "/" + schema, username,
-                    password);
+                Connection = DriverManager.getConnection(url + "/" + schema, username, password);
+
+                if (Connection == null)
+                {
+
+                }
+
         } catch (SQLException sqle) {
-            System.err.println(sqle);
+            System.err.println(sqle.toString());
         } catch (FileNotFoundException fnfe) {
             System.err.println(fnfe);
         } catch (IOException ex) {
@@ -75,6 +80,9 @@ public class DBConnection {
         Connection.rollback();
     }
 
+    private void MakeDataBase () {
+
+    }
 
 
 }

@@ -60,7 +60,6 @@ public class MazeManager {
         MazeDescriptions descriptions;
         try
         {
-            int index = 0;
             descriptions = mazeModule.GetMazeDescriptions();
             String[][] output = descriptions.ToStringArray();
 

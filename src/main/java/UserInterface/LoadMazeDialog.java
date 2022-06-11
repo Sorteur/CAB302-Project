@@ -22,7 +22,7 @@ public class LoadMazeDialog {
         Font Large  = new Font("Larger",Font.PLAIN, 24 );
 
         JFrame PopOut = new JFrame();
-        PopOut.setSize(600, 200);
+        PopOut.setSize(1000, 200);
         PopOut.setVisible(true);
         PopOut.setLocationRelativeTo(null);
         PopOut.setLayout(new GridBagLayout());
@@ -46,7 +46,7 @@ public class LoadMazeDialog {
         String[][] data = MazeManager.Instance().LoadMazeDescriptions();
         JTable Descriptions = new JTable(data, columnNames);
         //Descriptions.getTableHeader().setReorderingAllowed(false);
-        Descriptions.setPreferredScrollableViewportSize(new Dimension(600, 100));
+        Descriptions.setPreferredScrollableViewportSize(new Dimension(800, 100));
         Descriptions.setFillsViewportHeight(true);
 
         JScrollPane scrollPane = new JScrollPane(Descriptions);

@@ -33,6 +33,24 @@ public class Maze {
      * @see Cell
      */
 
+    public Maze(int length, int height, String author, LocalDateTime creation, LocalDateTime lastEdited) {
+        Length = length;
+        Height = height;
+        Author = author;
+        Creation = creation;
+        LastEdited = lastEdited;
+        int index = 0;
+        int l = 0;
+        while (l < Length){
+            int h=0;
+            while (h < Height){
+                Grid.add(new Cell(index,l,h,WallType.Wall,WallType.Wall,WallType.Wall,WallType.Wall));
+                index++;
+                h++;
+            }
+            l++;
+        }
+    }
 
     public Maze(int length, int height) {
         Length = length;

@@ -133,7 +133,7 @@ public class MazeModule extends DataModule{
                 lastEditedDate = resultSet.getTimestamp(5);
                 xdemension = resultSet.getInt(6);
                 ydemension = resultSet.getInt(7);
-                Maze maze = new Maze(xdemension,ydemension);
+                Maze maze = new Maze(xdemension,ydemension, author, creationDate.toLocalDateTime(), lastEditedDate.toLocalDateTime());
                 maze.SetDescription(description);
                 maze.SetId(id);
                 return maze;
@@ -460,13 +460,13 @@ public class MazeModule extends DataModule{
         PreparedStatement statement;
 
         if (maze.getLogo() != null) {
-            sql = "UPDATE MazeImageResource " + "SET ImageTypeId = ?, Image = ?, PositionX = ?, PositionY = ?, GridScaleX = ?, GridScaleY = ? " + "WHERE Id = ?";
+            sql = "UPDATE MazeImageResource " + "SET ImageTypeId = ?, Image = ?, PositionX = ?, PositionY = ? " + "WHERE Id = ?";
 
             id = GetLogoIdByMazeId(maze.GetId());
 
             if(id == 0)
             {
-                sql = "INSERT INTO MazeImageResource(Id, MazeId, ImageTypeId, Image, PositionX, PositionY,) " + "VALUES (?, ?, ?, ?, ?, ?)";
+                sql = "INSERT INTO MazeImageResource(Id, MazeId, ImageTypeId, Image, PositionX, PositionY ) " + "VALUES (?, ?, ?, ?, ?, ?)";
 
                 id = GetNextSequence("MazeImageResourceId");
                 imagetypeid = 2;
@@ -505,7 +505,7 @@ public class MazeModule extends DataModule{
                 statement.setInt(3, positionx);
                 statement.setInt(4, positiony);
 
-                statement.setInt(7, id);
+                statement.setInt(5, id);
 
                 try {
                     statement.executeUpdate();
@@ -516,9 +516,6 @@ public class MazeModule extends DataModule{
         }
     }
 
-    public void DeleteMaze (int ID) {
-
-    }
 
 
     //Tools//
