@@ -8,6 +8,7 @@ import org.junit.jupiter.api.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 
 public class MazeManagerTest {
@@ -32,7 +33,7 @@ public class MazeManagerTest {
 
     //Test 3: Test if Logo is placed at 3,3 using CreateLogo
     @Test
-    void CreateLogoTest(){
+    void CreateLogoTest() throws SQLException{
         MazePanel TestPanel = new MazePanel();
         Image TestImage = new BufferedImage(2,2,BufferedImage.TYPE_INT_RGB);
         MazeManager.Instance().CreateMaze(10,10);
@@ -45,7 +46,7 @@ public class MazeManagerTest {
 
     //Test 4: Test if maze can be sucessfully saved and loaded from database
     @Test
-    void SaveAndLoadMazeTest(){
+    void SaveAndLoadMazeTest() throws SQLException {
         Maze TestMaze = MazeManager.Instance().CreateMaze(10,10);
         TestMaze.SetAuthor("Tyler");
         //TestMaze.
