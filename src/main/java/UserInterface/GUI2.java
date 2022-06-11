@@ -1,5 +1,8 @@
 package UserInterface;
 
+import DataClasses.Cell;
+import DataClasses.Maze;
+import DataClasses.WallType;
 import Engine.MazeGenerator;
 import Engine.MazeManager;
 import Engine.MazeSolver;
@@ -94,6 +97,8 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
             if (MazeManager.Instance().GetMaze() == null) {JOptionPane.showMessageDialog(pnlLeft, "Must Create or Load in a Maze to Solve!", "Error", JOptionPane.ERROR_MESSAGE);}
             else {
                 try {
+
+
                     if (MazeManager.Instance().GetMaze().GetSolved())
                     {
                         MazeManager.Instance().GetMaze().setSolved(false);
@@ -103,6 +108,7 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
                     {
                         MazeManager.Instance().GetMaze().setSolved(false);
                         MazeSolver.Instance().SolveMaze();
+                        solvePopout();
                         pnlMaze.GridSet();
                     }
 
@@ -115,6 +121,69 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
 
     }
 
+    private void solvePopout() {
+        int DeadEnd = 0;
+        int SolutionCells = 1;
+        for (Cell cells : MazeManager.Instance().GetMaze().getGrid()){
+            if (cells.Searched){
+                SolutionCells++;
+            }
+            if (cells.IsNorthernwall() == WallType.Empty){
+                if (cells.IsSouthernwall() == WallType.Wall && cells.IsEasternwall() == WallType.Wall && cells.IsWesternwall() == WallType.Wall){
+                    DeadEnd++;
+                }
+            } else if (cells.IsSouthernwall() == WallType.Empty){
+                if (cells.IsNorthernwall() == WallType.Wall && cells.IsEasternwall() == WallType.Wall && cells.IsWesternwall() == WallType.Wall){
+                    DeadEnd++;
+                }
+            } else if (cells.IsEasternwall() == WallType.Empty){
+                if (cells.IsNorthernwall() == WallType.Wall && cells.IsSouthernwall() == WallType.Wall && cells.IsWesternwall() == WallType.Wall){
+                    DeadEnd++;
+                }
+            } else {
+                if (cells.IsNorthernwall() == WallType.Wall && cells.IsEasternwall() == WallType.Wall && cells.IsEasternwall() == WallType.Wall){
+                    DeadEnd++;
+                }
+            }
+        }
+        int PercentDeadEnd = (DeadEnd*100)/ MazeManager.Instance().GetMaze().getGrid().size();
+        int PercentCellsSolution = (SolutionCells*100)/ MazeManager.Instance().GetMaze().getGrid().size();
+        Font Large  = new Font("Larger",Font.PLAIN, 24 );
+
+        JFrame PopOut = new JFrame();
+        PopOut.setSize(600, 200);
+        PopOut.setVisible(true);
+        PopOut.setLocationRelativeTo(null);
+        PopOut.setLayout(new GridBagLayout());
+
+        GridBagConstraints c  =  new GridBagConstraints();
+        c.insets = new Insets(5,5,0,5);
+        c.anchor = GridBagConstraints.LINE_START;
+
+        JLabel PercentDeadEndLabel = new JLabel("Percentage of cells that are dead ends:");
+        PercentDeadEndLabel.setFont(Large);
+        c.gridx = 0;
+        c.gridy = 0;
+        PopOut.add(PercentDeadEndLabel,c);
+
+        JLabel DeadendNumberLabel = new JLabel(String.valueOf(PercentDeadEnd)+"%");
+        DeadendNumberLabel.setFont(Large);
+        c.gridx = 1;
+        c.gridy = 0;
+        PopOut.add(DeadendNumberLabel,c);
+
+        JLabel PercentCellsSolutionLabel = new JLabel("Percentage of cells that are apart of the solution:");
+        PercentCellsSolutionLabel.setFont(Large);
+        c.gridx = 0;
+        c.gridy = 1;
+        PopOut.add(PercentCellsSolutionLabel,c);
+
+        JLabel CellsSolutionNumberLabel = new JLabel(String.valueOf(PercentCellsSolution)+"%");
+        CellsSolutionNumberLabel.setFont(Large);
+        c.gridx = 1;
+        c.gridy = 1;
+        PopOut.add(CellsSolutionNumberLabel,c);
+    }
 
 
     private void newMaze(){
@@ -196,17 +265,12 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
                 int Height = Integer.parseInt(HeightBox.getText());
 
                 //TODO REFACTOR
-                MazeManager.Instance().CreateMaze(Width,Height);
-
-
-
-
-
-
+                //MazeManager.Instance().CreateMaze(Width,Height);
                 if (RandomButton.isSelected()) {
                     if (BuildAroundLogo.isSelected()){
                         ImageGUI.Instance().AutoLogo(pnlMaze,Width,Height,true,ImageStartEnd.isSelected());
                     } else {
+                        MazeManager.Instance().CreateMaze(Width,Height);
                         MazeGenerator.Instance().GenerateMaze(MazeManager.Instance().GetMaze());
                         if (ImageStartEnd.isSelected()){
                             MazeManager.Instance().GetMaze().setImgSrtEnd(true);

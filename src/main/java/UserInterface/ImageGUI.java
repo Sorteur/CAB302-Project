@@ -15,9 +15,6 @@ public class ImageGUI {
     private Image StartImage;
     private Image EndImage;
 
-    //used to determine if to create Logo/StartEnd or update them.
-    private int i;
-    private int j;
 
     public static ImageGUI Instance(){
         return instance;
@@ -151,8 +148,7 @@ public class ImageGUI {
                 int Y = Integer.parseInt(YPosBox.getText())-1;
                 int WidthBoxInt = Integer.parseInt(WidthBox.getText());
                 int HeightBoxInt = Integer.parseInt(HeightBox.getText());
-                MazeManager.Instance().CreateLogo(Logo,pnlMaze, X, Y, WidthBoxInt, HeightBoxInt,i);
-                i++;
+                MazeManager.Instance().CreateLogo(Logo,pnlMaze, X, Y, WidthBoxInt, HeightBoxInt);
                 logoMenu.dispose();
             } catch(NumberFormatException e) {
                 JOptionPane.showMessageDialog(logoMenu,"Inputs must be whole numbers.","Input error",JOptionPane.ERROR_MESSAGE);
@@ -248,9 +244,8 @@ public class ImageGUI {
                 int Y = Integer.parseInt(HeightBox.getText());
                 int Width = (pnlMaze.sizeScale*X)-2;
                 int Height = (pnlMaze.sizeScale*Y)-2;
-                MazeManager.Instance().StartEndCreator(pnlMaze, X, Y, Width, Height,EndImage,StartImage,j);
+                MazeManager.Instance().StartEndCreator(pnlMaze, X, Y, Width, Height,EndImage,StartImage);
                 imgMenu.dispose();
-                j++;
             } catch (NumberFormatException e){
                 JOptionPane.showMessageDialog(imgMenu,"Inputs must be whole numbers.","Input error", JOptionPane.ERROR_MESSAGE);
             } catch (NullPointerException e){
