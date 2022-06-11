@@ -107,7 +107,7 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
                     else
                     {
                         MazeManager.Instance().GetMaze().setSolved(false);
-                        MazeSolver.Instance().SolveMaze();
+                        MazeManager.Instance().SolveMaze();
                         solvePopout();
                         pnlMaze.GridSet();
                     }

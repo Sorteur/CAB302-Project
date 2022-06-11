@@ -92,6 +92,10 @@ public class MazeManager {
 
     }
 
+    public void SolveMaze() throws Exception {
+        MazeSolver.Instance().SolveMaze(Maze);
+    }
+
     /**
      * Creates and places a logo at specified co-ordinates
      * @param Logo Image to be placed

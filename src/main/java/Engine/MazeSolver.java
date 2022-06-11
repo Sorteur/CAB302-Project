@@ -23,8 +23,8 @@ public class MazeSolver {
     }
     Maze CurrentMaze;
 
-    public void SolveMaze() throws Exception {
-        CurrentMaze = MazeManager.Instance().GetMaze();
+    public void SolveMaze(Maze maze) throws Exception {
+        CurrentMaze = maze;
         DepthFirstSearch();
     }
 
