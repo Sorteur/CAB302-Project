@@ -10,8 +10,8 @@ public class DBConnectionTest {
     @BeforeEach
 
     @Test
-    void Test(){
-        connection = DBConnection.Instance();
+    void Test() throws SQLException{
+        connection = new DBConnection();
     }
 
     @Test
