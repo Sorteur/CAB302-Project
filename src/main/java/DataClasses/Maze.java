@@ -22,17 +22,14 @@ public class Maze {
     private boolean Solved = false;
     private final ArrayList<Cell> Grid = new ArrayList<>();
 
-
     /**
-     * Given two integers representing the length and height of the maze in Cells,
-     * will create a maze with the length and height as given and populate with Cells.
-     *
-     * @param length Length of the desired maze.
-     * @param height Height of the desired maze.
-     *
-     * @see Cell
+     * Used for database loading mazes
+     * @param length Length of maze
+     * @param height Height of maze
+     * @param author Author of maze
+     * @param creation Creation time of maze
+     * @param lastEdited Last Edited time of maze
      */
-
     public Maze(int length, int height, String author, LocalDateTime creation, LocalDateTime lastEdited) {
         Length = length;
         Height = height;
@@ -52,9 +49,20 @@ public class Maze {
         }
     }
 
+
+    /**
+     * Given two integers representing the length and height of the maze in Cells,
+     * will create a maze with the length and height as given and populate with Cells.
+     *
+     * @param length Length of the desired maze.
+     * @param height Height of the desired maze.
+     *
+     * @see Cell
+     */
     public Maze(int length, int height) {
         Length = length;
         Height = height;
+
         int index = 0;
         int l = 0;
         while (l < Length){
@@ -83,10 +91,35 @@ public class Maze {
     public String GetDescription(){return Description;}
 
     //TODO THESE
+
+    /**
+     * Sets author of maze
+     * @param author String to set author of maze to
+     */
     public void SetAuthor(String author) { Author = author;}
+
+    /**
+     * Get author of maze
+     * @return String Author of maze
+     */
     public String GetAuthor() {return Author;}
+
+    /**
+     * Gets creation time of maze
+     * @return LocalDateTime Creation time of maze
+     */
     public LocalDateTime GetCreation(){return Creation;}
+
+    /**
+     * Sets the last edited time of maze
+     * @param lastEdited Time that maze was last edited
+     */
     public void SetLastEdited(LocalDateTime lastEdited) {LastEdited =lastEdited;}
+
+    /**
+     * Gets the time the maze was last edited
+     * @return LocalDateTime Time maze was last edited.
+     */
     public LocalDateTime GetLastEdited(){return LastEdited;}
 
     /**
@@ -370,11 +403,11 @@ public class Maze {
     }
 
     /**
-     *
-     * @param xrange
-     * @param yrange
-     * @param cell
-     * @return
+     * Determines if specified cell is a viable place for a logo or not
+     * @param xrange Range that cell logo can't be placed in X direction
+     * @param yrange Range that cell logo can't be placed in Y direction
+     * @param cell Cell to determine if viable location or not
+     * @return True or False, if viable or not
      */
     public boolean ViableImageLogo(int xrange, int yrange, Cell cell) {
         int InvalidStartingCellCoordinateX = (Length/3)-1; //Less than this whilst being less than the Y range means your in a possible starting cell
@@ -404,10 +437,6 @@ public class Maze {
             return false;
         if(openingcellx > InvalidExitCellCoordinateX & currentcelly > InvalidExitCellCoordinateY)
             return false;
-
-
-
-
         return true;
     }
 
