@@ -11,15 +11,33 @@ public class MazeDescriptions {
     private LocalDateTime[] LastEdited;
     private int Count;
 
-    public MazeDescriptions(int TotolDescriptions)
+    /**
+     * Holds Information about many Mazes
+     * Includes a Maze's Id, Description, Author, Creation Date, Last Edited Date.
+     * @param  TotalDescriptions  An int for how many descriptions there will be
+     * @see Maze
+     */
+    public MazeDescriptions(int TotalDescriptions)
     {
-        Mazeid = new int[TotolDescriptions];
-        Description = new String[TotolDescriptions];
-        Author = new String[TotolDescriptions];
-        Creation = new LocalDateTime[TotolDescriptions];
-        LastEdited = new LocalDateTime[TotolDescriptions];
-        Count = TotolDescriptions;
+        Mazeid = new int[TotalDescriptions];
+        Description = new String[TotalDescriptions];
+        Author = new String[TotalDescriptions];
+        Creation = new LocalDateTime[TotalDescriptions];
+        LastEdited = new LocalDateTime[TotalDescriptions];
+        Count = TotalDescriptions;
     }
+
+    /**
+     * Inserts information about a specific maze.
+     * @param  index  an int as an absolute position of where the following elements should sit in their respective arrays
+     * @param  mazeId an int for an id representing this Maze
+     * @param  description a String for either a title/name of the Maze
+     * @param  author a String for the name of the author of this Maze
+     * @param  creation a LocalDateTime for the date this Maze was created
+     * @param  lastEdited a LocalDateTime for the date this Maze was last edited
+     * @see MazeDescriptions
+     * @see Maze
+     */
 
     public void InsertDescription(int index, int mazeId, String description, String author, LocalDateTime creation, LocalDateTime lastEdited){
         if (!(index < 0 || index > Count))
@@ -31,7 +49,15 @@ public class MazeDescriptions {
             LastEdited[index] = lastEdited;
         }
     }
-
+    /**
+     * Returns Information about movie descriptions that have been
+     * added, this includes: Id, Description, Author, CreationDate, and LastEditedDate.
+     *
+     * @return an ArrayArray of Strings containing information about
+     * every Insertion in this MazeDescriptions
+     * @see MazeDescriptions
+     * @see Maze
+     */
     public String[][] ToStringArray(){
         String[][] result = new String[Count][5];
         for(int i = 0; i < Count; i++)
