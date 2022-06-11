@@ -1,14 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="4b6e86b4-7292-4739-a5c0-2934c990bb8a" name="Changes" comment="Started Auto-logo and fixed bugs">
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__aopalliance_aopalliance_1_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__asm_asm_3_3_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_findbugs_jsr305_1_3_9.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_guava_guava_10_0_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_thoughtworks_qdox_qdox_2_0_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_io_commons_io_2_6.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_annotation_jsr250_api_1_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_enterprise_cdi_api_1_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_inject_javax_inject_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_maven_maven_aether_provider_3_1_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_maven_maven_artifact_3_1_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_maven_maven_core_3_1_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_maven_maven_model_builder_3_1_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_maven_maven_plugin_api_3_1_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_maven_maven_repository_metadata_3_1_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_maven_maven_settings_3_1_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_maven_maven_settings_builder_3_1_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_maven_plugins_maven_surefire_plugin_3_0_0_M6.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_maven_shared_maven_common_artifact_filters_3_1_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_maven_surefire_common_java5_2_19_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_maven_surefire_maven_surefire_common_3_0_0_M6.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_maven_surefire_surefire_api_2_19_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_maven_surefire_surefire_booter_3_0_0_M6.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_maven_surefire_surefire_extensions_api_3_0_0_M6.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_maven_surefire_surefire_extensions_spi_3_0_0_M6.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_maven_surefire_surefire_shared_utils_3_0_0_M6.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apiguardian_apiguardian_api_1_0_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_codehaus_plexus_plexus_classworlds_2_4_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_codehaus_plexus_plexus_component_annotations_1_5_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_codehaus_plexus_plexus_interpolation_1_16.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_codehaus_plexus_plexus_java_1_1_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_codehaus_plexus_plexus_utils_3_0_10.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_aether_aether_api_0_9_0_M2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_aether_aether_impl_0_9_0_M2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_aether_aether_spi_0_9_0_M2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_aether_aether_util_0_9_0_M2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_sisu_org_eclipse_sisu_inject_0_0_0_M2a.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_sisu_org_eclipse_sisu_plexus_0_0_0_M2a.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_5_8_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_api_5_8_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_engine_5_8_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_params_5_8_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_commons_1_8_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_engine_1_0_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_launcher_1_0_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_surefire_provider_1_0_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_opentest4j_opentest4j_1_2_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_ow2_asm_asm_9_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_sonatype_plexus_plexus_cipher_1_4.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_sonatype_plexus_plexus_sec_dispatcher_1_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_sonatype_sisu_sisu_guice_no_aop_3_1_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ServerFramework/DataModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/CAB302-Project.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/CAB302-Project.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataClasses/Maze.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataClasses/Maze.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Engine/MazeGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Engine/MazeGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserInterface/GUI2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/GUI2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserInterface/ImageGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/ImageGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserInterface/MazePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/MazePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserInterface/SrtEndPlacer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/SrtEndPlacer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CAB302-Project/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataClasses/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DataClasses/Cell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataClasses/Maze.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DataClasses/Maze.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataClasses/MazeDescriptions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DataClasses/MazeDescriptions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataClasses/MazeImageResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DataClasses/MazeImageResource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataClasses/WallType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DataClasses/WallType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataModules/DBCScript.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DataModules/DBCScript.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataModules/DBConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DataModules/DBConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataModules/DataModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DataModules/DataModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataModules/MazeModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DataModules/MazeModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Engine/MazeGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Engine/MazeGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Engine/MazeManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Engine/MazeManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Engine/MazeSolver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Engine/MazeSolver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ServerFramework/DBConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ServerFramework/DataModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ServerFramework/DBConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UnitTests/MazeGeneratorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/MazeGeneratorTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UnitTests/MazeManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/MazeManagerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UnitTests/MazeModuleTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/MazeModuleTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UnitTests/MazeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/MazeTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UserInterface/GUI2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UserInterface/GUI2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UserInterface/ImageGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UserInterface/ImageGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UserInterface/LoadMazeDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UserInterface/LoadMazeDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UserInterface/LogoPlacer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UserInterface/LogoPlacer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UserInterface/MazePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UserInterface/MazePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UserInterface/SaveMazeDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UserInterface/SaveMazeDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UserInterface/SrtEndPlacer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UserInterface/SrtEndPlacer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,7 +124,7 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectId" id="272OjeaZosqg4jJ7xPkmm3RwWlg" />
   <component name="ProjectViewState">
@@ -62,10 +142,10 @@
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
     <property name="create.test.in.the.same.root" value="true" />
-    <property name="project.structure.last.edited" value="Global Libraries" />
-    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="MavenSettings" />
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.Recents.Supers">
@@ -73,6 +153,9 @@
     </key>
     <key name="ExtractSuperBase.RECENT_KEYS">
       <recent name="UserInterface" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
       <recent name="DataClasses" />
@@ -87,11 +170,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="All in CAB302-Project" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="CAB302-Project" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="MazeManagerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="CAB302-Project" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="UnitTests.*" />
+          <option name="PATTERN" value=".*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -102,27 +193,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MazeManagerTest.CreateMazeTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="CAB302-Project" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="UnitTests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="UnitTests" />
-      <option name="MAIN_CLASS_NAME" value="UnitTests.MazeManagerTest" />
-      <option name="METHOD_NAME" value="CreateMazeTest" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="MazeManagerTest.LoadMazeTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="CAB302-Project" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="UnitTests.*" />
+          <option name="PATTERN" value=".*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -134,12 +209,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="MazeTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="CAB302-Project" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="MazeTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.MazeTest" />
+        <item itemvalue="JUnit.All in CAB302-Project" />
         <item itemvalue="JUnit.MazeManagerTest" />
         <item itemvalue="JUnit.MazeManagerTest.LoadMazeTest" />
-        <item itemvalue="JUnit.MazeManagerTest.CreateMazeTest" />
       </list>
     </recent_temporary>
   </component>

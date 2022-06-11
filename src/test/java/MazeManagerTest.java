@@ -1,5 +1,3 @@
-package UnitTests;
-
 import DataClasses.Maze;
 import Engine.MazeManager;
 import org.junit.jupiter.api.Test;

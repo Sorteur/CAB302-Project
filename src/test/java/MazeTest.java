@@ -1,4 +1,3 @@
-package UnitTests;
 import DataClasses.Cell;
 import DataClasses.Maze;
 import DataClasses.WallType;
