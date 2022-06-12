@@ -4,9 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4b6e86b4-7292-4739-a5c0-2934c990bb8a" name="Changes" comment="Added exceptions">
+    <list default="true" id="4b6e86b4-7292-4739-a5c0-2934c990bb8a" name="Changes" comment="Ignore files">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apiguardian_apiguardian_api_1_1_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_5_8_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_api_5_8_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_engine_5_8_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_params_5_8_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_commons_1_8_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_engine_1_8_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mariadb_jdbc_mariadb_java_client_3_0_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_opentest4j_opentest4j_1_2_0.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/CAB302-Project.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/CAB302-Project.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DataClasses/Maze.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DataClasses/Maze.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/DBConnectionTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/DBConnectionTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/MazeModuleTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/MazeModuleTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,30 +56,35 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="272OjeaZosqg4jJ7xPkmm3RwWlg" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="Downloaded.Files.Path.Enabled" value="false" />
-    <property name="Repository.Attach.Annotations" value="false" />
-    <property name="Repository.Attach.JavaDocs" value="false" />
-    <property name="Repository.Attach.Sources" value="false" />
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
-    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
-    <property name="create.test.in.the.same.root" value="true" />
-    <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
-  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mariadb&quot;
+    ]
+  }
+}</component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -80,53 +100,49 @@
       <recent name="Engine" />
     </key>
   </component>
-  <component name="RunAnythingCache">
-    <option name="myCommands">
-      <command value="mvn test" />
-    </option>
-  </component>
-  <component name="RunManager" selected="Application.Main">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main" />
+  <component name="RunManager" selected="Application.Main.Main">
+    <configuration name="Main.Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main.Main" />
       <module name="CAB302-Project" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MazeManagerTest (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="DBConnectionTest.Test4" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="CAB302-Project" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="MazeManagerTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="MazeManagerTest.LogoDrawTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="CAB302-Project" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="MazeManagerTest" />
-      <option name="METHOD_NAME" value="LogoDrawTest" />
+      <option name="MAIN_CLASS_NAME" value="DBConnectionTest" />
+      <option name="METHOD_NAME" value="Test4" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MazeManagerTest.SaveAndLoadMazeTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="MazeManagerTest.FailSolveMaze" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="CAB302-Project" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="MazeManagerTest" />
-      <option name="METHOD_NAME" value="SaveAndLoadMazeTest" />
+      <option name="METHOD_NAME" value="FailSolveMaze" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MazeManagerTest.StartEndCreatorTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="MazeModuleTest.UpdateMazeException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="CAB302-Project" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="MazeManagerTest" />
-      <option name="METHOD_NAME" value="StartEndCreatorTest" />
+      <option name="MAIN_CLASS_NAME" value="MazeModuleTest" />
+      <option name="METHOD_NAME" value="UpdateMazeException" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MazeModuleTest.UpdateMazeNewLogo" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="CAB302-Project" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="MazeModuleTest" />
+      <option name="METHOD_NAME" value="UpdateMazeNewLogo" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -134,11 +150,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
-        <item itemvalue="JUnit.MazeManagerTest (1)" />
-        <item itemvalue="JUnit.MazeManagerTest.StartEndCreatorTest" />
-        <item itemvalue="JUnit.MazeManagerTest.SaveAndLoadMazeTest" />
-        <item itemvalue="JUnit.MazeManagerTest.LogoDrawTest" />
+        <item itemvalue="Application.Main.Main" />
+        <item itemvalue="JUnit.DBConnectionTest.Test4" />
+        <item itemvalue="JUnit.MazeModuleTest.UpdateMazeNewLogo" />
+        <item itemvalue="JUnit.MazeModuleTest.UpdateMazeException" />
+        <item itemvalue="JUnit.MazeManagerTest.FailSolveMaze" />
       </list>
     </recent_temporary>
   </component>
@@ -150,6 +166,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1648514851233</updated>
+      <workItem from="1654923968762" duration="46413000" />
     </task>
     <task id="LOCAL-00001" summary="Test">
       <created>1648516100444</created>
@@ -319,68 +336,184 @@
       <option name="project" value="LOCAL" />
       <updated>1654407628597</updated>
     </task>
-    <task id="LOCAL-00025" summary="ADDED MAVEN">
-      <created>1654908421492</created>
+    <task id="LOCAL-00025" summary="finished working with creation dates lastedited dates&#10;Added Ignore Files">
+      <created>1654914462251</created>
       <option name="number" value="00025" />
       <option name="presentableId" value="LOCAL-00025" />
       <option name="project" value="LOCAL" />
-      <updated>1654908421492</updated>
+      <updated>1654914462251</updated>
     </task>
-    <task id="LOCAL-00026" summary="Added More Unit-Tests and Javadocs">
-      <created>1654924863868</created>
+    <task id="LOCAL-00026" summary="finished working with creation dates lastedited dates&#10;Added Ignore Files">
+      <created>1654914536828</created>
       <option name="number" value="00026" />
       <option name="presentableId" value="LOCAL-00026" />
       <option name="project" value="LOCAL" />
-      <updated>1654924863868</updated>
+      <updated>1654914536828</updated>
     </task>
-    <task id="LOCAL-00027" summary="Added More Javadocs">
-      <created>1654951450485</created>
+    <task id="LOCAL-00027" summary="DBConnection Unit Tests">
+      <created>1654916394966</created>
       <option name="number" value="00027" />
       <option name="presentableId" value="LOCAL-00027" />
       <option name="project" value="LOCAL" />
-      <updated>1654951450485</updated>
+      <updated>1654916394966</updated>
     </task>
-    <task id="LOCAL-00028" summary="Added even More Javadocs">
-      <created>1654951623662</created>
+    <task id="LOCAL-00028" summary="SQL Exception Handling Done!">
+      <created>1654926323204</created>
       <option name="number" value="00028" />
       <option name="presentableId" value="LOCAL-00028" />
       <option name="project" value="LOCAL" />
-      <updated>1654951623662</updated>
+      <updated>1654926323204</updated>
     </task>
-    <task id="LOCAL-00029" summary="Added exceptions">
-      <created>1654998402548</created>
+    <task id="LOCAL-00029" summary="Testing">
+      <created>1654926821434</created>
       <option name="number" value="00029" />
       <option name="presentableId" value="LOCAL-00029" />
       <option name="project" value="LOCAL" />
-      <updated>1654998402548</updated>
+      <updated>1654926821434</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="Cleaned up MazeModuleTest and added throws to MazeManagerTest">
+      <created>1654930736619</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1654930736619</updated>
+    </task>
+    <task id="LOCAL-00031" summary="Removed some redundant code in MazeGenerator&#10;Made RandomCell Private">
+      <created>1654930792579</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1654930792579</updated>
+    </task>
+    <task id="LOCAL-00032" summary="WallType Unit Tests">
+      <created>1654942074562</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1654942074562</updated>
+    </task>
+    <task id="LOCAL-00033" summary="MazeGenerator Unit Tests">
+      <created>1654942099015</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1654942099015</updated>
+    </task>
+    <task id="LOCAL-00034" summary="must go through the maze manager to solve a maze">
+      <created>1654942174442</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1654942174442</updated>
+    </task>
+    <task id="LOCAL-00035" summary="MazeSolver Unit Tests">
+      <created>1654942198373</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1654942198373</updated>
+    </task>
+    <task id="LOCAL-00036" summary="Removed Not Used Count Getter on MazeDescriptions">
+      <created>1654942794878</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1654942794878</updated>
+    </task>
+    <task id="LOCAL-00037" summary="MazeDescriptions Unit Testing &#10;MazeDescriptions JavaDocs">
+      <created>1654947376060</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1654947376060</updated>
+    </task>
+    <task id="LOCAL-00038" summary="MazeImageResource JavaDocs">
+      <created>1654948755926</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1654948755926</updated>
+    </task>
+    <task id="LOCAL-00039" summary="WallType JavaDocs">
+      <created>1654949783429</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1654949783429</updated>
+    </task>
+    <task id="LOCAL-00040" summary="MazeModule JavaDocs">
+      <created>1654998183408</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1654998183408</updated>
+    </task>
+    <task id="LOCAL-00041" summary="Ignore files">
+      <created>1654998199951</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1654998199951</updated>
+    </task>
+    <task id="LOCAL-00042" summary="Some EdgeCases on Unit Test">
+      <created>1655000816111</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1655000816111</updated>
+    </task>
+    <task id="LOCAL-00043" summary="Ignore files">
+      <created>1655001121135</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1655001121135</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="HEAD" />
+                </option>
+              </RecentGroup>
+            </list>
           </value>
         </entry>
       </map>
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Test" />
-    <MESSAGE value="Test 2" />
-    <MESSAGE value="Just Testing what we could do to generate cells for the mazes, currently just a grid no I/O." />
-    <MESSAGE value="Moved from Test to main, disposed of unused files," />
-    <MESSAGE value="updating" />
-    <MESSAGE value="Added Pushable 'Buttons'" />
-    <MESSAGE value="FIXED THE DOUBLE LINE ISSUE LETS GOOOOOOO" />
-    <MESSAGE value="Slightly changed buttons to look better" />
-    <MESSAGE value="Added Start-GUI" />
-    <MESSAGE value="Tweaked some stuff and started on Unit-Tests" />
-    <MESSAGE value="Changed the way DrawGrid Works and moved some methods to GUI2" />
-    <MESSAGE value="Fixed Maze bug" />
     <MESSAGE value="Reworked grid GUI, Maze create UI" />
     <MESSAGE value="Changed coloured start/finish to arrows" />
     <MESSAGE value="Started LogoGUI" />
@@ -388,11 +521,32 @@
     <MESSAGE value="Functionality of Start/End images implemented, still need to make it look pretty" />
     <MESSAGE value="Finished implementation of GUI" />
     <MESSAGE value="Started Auto-logo and fixed bugs" />
-    <MESSAGE value="ADDED MAVEN" />
-    <MESSAGE value="Added More Unit-Tests and Javadocs" />
-    <MESSAGE value="Added More Javadocs" />
-    <MESSAGE value="Added even More Javadocs" />
-    <MESSAGE value="Added exceptions" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added exceptions" />
+    <MESSAGE value="finished working with creation dates lastedited dates&#10;Added Ignore Files" />
+    <MESSAGE value="DBConnection Unit Tests" />
+    <MESSAGE value="SQL Exception Handling Done!" />
+    <MESSAGE value="Testing" />
+    <MESSAGE value="Cleaned up MazeModuleTest and added throws to MazeManagerTest" />
+    <MESSAGE value="Removed some redundant code in MazeGenerator&#10;Made RandomCell Private" />
+    <MESSAGE value="WallType Unit Tests" />
+    <MESSAGE value="MazeGenerator Unit Tests" />
+    <MESSAGE value="must go through the maze manager to solve a maze" />
+    <MESSAGE value="MazeSolver Unit Tests" />
+    <MESSAGE value="Removed Redundant Method" />
+    <MESSAGE value="Removed Not Used Count Getter on MazeDescriptions" />
+    <MESSAGE value="MazeDescriptions Unit Testing &#10;MazeDescriptions JavaDocs" />
+    <MESSAGE value="MazeImageResource JavaDocs" />
+    <MESSAGE value="WallType JavaDocs" />
+    <MESSAGE value="MazeModule JavaDocs" />
+    <MESSAGE value="Some EdgeCases on Unit Test" />
+    <MESSAGE value="Ignore files" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ignore files" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/CAB302_Project$DBConnectionTest_Test4.ic" NAME="DBConnectionTest.Test4 Coverage Results" MODIFIED="1655014589724" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/CAB302_Project$MazeManagerTest_FailSolveMaze.ic" NAME="MazeManagerTest.FailSolveMaze Coverage Results" MODIFIED="1655000186060" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/CAB302_Project$DBConnectionTest.ic" NAME="DBConnectionTest Coverage Results" MODIFIED="1654998507766" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/CAB302_Project$MazeModuleTest_UpdateMazeNewLogo.ic" NAME="MazeModuleTest.UpdateMazeNewLogo Coverage Results" MODIFIED="1655000669515" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/CAB302_Project$All_in_CAB302_Project.ic" NAME="All in CAB302-Project Coverage Results" MODIFIED="1654999231448" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/CAB302_Project$Main.ic" NAME="Main Coverage Results" MODIFIED="1655003778988" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>
