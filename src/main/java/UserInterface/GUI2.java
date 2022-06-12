@@ -264,6 +264,12 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
                 int Width = Integer.parseInt(WidthBox.getText());
                 int Height = Integer.parseInt(HeightBox.getText());
 
+                if (Width > 100 || Height > 100){
+                    throw new IndexOutOfBoundsException();
+                } else if (Height < 4 || Width < 6){
+                    throw new IndexOutOfBoundsException();
+                }
+
                 if (RandomButton.isSelected()) {
                     if (BuildAroundLogo.isSelected()){
                         ImageGUI.Instance().AutoLogo(pnlMaze,Width,Height,true,ImageStartEnd.isSelected());
@@ -293,6 +299,8 @@ public class GUI2 implements ActionListener, Runnable, ComponentListener {
                 PopOut.dispose();
             } catch(NumberFormatException e) {
                 JOptionPane.showMessageDialog(PopOut,"Dimensions of maze must be whole numbers.","Input error",JOptionPane.ERROR_MESSAGE);
+            } catch(IndexOutOfBoundsException e){
+                JOptionPane.showMessageDialog(PopOut,"Height must be between 4 and 100, Width must be between 6 and 100","Input error",JOptionPane.ERROR_MESSAGE);
             }
         });
         PopOut.add(Confirm,c);
