@@ -32,3 +32,8 @@
 /target/test-classes/MazeManagerTest.class
 /target/test-classes/MazeModuleTest.class
 /target/test-classes/MazeTest.class
+/target/classes/DataClasses/MazeDescriptions.class
+/target/test-classes/DBConnectionTest.class
+/target/test-classes/MazeDescriptionsTest.class
+/target/test-classes/MazeSolverTest.class
+/target/test-classes/WallTypeTest.class
