@@ -52,17 +52,6 @@ public class DBConnection {
         }
     }
 
-    /**
-     * Closes Databaseconnection
-     */
-    protected void finalize() {
-        try {
-            Connection.close();
-        }
-        catch (SQLException sqle) {
-            System.err.println(sqle);
-        }
-    }
 
     /**
      * Starts SQL transaction

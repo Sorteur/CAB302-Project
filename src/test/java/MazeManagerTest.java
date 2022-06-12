@@ -1,4 +1,6 @@
+import DataClasses.Cell;
 import DataClasses.Maze;
+import Engine.MazeGenerator;
 import Engine.MazeManager;
 import UserInterface.MazePanel;
 import org.junit.jupiter.api.Test;
@@ -100,5 +102,23 @@ public class MazeManagerTest {
         MazeManager.Instance().StartEndDraw(TestPanel);
         assertEquals(1,TestPanel.getComponents().length);
 
+    }
+
+    @Test
+    void SolveMaze() throws Exception {
+        MazeManager.Instance().CreateMaze(10,10);
+        MazeGenerator.Instance().GenerateMaze(MazeManager.Instance().GetMaze());
+        MazeManager.Instance().SolveMaze();
+
+        Cell cell =  MazeManager.Instance().GetMaze().getCell(99); // if the last cell is searched it means the solver found it
+
+        assertEquals(true, cell.Searched);
+    }
+    @Test
+    void FailSolveMaze() {
+        assertThrows(Exception.class, () -> {
+            MazeManager.Instance().CreateMaze(10,10);
+            MazeManager.Instance().SolveMaze();
+        });
     }
 }

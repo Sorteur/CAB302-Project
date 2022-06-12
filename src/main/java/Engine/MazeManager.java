@@ -92,6 +92,9 @@ public class MazeManager {
 
     }
 
+    /**
+     * Solves the current maze
+     */
     public void SolveMaze() throws Exception {
         MazeSolver.Instance().SolveMaze(Maze);
     }
