@@ -16,7 +16,7 @@
 /target/classes/UserInterface/LogoPlacer.class
 /target/classes/Main.class
 /target/classes/UserInterface/LoadMazeDialog.class
-/target/classes/DataClasses/MazeDescriptions.class
+/target/classes/DataClasses/MazeDescriptionsTest.class
 /target/classes/DataClasses/MazeImageResource.class
 /target/classes/Engine/MazeManager.class
 /target/classes/DataModules/MazeModule.class
