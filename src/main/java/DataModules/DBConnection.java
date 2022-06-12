@@ -91,9 +91,5 @@ public class DBConnection {
         Connection.rollback();
     }
 
-    private void MakeDataBase () {
-
-    }
-
 
 }

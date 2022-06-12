@@ -7,7 +7,7 @@ import java.sql.SQLException;
 /**
  * The class that handles SQL transactions
  */
-public class DataModule {
+public abstract class DataModule {
 
     protected DBConnection DBConnection;
 
@@ -66,9 +66,10 @@ public class DataModule {
     }
 
     /**
+     * Gets the next id from a specified table
      *
      * @param sequenceName
-     * @return
+     * @return int id
      * @throws SQLException
      * @see DBConnection
      */
@@ -89,7 +90,5 @@ public class DataModule {
         }
         return id;
     }
-
-
 
 }

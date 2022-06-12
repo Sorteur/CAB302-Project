@@ -16,6 +16,15 @@ public class MazeModule extends DataModule{
         super(connection);
     }
 
+    /**
+     * Handles the transaction, returns a maze from the
+     * database with the corresponding id.
+     *
+     * @param  id  An int representing a maze in the database
+     * @return Maze from the database
+     * @throws SQLException
+     * @see Maze
+     */
     public Maze GetMazeFromID(int id) throws SQLException{
         StartTransaction();
         try{
@@ -26,6 +35,14 @@ public class MazeModule extends DataModule{
         }
     }
 
+    /**
+     * Handles the transaction, returns all Maze Id's, Description,
+     * Author, CreationDate, LastEdited as a MazeDescriptions.
+     *
+     * @return MazeDescriptions
+     * @throws SQLException
+     * @see MazeDescriptions
+     */
     public MazeDescriptions GetMazeDescriptions() throws SQLException{
         StartTransaction();
         try{
@@ -38,6 +55,15 @@ public class MazeModule extends DataModule{
         }
     }
 
+
+    /**
+     * Handles the transaction, Saves/Updates a Maze to the
+     * database.
+     *
+     * @param maze the Maze to be saved or updated
+     * @throws SQLException
+     * @see Maze
+     */
     public void SaveMaze (Maze maze) throws SQLException {
 
         StartTransaction();
@@ -53,12 +79,33 @@ public class MazeModule extends DataModule{
 
     }
 
+    /**
+     * Handles the various methods that query the database
+     * that need to be called to return a complete maze that can be displayed.
+     *
+     *
+     * @param id int id of the maze
+     * @return Maze a Maze from the database corresponding to the id
+     * @throws SQLException
+     * @see Maze
+     */
     private Maze DoGetMazeFromId(int id) throws SQLException {
         Maze maze = DoGetPartialMazeFromId(id);
         maze = PopulateMazeCellsFromMazeId(id, maze);
         maze = PopulateMazeImages(id, maze);
         return maze;
     }
+
+    /**
+     * Query's the database for the images that belong to the passed in maze,
+     * returns the maze with the images attached.
+     *
+     * @param maze the Maze to be populated with Images
+     * @param mazeid the Id of the Maze
+     * @throws SQLException
+     * @see Maze
+     * @see MazeImageResource
+     */
     private Maze PopulateMazeImages(int mazeid ,Maze maze) throws SQLException {
         String sql = "SELECT Id, ImageTypeId, Image, PositionX, PositionY " + "FROM MazeImageResource " + "WHERE MazeId = ?;";
 
@@ -98,6 +145,16 @@ public class MazeModule extends DataModule{
             statement.close();
         }
     }
+    /**
+     * Query's the database for the cells that belong to the passed in maze,
+     * returns the maze with the cells attached.
+     *
+     * @param maze the Maze to be populated with cells
+     * @param mazeid the Id of the Maze
+     * @throws SQLException
+     * @see Maze
+     * @see Cell
+     */
 
     private Maze PopulateMazeCellsFromMazeId(int mazeid, Maze maze) throws SQLException {
         String sql = "SELECT Id, ArrayListPos, XPosistion, YPosistion, NorthWallTypeId, EastWallTypeId, SouthWallTypeId, WestWallTypeId " + "FROM Cell " + "WHERE MazeId = ?;";
@@ -133,6 +190,16 @@ public class MazeModule extends DataModule{
             statement.close();
         }
     }
+
+    /**
+     * Query's the database for the Maze that relates to the passed in id,
+     * returns the maze.
+     *
+     * @param id the id of the Maze
+     * @return Maze the corresponding Maze
+     * @throws SQLException
+     * @see Maze
+     */
 
     private Maze DoGetPartialMazeFromId (int id) throws SQLException {
 
@@ -170,6 +237,16 @@ public class MazeModule extends DataModule{
         }
     }
 
+    /**
+     * Handles the various methods that query the database
+     * that need to be called to return a complete MazeDescriptions.
+     *
+     *
+     * @return MazeDescriptions various information about all the mazes in the
+     * database wrapped up in a MazeDescription
+     * @throws SQLException
+     * @see MazeDescriptions
+     */
 
     private MazeDescriptions DoGetMazeDescriptions() throws SQLException
     {
@@ -177,6 +254,17 @@ public class MazeModule extends DataModule{
 
         return descriptions;
     }
+
+
+    /**
+     * Query's the database for all the Mazes and packages the information,
+     * returns a MazeDescriptions.
+     *
+     * @return MazeDescriptions, Information about all the mazes in the database
+     * @throws SQLException
+     * @see MazeDescriptions
+     * @see Maze
+     */
 
     private MazeDescriptions ReadMazeDescriptions() throws SQLException
     {
@@ -205,6 +293,15 @@ public class MazeModule extends DataModule{
         }
     }
 
+    /**
+     * Handles the various methods that query the database
+     * that need to be called to save/update a complete maze that can be displayed.
+     * It uses the maze id to determine if it should update or save.
+     *
+     * @param maze Maze to be saved or updated
+     * @throws SQLException
+     * @see Maze
+     */
 
     private void DoSaveMaze(Maze maze) throws SQLException
     {
@@ -231,6 +328,14 @@ public class MazeModule extends DataModule{
 
     }
 
+    /**
+     * Query's the database, Inserting a Maze.
+     *
+     * @param maze Maze to be saved
+     * @throws SQLException
+     * @see Maze
+     */
+
     private void InsertMaze (Maze maze) throws SQLException
     {
 
@@ -256,6 +361,14 @@ public class MazeModule extends DataModule{
 
     }
 
+    /**
+     * Query's the database, Inserting a Cell of a Maze.
+     *
+     * @param cell cell to be saved
+     * @throws SQLException
+     * @see Maze
+     * @see Cell
+     */
     private void InsertCell(Cell cell) throws SQLException
     {
         int id = GetNextSequence("CellId");
@@ -286,6 +399,14 @@ public class MazeModule extends DataModule{
     }
 
     //Should consider making a ImageModule...
+    /**
+     * Query's the database, Inserting an Image of a Maze.
+     *
+     * @param maze contains Image to be saved
+     * @throws SQLException
+     * @see Maze
+     * @see MazeImageResource
+     */
     private void InsertImages(Maze maze) throws SQLException
     {
         String sql;
@@ -380,6 +501,13 @@ public class MazeModule extends DataModule{
         }
     }
 
+    /**
+     * Query's the database, Updating a Maze.
+     *
+     * @param maze Maze to be Updated
+     * @throws SQLException
+     * @see Maze
+     */
 
     private void UpdateMaze (Maze maze) throws SQLException {
         int id = maze.GetId();
@@ -397,6 +525,14 @@ public class MazeModule extends DataModule{
         statement.executeUpdate();
     }
 
+    /**
+     * Query's the database, Updating a Cell of a Maze.
+     *
+     * @param cell cell to be Updated
+     * @throws SQLException
+     * @see Maze
+     * @see Cell
+     */
     private void UpdateCell (Cell cell) throws SQLException {
 
         int id = cell.Id;
@@ -425,7 +561,16 @@ public class MazeModule extends DataModule{
         statement.executeUpdate();
     }
 
-
+    /**
+     * Query's the database, returning the logo id
+     * from the corresponding maze id
+     *
+     * @param mazeId int to be queried
+     * @return int representing the logo id
+     * @throws SQLException
+     * @see Maze
+     * @see MazeImageResource
+     */
     private int GetLogoIdByMazeId(int mazeId) throws SQLException{
 
         String sql = "SELECT Id " + "FROM MazeImageResource " + "WHERE MazeId = ? AND ImageTypeId = 2;";
@@ -448,6 +593,14 @@ public class MazeModule extends DataModule{
         return 0;
     }
 
+    /**
+     * Query's the database, Updating a Image of a Maze.
+     *
+     * @param maze containing the image to be Updated
+     * @throws SQLException
+     * @see Maze
+     * @see Cell
+     */
 
     private void UpdateImages(Maze maze) throws SQLException {
         String sql;
@@ -521,6 +674,17 @@ public class MazeModule extends DataModule{
 
 
     //Tools//
+
+    /**
+     * Returns a ByteArrayInputStream intended to be used as blob from an Image
+     * to help store Images in a database
+     *
+     * @param Image Image to be converted
+     * @return ByteArrayInputStream to be used as blob
+     * @throws SQLException
+     * @see Maze
+     * @see Cell
+     */
     private ByteArrayInputStream GetImageAsBlob(Image Image)
     {// with help of this as reference https://stackoverflow.com/questions/20961065/converting-image-in-memory-to-a-blob
         BufferedImage bufferedImage = new BufferedImage(Image.getWidth(null), Image.getHeight(null), BufferedImage.TYPE_INT_ARGB);
@@ -545,7 +709,16 @@ public class MazeModule extends DataModule{
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(byteArrayOutputStream.toByteArray());
         return byteArrayInputStream;
     }
-
+    /**
+     * Returns an Image intended to populate a MazeImageResource
+     * to help load image out of the database
+     *
+     * @param blob Blob to be converted
+     * @return Image to be used
+     * @throws SQLException
+     * @see Maze
+     * @see Cell
+     */
     private static Image GetBlobAsImage (Blob blob) throws SQLException {
         // with help of this as reference https://stackoverflow.com/questions/22923518/how-can-i-convert-a-bufferedimage-to-an-image
         // and this https://stackoverflow.com/questions/50427495/java-blob-to-image-file
