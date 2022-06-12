@@ -1,3 +1,5 @@
+package Main;
+
 import UserInterface.GUI2;
 import javax.swing.*;
 

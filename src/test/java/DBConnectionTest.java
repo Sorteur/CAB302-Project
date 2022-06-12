@@ -26,6 +26,7 @@ public class DBConnectionTest {
 
     @Test
     void Test4() throws SQLException{
+        connection.StartTransaction();
         connection.RollbackTransaction();
     }
 

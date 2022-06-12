@@ -103,24 +103,6 @@ public class Maze {
     public String GetAuthor() {return Author;}
 
     /**
-     * Gets creation time of maze
-     * @return LocalDateTime Creation time of maze
-     */
-    public LocalDateTime GetCreation(){return Creation;}
-
-    /**
-     * Sets the last edited time of maze
-     * @param lastEdited Time that maze was last edited
-     */
-    public void SetLastEdited(LocalDateTime lastEdited) {LastEdited =lastEdited;}
-
-    /**
-     * Gets the time the maze was last edited
-     * @return LocalDateTime Time maze was last edited.
-     */
-    public LocalDateTime GetLastEdited(){return LastEdited;}
-
-    /**
      * Sets ID of maze and maze's cells, used in database storage.
      * @param id Integer to be assigned to maze as it's ID
      */

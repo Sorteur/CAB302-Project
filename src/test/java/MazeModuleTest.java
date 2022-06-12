@@ -93,20 +93,5 @@ public class MazeModuleTest {
 
     }
 
-    @Test
-    void UpdateMazeException() {
-        assertThrows(SQLException.class, () -> {
-            Updatemaze = new Maze(10, 10);
-            Updatemaze.SetId(99999);
-            Updatemaze.SetDescription("UpdatedMaze");
-            mazeModule.SaveMaze(Updatemaze);
-        });
-
-
-
-    }
-
-
-
 
 }
